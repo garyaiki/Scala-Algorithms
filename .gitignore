@@ -1,0 +1,5 @@
+/bin
+/target
+/.cache
+/project/target
+/project/project/target
