@@ -1,4 +1,4 @@
-package org.gs.map
+package org.gs.symboltable
 
 import math.Ordering
 import scala.annotation.tailrec

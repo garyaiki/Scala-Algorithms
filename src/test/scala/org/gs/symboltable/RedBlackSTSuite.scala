@@ -1,4 +1,4 @@
-package org.gs.map
+package org.gs.symboltable
 
 import org.scalatest.FunSuite
 import org.junit.runner.RunWith

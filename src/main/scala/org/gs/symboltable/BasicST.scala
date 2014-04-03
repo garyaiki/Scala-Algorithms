@@ -1,4 +1,4 @@
-package org.gs.map
+package org.gs.symboltable
 
 class BasicSymbolTable[T, U]() {
   def put(key: T, value: U): Unit = ???
