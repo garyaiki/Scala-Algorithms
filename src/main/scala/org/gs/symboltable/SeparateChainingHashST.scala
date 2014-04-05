@@ -7,17 +7,19 @@ class SeparateChainingHashST[T, U](initialSize: Int) {
 
   private def hash(key: T) = (key.hashCode & 0x7fffffff) % m
   private def chainGet(x: (T, U), key: T) = (x._1 == key)
-  
+
   def size() = n
-  
+
   def isEmpty() = size == 0
 
   def get(key: T) = {
     val i = hash(key)
-    val r = st(i).find(chainGet(_, key))
-    r match {
-      case None => None
-      case Some(x) => Some(x._2)
+    if (st(i) == null) None else {
+      val r = st(i).find(chainGet(_, key))
+      r match {
+        case None => None
+        case Some(x) => Some(x._2)
+      }
     }
   }
 
@@ -34,12 +36,16 @@ class SeparateChainingHashST[T, U](initialSize: Int) {
     if (value == null) delete(key) else {
       if (n >= 10 * m) resize(2 * m)
       val i = hash(key)
-      val r = st(i).find(chainGet(_, key))
-      if ( r == None) n = n + 1
-      st(i) = (key, value) :: st(i)
+      if (st(i) == null) {
+        st(i) = List((key, value))
+        n = n + 1
+      } else {
+        st(i) = (key, value) :: st(i)
+        if (!st(i).contains(key)) n = n + 1
+      }
     }
   }
-  
+
   def resize(chains: Int) {
     var tmp = new SeparateChainingHashST[T, U](chains)
     for {
@@ -47,15 +53,15 @@ class SeparateChainingHashST[T, U](initialSize: Int) {
       kv <- chain
     } tmp.put(kv._1, kv._2)
     m = tmp.m
-    n = tmp.n
     st = tmp.st
   }
-  
+
   import scala.collection.mutable.Queue
   def keys(): Seq[T] = {
     val q = Queue[T]()
     for {
       chain <- st
+      if(chain != null)
       kv <- chain
     } q.enqueue(kv._1)
     q.toSeq
