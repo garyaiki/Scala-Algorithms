@@ -3,3 +3,4 @@
 /.cache
 /project/target
 /project/project/target
+*.sc
