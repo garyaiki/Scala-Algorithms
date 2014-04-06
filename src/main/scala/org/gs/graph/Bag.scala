@@ -1,23 +1,17 @@
 package org.gs.graph
 
-class Bag[T] {
-  val nodes = List[T]()
-  var n = 0
+import scala.collection._
+import scala.collection.generic._
+import scala.collection.mutable.{ Builder, ListBuffer }
+class Bag[A](seq: A*) extends Traversable[A]
+  with GenericTraversableTemplate[A, Bag]
+  with TraversableLike[A, Bag[A]] {
+  override def companion = Bag
+  def foreach[U](f: A => U) = util.Random.shuffle(seq.toSeq).foreach(f)
   
-  def isEmpty() = nodes.isEmpty
-  
-  def size = n
-  
-  def add(item: T) {
-    item :: nodes
-    n = n + 1
-  }
-  
-  def iterator():Iterator[T] = {
-    nodes.iterator
-  }
 }
 
-object Bag {
-
+object Bag extends TraversableFactory[Bag] {
+  implicit def canBuildFrom[A]: CanBuildFrom[Coll, A, Bag[A]] = new GenericCanBuildFrom[A]
+  def newBuilder[A] = new ListBuffer[A] mapResult (x => new Bag(x: _*))
 }
