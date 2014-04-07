@@ -35,4 +35,32 @@ class GraphSuite extends FunSuite with BeforeAndAfter with PrivateMethodTester {
     val fromNine = new DepthFirstSearch(testGraph, 9)
     assert(fromNine.count === 4)
   }
+
+  test("breadth first paths") {
+    val toZero = new BreadthFirstPaths(testGraph, 0)
+    assert(toZero.hasPathTo(1) === true)
+    assert(toZero.distance(1) === 1)
+    assert(toZero.hasPathTo(2) === true)
+    assert(toZero.distance(2) === 1)
+    assert(toZero.hasPathTo(3) === true)
+    assert(toZero.distance(3) === 2)
+    assert(toZero.hasPathTo(4) === true)
+    assert(toZero.distance(4) === 2)
+    assert(toZero.hasPathTo(5) === true)
+    assert(toZero.distance(5) === 1)
+    assert(toZero.hasPathTo(6) === true)
+    assert(toZero.distance(6) === 1)
+    assert(toZero.hasPathTo(7) === false)
+    assert(toZero.distance(7) === Int.MaxValue)
+    assert(toZero.hasPathTo(8) === false)
+    assert(toZero.distance(8) === Int.MaxValue)
+    assert(toZero.hasPathTo(9) === false)
+    assert(toZero.distance(9) === Int.MaxValue)
+    assert(toZero.hasPathTo(10) === false)
+    assert(toZero.distance(10) === Int.MaxValue)
+    assert(toZero.hasPathTo(11) === false)
+    assert(toZero.distance(11) === Int.MaxValue)
+    assert(toZero.hasPathTo(12) === false)
+    assert(toZero.distance(12) === Int.MaxValue)
+  }
 }
