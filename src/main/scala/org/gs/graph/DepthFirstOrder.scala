@@ -1,0 +1,49 @@
+package org.gs.graph
+
+import scala.collection.mutable.Queue
+
+class DepthFirstOrder(g: Digraph) {
+  val pre = new Array[Int](g.v)
+  val post = new Array[Int](g.v)
+  val preOrder = new Queue[Int]()
+  val postOrder = new Queue[Int]()
+  var preCounter = 0
+  var postCounter = 0
+  val marked = Array.fill[Boolean](g.v)(false)
+  for {
+    i <- 0 until g.v
+    if (!marked(i))
+  } dfs(i)
+
+  def dfs(v: Int): Unit = {
+    marked(v) = true
+    preCounter = preCounter + 1
+    pre(v) = preCounter
+    preOrder.enqueue(v)
+    for {
+      w <- g.adj(v)
+      if (!marked(w))
+    } dfs(w)
+    postOrder.enqueue(v)
+    postCounter = postCounter + 1
+    post(v) = postCounter
+  }
+
+  def preOrderVertex(v: Int) = pre(v)
+  def postOrderVertex(v: Int) = post(v)
+
+  def preOrderSeq(v: Int) = preOrder.toSeq
+  def postOrderSeq(v: Int) = postOrder.toSeq
+
+  def reversePost(): Seq[Int] = {
+    var reverse = List[Int]()
+    for {
+      v <- postOrder
+    } reverse = v :: reverse
+    reverse.toSeq
+  }
+
+}
+object DepthFirstOrder {
+
+}
