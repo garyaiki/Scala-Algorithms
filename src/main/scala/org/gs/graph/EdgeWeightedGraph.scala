@@ -11,27 +11,20 @@ class EdgeWeightedGraph(val v: Int) {
     this(g.v)
     e = g.e
     var reverse = null.asInstanceOf[ListBuffer[Edge]]
-    def stackFromEdges(v: Int) {
+
+    for {
+      v <- 0 until g.v
+      reverse = ListBuffer[Edge]()
+    } {
       for {
         e <- g.adj(v)
       } reverse.prepend(e)
-    }
-    def addEdgesFromStack(v: Int) {
       for {
         er <- reverse
       } adj(v) = er :: adj(v)
     }
-
-    def copyEdges(v: Int) {
-      stackFromEdges(v)
-      addEdgesFromStack(v)
-    }
-    for {
-      v <- 0 until g.v
-      reverse = ListBuffer[Edge]()
-    } copyEdges(v: Int)
-  }
-
+  } 
+ 
   def rangeGuard(x: Int) = {
     x match {
       case x if 0 until v contains x => true
