@@ -2,10 +2,7 @@ package org.gs.graph
 
 class Graph(val v: Int) {
   var e = 0
-  val adj = new Array[List[Int]](v)
-  for {
-    newV <- 0 until v
-  } adj(newV) = List[Int]()
+  val adj = Array.fill[List[Int]](v)(List[Int]())
 
   def addEdge(aV: Int, otherV: Int) {
     def rangeGuard(x: Int) = {
@@ -14,8 +11,7 @@ class Graph(val v: Int) {
         case _ => false
       }
     }
-    require(rangeGuard(aV))
-    require(rangeGuard(otherV))
+    require(rangeGuard(aV) && rangeGuard(otherV), s"aV:$aV and otherV:$otherV must be in 0-$v" )
     e = e + 1
     adj(aV) = otherV :: adj(aV)
     adj(otherV) = aV :: adj(otherV)

@@ -3,13 +3,13 @@ package org.gs.graph
 import scala.collection.mutable.Queue
 
 class DepthFirstOrder(g: Digraph) {
-  val pre = new Array[Int](g.v)
-  val post = new Array[Int](g.v)
+  private val pre = new Array[Int](g.v)
+  private val post = new Array[Int](g.v)
   val preOrder = new Queue[Int]()
   val postOrder = new Queue[Int]()
-  var preCounter = 0
-  var postCounter = 0
-  val marked = Array.fill[Boolean](g.v)(false)
+  private var preCounter = 0
+  private var postCounter = 0
+  private val marked = Array.fill[Boolean](g.v)(false)
   for {
     i <- 0 until g.v
     if (!marked(i))

@@ -2,10 +2,7 @@ package org.gs.graph
 
 class Digraph(val v: Int) {
   var e = 0
-  val adj = new Array[List[Int]](v)
-  for {
-    newV <- 0 until v
-  } adj(newV) = List[Int]()
+  val adj = Array.fill[List[Int]](v)(List[Int]())
 
   def addEdge(aV: Int, otherV: Int) {
     def rangeGuard(x: Int) = {
