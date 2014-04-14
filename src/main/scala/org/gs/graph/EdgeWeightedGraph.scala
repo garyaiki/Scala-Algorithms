@@ -65,7 +65,7 @@ class EdgeWeightedGraph(val v: Int) {
     for {
       vV <- 0 until v
     } addEdgesAndSelfLoops(vV)
-    list
+    list.toSeq
   }
   
   override def toString(): String = {
@@ -76,7 +76,7 @@ class EdgeWeightedGraph(val v: Int) {
       sb.append(s"$vV : ")
       for {
         ed <- adj(vV)
-      } sb.append(s"$e  ")
+      } sb.append(s"$ed  ")
       sb.append(lf)
     }
     for {

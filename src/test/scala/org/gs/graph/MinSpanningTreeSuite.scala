@@ -26,7 +26,7 @@ class MinSpanningTreeSuite extends FlatSpec {
     }
   }
 
-  trait GraphBuider extends Builder {
+  trait GraphBuilder extends Builder {
     val g = new EdgeWeightedGraph(8)
     for {
       ed <- tinyEdgeArray
@@ -48,14 +48,29 @@ class MinSpanningTreeSuite extends FlatSpec {
     assert(piEdge.compareTo(piEdge) === 0)
   }
 
-  "construct edge weighted graph" should " have 8 vertices, 32 edges" in new GraphBuider {
+  "construct edge weighted graph" should " have 8 vertices, 32 edges" in new GraphBuilder {
     assert(g.v === 8, s"${g.v} is the wrong number of vertices")
     assert(g.e === 32, s"${g.e} is the wrong number of edges")
   }
 
-  "copy edge weighted graph" should " have 8 vertices, 32 edges" in new GraphBuider {
+  "copy edge weighted graph" should " have 8 vertices, 32 edges" in new GraphBuilder {
     val gc = new EdgeWeightedGraph(g)
     assert(gc.v === 8, s"${gc.v} is the wrong number of vertices")
     assert(gc.e === 32, s"${gc.e} is the wrong number of edges")
   }
+
+  "adjacencies for each vertex" should "have all its edges contain that vertex" in new GraphBuilder {
+    def curriedVertexCheck(adjIndex: Int)(e: Edge): Boolean = {
+      val s = e.toString.take(3)
+      s.contains(adjIndex.toString)
+    }
+    for {
+      i <- 0 until g.v
+    } assert(g.adj(i).forall(curriedVertexCheck(i)_) , s" not all edges in adj $i contain $i")
+  }
+  
+  "edges" should "return all edges" in new GraphBuilder {println(g.toString)
+    assert(g.edges.length === g.e, "edges returned ${g.edges.length} should be ${g.e}")
+    
+  } 
 }
