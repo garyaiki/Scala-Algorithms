@@ -1,6 +1,6 @@
 package org.gs.graph
 
-class Edge(v: Int, w: Int, val weight: Double) {
+class Edge(v: Int, w: Int, val weight: Double) extends Ordered[Edge] {
   require(v >= 0 && w >= 0 && !weight.isNaN(), "s invalid arg(s) v:$v w:$w weight$weight")
   
   def either() = v
@@ -11,7 +11,7 @@ class Edge(v: Int, w: Int, val weight: Double) {
     case _ => throw new IllegalArgumentException(s"Illegal endpoint vertex:${vertex}")
   }
   
-  def compareTo(that: Edge) = weight.compareTo(that.weight)
+  def compare(that: Edge) = weight.compareTo(that.weight)
   
   override def toString() = f"$v%d-$w%d $weight%.5f"
 }

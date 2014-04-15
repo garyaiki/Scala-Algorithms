@@ -6,6 +6,8 @@ import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import scala.collection.mutable.ArrayBuffer
 import scala.collection.mutable.Queue
+import math.Ordering
+
 
 @RunWith(classOf[JUnitRunner])
 class MinSpanningTreeSuite extends FlatSpec {
@@ -43,9 +45,9 @@ class MinSpanningTreeSuite extends FlatSpec {
     val ltEdge = new Edge(12, 23, 3.13)
     val gtEdge = new Edge(12, 23, 3.15)
 
-    assert(piEdge.compareTo(gtEdge) === -1)
-    assert(piEdge.compareTo(ltEdge) === 1)
-    assert(piEdge.compareTo(piEdge) === 0)
+    assert(piEdge.compare(gtEdge) === -1)
+    assert(piEdge.compare(ltEdge) === 1)
+    assert(piEdge.compare(piEdge) === 0)
   }
 
   "construct edge weighted graph" should " have 8 vertices, 32 edges" in new GraphBuilder {
@@ -69,8 +71,17 @@ class MinSpanningTreeSuite extends FlatSpec {
     } assert(g.adj(i).forall(curriedVertexCheck(i)_) , s" not all edges in adj $i contain $i")
   }
   
-  "edges" should "return all edges" in new GraphBuilder {println(g.toString)
+  "edges" should "return all edges" in new GraphBuilder {
     assert(g.edges.length === g.e, "edges returned ${g.edges.length} should be ${g.e}")
-    
   } 
+  
+  "weight of LazyPrimMST" should "equal weight of EdgeWeightedGraph" in new GraphBuilder {
+	  val totalWeightEWG = g.edges.foldLeft(0.0)(_ + _.weight)
+	  println(s"g total weight:$totalWeightEWG ")
+	  val primMST = new LazyPrimMST(g)
+	  val primWeight = primMST.getWeight
+	  assert(primWeight === totalWeightEWG, 
+	      s"g total weight:$totalWeightEWG != primMST weight $primWeight")
+  }
+
 }
