@@ -38,7 +38,7 @@ class MinSpanningTreeSuite extends FlatSpec {
   }
   "edge toString" should "be v%d w%d weight weight%.5f" in {
     val piEdge = new Edge(12, 23, 3.14)
-    assert(piEdge.toString === "12-23 3.14000")
+    assert(piEdge.toString === "12-23 3.14000 ")
   }
   "edge compareTo" should "be -1 for lt, 0 for ==, 1 for gt" in {
     val piEdge = new Edge(12, 23, 3.14)

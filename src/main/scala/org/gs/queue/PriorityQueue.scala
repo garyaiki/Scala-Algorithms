@@ -1,66 +1,77 @@
+/*
+ * @http://algs4.cs.princeton.edu/24pq/MaxPQ.java.html
+ * @see http://algs4.cs.princeton.edu/24pq/MinPQ.java.html
+ */
 package org.gs.queue
 
 import collection.mutable.ArrayBuffer
 import math.Ordering
+import scala.annotation.tailrec
 
-class PriorityQueue[T](bHeap: ArrayBuffer[T]) {
-  def isEmpty(): Boolean = bHeap.length < 2
-  def less(a: Int, b: Int)(implicit ord: Ordering[T]) = ord.lt(bHeap(a), bHeap(b))
-  def greater(a: Int, b: Int)(implicit ord: Ordering[T]) = ord.gt(bHeap(a), bHeap(b))
+/**
 
-  def exchange(child: Int, parent: Int) {
-    val parentVal = bHeap(parent)
-    val childVal = bHeap(child)
-    bHeap.update(parent, childVal)
-    bHeap.update(child, parentVal)
+ * @author garystruthers
+ *
+ * @param <T>
+ */
+class PriorityQueue[T](pq: ArrayBuffer[T]) {
+  pq.append(null.asInstanceOf[T]) // don't use index 0
+  private var n = 0
+  def isEmpty(): Boolean = n == 0
+  def less(a: Int, b: Int)(implicit ord: Ordering[T]) = ord.lt(pq(a), pq(b))
+  def greater(a: Int, b: Int)(implicit ord: Ordering[T]) = ord.gt(pq(a), pq(b))
+
+  private def exchange(child: Int, parent: Int) {
+    val parentVal = pq(parent)
+    pq.update(parent, pq(child))
+    pq.update(child, parentVal)
   }
-  def swim(k: Int, cmp: (Int, Int) => Boolean) {
-    var i = k
-    var j = i./(2)
-    while (i > 1 && cmp(j, i)) {
-      exchange(i, j)
-      i = j
-      j = i./(2)
-    }
-  }
 
-  def sink(k: Int, cmp: (Int, Int) => Boolean) {
-    val n = bHeap.length
-    var i = k
-    var firstChild = i.*(2)
-    while (firstChild < n) {
-      if (cmp(firstChild, firstChild + 1)) firstChild = firstChild + 1
-      if (cmp(i, firstChild)) {
-        exchange(i, firstChild)
-        i = firstChild
-        firstChild = i.*(2)
+  private def swim(k: Int, cmp: (Int, Int) => Boolean) {
+    @tailrec
+    def loop(i: Int, j: Int) {
+      if (i > 1 && cmp(j, i)) {
+        exchange(i, j)
+        loop(j, j / (2))
       }
     }
+    loop(k, k./(2))
+  }
+
+  private def sink(k: Int, cmp: (Int, Int) => Boolean) {
+    @tailrec
+    def loop(k: Int, k2: Int): Unit = {
+      if (k2 < n) {
+        val k2Var = if (cmp(k2, k2 + 1)) k2 + 1 else k2
+        val kVars = if (cmp(k, k2Var)) {
+          exchange(k, k2Var)
+          (k2Var,k2Var.*(2))
+        } else (k, k2Var)
+        loop(kVars._1, kVars._2)
+      }
+    }
+    loop(k, k.*(2))
   }
 
   def insert(key: T, cmp: (Int, Int) => Boolean): Unit = { // Cost at most 1 + lg N compares
-    bHeap += key
-    println(bHeap.mkString)
-    swim(bHeap.length - 1, cmp)
-    println(bHeap.mkString)
+    pq.append(key)
+    n = n + 1
+    swim(n, cmp)
   }
+
   def pop(cmp: (Int, Int) => Boolean): Option[T] = {
-    println(bHeap.mkString)
     if (isEmpty) None else {
-      val root = bHeap(1)
-      val lastItem = bHeap.length - 1
-      exchange(1, lastItem)
+      exchange(1, n)
+      val lastItem = pq.remove(n)
+      n = n - 1
       sink(1, cmp)
-      bHeap.remove(lastItem)
-      Some(root)
+      Some(lastItem)
     }
   }
 }
-// parent of k = k/2
-// children of k = 2k until 4k
-// root i = 1 level 1 = 2,3 level 2 = 4..7 level 3 = 8..15 level 4 = 16..31 level 5 = 32..63
 
-class MinPQ[T](bHeap: ArrayBuffer[T]) extends PriorityQueue(bHeap) {
+
+class MinPQ[T](pq: ArrayBuffer[T]) extends PriorityQueue(pq) {
   def insert(key: T)(implicit ord: Ordering[T]): Unit = { // Cost at most 1 + lg N compares
     insert(key, greater)
   }
@@ -69,7 +80,7 @@ class MinPQ[T](bHeap: ArrayBuffer[T]) extends PriorityQueue(bHeap) {
   }
 }
 
-class MaxPQ[T](bHeap: ArrayBuffer[T]) extends PriorityQueue(bHeap) {
+class MaxPQ[T](pq: ArrayBuffer[T]) extends PriorityQueue(pq) {
   def insert(key: T)(implicit ord: Ordering[T]): Unit = { // Cost at most 1 + lg N compares
     insert(key, less)
   }

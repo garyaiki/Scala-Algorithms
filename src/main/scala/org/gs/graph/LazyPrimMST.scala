@@ -49,11 +49,12 @@ class LazyPrimMST(g: EdgeWeightedGraph) {
         }
       }
       if(!pq.isEmpty) {
-        pq.pop match {
+        val edge = pq.pop
+        edge match {
           case Some(e) => doEdge(e)
           case None =>
         }
-      }
+      } else println(s"pq is empty ${pq.isEmpty}")
       loop
     }
     loop

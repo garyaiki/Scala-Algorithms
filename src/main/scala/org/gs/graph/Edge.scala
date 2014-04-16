@@ -13,7 +13,7 @@ class Edge(v: Int, w: Int, val weight: Double) extends Ordered[Edge] {
   
   def compare(that: Edge) = weight.compareTo(that.weight)
   
-  override def toString() = f"$v%d-$w%d $weight%.5f"
+  override def toString() = f"$v%d-$w%d $weight%.5f "
 }
 object Edge {
 

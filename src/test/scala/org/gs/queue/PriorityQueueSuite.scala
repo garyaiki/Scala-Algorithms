@@ -9,8 +9,14 @@ import org.scalatest.junit.JUnitRunner
 
 @RunWith(classOf[JUnitRunner])
 class PriorityQueueSuite extends FunSuite {
+  test("max insert and force resize") {
+    val pq = new MaxPQ(new ArrayBuffer[Char](0))
+    pq.insert('P')
+    assert(pq.pop() === Some('P'))
+  }
+  
   test("max") {
-    val pq = new MaxPQ(new ArrayBuffer[Char](10).+=('!'))
+    val pq = new MaxPQ(new ArrayBuffer[Char](10))
 
     pq.insert('P')
     pq.insert('H')
@@ -24,10 +30,15 @@ class PriorityQueueSuite extends FunSuite {
     pq.insert('N')
     assert(pq.pop() === Some('T'))
   }
-
-  test("min") {
-    val pq = new MinPQ(new ArrayBuffer[Char](10).+=('!'))
-
+  
+  test("min insert and force resize") {
+    val pq = new MinPQ(new ArrayBuffer[Char](0))
+    pq.insert('P')
+    assert(pq.pop() === Some('P'))
+  }
+  
+  test("min insert and swim") {
+    val pq = new MinPQ(new ArrayBuffer[Char](0))
     pq.insert('P')
     pq.insert('H')
     pq.insert('I')
@@ -42,8 +53,8 @@ class PriorityQueueSuite extends FunSuite {
   }
 
   test("min empty") {
-    val pq = new MinPQ(new ArrayBuffer[Char](10).+=('!'))
+    val pq = new MinPQ(new ArrayBuffer[Char](10))
     val r = pq.pop()
     assert(r === None)
-  }
+  } 
 }
