@@ -75,9 +75,8 @@ class MinSpanningTreeSuite extends FlatSpec {
     assert(g.edges.length === g.e, "edges returned ${g.edges.length} should be ${g.e}")
   } 
   
-  "weight of LazyPrimMST" should "equal weight of EdgeWeightedGraph" in new GraphBuilder {
+  "total weight of LazyPrimMST" should "equal total weight of EdgeWeightedGraph" in new GraphBuilder {
 	  val totalWeightEWG = g.edges.foldLeft(0.0)(_ + _.weight)
-	  println(s"g total weight:$totalWeightEWG ")
 	  val primMST = new LazyPrimMST(g)
 	  val primWeight = primMST.getWeight
 	  assert(primWeight === totalWeightEWG, 

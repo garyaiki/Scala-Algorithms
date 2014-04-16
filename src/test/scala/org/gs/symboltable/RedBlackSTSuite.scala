@@ -118,7 +118,6 @@ class RedBlackSymbolTableSuite extends FunSuite with BeforeAndAfter with Private
     assert(ost.isRankConsistent, "Ranks not consistent")
     assert(ost.is23, "Not a 2-3 tree")
     val str = ost.inorderTreeWalk
-    println("contains tree walk ", str)
     assert(ost.isBalanced, "Not balanced")
   }
 
@@ -234,7 +233,6 @@ class RedBlackSymbolTableSuite extends FunSuite with BeforeAndAfter with Private
     assert(ost.isRankConsistent, "Ranks not consistent")
      //   assert(ost.is23, "Not a 2-3 tree")
     assert(ost.isBalanced, "Not balanced")
-        print(ost.levelOrderTreeWalk)
 
   }
 

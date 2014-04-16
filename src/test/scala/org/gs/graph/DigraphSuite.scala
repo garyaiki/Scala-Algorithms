@@ -72,7 +72,6 @@ class DigraphSuite extends FunSuite with BeforeAndAfter with PrivateMethodTester
     assert((from3.pathTo(3)).mkString(",") === "3")
     assert((from3.pathTo(4)).mkString(",") === "3,5,4")
     assert((from3.pathTo(5)).mkString(",") === "3,5")
-    println((from3.pathTo(6)).mkString(","))
     assert(from3.hasPathTo(0) === true)
     //   assert(from3.hasPathTo(1) === true)
     assert(from3.hasPathTo(2) === true)

@@ -5,8 +5,6 @@ import scala.collection.mutable.Queue
 import math.Ordering
 import scala.annotation.tailrec
 
-
-
 import org.gs.queue.MinPQ
 
 class LazyPrimMST(g: EdgeWeightedGraph) {
@@ -54,7 +52,7 @@ class LazyPrimMST(g: EdgeWeightedGraph) {
           case Some(e) => doEdge(e)
           case None =>
         }
-      } else println(s"pq is empty ${pq.isEmpty}")
+      } 
       loop
     }
     loop

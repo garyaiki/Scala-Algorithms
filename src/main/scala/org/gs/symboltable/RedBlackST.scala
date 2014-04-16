@@ -68,7 +68,6 @@ class RedBlackSymbolTable[T, U](implicit ord: Ordering[T]) {
     }
     root = loop(root)
     root.red = false
-    println("after put " + inorderTreeWalk)
   }
   //@TODO refactor
   def get(key: T)(implicit ord: Ordering[T]): Option[U] = {
