@@ -162,11 +162,7 @@ class MinSpanningTreeSuite extends FlatSpec {
   }
 
   it should "be a minimal spanning forest" in new LazyPrimMSTBuilder {
-    val edges = primMST.edges
-    for (e <- edges) {
-      val uf = new UF(g.v)
-      //for (f <- primMST.mst) @mst is private
-    }
+    assert(primMST.checkIsMinSpanningForest === true)
   }
 
 }
