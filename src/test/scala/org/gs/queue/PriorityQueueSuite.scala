@@ -1,8 +1,10 @@
 package org.gs.queue
-
+/**
+ * @author Gary Struthers
+ *
+ */
 import scala.collection.mutable.ArrayBuffer
 import scala.math.Ordering._
-
 import org.junit.runner.RunWith
 import org.scalatest.FlatSpec
 import org.scalatest.junit.JUnitRunner
@@ -45,7 +47,7 @@ class MaxPriorityQueueSuite extends FlatSpec {
     val r = pq.pop()
     assert(r === None)
   }
-
+ 
   behavior of "a MinPQ"
 
   it should "return correct item and resize q" in {

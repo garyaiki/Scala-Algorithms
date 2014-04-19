@@ -14,6 +14,14 @@ class Edge(v: Int, w: Int, val weight: Double) extends Ordered[Edge] {
   def compare(that: Edge) = weight.compareTo(that.weight)
   
   override def toString() = f"$v%d-$w%d $weight%.5f "
+  
+  def canEqual(other: Any) = other.isInstanceOf[Edge]
+  
+  override def hashCode = 41 * ( 41 + v) + w + weight.hashCode
+  
+  override def equals(that: Any) = that match {
+    case that: Edge => (that canEqual this) && this.hashCode == that.hashCode
+  }
 }
 object Edge {
 
