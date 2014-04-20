@@ -22,7 +22,7 @@ class KosarajuSharirSCC(g: Digraph) {
     } dfs(w)
   }
 
-  def stronglyConnected(v:Int, w: Int) {
+  def stronglyConnected(v:Int, w: Int) = {
     id(v) == id(w)
   }
   

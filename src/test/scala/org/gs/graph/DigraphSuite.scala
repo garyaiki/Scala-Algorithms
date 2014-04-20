@@ -32,23 +32,33 @@ class DigraphSuite extends FlatSpec {
   behavior of "a DirectedDFS"
   it should "mark reachable verticies" in new DigraphBuilder {
     val from1 = new DirectedDFS(tinyDG, 1)
-    assert(from1.marked === Array[Boolean](false, true, false, false, false, false, false, false, false,
-      false, false, false, false))
+    assert(from1.marked === Array[Boolean](false, true, false, false, false, false, false, false,
+      false, false, false, false, false))
     val from2 = new DirectedDFS(tinyDG, 2)
-    assert(from2.marked === Array[Boolean](true, true, true, true, true, true, false, false, false, false,
-      false, false, false))
+    assert(from2.marked === Array[Boolean](true, true, true, true, true, true, false, false, false,
+      false, false, false, false))
+  }
+
+  it should "count reachable verticies" in new DigraphBuilder {
+    val from1 = new DirectedDFS(tinyDG, 1)
+    assert(from1.count === 1)
+    val from2 = new DirectedDFS(tinyDG, 2)
+    assert(from2.count === 6)
   }
 
   behavior of "a DepthFirstDirectedPaths"
   it should "find paths from source vertex to end vertex" in new DigraphBuilder {
     val from3 = new DepthFirstDirectedPaths(tinyDG, 3)
-
     assert(from3.pathTo(0).corresponds(List(3, 5, 4, 2, 0))(equals))
     assert(from3.pathTo(1).corresponds(List(3, 5, 4, 2, 0, 1))(equals))
     assert(from3.pathTo(2).corresponds(List(3, 5, 4, 2))(equals))
     assert(from3.pathTo(3).corresponds(List(3))(equals))
     assert(from3.pathTo(4).corresponds(List(3, 5, 4))(equals))
     assert(from3.pathTo(5).corresponds(List(3, 5))(equals))
+  }
+
+  it should "find absent paths from source vertex to end vertex" in new DigraphBuilder {
+    val from3 = new DepthFirstDirectedPaths(tinyDG, 3)
     assert(from3.hasPathTo(6) === false)
     assert(from3.hasPathTo(7) === false)
     assert(from3.hasPathTo(8) === false)
@@ -60,14 +70,28 @@ class DigraphSuite extends FlatSpec {
 
   behavior of "a BreadthFirstDirectedPaths"
   it should "find paths from source vertex to end vertex" in new DigraphBuilder {
+    val fromZero = new BreadthFirstDirectedPaths(tinyDG, 0)
+    assert((fromZero.pathTo(4)).corresponds(List(0, 5, 4))(equals))
     val from3 = new BreadthFirstDirectedPaths(tinyDG, 3)
-    assert((from3.pathTo(0)).corresponds(List(3,2,0))(equals))
-    assert((from3.pathTo(1)).corresponds(List(3,2,0,1))(equals))
-    assert((from3.pathTo(2)).corresponds(List(3,2))(equals))
-    assert((from3.pathTo(3)).corresponds(List(3))(equals))
-    assert((from3.pathTo(4)).corresponds(List(3,5,4))(equals))
-    assert((from3.pathTo(5)).corresponds(List(3,5))(equals))
+    assert(from3.pathTo(0).corresponds(List(3, 2, 0))(equals))
+    assert(from3.pathTo(1).corresponds(List(3, 2, 0, 1))(equals))
+    //@FIXME assert(from3.distTo(1) === 2)
+    assert(from3.pathTo(2).corresponds(List(3, 2))(equals))
+    assert(from3.pathTo(3).corresponds(List(3))(equals))
+    assert(from3.pathTo(4).corresponds(List(3, 5, 4))(equals))
+    assert(from3.pathTo(5).corresponds(List(3, 5))(equals))
     //@FIXME   assert(from3.hasPathTo(1) === true)
+    //assert((from3.pathTo(6)).mkString(",") === "3") //@FIXME
+    val from7 = new BreadthFirstDirectedPaths(tinyDG, 7)
+    assert(from7.pathTo(4).corresponds(List(7, 6, 4))(equals))
+    val from9 = new BreadthFirstDirectedPaths(tinyDG, 9)
+    assert(from9.pathTo(4).corresponds(List(9, 11, 4))(equals)) //@FIXME,2,0")
+  }
+
+  it should "find absent paths from source vertex to end vertex" in new DigraphBuilder {
+    val fromZero = new BreadthFirstDirectedPaths(tinyDG, 0)
+    assert((fromZero.pathTo(4)).corresponds(List(0, 5, 4))(equals))
+    val from3 = new BreadthFirstDirectedPaths(tinyDG, 3)
     assert(from3.hasPathTo(6) === false)
     assert(from3.hasPathTo(7) === false)
     assert(from3.hasPathTo(8) === false)
@@ -75,51 +99,83 @@ class DigraphSuite extends FlatSpec {
     assert(from3.hasPathTo(10) === false)
     assert(from3.hasPathTo(11) === false)
     assert(from3.hasPathTo(12) === false)
-    //assert((from3.pathTo(6)).mkString(",") === "3") //@FIXME
-    val fromZero = new BreadthFirstDirectedPaths(tinyDG, 0)
-    assert((fromZero.pathTo(4)).corresponds(List(0,5,4))(equals))
-    val fromSeven = new BreadthFirstDirectedPaths(tinyDG, 7)
-    assert((fromSeven.pathTo(4)).corresponds(List(7,6,4))(equals))
-    val fromNine = new BreadthFirstDirectedPaths(tinyDG, 9)
-    assert((fromNine.pathTo(4)).corresponds(List(9,11,4))(equals)) //@FIXME,2,0")
+  }
+
+  it should "find distances from source vertex to end vertex" in new DigraphBuilder {
+    val from0 = new BreadthFirstDirectedPaths(tinyDG, 0)
+    assert(from0.distTo(4) === 2)
+    val from3 = new BreadthFirstDirectedPaths(tinyDG, 3)
+    assert(from3.distTo(0) === 2)
+    //@FIXME assert(from3.distTo(1) === 2)
+    assert(from3.distTo(2) === 1)
+    assert(from3.distTo(3) === 0)
+    assert(from3.distTo(4) === 2)
+    assert(from3.distTo(5) === 1)
+    val from7 = new BreadthFirstDirectedPaths(tinyDG, 7)
+    assert(from7.distTo(4) === 2)
+    val from9 = new BreadthFirstDirectedPaths(tinyDG, 9)
+    assert(from9.distTo(4) === 2)
   }
 
   behavior of "a DirectedCycle"
   it should "find digraph's directed cycles" in new DigraphBuilder {
     val tdg = new DirectedCycle(tinyDG)
-    assert(tdg.cycle.mkString(",") === "3,5,4,3")
+    assert(tdg.cycle.corresponds(List(3, 5, 4, 3))(equals))
+    val tdag = new DirectedCycle(tinyDAG)
+    assert((tdag.hasCycle) === false)
+  }
+
+  it should "show digraph has no directed cycles" in new DigraphBuilder {
     val tdag = new DirectedCycle(tinyDAG)
     assert((tdag.hasCycle) === false)
   }
 
   behavior of "a DepthFirstOrder"
-  it should "find pre-order, post-order and reverse post-order of a Digraph" in new DigraphBuilder {
+  it should "find pre-order of a Digraph" in new DigraphBuilder {
     val dfo = new DepthFirstOrder(tinyDAG)
-    assert(dfo.preOrder.mkString(",") === "0,5,4,1,6,9,11,12,10,2,3,7,8")
-    assert(dfo.postOrder.mkString(",") === "4,5,1,12,11,10,9,6,0,3,2,7,8")
-    assert(dfo.reversePost.mkString(",") === "8,7,2,3,0,6,9,10,11,12,1,5,4")
+    assert(dfo.preOrder.corresponds(List(0, 5, 4, 1, 6, 9, 11, 12, 10, 2, 3, 7, 8))(equals))
     val dfoDG = new DepthFirstOrder(tinyDG)
-    assert(dfoDG.preOrder.mkString(",") === "0,5,4,3,2,1,6,9,11,12,10,8,7")
-    assert(dfoDG.postOrder.mkString(",") === "2,3,4,5,1,0,12,11,10,9,8,6,7")
-    assert(dfoDG.reversePost.mkString(",") === "7,6,8,9,10,11,12,0,1,5,4,3,2")
+    assert(dfoDG.preOrder.corresponds(List(0, 5, 4, 3, 2, 1, 6, 9, 11, 12, 10, 8, 7))(equals))
+  }
+
+  it should "find post-order of a Digraph" in new DigraphBuilder {
+    val dfo = new DepthFirstOrder(tinyDAG)
+    assert(dfo.postOrder.corresponds(List(4, 5, 1, 12, 11, 10, 9, 6, 0, 3, 2, 7, 8))(equals))
+    val dfoDG = new DepthFirstOrder(tinyDG)
+    assert(dfoDG.postOrder.corresponds(List(2, 3, 4, 5, 1, 0, 12, 11, 10, 9, 8, 6, 7))(equals))
+  }
+
+  it should "find reverse post-order of a Digraph" in new DigraphBuilder {
+    val dfo = new DepthFirstOrder(tinyDAG)
+    assert(dfo.reversePost.corresponds(List(8, 7, 2, 3, 0, 6, 9, 10, 11, 12, 1, 5, 4))(equals))
+    val dfoDG = new DepthFirstOrder(tinyDG)
+    assert(dfoDG.reversePost.corresponds(List(7, 6, 8, 9, 10, 11, 12, 0, 1, 5, 4, 3, 2))(equals))
   }
   behavior of "a Topological"
   it should "find topological order of a Digraph" in new DigraphBuilder {
-    val tdag = new Topological(tinyDAG)
-    assert(tdag.order === None)
     val tdg = new Topological(tinyDG)
-    val order = tdg.order
-    order match {
-      case Some(x) => assert(x.mkString(",") === "7,6,8,9,10,11,12,0,1,5,4,3,2")
+    tdg.order match {
+      case Some(x) => assert(x.corresponds(List(7, 6, 8, 9, 10, 11, 12, 0, 1, 5, 4, 3, 2))(equals))
       case None => fail("no topological order")
     }
   }
 
+  it should "show a Digraph has no topological order" in new DigraphBuilder {
+    val tdag = new Topological(tinyDAG)
+    assert(tdag.order === None)
+  }
+
   behavior of "a KosarajuSharirSCC"
-  it should "find components of a Digraph" in new DigraphBuilder {
+
+  it should "find number of components of a Digraph" in new DigraphBuilder {
     val scc = new KosarajuSharirSCC(tinyDG)
     val m = scc.count
     assert(m === 5)
+  }
+
+  it should "find components of a Digraph" in new DigraphBuilder {
+    val scc = new KosarajuSharirSCC(tinyDG)
+    val m = scc.count
     val components = new Array[Queue[Int]](m)
     for {
       i <- 0 until m
@@ -131,7 +187,22 @@ class DigraphSuite extends FlatSpec {
     } {
       components(scc.id(v)).enqueue(v)
     }
-    assert(components.flatten.mkString(",") === "1,0,2,3,4,5,9,10,11,12,6,8,7")
+    assert(components(0).corresponds(List(1))(equals))
+    assert(components(1).corresponds(List(0, 2, 3, 4, 5))(equals))
+    assert(components(2).corresponds(List(9, 10, 11, 12))(equals))
+    assert(components(3).corresponds(List(6, 8))(equals))
+    assert(components(4).corresponds(List(7))(equals))
   }
-
+  
+  it should "find strongly connected components of a Digraph" in new DigraphBuilder {
+    val scc = new KosarajuSharirSCC(tinyDG)
+    assert(scc.stronglyConnected(0,2))
+    assert(scc.stronglyConnected(0,3))
+    assert(scc.stronglyConnected(0,4))
+    assert(scc.stronglyConnected(0,5))
+    assert(scc.stronglyConnected(6,8))
+    assert(scc.stronglyConnected(9,10))
+    assert(scc.stronglyConnected(10,11))
+    assert(scc.stronglyConnected(11,12))
+  }
 }
