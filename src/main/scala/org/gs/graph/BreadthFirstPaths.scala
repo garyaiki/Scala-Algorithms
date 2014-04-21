@@ -1,37 +1,51 @@
 package org.gs.graph
+/**
+ * @see http://algs4.cs.princeton.edu/41undirected/BreadthFirstPaths.java.html
+ */
 import scala.collection.mutable.Queue
+import scala.collection.mutable.ListBuffer
+import scala.annotation.tailrec
 class BreadthFirstPaths(g: Graph, s: Int) {
-  val paths = new Array[(Boolean, Int)](g.v) // marked _1, edgeTo _2
-  val distTo = Array.fill[Int](g.v)(Int.MaxValue)
-  
+  private[graph] val marked = Array.fill[Boolean](g.v)(false)
+  private[graph] val edgeTo = new Array[Int](g.v)
+  private[graph] val distTo = Array.fill[Int](g.v)(Int.MaxValue)
+
   private def bfs(s: Int) {
     val q = new Queue[Int]()
     distTo(s) = 0
-    paths(s) = (true, if(paths(s) != null) paths(s)._2 else null.asInstanceOf[Int])
+    marked(s) = true
     q.enqueue(s)
     for {
-      dq <- q
-      w <- g.adj(dq)
-      if (paths(w) == null || !paths(w)._1)   
+      v <- q
+      w <- g.adj(v)
+      if (!marked(w))
     } {
-      paths(w) = (true, dq)
-      distTo(w) = distTo(dq) + 1
+      edgeTo(w) = v
+      distTo(w) = distTo(v) + 1
+      marked(w) = true
       q.enqueue(w)
-    } 
+    }
   }
   bfs(s)
-  
-  def hasPathTo(v: Int) = paths(v) != null && paths(v)._1
+
+  def hasPathTo(v: Int) = marked(v)
   def distance(v: Int) = distTo(v)
-  def pathTo(v: Int) = {
-    var pathStack = List[Int]()
-    def loop(x: Int): Int = {
-      if(distTo(x) == 0) x else {
-        pathStack = x :: pathStack
-        loop(paths(x)._2)
+  
+  def pathTo(v: Int): Option[Seq[Int]] = {
+    val path = ListBuffer[Int]()
+    if (!hasPathTo(v)) None else {
+      def loop(x: Int): Unit = {
+        if (distTo(x) == 0) {
+          path.prepend(x)
+          val y = edgeTo(x)
+          loop(y)
+        }  
+        path.prepend(v)
       }
+      loop(v)
+      Some(path)
     }
-    pathStack(loop(v))
+
   }
 }
 object BreadthFirstPaths {

@@ -104,12 +104,13 @@ class GraphSuite extends FlatSpec {
         for {
           w <- 0 until tinyCGdata.size
           if (g.hasPathTo(w) && i != w) 
-//@FIXME          v <- g.edgeTo(w)
+            
         } {
-/*          assert(g.hasPathTo(v) == g.hasPathTo(w), s"source:$i edge v:$v - w:$w")
+          val v = g.edgeTo(w)
+          assert(g.hasPathTo(v) == g.hasPathTo(w), s"source:$i edge v:$v - w:$w")
           assert(g.distTo(w) <= g.distTo(v) + 1,
             s"source:$i v:$v - w:$w distTo w:${g.distTo(w)}  distTo v + 1:${g.distTo(v) + 1}")
-*/        }
+        }
       }
     }
   it should "show if source hasPathTo target vertices" in new ConnectedGraphBuilder {
