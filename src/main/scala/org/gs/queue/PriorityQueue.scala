@@ -14,10 +14,9 @@ import scala.annotation.tailrec
  *
  * @param <T>
  */
-class PriorityQueue[T](pqArg: ArrayBuffer[T]) {
-  if (pqArg.isEmpty) pqArg.append(null.asInstanceOf[T]) // don't use index 0
-  else pqArg(0) = null.asInstanceOf[T]
-  var pq = pqArg
+class PriorityQueue[T](pq: ArrayBuffer[T]) {
+  if (pq.isEmpty) pq.append(null.asInstanceOf[T]) // don't use index 0
+  else pq(0) = null.asInstanceOf[T]
   private var n = 0
   private[queue] def getNumberInQ() = n // only used for helpers
   def isEmpty(): Boolean = n == 0
