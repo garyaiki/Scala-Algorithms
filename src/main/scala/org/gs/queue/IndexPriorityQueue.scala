@@ -18,11 +18,12 @@ class IndexPriorityQueue[T: ClassTag](nMax: Int) {
   require(nMax >= 0, s"nMax:$nMax can't be negative")
   private var n = 0
   private val keys = new Array[T](nMax + 1)
-  private val pq = new Array[Int](nMax + 1)
-  private val qp = Array.fill[Int](nMax + 1)(-1)
+  private val pq = new Array[Int](keys.size)
+  private val qp = Array.fill[Int](keys.size)(-1)
   def isEmpty(): Boolean = n == 0
-  def less(a: Int, b: Int)(implicit ord: Ordering[T]) = ord.lt(keys(a), keys(b))
-  def greater(a: Int, b: Int)(implicit ord: Ordering[T]) = ord.gt(keys(a), keys(b))
+  def less(a: Int, b: Int)(implicit ord: Ordering[T]): Boolean = ord.gt(keys(pq(a)), keys(pq(b)))
+  def greater(a: Int, b: Int)(implicit ord: Ordering[T]) =  ord.gt(keys(pq(a)), keys(pq(b)))
+
   private def rangeGuard(x: Int) = {
     x match {
       case x if 0 to nMax contains x => true
@@ -35,12 +36,12 @@ class IndexPriorityQueue[T: ClassTag](nMax: Int) {
   }
   def size() = n
 
-  private def exchange(child: Int, parent: Int) {
-    val parentVal = pq(parent)
-    pq.update(parent, pq(child))
-    pq.update(child, parentVal)
-    qp(pq(child)) = child
-    qp(pq(parent)) = parent
+  private def exchange(i: Int, j: Int) {
+    val swap = pq(i)
+    pq.update(i, pq(j))
+    pq.update(j, swap)
+    qp(pq(j)) = j
+    qp(pq(i)) = i
   }
 
   private def swim(k: Int, cmp: (Int, Int) => Boolean) {
@@ -86,7 +87,7 @@ class IndexPriorityQueue[T: ClassTag](nMax: Int) {
     pq(1)
   }
 
-  def key() = {
+  def topKey() = {
     require(n > 0, s"n:$n priority queue underflow")
     keys(pq(1))
   }
@@ -119,17 +120,18 @@ class IndexPriorityQueue[T: ClassTag](nMax: Int) {
   def decreaseKey(i: Int, key: T, cmp: (Int, Int) => Boolean)(implicit ord: Ordering[T]) {
     require(rangeGuard(i), s"i:$i not in 0 - nMax:$nMax")
     require(contains(i), s"index:$i is not in the priority queue")
-    require(ord.compare(keys(i), key) >= 0,
+    require(ord.compare(keys(i), key) > 0,
       s"Calling decreaseKey() with i:$i, key:$key would not strictly decrease the key")
     keys(i) = key
     swim(qp(i), cmp)
   }
 
   def increaseKey(i: Int, key: T, cmp: (Int, Int) => Boolean)(implicit ord: Ordering[T]) {
+    val r = ord.compare(keys(i), key)
     require(rangeGuard(i), s"i:$i not in 0 - nMax:$nMax")
     require(contains(i), s"index:$i is not in the priority queue")
-    require(ord.compare(keys(i), key) < 0,
-      s"Calling decreaseKey() with i:$i, key:$key would not strictly decrease the key")
+    require(r < 0,
+      s"Calling increaseKey() with i:$i, key:$key would not strictly increase the key")
     keys(i) = key
     sink(qp(i), cmp)
   }
@@ -145,16 +147,18 @@ class IndexPriorityQueue[T: ClassTag](nMax: Int) {
     keys(i) = null.asInstanceOf[T]
     qp(i) = -1
   }
-  
-  def toString(keys: Seq[T]): String = {
+
+  def toString(j:Int): String = {
     val sb = new StringBuilder()
     for {
-      s <- keys
-      if (s != null)
-    } sb.append(s" $s")
+      i <- 0 until pq.size
+      if (i != 0)
+    } sb.append(s" ${keys(pq(i))}")
     sb.toString
   }
 
+  def getKeys() = for(i <- 1 until nMax ) yield keys(pq(i))
+  
   def checkHeap(cmp: (Int, Int) => Boolean): Boolean = {
     def loop(k: Int): Boolean = {
       if (k > n) true else {
@@ -169,17 +173,17 @@ class IndexPriorityQueue[T: ClassTag](nMax: Int) {
   }
 }
 
-class IndexMinPQ[T:ClassTag](nMax: Int) extends IndexPriorityQueue[T](nMax) {
-  def insert(i: Int, key: T)(implicit ord: Ordering[T]) { insert(i, key, greater)  }
+class IndexMinPQ[T: ClassTag](nMax: Int) extends IndexPriorityQueue[T](nMax) {
+  def insert(i: Int, key: T)(implicit ord: Ordering[T]) { insert(i, key, greater) }
 
   def minIndex() = index()
-  
-  def minKey() = key
-  
+
+  def minKey() = topKey
+
   def delMin()(implicit ord: Ordering[T]): Int = delTop(greater)
-  
+
   def changeKey(i: Int, key: T)(implicit ord: Ordering[T]) { changeKey(i, key, greater) }
-  
+
   def decreaseKey(i: Int, key: T)(implicit ord: Ordering[T]) { decreaseKey(i, key, greater) }
 
   def increaseKey(i: Int, key: T)(implicit ord: Ordering[T]) { increaseKey(i, key, greater) }
@@ -188,22 +192,22 @@ class IndexMinPQ[T:ClassTag](nMax: Int) extends IndexPriorityQueue[T](nMax) {
 
   def isMinHeap()(implicit ord: Ordering[T]): Boolean = checkHeap(greater)
 
-  def keys()(implicit ord: Ordering[T]): Seq[T] = keys.sorted[T]
+  def keys()(implicit ord: Ordering[T]): Seq[T] = getKeys
 
-  def toString()(implicit ord: Ordering[T]): String = toString(keys)
+  def toString()(implicit ord: Ordering[T]): String = toString(9)
 }
 
-class IndexMaxPQ[T:ClassTag](nMax: Int) extends IndexPriorityQueue[T](nMax) {
-  def insert(i: Int, key: T)(implicit ord: Ordering[T]) { insert(i, key, less)  }
+class IndexMaxPQ[T: ClassTag](nMax: Int) extends IndexPriorityQueue[T](nMax) {
+  def insert(i: Int, key: T)(implicit ord: Ordering[T]) { insert(i, key, less) }
 
-  def minIndex() = index()
-  
-  def minKey() = key
-  
-  def delMin()(implicit ord: Ordering[T]): Int = delTop(less)
-  
+  def maxIndex() = index()
+
+  def maxKey() = topKey
+
+  def delMax()(implicit ord: Ordering[T]): Int = delTop(less)
+
   def changeKey(i: Int, key: T)(implicit ord: Ordering[T]) { changeKey(i, key, less) }
-  
+
   def decreaseKey(i: Int, key: T)(implicit ord: Ordering[T]) { decreaseKey(i, key, less) }
 
   def increaseKey(i: Int, key: T)(implicit ord: Ordering[T]) { increaseKey(i, key, less) }
@@ -212,9 +216,9 @@ class IndexMaxPQ[T:ClassTag](nMax: Int) extends IndexPriorityQueue[T](nMax) {
 
   def isMinHeap()(implicit ord: Ordering[T]): Boolean = checkHeap(less)
 
-  def keys()(implicit ord: Ordering[T]): Seq[T] = keys.sorted[T]
+  def keys()(implicit ord: Ordering[T]): Seq[T] = getKeys
 
-  def toString()(implicit ord: Ordering[T]): String = toString(keys)
+  def toString()(implicit ord: Ordering[T]): String = toString(9)
 }
 
 object IndexPriorityQueue {
