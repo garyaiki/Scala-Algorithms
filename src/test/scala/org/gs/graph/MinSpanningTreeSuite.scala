@@ -7,6 +7,8 @@ package org.gs.graph
  *
  */
 import org.scalatest.FlatSpec
+import org.scalautils._
+import Tolerance._
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import scala.collection.mutable.ArrayBuffer
@@ -22,13 +24,12 @@ class MinSpanningTreeSuite extends FlatSpec {
 
   trait Builder {
     val tinyEWGData = Array((6, 0, 0.58000), (0, 2, 0.26000), (0, 4, 0.38000), (0, 7, 0.16000),
-      (1, 3, 0.29000), (1, 2, 0.36000), (1, 7, 0.19000), (1, 5, 0.32000),
-      (6, 2, 0.40000), (2, 7, 0.34000), (1, 2, 0.36000), (0, 2, 0.26000), (2, 3, 0.17000),
-      (3, 6, 0.52000), (1, 3, 0.29000), (2, 3, 0.17000),
-      (6, 4, 0.93000), (0, 4, 0.38000), (4, 7, 0.37000), (4, 5, 0.35000),
-      (1, 5, 0.32000), (5, 7, 0.28000), (4, 5, 0.35000),
-      (6, 4, 0.93000), (6, 0, 0.58000), (3, 6, 0.52000), (6, 2, 0.40000),
-      (2, 7, 0.34000), (1, 7, 0.19000), (0, 7, 0.16000), (5, 7, 0.28000), (4, 7, 0.37000))
+      (1, 3, 0.29000), (1, 2, 0.36000), (1, 7, 0.19000), (1, 5, 0.32000), (6, 2, 0.40000), 
+      (2, 7, 0.34000), (1, 2, 0.36000), (0, 2, 0.26000), (2, 3, 0.17000), (3, 6, 0.52000), 
+      (1, 3, 0.29000), (2, 3, 0.17000), (6, 4, 0.93000), (0, 4, 0.38000), (4, 7, 0.37000), 
+      (4, 5, 0.35000), (1, 5, 0.32000), (5, 7, 0.28000), (4, 5, 0.35000), (6, 4, 0.93000), 
+      (6, 0, 0.58000), (3, 6, 0.52000), (6, 2, 0.40000), (2, 7, 0.34000), (1, 7, 0.19000), 
+      (0, 7, 0.16000), (5, 7, 0.28000), (4, 7, 0.37000))
     val tinyEdgeArray = {
       for {
         e <- tinyEWGData
@@ -88,14 +89,15 @@ class MinSpanningTreeSuite extends FlatSpec {
     assert(g.edges.length === g.e, "edges returned ${g.edges.length} should be ${g.e}")
   }
 
-  behavior of "a LazyPrimMST"
-
-  it should "build" in new GraphBuilder {
+  trait LazyPrimMSTBuilder extends MSTBuilder {
     val primMST = new LazyPrimMST(g)
   }
-
-  trait LazyPrimMSTBuilder extends GraphBuilder {
-    val primMST = new LazyPrimMST(g)
+  
+  trait PrimMSTBuilder extends MSTBuilder {
+    val primMST = new PrimMST(g)
+  }
+  
+  trait MSTBuilder extends GraphBuilder {
     val tinyMST = Array((0, 2, 0.26000), (0, 7, 0.16000),
       (1, 7, 0.19000),
       (6, 2, 0.40000),
@@ -126,7 +128,12 @@ class MinSpanningTreeSuite extends FlatSpec {
       foundCycle
     }
   }
+  behavior of "a LazyPrimMST"
 
+  it should "build" in new GraphBuilder {
+    val primMST = new LazyPrimMST(g)
+  }
+  
   it should "match edges" in new LazyPrimMSTBuilder {
     val edges = primMST.edges
     val diff = edges.diff(tinyMSTArray)
@@ -164,5 +171,86 @@ class MinSpanningTreeSuite extends FlatSpec {
   it should "be a minimal spanning forest" in new LazyPrimMSTBuilder {
     assert(primMST.checkIsMinSpanningForest === true)
   }
+
+  behavior of "a PrimMST"
+  
+  it should "build" in new GraphBuilder {
+    val primMST = new PrimMST(g)
+  }
+  
+  it should "match edges" in new PrimMSTBuilder {
+    val edges = primMST.edges.toArray
+    println(edges.mkString(" "))
+    val diff = edges.diff(tinyMSTArray)
+    assert(edges.diff(tinyMSTArray).size === 0)
+  }
+  it should "match total weight of edges" in new PrimMSTBuilder {
+    val primWeight = primMST.weight
+    assert(primWeight === 1.81 +- 0.0100)
+  }
+
+  it should "be acyclic" in new PrimMSTBuilder {
+    val hasCycle = buildUF(primMST.edges)
+    assert(hasCycle === false)
+  }
+
+  it should "be a spanning forest" in new PrimMSTBuilder {
+    val edges = primMST.edges
+    val hasCycle = buildUF(primMST.edges)
+    var spanningForest = true
+    breakable {
+      for (e <- edges) {
+        val v = e.either
+        val w = e.other(v)
+        val foundV = uf.find(v)
+        val foundW = uf.find(w)
+        if (!uf.connected(v, w)) {
+          spanningForest = false
+          break
+        }
+      }
+    }
+    assert(spanningForest === true)
+  }
+
+  it should "be a minimal spanning forest" in new PrimMSTBuilder {
+      def checkIsMinSpanningForest(): Boolean = {
+    var cutOptimiality = true
+    val uf = new UF(g.v)
+    val mst = primMST.edges
+    def mstEdges(e: Edge) {
+      for (f <- mst) {
+        val x = f.either
+        val y = f.other(x)
+        if (f != e) uf.union(x, y)
+      }
+    }
+    def minWeightInCrossingCut(e: Edge): Boolean = {
+      breakable {
+        for (f <- g.edges) {
+          val x = f.either
+          val y = f.other(x)
+          if (!uf.connected(x, y)) {
+            if (f.weight < e.weight) {
+              cutOptimiality = false
+              break
+            }
+          }
+        }
+      }
+      cutOptimiality
+    }
+    breakable {
+      val edges = primMST.edges
+      for (e <- edges) {
+        mstEdges(e)
+        if (!minWeightInCrossingCut(e)) break
+      }
+    }
+    cutOptimiality
+  }
+    assert(checkIsMinSpanningForest === true)
+  }
+
 
 }
