@@ -21,7 +21,7 @@ class IndexPriorityQueue[T: ClassTag](nMax: Int) {
   private val pq = new Array[Int](keys.size)
   private val qp = Array.fill[Int](keys.size)(-1)
   def isEmpty(): Boolean = n == 0
-  def less(a: Int, b: Int)(implicit ord: Ordering[T]): Boolean = ord.gt(keys(pq(a)), keys(pq(b)))
+  def less(a: Int, b: Int)(implicit ord: Ordering[T]): Boolean = ord.lt(keys(pq(a)), keys(pq(b)))
   def greater(a: Int, b: Int)(implicit ord: Ordering[T]) =  ord.gt(keys(pq(a)), keys(pq(b)))
 
   private def rangeGuard(x: Int) = {
@@ -148,13 +148,18 @@ class IndexPriorityQueue[T: ClassTag](nMax: Int) {
     qp(i) = -1
   }
 
-  def toString(j:Int): String = {
+  override def toString(): String = {
     val sb = new StringBuilder()
+    val size = pq.size
     for {
-      i <- 0 until pq.size
+      i <- 0 until size
       if (i != 0)
-    } sb.append(s" ${keys(pq(i))}")
-    sb.toString
+    } {
+      val key = keys(pq(i))
+      if(key != null)
+      sb.append(s" $key")
+    }
+    sb.toString.trim()
   }
 
   def getKeys() = for(i <- 1 until nMax ) yield keys(pq(i))
@@ -194,7 +199,6 @@ class IndexMinPQ[T: ClassTag](nMax: Int) extends IndexPriorityQueue[T](nMax) {
 
   def keys()(implicit ord: Ordering[T]): Seq[T] = getKeys
 
-  def toString()(implicit ord: Ordering[T]): String = toString(9)
 }
 
 class IndexMaxPQ[T: ClassTag](nMax: Int) extends IndexPriorityQueue[T](nMax) {
@@ -218,7 +222,6 @@ class IndexMaxPQ[T: ClassTag](nMax: Int) extends IndexPriorityQueue[T](nMax) {
 
   def keys()(implicit ord: Ordering[T]): Seq[T] = getKeys
 
-  def toString()(implicit ord: Ordering[T]): String = toString(9)
 }
 
 object IndexPriorityQueue {

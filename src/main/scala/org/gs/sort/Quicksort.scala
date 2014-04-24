@@ -38,7 +38,7 @@ class Quicksort[T](implicit orderer: T => Ordered[T]) {
 
   private def partition(lo: Int, hi: Int): Int = {
 
-    def medianOf3() = {//@TODO
+    def medianOf3() = { //@TODO
       val center = (lo + hi) / 2
       if (input(lo) > input(center)) exchange(lo, center)
       if (input(lo) > input(hi)) exchange(lo, hi)
@@ -73,6 +73,29 @@ class Quicksort[T](implicit orderer: T => Ordered[T]) {
     loop(lo + 1, hi)
   }
 
+  /**
+   * @TODO
+ * @param xs
+ * @param lt
+ * @return
+ */
+def quicksort[T](xs: List[T])(lt: (T, T) => Boolean) = {
+    @annotation.tailrec
+    def qsort(todo: List[List[T]], done: List[T]): List[T] = todo match {
+      case Nil => done
+      case xs :: rest => xs match {
+        case Nil => qsort(rest, done)
+        case x :: xrest =>
+          val (ls, rs) = (xrest partition (lt(x, _)))
+          if (ls.isEmpty) {
+            if (rs.isEmpty) qsort(rest, x :: done)
+            else qsort(rs :: rest, x :: done)
+          } else qsort(ls :: List(x) :: rs :: rest, done)
+      }
+    }
+    qsort(List(xs), Nil)
+  }
+
   private def sort(low: Int, high: Int) {
 
     if (low < high) {
@@ -84,8 +107,12 @@ class Quicksort[T](implicit orderer: T => Ordered[T]) {
     }
   }
 
+  /**
+   * @param a
+   * @param shuffle
+   * @return
+   */
   def sort(a: ArrayBuffer[T], shuffle: Boolean = true): ArrayBuffer[T] = {
-
     if (shuffle) shuffleArrayBuffer(a)
     input = a
     sort(0, input.length - 1)
