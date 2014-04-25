@@ -1,5 +1,11 @@
+/**
+ * @see http://algs4.cs.princeton.edu/43mst/Edge.java.html
+ */
 package org.gs.graph
-
+/**
+ * @author Gary Struthers
+ *
+ */
 class Edge(v: Int, w: Int, val weight: Double) extends Ordered[Edge] {
   require(v >= 0 && w >= 0 && !weight.isNaN(), "s invalid arg(s) v:$v w:$w weight$weight")
   

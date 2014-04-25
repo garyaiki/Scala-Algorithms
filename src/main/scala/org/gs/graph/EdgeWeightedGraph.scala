@@ -1,5 +1,11 @@
+/**
+ * @see http://algs4.cs.princeton.edu/43mst/EdgeWeightedGraph.java.html
+ */
 package org.gs.graph
-
+/**
+ * @author Gary Struthers
+ *
+ */
 import scala.collection.mutable.ListBuffer
 
 class EdgeWeightedGraph(val v: Int) {
