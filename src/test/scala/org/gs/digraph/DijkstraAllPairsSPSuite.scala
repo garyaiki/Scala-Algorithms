@@ -1,14 +1,14 @@
 /**
  *
  */
-package org.gs.graph
+package org.gs.digraph
 
 import org.scalatest.FlatSpec
 import org.junit.runner.RunWith
-import org.scalatest.junit.JUnitRunner
 import org.scalautils._
-import Tolerance._
-import org.gs.graph.fixtures.GraphBuilder
+import org.scalautils.Tolerance._
+import org.gs.digraph.fixtures.GraphBuilder
+import org.scalatest.junit.JUnitRunner
 
 trait DijkstraAllPairsSPBuilder extends GraphBuilder {
   val verticesLength = g.v

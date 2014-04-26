@@ -1,17 +1,12 @@
 /**
  * @see http://algs4.cs.princeton.edu/43mst/PrimMST.java.html
  */
-package org.gs.graph
-/**
- * @author Gary Struthers
- *
- */
-import scala.collection.mutable.ArrayBuffer
+package org.gs.digraph
 import scala.collection.mutable.Queue
-import math.Ordering
 import scala.annotation.tailrec
 import org.gs.queue.IndexMinPQ
-import org.gs.set.UF
+import org.gs.graph.Edge
+import org.gs.graph.EdgeWeightedGraph
 
 class PrimMST(g: EdgeWeightedGraph) {
   private val edgeTo = new Array[Edge](g.v)

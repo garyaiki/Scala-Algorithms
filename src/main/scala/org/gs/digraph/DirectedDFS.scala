@@ -1,5 +1,12 @@
-package org.gs.graph
+/**
+ * @see http://algs4.cs.princeton.edu/42directed/DirectedDFS.java.html
+ */
+package org.gs.digraph
 
+/**
+ * @author Gary Struthers
+ *
+ */
 class DirectedDFS(g: Digraph, s: Int) {
   val marked = new Array[Boolean](g.v)
   var count = 0

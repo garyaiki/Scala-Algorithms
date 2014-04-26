@@ -1,4 +1,4 @@
-package org.gs.graph
+package org.gs.digraph
 
 import scala.collection.mutable.Queue
 

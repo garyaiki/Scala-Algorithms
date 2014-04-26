@@ -1,7 +1,8 @@
 /**
  * @see http://algs4.cs.princeton.edu/44sp/DijkstraAllPairsSP.java.html
  */
-package org.gs.graph
+package org.gs.digraph
+
 
 /**
  * @author Gary Struthers

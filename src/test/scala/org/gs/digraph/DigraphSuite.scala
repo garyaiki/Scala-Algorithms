@@ -1,13 +1,13 @@
-package org.gs.graph
+package org.gs.digraph
 /**
  * @see http://algs4.cs.princeton.edu/44sp/tinyDG.txt
  * @see http://algs4.cs.princeton.edu/42directed/tinyDAG.txt
  */
 import org.scalatest.FlatSpec
 import org.junit.runner.RunWith
-import org.scalatest.junit.JUnitRunner
-import scala.collection.mutable.ArrayBuffer
 import scala.collection.mutable.Queue
+import org.gs.graph.Topological //@TODO digraph Topological
+import org.scalatest.junit.JUnitRunner
 /**
  * @author Gary Struthers
  *

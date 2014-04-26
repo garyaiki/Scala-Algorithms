@@ -1,5 +1,13 @@
-package org.gs.graph
+/**
+ * @see http://algs4.cs.princeton.edu/42directed/KosarajuSharirSCC.java.html
+ */
+package org.gs.digraph
 
+
+/**
+ * @author Gary Struthers
+ *
+ */
 class KosarajuSharirSCC(g: Digraph) {
   val depthFirstOrder = new DepthFirstOrder(g.reverse)
   val marked = Array.fill[Boolean](g.v)(false)

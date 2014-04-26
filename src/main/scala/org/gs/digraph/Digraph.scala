@@ -1,4 +1,4 @@
-package org.gs.graph
+package org.gs.digraph
 
 class Digraph(val v: Int) {
   var e = 0

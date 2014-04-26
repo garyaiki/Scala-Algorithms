@@ -1,23 +1,21 @@
 /**
  * @see http://algs4.cs.princeton.edu/43mst/tinyEWG.txt
  */
-package org.gs.graph
+package org.gs.digraph
 /**
  * @author Gary Struthers
  *
  */
 import org.scalatest.FlatSpec
 import org.scalautils._
-import Tolerance._
+import org.scalautils.Tolerance._
 import org.junit.runner.RunWith
-import org.scalatest.junit.JUnitRunner
-import scala.collection.mutable.ArrayBuffer
-import scala.collection.mutable.Queue
 import scala.util.control.Breaks._
-
-import math.Ordering
-
 import org.gs.set.UF
+import org.gs.graph.Edge
+import org.gs.graph.EdgeWeightedGraph
+import scala.Array.canBuildFrom
+import org.scalatest.junit.JUnitRunner
 
 @RunWith(classOf[JUnitRunner])
 class MinSpanningTreeSuite extends FlatSpec {

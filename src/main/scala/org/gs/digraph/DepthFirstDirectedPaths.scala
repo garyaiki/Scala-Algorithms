@@ -1,5 +1,14 @@
-package org.gs.graph
+package org.gs.digraph
 
+/**
+ * @see http://algs4.cs.princeton.edu/42directed/DepthFirstDirectedPaths.java.html
+ */
+import scala.annotation.tailrec
+
+/**
+ * @author Gary Struthers
+ *
+ */
 class DepthFirstDirectedPaths(g: Digraph, s: Int) {
   val marked = new Array[Boolean](g.v)
   val edgeTo = new Array[Int](g.v)
@@ -20,6 +29,7 @@ class DepthFirstDirectedPaths(g: Digraph, s: Int) {
 
   def pathTo(v: Int): Seq[Int] = {
     var pathStack = List[Int]()
+    @tailrec
     def loop(x: Int): Int = {
       if (x == s) x else {
         pathStack = x :: pathStack

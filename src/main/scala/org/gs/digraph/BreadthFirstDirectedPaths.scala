@@ -1,5 +1,14 @@
-package org.gs.graph
+package org.gs.digraph
+/**
+ * @see http://algs4.cs.princeton.edu/42directed/BreadthFirstDirectedPaths.java.html
+ */
 import scala.collection.mutable.Queue
+import scala.annotation.tailrec
+
+/**
+ * @author Gary Struthers
+ *
+ */
 class BreadthFirstDirectedPaths(g: Digraph, s: Int) {
   val marked = Array.fill[Boolean](g.v)(false)
   val edgeTo = new Array[Int](g.v)
@@ -27,6 +36,7 @@ class BreadthFirstDirectedPaths(g: Digraph, s: Int) {
   def distance(v: Int) = distTo(v)
   def pathTo(v: Int) = {
     var pathStack = List[Int]()
+    @tailrec
     def loop(x: Int): Int = {
       if(distTo(x) == 0) x else {
         pathStack = x :: pathStack

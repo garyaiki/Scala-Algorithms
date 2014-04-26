@@ -1,7 +1,7 @@
 /**
  * @see http://algs4.cs.princeton.edu/44sp/DijkstraSP.java.html
  */
-package org.gs.graph
+package org.gs.digraph
 
 import scala.annotation.tailrec
 import org.gs.queue.IndexMinPQ

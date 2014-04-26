@@ -1,17 +1,20 @@
 /**
  * @see http://algs4.cs.princeton.edu/43mst/LazyPrimMST.java.html
  */
-package org.gs.graph
+package org.gs.digraph
 /**
  * @author Gary Struthers
  *
  */
 import scala.collection.mutable.ArrayBuffer
 import scala.collection.mutable.Queue
-import math.Ordering
 import scala.annotation.tailrec
 import org.gs.queue.MinPQ
 import org.gs.set.UF
+import org.gs.graph.Edge
+import org.gs.graph.EdgeWeightedGraph
+import scala.util.control.Breaks.break
+import scala.util.control.Breaks.breakable
 
 class LazyPrimMST(g: EdgeWeightedGraph) {
   private var weight: Double = 0.0

@@ -1,5 +1,9 @@
 package org.gs.graph
 
+import org.gs.digraph.Digraph
+import org.gs.digraph.DirectedCycle
+import org.gs.digraph.DepthFirstOrder
+
 class Topological(g: Digraph) {
   val finder = new DirectedCycle(g)
   var order:Option[Seq[Int]] = None 

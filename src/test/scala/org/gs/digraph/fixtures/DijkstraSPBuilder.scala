@@ -1,14 +1,14 @@
 /**
  *
  */
-package org.gs.graph.fixtures
+package org.gs.digraph.fixtures
 
 import org.scalatest.SuiteMixin
 import scala.collection.immutable.Set
 import org.scalatest.Suite
-import org.gs.graph.EdgeWeightedDigraph
-import org.gs.graph.DijkstraSP
-import org.gs.graph.DirectedEdge
+import org.gs.digraph.EdgeWeightedDigraph
+import org.gs.digraph.DijkstraSP
+import org.gs.digraph.DirectedEdge
 
 /**
  * @author Gary Struthers

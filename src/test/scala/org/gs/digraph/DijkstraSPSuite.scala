@@ -1,14 +1,15 @@
 /**
  * @see http://algs4.cs.princeton.edu/44sp/tinyEWD.txt
  */
-package org.gs.graph
+package org.gs.digraph
 
 import org.junit.runner.RunWith
-import org.scalatest.junit.JUnitRunner
 import org.scalatest.FlatSpec
 import scala.util.control.Breaks._
-import org.gs.graph.fixtures.DijkstraSPBuilder
-import org.gs.graph.fixtures.GraphBuilder
+import org.scalatest.junit.JUnitRunner
+import org.gs.digraph.fixtures.DijkstraSPBuilder
+import org.gs.digraph.fixtures.GraphBuilder
+
 
 /**
  * @author Gary Struthers

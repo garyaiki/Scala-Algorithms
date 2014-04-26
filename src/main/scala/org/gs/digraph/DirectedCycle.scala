@@ -1,5 +1,15 @@
-package org.gs.graph
+/**
+ * @see http://algs4.cs.princeton.edu/44sp/DirectedCycle.java.html
+ */
+package org.gs.digraph
 
+import scala.annotation.tailrec
+
+
+/**
+ * @author Gary Struthers
+ *
+ */
 class DirectedCycle(g: Digraph) {
   val marked = Array.fill[Boolean](g.v)(false)
   val onStack = Array.fill[Boolean](g.v)(false)
@@ -23,6 +33,7 @@ class DirectedCycle(g: Digraph) {
     def traceBack(w: Int):Boolean =  {
       if(onStack(w)) {
     	cycle = List[Int]()
+    	@tailrec
         def loop(x: Int): Unit = {
           if (x != w) {
             cycle = x :: cycle

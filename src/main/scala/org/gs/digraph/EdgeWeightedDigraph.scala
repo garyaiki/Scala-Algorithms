@@ -1,7 +1,7 @@
 /**
  * @see http://algs4.cs.princeton.edu/44sp/EdgeWeightedDigraph.java.html
  */
-package org.gs.graph
+package org.gs.digraph
 
 import scala.collection.mutable.ListBuffer
 /**
@@ -50,7 +50,7 @@ class EdgeWeightedDigraph(val v: Int) {
   }
 
   def edges() = {
-    var list = ListBuffer[DirectedEdge]()
+    val list = ListBuffer[DirectedEdge]()
     for {
       vV <- 0 until v
       e <- adj(vV)
