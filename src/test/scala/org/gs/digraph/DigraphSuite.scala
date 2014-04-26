@@ -6,7 +6,7 @@ package org.gs.digraph
 import org.scalatest.FlatSpec
 import org.junit.runner.RunWith
 import scala.collection.mutable.Queue
-import org.gs.graph.Topological //@TODO digraph Topological
+import org.gs.digraph.Topological //@TODO digraph Topological
 import org.scalatest.junit.JUnitRunner
 /**
  * @author Gary Struthers

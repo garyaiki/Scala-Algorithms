@@ -1,4 +1,4 @@
-package org.gs.graph
+package org.gs.digraph
 
 import org.gs.digraph.Digraph
 import org.gs.digraph.DirectedCycle
