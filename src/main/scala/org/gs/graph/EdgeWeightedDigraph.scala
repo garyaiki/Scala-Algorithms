@@ -53,7 +53,7 @@ class EdgeWeightedDigraph(val v: Int) {
     var list = ListBuffer[DirectedEdge]()
     for {
       vV <- 0 until v
-      e <- adj(v)
+      e <- adj(vV)
     } list.+=(e)
     list.toSeq
   }
