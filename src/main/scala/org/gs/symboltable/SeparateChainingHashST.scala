@@ -1,5 +1,14 @@
+/**
+ * @see http://algs4.cs.princeton.edu/34hash/SeparateChainingHashST.java.html
+ */
 package org.gs.symboltable
 
+/**
+ * @author Gary Struthers
+ *
+ * @param <T>
+ * @param <U>
+ */
 class SeparateChainingHashST[T, U](initialSize: Int) {
   var m = initialSize
   var n = 0
@@ -38,10 +47,10 @@ class SeparateChainingHashST[T, U](initialSize: Int) {
       val i = hash(key)
       if (st(i) == null) {
         st(i) = List((key, value))
-        n = n + 1
+        n += 1
       } else {
         st(i) = (key, value) :: st(i)
-        if (!st(i).contains(key)) n = n + 1
+        if (!st(i).contains(key)) n += 1
       }
     }
   }

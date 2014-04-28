@@ -3,29 +3,15 @@
  */
 package org.gs.digraph.fixtures
 
-import org.scalatest.SuiteMixin
-import scala.collection.immutable.Set
-import org.scalatest.Suite
 import org.gs.digraph.EdgeWeightedDigraph
 import org.gs.digraph.DijkstraSP
 import org.gs.digraph.DirectedEdge
 
 /**
  * @author Gary Struthers
- *
-
-trait DijkstraSPBuilder extends SuiteMixin { this: Suite =>
-
-  abstract override def withFixture(test: NoArgTest) = {
-    // @TODO
-    try super.withFixture(test)
-    //finally cleanup if necessary
-  }
-
-}
-*  
+ * 
 */
-trait Builder {
+trait TinyEdgeWeightedArrayBuilder {
   val tinyEWDData = Array((4, 5, 0.35), (5, 4, 0.35), (4, 7, 0.37), (5, 7, 0.28), (7, 5, 0.28),
     (5, 1, 0.32), (0, 4, 0.38), (0, 2, 0.26), (7, 3, 0.39), (1, 3, 0.29), (2, 7, 0.34),
     (6, 2, 0.40), (3, 6, 0.52), (6, 0, 0.58), (6, 4, 0.93))
@@ -37,7 +23,7 @@ trait Builder {
   }
 }
 
-trait GraphBuilder extends Builder {
+trait TinyEdgeWeightedDigraphBuilder extends TinyEdgeWeightedArrayBuilder {
   val g = new EdgeWeightedDigraph(size)
   for {
     ed <- tinyEdgeArray
@@ -45,7 +31,7 @@ trait GraphBuilder extends Builder {
     g.addEdge(ed)
   }
 }
-trait DijkstraSPBuilder extends GraphBuilder {
+trait DijkstraSPBuilder extends TinyEdgeWeightedDigraphBuilder {
 
   val s0 = 0
   val dsp0 = new DijkstraSP(g, s0)

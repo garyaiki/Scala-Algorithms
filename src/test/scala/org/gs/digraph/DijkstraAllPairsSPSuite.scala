@@ -7,10 +7,10 @@ import org.scalatest.FlatSpec
 import org.junit.runner.RunWith
 import org.scalautils._
 import org.scalautils.Tolerance._
-import org.gs.digraph.fixtures.GraphBuilder
+import org.gs.digraph.fixtures.TinyEdgeWeightedDigraphBuilder
 import org.scalatest.junit.JUnitRunner
 
-trait DijkstraAllPairsSPBuilder extends GraphBuilder {
+trait DijkstraAllPairsSPBuilder extends TinyEdgeWeightedDigraphBuilder {
   val verticesLength = g.v
   val allPairsSP = new DijkstraAllPairsSP(g)
 }
@@ -21,7 +21,7 @@ trait DijkstraAllPairsSPBuilder extends GraphBuilder {
 @RunWith(classOf[JUnitRunner])
 class DijkstraAllPairsSPSuite extends FlatSpec {
   behavior of "a DijkstraAllPairsSP"
-  it should "build" in new GraphBuilder {
+  it should "build" in new TinyEdgeWeightedDigraphBuilder {
     val allPairsSP = new DijkstraAllPairsSP(g)
   }
   

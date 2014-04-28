@@ -1,9 +1,17 @@
+/**
+ * @see
+ */
 package org.gs.sort
 
 import scala.collection.mutable.ArrayBuffer
 import scala.util.Random
 import scala.annotation.tailrec
 
+/**
+ * @author Gary Struthers
+ *
+ * @param <T>
+ */
 class Quicksort[T](implicit orderer: T => Ordered[T]) {
 
   private var input: ArrayBuffer[T] = _
@@ -25,11 +33,11 @@ class Quicksort[T](implicit orderer: T => Ordered[T]) {
       def loopJ(): Unit = {
         if (input(j) >= input(j - 1)) j = 0 else {
           exchange(j, j - 1)
-          j = j - 1
+          j -= 1
         }
         if (j > 0) loopJ
       }
-      i = i + 1
+      i += 1
       loopJ
       if (i < input.length) loopI
     }
@@ -79,7 +87,7 @@ class Quicksort[T](implicit orderer: T => Ordered[T]) {
  * @param lt
  * @return
  */
-def quicksort[T](xs: List[T])(lt: (T, T) => Boolean) = {
+  def quicksort[T](xs: List[T])(lt: (T, T) => Boolean) = {
     @annotation.tailrec
     def qsort(todo: List[List[T]], done: List[T]): List[T] = todo match {
       case Nil => done
@@ -97,7 +105,6 @@ def quicksort[T](xs: List[T])(lt: (T, T) => Boolean) = {
   }
 
   private def sort(low: Int, high: Int) {
-
     if (low < high) {
       if ((low + 10) > high) insertionSort else {
         val j = partition(low, high: Int)
@@ -119,9 +126,3 @@ def quicksort[T](xs: List[T])(lt: (T, T) => Boolean) = {
     input
   }
 }
-/*object Quicksort {
-  def apply(a: ArrayBuffer[Char], shuffle: Boolean = true) = {
-    val qs = new Quicksort()
-    qs.input = a
-  }
-}*/

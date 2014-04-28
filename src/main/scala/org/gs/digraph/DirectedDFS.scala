@@ -12,7 +12,7 @@ class DirectedDFS(g: Digraph, s: Int) {
   var count = 0
   
   private def dfs(v: Int) {
-    count = count + 1
+    count += 1//count + 1
     marked(v) = true
     for {
       w <- g.adj(v)
@@ -22,7 +22,4 @@ class DirectedDFS(g: Digraph, s: Int) {
   dfs(s)
   
   def isMarked(v: Int) = marked(v)
-}
-object DirectedDFS {
-
 }

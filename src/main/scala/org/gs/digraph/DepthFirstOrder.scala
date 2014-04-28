@@ -1,7 +1,14 @@
+/**
+ * @see http://algs4.cs.princeton.edu/42directed/DepthFirstOrder.java.html
+ */
 package org.gs.digraph
 
 import scala.collection.mutable.Queue
 
+/**
+ * @author Gary Struthers
+ *
+ */
 class DepthFirstOrder(g: Digraph) {
   private val pre = new Array[Int](g.v)
   private val post = new Array[Int](g.v)
@@ -17,7 +24,7 @@ class DepthFirstOrder(g: Digraph) {
 
   def dfs(v: Int): Unit = {
     marked(v) = true
-    preCounter = preCounter + 1
+    preCounter += 1
     pre(v) = preCounter
     preOrder.enqueue(v)
     for {
@@ -25,7 +32,7 @@ class DepthFirstOrder(g: Digraph) {
       if (!marked(w))
     } dfs(w)
     postOrder.enqueue(v)
-    postCounter = postCounter + 1
+    postCounter += 1
     post(v) = postCounter
   }
 
@@ -42,8 +49,5 @@ class DepthFirstOrder(g: Digraph) {
     } reverse = v :: reverse
     reverse.toSeq
   }
-
-}
-object DepthFirstOrder {
 
 }

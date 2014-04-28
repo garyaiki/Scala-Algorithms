@@ -18,7 +18,7 @@ class KosarajuSharirSCC(g: Digraph) {
     if(!marked(v))
   } {
     dfs(v)
-    count = count + 1
+    count += 1
   }
   
   def dfs(v: Int):Unit = {

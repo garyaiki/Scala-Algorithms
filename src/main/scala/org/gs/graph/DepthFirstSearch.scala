@@ -1,11 +1,18 @@
+/**
+ * @see http://algs4.cs.princeton.edu/41undirected/DepthFirstSearch.java.html
+ */
 package org.gs.graph
 
+/**
+ * @author Gary Struthers
+ *
+ */
 class DepthFirstSearch(g: Graph, s: Int) {
   val marked = new Array[Boolean](g.v)
   var count = 0
   
   private def dfs(v: Int) {
-    count = count + 1
+    count += 1
     marked(v) = true
     for {
       w <- g.adj(v)
@@ -13,7 +20,4 @@ class DepthFirstSearch(g: Graph, s: Int) {
     } dfs(w) 
   }
   dfs(s)
-}
-object DepthFirstSearch {
-
 }

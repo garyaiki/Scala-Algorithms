@@ -1,5 +1,12 @@
+/**
+ * @see http://algs4.cs.princeton.edu/41undirected/Graph.java.html
+ */
 package org.gs.graph
 
+/**
+ * @author Gary Struthers
+ *
+ */
 class Graph(val v: Int) {
   var e = 0
   val adj = Array.fill[List[Int]](v)(List[Int]())
@@ -16,7 +23,4 @@ class Graph(val v: Int) {
     adj(aV) = otherV :: adj(aV)
     adj(otherV) = aV :: adj(otherV)
   }
-}
-object Graph {
-
 }

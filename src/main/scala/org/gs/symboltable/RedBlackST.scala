@@ -1,8 +1,17 @@
+/**
+ * @see http://algs4.cs.princeton.edu/33balanced/RedBlackBST.java.html
+ */
 package org.gs.symboltable
 
 import math.Ordering
 import scala.annotation.tailrec
 
+/**
+ * @author Gary Struthers
+ *
+ * @param <T>
+ * @param <U>
+ */
 class RedBlackSymbolTable[T, U](implicit ord: Ordering[T]) {
   class Node[T, U](var key: T, var value: U, var count: Int = 1, var red: Boolean = true) {
     var left = null.asInstanceOf[Node[T, U]]
@@ -312,12 +321,11 @@ class RedBlackSymbolTable[T, U](implicit ord: Ordering[T]) {
       }
       if (n.right != null) {
         q.enqueue(n.right)
-
       }
     }
     sb.toString
   }
-  override def toString(): String = {
+  override def toString(): String = {//TODO cleanup
     def buildString(): StringBuilder = {
       val sb = new StringBuilder
       val node = root
@@ -399,7 +407,7 @@ class RedBlackSymbolTable[T, U](implicit ord: Ordering[T]) {
     buildString().toString
   }
 
-  def isBST(): Boolean = {
+  def isBST(): Boolean = {   
     def loop(x: Node[T, U], min: T, max: T): Boolean = {
       if (x == null) true else {
         if (min != null && ord.compare(x.key, min) <= 0) false else if (max != null && ord.compare(x.key, max) >= 0) false else
@@ -409,7 +417,7 @@ class RedBlackSymbolTable[T, U](implicit ord: Ordering[T]) {
     loop(root, null.asInstanceOf[T], null.asInstanceOf[T])
   }
 
-  def isSizeConsistent(): Boolean = {
+  def isSizeConsistent(): Boolean = {    
     def loop(x: Node[T, U]): Boolean = {
       if (x == null) true else if (x.count != size(x.left) + size(x.right) + 1) false else
         loop(x.left) && loop(x.right)
@@ -461,13 +469,9 @@ class RedBlackSymbolTable[T, U](implicit ord: Ordering[T]) {
 
     var n = root
     while (n != null) {
-      if (!isRed(n)) black = black + 1
+      if (!isRed(n)) black += 1
       n = n.left
     }
     loop(root, black)
   }
-}
-
-object RedBlackSymbolTable {
-
 }

@@ -8,7 +8,7 @@ import org.scalatest.FlatSpec
 import scala.util.control.Breaks._
 import org.scalatest.junit.JUnitRunner
 import org.gs.digraph.fixtures.DijkstraSPBuilder
-import org.gs.digraph.fixtures.GraphBuilder
+import org.gs.digraph.fixtures.TinyEdgeWeightedDigraphBuilder
 
 
 /**
@@ -20,12 +20,12 @@ class DijkstraSPSuite extends FlatSpec {
 
   behavior of "a EdgeWeightedDigraph"
 
-  it should "have no negative weights" in new GraphBuilder {
+  it should "have no negative weights" in new TinyEdgeWeightedDigraphBuilder {
     assert(g.edges.forall(_.weight >= 0))
   }
 
   behavior of "a DijkstraSP"
-  it should "build" in new GraphBuilder {
+  it should "build" in new TinyEdgeWeightedDigraphBuilder {
     val dsp = new DijkstraSP(g, 0)
     assert(dsp !== null)
   }

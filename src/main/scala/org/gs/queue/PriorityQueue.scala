@@ -58,7 +58,7 @@ class PriorityQueue[T](pq: ArrayBuffer[T]) {
   }
 
   def insert(key: T, cmp: (Int, Int) => Boolean): Unit = { // Cost at most 1 + lg N compares
-    n = n + 1
+    n += 1
     pq.append(key)
     swim(n, cmp)
   }
@@ -125,6 +125,3 @@ class MaxPQ[T](pq: ArrayBuffer[T]) extends PriorityQueue(pq) {
 
 }
 
-object PriorityQueue {
-
-}

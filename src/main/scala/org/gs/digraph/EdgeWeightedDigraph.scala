@@ -41,7 +41,7 @@ class EdgeWeightedDigraph(val v: Int) {
   def addEdge(ed: DirectedEdge) {
     val v = ed.from
     adj(v) = ed :: adj(v)
-    e = e + 1
+    e += 1//e + 1
   }
 
   def edgesOnVertex(eV: Int) = {
@@ -79,8 +79,4 @@ class EdgeWeightedDigraph(val v: Int) {
     } addLines(vV)
     sb.toString
   }
-}
-
-object EdgeWeightedDigraph {
-
 }

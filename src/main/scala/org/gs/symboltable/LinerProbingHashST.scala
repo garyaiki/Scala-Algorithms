@@ -1,7 +1,16 @@
+/**
+ * @see http://algs4.cs.princeton.edu/34hash/LinearProbingHashST.java.html
+ */
 package org.gs.symboltable
 
 import scala.annotation.tailrec
 
+/**
+ * @author Gary Struthers
+ *
+ * @param <T>
+ * @param <U>
+ */
 class LinearProbingHashST[T, U](initialSize: Int) {
   var m = initialSize
   var n = 0
@@ -69,7 +78,7 @@ class LinearProbingHashST[T, U](initialSize: Int) {
         } else st(j) = (key, value)
       }
       loop(hash(key))
-      n = n + 1
+      n += 1
     }
   }
 

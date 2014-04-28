@@ -75,7 +75,7 @@ class IndexPriorityQueue[T: ClassTag](nMax: Int) {
   def insert(i: Int, key: T, cmp: (Int, Int) => Boolean): Unit = {
     require(rangeGuard(i), s"i:$i not in 0 - nMax:$nMax")
     require(!contains(i), s"index:$i is already in the priority queue")
-    n = n + 1
+    n += 1
     qp(i) = n
     pq(n) = i
     keys(i) = key
@@ -221,9 +221,5 @@ class IndexMaxPQ[T: ClassTag](nMax: Int) extends IndexPriorityQueue[T](nMax) {
   def isMinHeap()(implicit ord: Ordering[T]): Boolean = checkHeap(less)
 
   def keys()(implicit ord: Ordering[T]): Seq[T] = getKeys
-
-}
-
-object IndexPriorityQueue {
 
 }

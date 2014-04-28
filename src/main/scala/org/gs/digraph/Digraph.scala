@@ -1,5 +1,12 @@
+/**
+ * @see http://algs4.cs.princeton.edu/42directed/Digraph.java.html
+ */
 package org.gs.digraph
 
+/**
+ * @author Gary Struthers
+ *
+ */
 class Digraph(val v: Int) {
   var e = 0
   val adj = Array.fill[List[Int]](v)(List[Int]())
@@ -13,7 +20,7 @@ class Digraph(val v: Int) {
     }
     require(rangeGuard(aV))
     require(rangeGuard(otherV))
-    e = e + 1
+    e += 1
     adj(aV) = otherV :: adj(aV)
   }
   
@@ -25,8 +32,4 @@ class Digraph(val v: Int) {
     } r.addEdge(w, newV)
     r
   }
-}
-
-object Digraph {
-
 }

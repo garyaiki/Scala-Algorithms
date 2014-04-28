@@ -46,7 +46,7 @@ class EdgeWeightedGraph(val v: Int) {
 
     adj(either) = ed :: adj(either)
     adj(other) = ed :: adj(other)
-    e = e + 1
+    e += 1
   }
   
   def edgesOnVertex(eV: Int) = {
@@ -61,7 +61,7 @@ class EdgeWeightedGraph(val v: Int) {
       def addEdges(edg: Edge) {
         if(edg.other(vV) > vV) list.prepend(edg) else if (edg.other(vV) == vV) {
           if (selfLoops % 2 == 0) list.prepend(edg)
-          selfLoops = selfLoops + 1
+          selfLoops += 1
         }        
       }
       for {
