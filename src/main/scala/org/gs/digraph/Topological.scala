@@ -1,8 +1,5 @@
 package org.gs.digraph
 
-import org.gs.digraph.Digraph
-import org.gs.digraph.DirectedCycle
-import org.gs.digraph.DepthFirstOrder
 
 class Topological(g: Digraph) {
   val finder = new DirectedCycle(g)

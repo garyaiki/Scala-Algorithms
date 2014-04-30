@@ -7,12 +7,23 @@ import org.scalatest.FlatSpec
 import org.junit.runner.RunWith
 import scala.collection.mutable.Queue
 import org.scalatest.junit.JUnitRunner
+import org.gs.digraph.fixtures.SymbolDigraphBuilder
 /**
  * @author Gary Struthers
  *
  */
 @RunWith(classOf[JUnitRunner])
 class DigraphSuite extends FlatSpec {
+  behavior of "a SymbolDigraph"
+  
+  it should "have edges" in new SymbolDigraphBuilder {
+    val d = buildFromManagedResource("http://algs4.cs.princeton.edu/41undirected/routes.txt")
+    println(d.g.e)
+    val size = d.keys.size
+    for(v <- 0 until size) println(s"index:$v key${d.name(v)} contains:${d.contains(d.name(v))} index:${d.index(d.name(v))}")
+    
+  }
+  
   trait DigraphBuilder {
     var tinyDAGdata = Array[(Int, Int)]((2, 3), (0, 6), (0, 1), (2, 0), (11, 12), (9, 12),
       (9, 10), (9, 11), (3, 5), (8, 7), (5, 4), (0, 5), (6, 4), (6, 9), (7, 6))
@@ -203,5 +214,5 @@ class DigraphSuite extends FlatSpec {
     assert(scc.stronglyConnected(9,10))
     assert(scc.stronglyConnected(10,11))
     assert(scc.stronglyConnected(11,12))
-  }
+  } 
 }
