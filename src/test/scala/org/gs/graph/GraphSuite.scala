@@ -12,7 +12,7 @@ import org.gs.graph.fixtures.SymbolGraphBuilder
 @RunWith(classOf[JUnitRunner])
 class GraphSuite extends FlatSpec {
   class Movies extends SymbolGraphBuilder {
-    val d = buildFromManagedResource("http://algs4.cs.princeton.edu/41undirected/movies.txt", "/")
+    val d = buildSymbolGraph("http://algs4.cs.princeton.edu/41undirected/movies.txt", "/")
   }
   val movies = new Movies
   
@@ -143,7 +143,7 @@ class GraphSuite extends FlatSpec {
   behavior of "a SymbolGraph"
 
   it should "find routes" in new SymbolGraphBuilder {
-    val d = buildFromManagedResource("http://algs4.cs.princeton.edu/41undirected/routes.txt", "\\s+")
+    val d = buildSymbolGraph("http://algs4.cs.princeton.edu/41undirected/routes.txt", "\\s+")
     val keys = d.keys
     val g = d.g
     assert("JFK" === keys(0))

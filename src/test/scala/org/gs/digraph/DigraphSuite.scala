@@ -17,7 +17,7 @@ class DigraphSuite extends FlatSpec {
   behavior of "a SymbolDigraph"
   
   it should "have edges" in new SymbolDigraphBuilder {
-    val d = buildFromManagedResource("http://algs4.cs.princeton.edu/41undirected/routes.txt", "\\s+")
+    val d = buildSymbolGraph("http://algs4.cs.princeton.edu/41undirected/routes.txt", "\\s+")
     println(d.g.e)
     val size = d.keys.size
     for(v <- 0 until size) println(s"index:$v key${d.name(v)} contains:${d.contains(d.name(v))} index:${d.index(d.name(v))}")
@@ -220,7 +220,7 @@ class DigraphSuite extends FlatSpec {
   behavior of "a SymbolDigraph"
 
   it should "find routes" in new SymbolDigraphBuilder {
-    val d = buildFromManagedResource("http://algs4.cs.princeton.edu/41undirected/routes.txt", "\\s+")
+    val d = buildSymbolGraph("http://algs4.cs.princeton.edu/41undirected/routes.txt", "\\s+")
     val keys = d.keys
     val g = d.g
     assert("JFK" === keys(0))

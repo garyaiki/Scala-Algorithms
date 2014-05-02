@@ -14,27 +14,18 @@ import org.gs.graph.BaseGraph
  *
  */
 abstract class BaseSymbolGraphBuilder extends SymbolTableBuilder {
-  def buildFromManagedResource(uri: String, delimiter: String): ArrayBuffer[String] = {
+  def buildFromManagedResource(uri: String): ArrayBuffer[String] = {
     val managedResource = readURI(uri)
-    
     def readFileToArray(buffSource: BufferedSource): ArrayBuffer[String] = {
       val savedLines = new ArrayBuffer[String]()
       val it = buffSource.getLines
       for (a <- it) savedLines.append(a)
       savedLines
     }
-
     managedResource.loan(readFileToArray)
   }
   
-  def buildStringAndInvertedIndexes(savedLines: ArrayBuffer[String], delimiter: String) = {
-
-    val st = buildStringIndex(delimiter, savedLines)
-    val keys = invertIndexKeys(st)
-    (st, keys)
-  }
-  
-  def buildGraph(savedLines: ArrayBuffer[String], st: TreeMap[String, Int], g: BaseGraph, delimiter: String) = {
+  def buildGraph[T <: BaseGraph](savedLines: ArrayBuffer[String], st: TreeMap[String, Int], g: T, delimiter: String) = {
     for {
       a <- savedLines
     } {
