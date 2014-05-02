@@ -7,9 +7,15 @@ import org.scalatest.FlatSpec
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import scala.collection.mutable.ArrayBuffer
+import org.gs.graph.fixtures.SymbolGraphBuilder
 
 @RunWith(classOf[JUnitRunner])
 class GraphSuite extends FlatSpec {
+  class Movies extends SymbolGraphBuilder {
+    val d = buildFromManagedResource("http://algs4.cs.princeton.edu/41undirected/movies.txt", "/")
+  }
+  val movies = new Movies
+  
   trait GraphBuilder {
     val tinyGdata = Array[(Int, Int)]((0, 5), (4, 3), (0, 1), (9, 12), (6, 4), (5, 4), (0, 2),
       (11, 12), (9, 10), (0, 6), (7, 8), (9, 11), (5, 3))
@@ -103,8 +109,8 @@ class GraphSuite extends FlatSpec {
         val g = new BreadthFirstPaths(tinyCG, i)
         for {
           w <- 0 until tinyCGdata.size
-          if (g.hasPathTo(w) && i != w) 
-            
+          if (g.hasPathTo(w) && i != w)
+
         } {
           val v = g.edgeTo(w)
           assert(g.hasPathTo(v) == g.hasPathTo(w), s"source:$i edge v:$v - w:$w")
@@ -132,5 +138,44 @@ class GraphSuite extends FlatSpec {
     assert(from0.distance(5) === 1)
     assert(from0.distance(6) === Int.MaxValue)
     assert(from0.distance(7) === Int.MaxValue)
+  }
+
+  behavior of "a SymbolGraph"
+
+  it should "find routes" in new SymbolGraphBuilder {
+    val d = buildFromManagedResource("http://algs4.cs.princeton.edu/41undirected/routes.txt", "\\s+")
+    val keys = d.keys
+    val g = d.g
+    assert("JFK" === keys(0))
+    val wJFK = for (w <- g.adj(0)) yield keys(w)
+    assert(wJFK.diff(List("MCO", "ATL", "ORD")) === List())
+    assert("LAX" === keys(8))
+    val wLAX = for (w <- g.adj(8)) yield keys(w)
+    assert(wLAX.diff(List("LAS", "PHX")) === List())
+  }
+
+  it should "find movies and their actors" in {
+    val d = movies.d
+    val keys = d.keys
+    val g = d.g
+    val movieIdx = d.index("Tin Men (1987)")
+    val wTinMen = movieIdx match {
+      case Some(x) => for (w <- g.adj(x)) yield keys(w)
+      case None => fail(s"Tin Men (1987) not found")
+    }
+    assert(wTinMen.contains("Munchel, Lois Raymond"))
+  }
+
+  it should "find actors and their movies" in {
+    val d = movies.d
+    val keys = d.keys
+    val g = d.g
+    val idx = d.index("Bacon, Kevin")
+    val ws = idx match {
+      case Some(x) => for (w <- g.adj(x)) yield keys(w)
+      case None => fail(s"Bacon, Kevin not found")
+    }
+    val count = ws.size
+    assert(ws.contains("Wild Things (1998)"))
   }
 }

@@ -3,7 +3,6 @@
  */
 package org.gs.digraph.fixtures
 
-import org.gs.patterns.Functor
 import org.gs.digraph.EdgeWeightedDigraph
 import org.gs.digraph.DijkstraSP
 import org.gs.digraph.DirectedEdge
