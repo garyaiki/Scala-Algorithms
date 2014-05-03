@@ -8,22 +8,13 @@ import scala.io.BufferedSource
 import scala.collection.mutable.ArrayBuffer
 import scala.collection.immutable.TreeMap
 import org.gs.graph.BaseGraph
+import org.gs.fixtures.BufferedSourceBuilder
 
 /**
  * @author Gary Struthers
  *
  */
-abstract class BaseSymbolGraphBuilder extends SymbolTableBuilder {
-  def buildFromManagedResource(uri: String): ArrayBuffer[String] = {
-    val managedResource = readURI(uri)
-    def readFileToArray(buffSource: BufferedSource): ArrayBuffer[String] = {
-      val savedLines = new ArrayBuffer[String]()
-      val it = buffSource.getLines
-      for (a <- it) savedLines.append(a)
-      savedLines
-    }
-    managedResource.loan(readFileToArray)
-  }
+trait BaseSymbolGraphBuilder {
   
   def buildGraph[T <: BaseGraph](savedLines: ArrayBuffer[String], st: TreeMap[String, Int], g: T, delimiter: String) = {
     for {

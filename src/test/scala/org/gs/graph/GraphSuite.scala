@@ -8,6 +8,7 @@ import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import scala.collection.mutable.ArrayBuffer
 import org.gs.graph.fixtures.SymbolGraphBuilder
+import org.gs.fixtures.IntArrayBuilder
 
 @RunWith(classOf[JUnitRunner])
 class GraphSuite extends FlatSpec {
@@ -15,7 +16,7 @@ class GraphSuite extends FlatSpec {
     val d = buildSymbolGraph("http://algs4.cs.princeton.edu/41undirected/movies.txt", "/")
   }
   val movies = new Movies
-  
+
   trait GraphBuilder {
     val tinyGdata = Array[(Int, Int)]((0, 5), (4, 3), (0, 1), (9, 12), (6, 4), (5, 4), (0, 2),
       (11, 12), (9, 10), (0, 6), (7, 8), (9, 11), (5, 3))
@@ -31,7 +32,21 @@ class GraphSuite extends FlatSpec {
       }
     }
   }
-
+  
+  behavior of "a Graph"
+  it should "build mediumG.txt" in new IntArrayBuilder {
+    val managedResource = readURI("http://algs4.cs.princeton.edu/41undirected/mediumG.txt")
+    val savedLines = managedResource.loan(readFileToArray)
+    val v = savedLines(0)
+    val e = savedLines(1)
+    val g = new Graph(v)
+    val twoInts = savedLines.drop(2).grouped(2)
+    for {
+      t <- twoInts
+    } g.addEdge(t(0), t(1))
+    assert(g.adj(2).diff(Array[Int](141, 110, 108, 86, 79, 51, 42, 18, 14)) === Array())
+  }
+  
   behavior of "a DepthFirstSearch"
   it should "count verticies connected to an edge" in new GraphBuilder {
     val from0 = new DepthFirstSearch(tinyG, 0)
@@ -77,14 +92,14 @@ class GraphSuite extends FlatSpec {
       val g = new BreadthFirstPaths(tinyCG, i)
       assert(g.distTo(i) === 0, s"i:$i distTo itself:${g.distTo(i)}")
     }
-    def showHasPathTo() {
+/*    def showHasPathTo() {
       for (i <- 0 until tinyCGdata.size) {
         val g = new BreadthFirstPaths(tinyCG, i)
         for (j <- 0 until tinyCGdata.size) {
           println(s"i:$i j:$j hasPathTo:${g.hasPathTo(j)}")
         }
       }
-    }
+    } */
   }
 
   it should "each edge v-w dist[w] <= dist[v] + 1 where v reachable from s" in
@@ -140,6 +155,26 @@ class GraphSuite extends FlatSpec {
     assert(from0.distance(7) === Int.MaxValue)
   }
 
+  // -Xms1g -Xmx2g
+  ignore should "build largeG.txt" in new IntArrayBuilder {
+    val managedResource = readURI("http://algs4.cs.princeton.edu/41undirected/largeG.txt")
+    val savedLines = managedResource.loan(readFileToArray)
+    val v = savedLines(0)
+    val e = savedLines(1)
+    val g = new Graph(v)
+    val twoInts = savedLines.drop(2).grouped(2)
+    for {
+      t <- twoInts
+    } g.addEdge(t(0), t(1))
+    val from0 = new BreadthFirstPaths(g, 0)
+    assert(from0.distance(1) === 418)
+    assert(from0.distance(2) === 323)
+    assert(from0.distance(3) === 168)
+    assert(from0.distance(4) === 144)
+    assert(from0.distance(5) === 566)
+    assert(from0.distance(6) === 349)
+  }
+  
   behavior of "a SymbolGraph"
 
   it should "find routes" in new SymbolGraphBuilder {

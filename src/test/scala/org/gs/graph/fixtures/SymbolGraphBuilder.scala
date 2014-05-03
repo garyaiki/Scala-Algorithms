@@ -3,10 +3,12 @@
  */
 package org.gs.graph.fixtures
 
-import scala.io.Source
 import scala.collection.immutable.TreeMap
-import org.gs.graph.Graph
+
+import org.gs.fixtures.StringArrayBuilder
+import org.gs.fixtures.SymbolTableBuilder
 import org.gs.graph.BaseGraph
+import org.gs.graph.Graph
 
 /**
  * @author Gary Struthers
@@ -18,7 +20,7 @@ class SymbolGraph[T <: BaseGraph](st: TreeMap[String, Int], val keys: Array[Stri
   def name(v: Int) = keys(v)
 }
 
-trait SymbolGraphBuilder extends BaseSymbolGraphBuilder {
+trait SymbolGraphBuilder extends StringArrayBuilder with SymbolTableBuilder with BaseSymbolGraphBuilder {
   def buildSymbolGraph(uri: String, delimiter: String): SymbolGraph[Graph] = {
     val savedLines = buildFromManagedResource(uri)
     val st = buildStringIndex(delimiter, savedLines)
