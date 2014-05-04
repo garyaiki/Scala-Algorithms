@@ -8,35 +8,12 @@ package org.gs.graph
  */
 import scala.collection.mutable.ListBuffer
 
-class EdgeWeightedGraph(val v: Int) {
-  require(v >= 0, s"Number of vertices, v:$v must be nonnegative")
-  var e = 0
-  val adj = Array.fill[List[Edge]](v)(List[Edge]())
+class EdgeWeightedGraph(v: Int) extends BaseEdgeWeightedGraph[Edge](v) {
 
   def this(g: EdgeWeightedGraph) = {
     this(g.v)
-    e = g.e
-    var reverse = null.asInstanceOf[ListBuffer[Edge]]
-
-    for {
-      v <- 0 until g.v
-      reverse = ListBuffer[Edge]()
-    } {
-      for {
-        e <- g.adj(v)
-      } reverse.prepend(e)
-      for {
-        er <- reverse
-      } adj(v) = er :: adj(v)
-    }
+	buildADJ(g)
   } 
- 
-  def rangeGuard(x: Int) = {
-    x match {
-      case x if 0 until v contains x => true
-      case _ => false
-    }
-  }
 
   def addEdge(ed: Edge) {
     val either = ed.either
@@ -48,14 +25,9 @@ class EdgeWeightedGraph(val v: Int) {
     adj(other) = ed :: adj(other)
     e += 1
   }
-  
-  def edgesOnVertex(eV: Int) = {
-    require(rangeGuard(eV), s"verticies eV:$eV  not in 0..$v ")
-    adj(eV).toSeq
-  }
 
   def edges() = {
-    var list = ListBuffer[Edge]()
+    val list = ListBuffer[Edge]()
     def addEdgesAndSelfLoops(vV: Int) {
       var selfLoops = 0
       def addEdges(edg: Edge) {
@@ -73,25 +45,5 @@ class EdgeWeightedGraph(val v: Int) {
     } addEdgesAndSelfLoops(vV)
     list.toSeq
   }
-  
-  override def toString(): String = {
-    val lf = sys.props("line.separator")
-    val sb = new StringBuilder()
-    sb.append(s"$v $e $lf")
-    def addLines(vV: Int) {
-      sb.append(s"$vV : ")
-      for {
-        ed <- adj(vV)
-      } sb.append(s"$ed  ")
-      sb.append(lf)
-    }
-    for {
-      vV <- 0 until v
-    } addLines(vV)
-    sb.toString
-  }
-}
-
-object EdgeWeightedGraph {
 
 }

@@ -32,7 +32,7 @@ class GraphSuite extends FlatSpec {
       }
     }
   }
-  
+
   behavior of "a Graph"
   it should "build mediumG.txt" in new IntArrayBuilder {
     val managedResource = readURI("http://algs4.cs.princeton.edu/41undirected/mediumG.txt")
@@ -46,7 +46,7 @@ class GraphSuite extends FlatSpec {
     } g.addEdge(t(0), t(1))
     assert(g.adj(2).diff(Array[Int](141, 110, 108, 86, 79, 51, 42, 18, 14)) === Array())
   }
-  
+
   behavior of "a DepthFirstSearch"
   it should "count verticies connected to an edge" in new GraphBuilder {
     val from0 = new DepthFirstSearch(tinyG, 0)
@@ -92,7 +92,7 @@ class GraphSuite extends FlatSpec {
       val g = new BreadthFirstPaths(tinyCG, i)
       assert(g.distTo(i) === 0, s"i:$i distTo itself:${g.distTo(i)}")
     }
-/*    def showHasPathTo() {
+    /*    def showHasPathTo() {
       for (i <- 0 until tinyCGdata.size) {
         val g = new BreadthFirstPaths(tinyCG, i)
         for (j <- 0 until tinyCGdata.size) {
@@ -156,7 +156,7 @@ class GraphSuite extends FlatSpec {
   }
 
   // -Xms1g -Xmx2g
-  ignore should "build largeG.txt" in new IntArrayBuilder {
+  it should "build largeG.txt" in new IntArrayBuilder {
     val managedResource = readURI("http://algs4.cs.princeton.edu/41undirected/largeG.txt")
     val savedLines = managedResource.loan(readFileToArray)
     val v = savedLines(0)
@@ -167,14 +167,28 @@ class GraphSuite extends FlatSpec {
       t <- twoInts
     } g.addEdge(t(0), t(1))
     val from0 = new BreadthFirstPaths(g, 0)
-    assert(from0.distance(1) === 418)
-    assert(from0.distance(2) === 323)
-    assert(from0.distance(3) === 168)
-    assert(from0.distance(4) === 144)
-    assert(from0.distance(5) === 566)
-    assert(from0.distance(6) === 349)
+    //    for(i <- 0 until g.v) if(from0.hasPathTo(i)) println(s"0 hasPathTo $i distance to:${from0.distance(i)}")
+    //    println(s"0 distance to 713461:${from0.distance(713461)}")
+    assert(from0.distance(762) === 2)
+    assert(from0.distance(932942) === 1)
+    assert(from0.distance(474885) === 2)
+    assert(from0.distance(460790) === 1)
+    assert(from0.distance(53370) === 2)
+    assert(from0.distance(713461) === 1)
+    assert(from0.distance(75230) === 2)
+    //println(s"marked:${from0.marked(82707)} edgeTo:${from0.edgeTo(82707)} distTo:${from0.distTo(82707)}")
+    for {
+      v <- 0 until g.v
+      w <- g.adj(v)
+      if (from0.hasPathTo(v))
+    } {
+      assert(from0.hasPathTo(v) == from0.hasPathTo(w), s"source:0 edge v:$v - w:$w")
+      assert(from0.distTo(w) <= from0.distTo(v) + 1,
+        s"source:0 v:$v - w:$w distTo w:${from0.distTo(w)}  distTo v + 1:${from0.distTo(v) + 1}")
+    }
+
   }
-  
+
   behavior of "a SymbolGraph"
 
   it should "find routes" in new SymbolGraphBuilder {
