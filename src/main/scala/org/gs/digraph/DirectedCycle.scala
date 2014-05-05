@@ -10,17 +10,9 @@ import scala.annotation.tailrec
  * @author Gary Struthers
  *
  */
-class DirectedCycle(g: Digraph) {
-  val marked = Array.fill[Boolean](g.v)(false)
-  val onStack = Array.fill[Boolean](g.v)(false)
-  val edgeTo = new Array[Int](g.v)
-  var cycle = List[Int]()
-  for {
-    v <- 0 until g.v
-    if(!marked(v))
-  } dfs(v)
+class DirectedCycle(g: Digraph) extends BaseDirectedCycle[Int](g.v){
 
-  private def dfs(v: Int) {
+   def dfs(v: Int) {
     onStack(v) = true
     marked(v) = true
     def recurOnNewVertex(w: Int):Boolean = {
@@ -56,7 +48,6 @@ class DirectedCycle(g: Digraph) {
     onStack(v) = false
   }
 
-  def hasCycle() = !cycle.isEmpty
 
 }
 object DirectedCycle {

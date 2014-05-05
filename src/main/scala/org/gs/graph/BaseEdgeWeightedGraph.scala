@@ -1,5 +1,5 @@
 /**
- *
+ * Common code for EdgeWeightedGraph, EdgeWeightedDigraph
  */
 package org.gs.graph
 
@@ -8,6 +8,8 @@ import scala.collection.mutable.ListBuffer
 /**
  * @author Gary Struthers
  *
+ * @param <T> Edge, DirectedEdge
+ * @param v number of vertices in EdgeWeightedGraph, EdgeWeightedDigraph
  */
 abstract class BaseEdgeWeightedGraph[T <: BaseEdge](val v: Int) {
   require(v >= 0, s"Number of vertices, v:$v must be nonnegative")
