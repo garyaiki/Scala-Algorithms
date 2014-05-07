@@ -1,5 +1,6 @@
 /*
- * @http://algs4.cs.princeton.edu/24pq/MaxPQ.java.html
+ * Common code for MaxPQ, MinPQ
+ * @see http://algs4.cs.princeton.edu/24pq/MaxPQ.java.html
  * @see http://algs4.cs.princeton.edu/24pq/MinPQ.java.html
  */
 package org.gs.queue
@@ -12,16 +13,22 @@ import scala.annotation.tailrec
  *
  * @author Gary Struthers
  *
- * @param <T>
+ * @param <A> keys are generic and ordered
+ * @param pq priority wueue array
  */
-class PriorityQueue[T](pq: ArrayBuffer[T]) {
-  if (pq.isEmpty) pq.append(null.asInstanceOf[T]) // don't use index 0
-  else pq(0) = null.asInstanceOf[T]
+abstract class PriorityQueue[A](pq: ArrayBuffer[A]) {
+  if (pq.isEmpty) pq.append(null.asInstanceOf[A]) // don't use index 0
+  else pq(0) = null.asInstanceOf[A]
+  
   private var n = 0
+  
   private[queue] def getNumberInQ() = n // only used for helpers
+  
   def isEmpty(): Boolean = n == 0
-  def less(a: Int, b: Int)(implicit ord: Ordering[T]) = ord.lt(pq(a), pq(b))
-  def greater(a: Int, b: Int)(implicit ord: Ordering[T]) = ord.gt(pq(a), pq(b))
+  
+  def less(a: Int, b: Int)(implicit ord: Ordering[A]): Boolean = ord.lt(pq(a), pq(b))
+  
+  def greater(a: Int, b: Int)(implicit ord: Ordering[A]): Boolean = ord.gt(pq(a), pq(b))
 
   private def exchange(child: Int, parent: Int) {
     val parentVal = pq(parent)
@@ -57,13 +64,13 @@ class PriorityQueue[T](pq: ArrayBuffer[T]) {
     loop(k)
   }
 
-  def insert(key: T, cmp: (Int, Int) => Boolean): Unit = { // Cost at most 1 + lg N compares
+  def insert(key: A, cmp: (Int, Int) => Boolean): Unit = { 
     n += 1
     pq.append(key)
     swim(n, cmp)
   }
 
-  def pop(cmp: (Int, Int) => Boolean): Option[T] = {
+  def pop(cmp: (Int, Int) => Boolean): Option[A] = {
     if (isEmpty) None else {
       exchange(1, n)
       val top = pq.remove(n)
@@ -73,7 +80,7 @@ class PriorityQueue[T](pq: ArrayBuffer[T]) {
     }
   }
 
-  def toString(keys: Seq[T]): String = {
+  def toString(keys: Seq[A]): String = {
     val sb = new StringBuilder()
     for {
       s <- keys
@@ -97,31 +104,4 @@ class PriorityQueue[T](pq: ArrayBuffer[T]) {
   }
 }
 
-class MinPQ[T](pq: ArrayBuffer[T]) extends PriorityQueue(pq) {
-  def insert(key: T)(implicit ord: Ordering[T]): Unit = { // Cost at most 1 + lg N compares
-    insert(key, greater)
-  }
-  def pop()(implicit ord: Ordering[T]): Option[T] = pop(greater)
-
-  def isMinHeap()(implicit ord: Ordering[T]): Boolean = checkHeap(greater)
-
-  def keys()(implicit ord: Ordering[T]): Seq[T] = pq.sorted[T]
-
-  def toString()(implicit ord: Ordering[T]): String = toString(keys)
-}
-
-class MaxPQ[T](pq: ArrayBuffer[T]) extends PriorityQueue(pq) {
-  def insert(key: T)(implicit ord: Ordering[T]): Unit = { // Cost at most 1 + lg N compares
-    insert(key, less)
-  }
-
-  def pop()(implicit ord: Ordering[T]): Option[T] = pop(less)
-
-  def isMaxHeap()(implicit ord: Ordering[T]): Boolean = checkHeap(less)
-
-  def keys()(implicit ord: Ordering[T]): Seq[T] = pq.sorted(Ordering[T].reverse)
-
-  def toString()(implicit ord: Ordering[T]): String = toString(keys)
-
-}
 

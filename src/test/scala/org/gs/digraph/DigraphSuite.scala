@@ -38,6 +38,8 @@ class DigraphSuite extends FlatSpec {
     for (t <- tinyDGdata) tinyDG.addEdge(t._1, t._2)
 
     val equals = (_: Int) == (_: Int)
+    
+    var tinyEWDAG = new EdgeWeightedDigraph(13)
   }
   
   behavior of "a DirectedDFS"
@@ -162,6 +164,29 @@ class DigraphSuite extends FlatSpec {
     val dfoDG = new DepthFirstOrder(tinyDG)
     assert(dfoDG.reversePost.corresponds(List(7, 6, 8, 9, 10, 11, 12, 0, 1, 5, 4, 3, 2))(equals))
   }
+/*  
+  behavior of "a EdgeWeightedDepthFirstOrder"
+  it should "find pre-order of a EdgeWeightedDigraph" in new DigraphBuilder {
+    val dfo = new EdgeWeightedDepthFirstOrder(tinyDAG)
+    assert(dfo.preOrder.corresponds(List(0, 5, 4, 1, 6, 9, 11, 12, 10, 2, 3, 7, 8))(equals))
+    val dfoDG = new EdgeWeightedDepthFirstOrder(tinyDG)
+    assert(dfoDG.preOrder.corresponds(List(0, 5, 4, 3, 2, 1, 6, 9, 11, 12, 10, 8, 7))(equals))
+  }
+
+  it should "find post-order of a EdgeWeightedDigraph" in new DigraphBuilder {
+    val dfo = new EdgeWeightedDepthFirstOrder(tinyDAG)
+    assert(dfo.postOrder.corresponds(List(4, 5, 1, 12, 11, 10, 9, 6, 0, 3, 2, 7, 8))(equals))
+    val dfoDG = new EdgeWeightedDepthFirstOrder(tinyDG)
+    assert(dfoDG.postOrder.corresponds(List(2, 3, 4, 5, 1, 0, 12, 11, 10, 9, 8, 6, 7))(equals))
+  }
+
+  it should "find reverse post-order of a EdgeWeightedDigraph" in new DigraphBuilder {
+    val dfo = new EdgeWeightedDepthFirstOrder(tinyDAG)
+    assert(dfo.reversePost.corresponds(List(8, 7, 2, 3, 0, 6, 9, 10, 11, 12, 1, 5, 4))(equals))
+    val dfoDG = new EdgeWeightedDepthFirstOrder(tinyDG)
+    assert(dfoDG.reversePost.corresponds(List(7, 6, 8, 9, 10, 11, 12, 0, 1, 5, 4, 3, 2))(equals))
+  }
+*/
   behavior of "a Topological"
   it should "find topological order of a Digraph" in new DigraphBuilder {
     val tdg = new Topological(tinyDG)

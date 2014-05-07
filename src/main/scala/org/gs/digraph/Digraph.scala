@@ -5,11 +5,12 @@ package org.gs.digraph
 
 import org.gs.graph.BaseGraph
 
+trait DigraphMarker
 /**
  * @author Gary Struthers
  *
  */
-class Digraph(v: Int) extends BaseGraph(v) {
+class Digraph(v: Int) extends BaseGraph(v) with DigraphMarker {
 
   def reverse(): Digraph = {
     val r = new Digraph(v)

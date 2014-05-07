@@ -2,12 +2,12 @@
  * @see http://algs4.cs.princeton.edu/43mst/EdgeWeightedGraph.java.html
  */
 package org.gs.graph
+
+import scala.collection.mutable.ListBuffer
 /**
  * @author Gary Struthers
- *
+ * @param v number of vertices
  */
-import scala.collection.mutable.ListBuffer
-
 class EdgeWeightedGraph(v: Int) extends BaseEdgeWeightedGraph[Edge](v) {
 
   def this(g: EdgeWeightedGraph) = {
@@ -15,7 +15,7 @@ class EdgeWeightedGraph(v: Int) extends BaseEdgeWeightedGraph[Edge](v) {
 	buildADJ(g)
   } 
 
-  def addEdge(ed: Edge) {
+  def addEdge(ed: Edge): Unit = {
     val either = ed.either
     val other = ed.other(either)
     require(rangeGuard(either) && rangeGuard(other),
@@ -26,7 +26,7 @@ class EdgeWeightedGraph(v: Int) extends BaseEdgeWeightedGraph[Edge](v) {
     e += 1
   }
 
-  def edges() = {
+  def edges(): Seq[Edge] = {
     val list = ListBuffer[Edge]()
     def addEdgesAndSelfLoops(vV: Int) {
       var selfLoops = 0

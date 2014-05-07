@@ -11,17 +11,17 @@ import scala.collection.mutable.ListBuffer
  * @param <T> Edge, DirectedEdge
  * @param v number of vertices in EdgeWeightedGraph, EdgeWeightedDigraph
  */
-abstract class BaseEdgeWeightedGraph[T <: BaseEdge](val v: Int) {
+abstract class BaseEdgeWeightedGraph[A <: BaseEdge](val v: Int) {
   require(v >= 0, s"Number of vertices, v:$v must be nonnegative")
   var e = 0
-  val adj = Array.fill[List[T]](v)(List[T]())
+  val adj = Array.fill[List[A]](v)(List[A]())
 
-  def buildADJ[U <: BaseEdgeWeightedGraph[T]](g: U) {
+  protected def buildADJ[U <: BaseEdgeWeightedGraph[A]](g: U) {
     e = g.e
 
     for {
       v <- 0 until g.v
-      reverse = ListBuffer[T]()
+      reverse = ListBuffer[A]()
     } {
       for {
         e <- g.adj(v)
@@ -44,7 +44,7 @@ abstract class BaseEdgeWeightedGraph[T <: BaseEdge](val v: Int) {
     adj(eV).toSeq
   }
 
-  def edges():Seq[T]
+  def edges():Seq[A]
 
   override def toString(): String = {
     val lf = sys.props("line.separator")

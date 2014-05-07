@@ -9,7 +9,7 @@ import scala.collection.mutable.Queue
  * @author Gary Struthers
  *
  */
-class DepthFirstOrder(g: Digraph) extends BaseDepthFirstOrder(g.v){
+class EdgeWeightedDepthFirstOrder(g: EdgeWeightedDigraph) extends BaseDepthFirstOrder(g.v){
 
   def dfs(v: Int): Unit = {
     marked(v) = true
@@ -17,9 +17,9 @@ class DepthFirstOrder(g: Digraph) extends BaseDepthFirstOrder(g.v){
     _pre(v) = preCounter
     preOrder.enqueue(v)
     for {
-      w <- g.adj(v)
-      if (!marked(w))
-    } dfs(w)
+      e <- g.adj(v)
+      if (!marked(e.to))
+    } dfs(e.to)
     postOrder.enqueue(v)
     postCounter += 1
     _post(v) = postCounter

@@ -40,11 +40,9 @@ class EdgeWeightedDirectedCycle(g: EdgeWeightedDigraph) extends BaseDirectedCycl
     }
     for {
       e <- g.adj(v)
-    } {
-      if (!hasCycle) {
-        if (!recurOnNewVertex(e)) traceBack(e)
-      }
-    }
+      if (!hasCycle)
+    } if (!recurOnNewVertex(e)) traceBack(e)
+    
     onStack(v) = false
   }
   

@@ -5,7 +5,8 @@ package org.gs.graph
 
 /**
  * @author Gary Struthers
- *
+ * @param g
+ * @param s
  */
 class DepthFirstSearch(g: Graph, s: Int) {
   val marked = new Array[Boolean](g.v)

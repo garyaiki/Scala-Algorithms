@@ -5,14 +5,20 @@ package org.gs.graph
 import scala.collection.mutable.Queue
 import scala.collection.mutable.ListBuffer
 import scala.annotation.tailrec
+
+/**
+ * @author Gary Struthers
+ * @param g 
+ * @param s
+ */
 class BreadthFirstPaths(g: Graph, s: Int) {
   private[graph] val marked = Array.fill[Boolean](g.v)(false)
   private[graph] val edgeTo = new Array[Int](g.v)
-  private[graph] val distTo = Array.fill[Int](g.v)(Int.MaxValue)
+  private[graph] val _distTo = Array.fill[Int](g.v)(Int.MaxValue)
 
   private def bfs(s: Int) {
     val q = new Queue[Int]()
-    distTo(s) = 0
+    _distTo(s) = 0
     marked(s) = true
     q.enqueue(s)
     for {
@@ -21,7 +27,7 @@ class BreadthFirstPaths(g: Graph, s: Int) {
       if (!marked(w))
     } {
       edgeTo(w) = v
-      distTo(w) = distTo(v) + 1
+      _distTo(w) = _distTo(v) + 1
       marked(w) = true
       q.enqueue(w)
     }
@@ -29,7 +35,7 @@ class BreadthFirstPaths(g: Graph, s: Int) {
   bfs(s)
 
   def hasPathTo(v: Int) = marked(v)
-  def distance(v: Int) = distTo(v)
+  def distTo(v: Int) = _distTo(v)
   
   def pathTo(v: Int): Option[Seq[Int]] = {
     val path = ListBuffer[Int]()

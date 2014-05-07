@@ -1,4 +1,9 @@
 package org.gs.queue
+/**
+ * This copies a example from Programming in Scala instead of translating from Algorthms
+ * @see http://booksites.artima.com/programming_in_scala_2ed/examples/type-parameterization/Queues5.scala
+ * @see http://algs4.cs.princeton.edu/13stacks/Queue.java.html
+ */
 
 trait Queue[T] {
   def head: T
@@ -11,8 +16,8 @@ object Queue {
   def apply[T](xs: T*): Queue[T] = new QueueImpl[T](xs.toList, Nil)
 
   private class QueueImpl[T] (
-    private var leading: List[T],
-    private var trailing: List[T]) extends Queue[T] {
+    private val leading: List[T],
+    private val trailing: List[T]) extends Queue[T] {
 
     def mirror =
       if (leading.isEmpty) new QueueImpl(trailing.reverse, Nil)

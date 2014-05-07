@@ -6,7 +6,7 @@ package org.gs.digraph
 
 /**
  * @author Gary Struthers
- *
+ * @param g digraph
  */
 class KosarajuSharirSCC(g: Digraph) {
   val depthFirstOrder = new DepthFirstOrder(g.reverse)
@@ -37,6 +37,3 @@ class KosarajuSharirSCC(g: Digraph) {
   def idStrongComponent(v:Int) = id(v)
 }
 
-object KosarajuSharirSCC {
-
-}

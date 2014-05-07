@@ -40,11 +40,9 @@ class DirectedCycle(g: Digraph) extends BaseDirectedCycle[Int](g.v){
     }
     for {
       w <- g.adj(v)
-    } {
-      if (!hasCycle) {
-        if(!recurOnNewVertex(w)) traceBack(w)
-      }
-    }
+      if (!hasCycle)
+    } if(!recurOnNewVertex(w)) traceBack(w)
+    
     onStack(v) = false
   }
 

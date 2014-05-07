@@ -138,7 +138,7 @@ class MinSpanningTreeSuite extends FlatSpec {
     assert(edges.diff(tinyMSTArray).size === 0)
   }
   it should "match total weight of edges" in new LazyPrimMSTBuilder {
-    val primWeight = primMST.getWeight
+    val primWeight = primMST.weight
     assert(primWeight === 1.81)
   }
 

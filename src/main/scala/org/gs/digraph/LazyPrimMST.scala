@@ -17,7 +17,7 @@ import scala.util.control.Breaks.break
 import scala.util.control.Breaks.breakable
 
 class LazyPrimMST(g: EdgeWeightedGraph) {
-  private var weight: Double = 0.0
+  private var _weight: Double = 0.0
   private val mst = new Queue[Edge]()
   private val marked = Array.fill[Boolean](g.v)(false)
   private val pq = new MinPQ[Edge](new ArrayBuffer((g.e) * 2))
@@ -26,7 +26,7 @@ class LazyPrimMST(g: EdgeWeightedGraph) {
     if (!marked(v))
   } prim(v)
 
-  def getWeight() = weight
+  def weight() = _weight
   def edges() = mst.toSeq
 
   private def scan(v: Int) {
@@ -50,7 +50,7 @@ class LazyPrimMST(g: EdgeWeightedGraph) {
         require(vM || wM, "Edge:$edg has no marked endpoint")
         if (!(vM && wM)) {
           mst.enqueue(edg)
-          weight += edg.weight
+          _weight += edg.weight
           if (!vM) scan(v)
           if (!wM) scan(w)
         }

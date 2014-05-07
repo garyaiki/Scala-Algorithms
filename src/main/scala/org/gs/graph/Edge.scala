@@ -4,7 +4,9 @@
 package org.gs.graph
 /**
  * @author Gary Struthers
- *
+ * @param v from vertex
+ * @param w to vertex
+ * @param weight
  */
 class Edge(v: Int, w: Int, weight: Double) extends BaseEdge(v, w, weight) with Ordered[Edge] {
   
@@ -17,7 +19,6 @@ class Edge(v: Int, w: Int, weight: Double) extends BaseEdge(v, w, weight) with O
   }
   
   def compare(that: Edge) = weight.compareTo(that.weight)
-  
   
   def canEqual(other: Any) = other.isInstanceOf[Edge]
   

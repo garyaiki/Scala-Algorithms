@@ -8,6 +8,10 @@ import org.gs.queue.IndexMinPQ
 import org.gs.graph.Edge
 import org.gs.graph.EdgeWeightedGraph
 
+/**
+ * @author Gary Struthers
+ * @param g EdgeWeightedGraph
+ */
 class PrimMST(g: EdgeWeightedGraph) {
   private val edgeTo = new Array[Edge](g.v)
   private val distTo = Array.fill[Double](g.v)(Double.MaxValue)

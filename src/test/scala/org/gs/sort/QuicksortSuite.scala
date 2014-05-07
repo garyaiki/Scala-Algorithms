@@ -17,7 +17,7 @@ class QuicksortSuite extends FunSuite with BeforeAndAfter with PrivateMethodTest
   }
   test("private partition unshuffled input") {
     assert(testInput(lo) === 'K')
-    val qs = new Quicksort[Char]
+    val qs = new QuickX[Char]
     val setInput = PrivateMethod[Unit]('setInput)
     qs invokePrivate setInput(testInput)
     val partition = PrivateMethod[Int]('partition)
@@ -26,7 +26,7 @@ class QuicksortSuite extends FunSuite with BeforeAndAfter with PrivateMethodTest
   }
 
   test("protected sort shuffled input") {
-    val qs = new Quicksort[Char]()
+    val qs = new QuickX[Char]()
     val shuffleArrayBuffer = PrivateMethod[Unit]('shuffleArrayBuffer)
     qs invokePrivate shuffleArrayBuffer(testInput)
     val setInput = PrivateMethod[Unit]('setInput)
@@ -39,7 +39,7 @@ class QuicksortSuite extends FunSuite with BeforeAndAfter with PrivateMethodTest
   }
 
   test("public sort shuffled input") {
-    val qs = new Quicksort[Char]()
+    val qs = new QuickX[Char]()
     val sorted = qs.sort(testInput)
     assert(sorted(lo) === 'A')
     assert(sorted(5) === 'K')

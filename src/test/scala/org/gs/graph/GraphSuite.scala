@@ -146,13 +146,13 @@ class GraphSuite extends FlatSpec {
 
   it should "show distance from source to target vertices" in new ConnectedGraphBuilder {
     val from0 = new BreadthFirstPaths(tinyCG, 0)
-    assert(from0.distance(1) === 1)
-    assert(from0.distance(2) === 1)
-    assert(from0.distance(3) === 2)
-    assert(from0.distance(4) === 2)
-    assert(from0.distance(5) === 1)
-    assert(from0.distance(6) === Int.MaxValue)
-    assert(from0.distance(7) === Int.MaxValue)
+    assert(from0.distTo(1) === 1)
+    assert(from0.distTo(2) === 1)
+    assert(from0.distTo(3) === 2)
+    assert(from0.distTo(4) === 2)
+    assert(from0.distTo(5) === 1)
+    assert(from0.distTo(6) === Int.MaxValue)
+    assert(from0.distTo(7) === Int.MaxValue)
   }
 
   // -Xms1g -Xmx2g
@@ -169,13 +169,13 @@ class GraphSuite extends FlatSpec {
     val from0 = new BreadthFirstPaths(g, 0)
     //    for(i <- 0 until g.v) if(from0.hasPathTo(i)) println(s"0 hasPathTo $i distance to:${from0.distance(i)}")
     //    println(s"0 distance to 713461:${from0.distance(713461)}")
-    assert(from0.distance(762) === 2)
-    assert(from0.distance(932942) === 1)
-    assert(from0.distance(474885) === 2)
-    assert(from0.distance(460790) === 1)
-    assert(from0.distance(53370) === 2)
-    assert(from0.distance(713461) === 1)
-    assert(from0.distance(75230) === 2)
+    assert(from0.distTo(762) === 2)
+    assert(from0.distTo(932942) === 1)
+    assert(from0.distTo(474885) === 2)
+    assert(from0.distTo(460790) === 1)
+    assert(from0.distTo(53370) === 2)
+    assert(from0.distTo(713461) === 1)
+    assert(from0.distTo(75230) === 2)
     //println(s"marked:${from0.marked(82707)} edgeTo:${from0.edgeTo(82707)} distTo:${from0.distTo(82707)}")
     for {
       v <- 0 until g.v

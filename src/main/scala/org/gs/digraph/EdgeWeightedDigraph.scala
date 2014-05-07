@@ -9,7 +9,7 @@ import org.gs.graph.BaseEdgeWeightedGraph
  * @author Gary Struthers
  *
  */
-class EdgeWeightedDigraph(v: Int) extends BaseEdgeWeightedGraph[DirectedEdge](v) {
+class EdgeWeightedDigraph(v: Int) extends BaseEdgeWeightedGraph[DirectedEdge](v) with DigraphMarker {
 
   def this(g: EdgeWeightedDigraph) = {
     this(g.v)

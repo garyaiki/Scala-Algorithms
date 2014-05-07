@@ -27,7 +27,7 @@ class SetSuite extends FlatSpec {
       t <- tinyUFdata
       if(!tinyUF.connected(t._1, t._2))
     } tinyUF.union(t._1, t._2)
-    assert(tinyUF.getCount === 2)
+    assert(tinyUF.count === 2)
   }
   // -Xms256m -Xmx512m
   it should "find 6 components in largeUF" in new IntArrayBuilder {
@@ -40,6 +40,6 @@ class SetSuite extends FlatSpec {
       t <- twoInts
       if(!uf.connected(t(0), t(1)))
     } uf.union(t(0), t(1))
-    assert(uf.getCount === 6)
+    assert(uf.count === 6)
   }
 }
