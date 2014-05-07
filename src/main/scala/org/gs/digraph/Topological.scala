@@ -16,7 +16,7 @@ class Topological[A <: DigraphMarker](g: A) {
     case e: EdgeWeightedDigraph => new EdgeWeightedDirectedCycle(e)
   }
   var _order: Seq[Int] = null
-  if(finder.hasCycle) _order = {
+  if(!finder.hasCycle) _order = {
     val dfs = g match {
       case d: Digraph => new DepthFirstOrder(d)
       case e: EdgeWeightedDigraph => new EdgeWeightedDepthFirstOrder(e)

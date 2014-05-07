@@ -37,7 +37,7 @@ class AcyclicSP(g: EdgeWeightedDigraph, s: Int) {
   
   def hasPathTo(v: Int): Boolean = _distTo(v) < Double.PositiveInfinity
   
-  def pathTo(v: Int) = {
+  def pathTo(v: Int): Option[Seq[DirectedEdge]] = {
     if(!hasPathTo(v)) None else {
       val path = new ListBuffer[DirectedEdge]()
       @tailrec
@@ -48,7 +48,7 @@ class AcyclicSP(g: EdgeWeightedDigraph, s: Int) {
         }
       }
       loop(edgeTo(v))
-      path
+      Some(path.toSeq)
     }
   }
 }
