@@ -8,7 +8,7 @@ import scala.annotation.tailrec
 
 /**
  * @author Gary Struthers
- * @param g EdgeWeightedDigraph
+ * @param g acyclic digraph
  * @param s source vertex
  */
 class AcyclicSP(g: EdgeWeightedDigraph, s: Int) {

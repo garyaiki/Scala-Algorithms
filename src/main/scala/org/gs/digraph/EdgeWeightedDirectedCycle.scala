@@ -1,9 +1,11 @@
 /**
- *
+ * @see http://algs4.cs.princeton.edu/44sp/EdgeWeightedDirectedCycle.java.html
  */
 package org.gs.digraph
 
 import scala.annotation.tailrec
+import scala.util.control.Breaks.break
+import scala.util.control.Breaks.breakable
 
 /**
  * @author Gary Struthers
@@ -11,39 +13,38 @@ import scala.annotation.tailrec
  */
 class EdgeWeightedDirectedCycle(g: EdgeWeightedDigraph) extends BaseDirectedCycle[DirectedEdge](g.v) {
 
-  def dfs( v: Int) {
+  def dfs(v: Int) {
     onStack(v) = true
     marked(v) = true
-    def recurOnNewVertex(e: DirectedEdge): Boolean = {
-      val w = e.to
-      if (!marked(w)) {
-        edgeTo(w) = e
-        dfs( w)
-        true
-      } else false
-    }
-    def traceBack(e: DirectedEdge): Boolean = {
-      val w = e.to
-      if (onStack(w)) {
-        cycle = List[DirectedEdge]()
-        @tailrec
-        def loop(x: DirectedEdge): Unit = {
-          if (x.from != w) {
-            cycle = x :: cycle
-            loop(edgeTo(e.from))
+    breakable {
+      for {
+        e <- g.adj(v)
+      } {
+        if (hasCycle) break
+        val w = e.to
+        val newV = !marked(w)
+        if (newV) {
+          edgeTo(w) = e
+          dfs(w)
+        } else if (onStack(w)) {
+          def traceBack(): List[DirectedEdge] = {
+            cycle = List[DirectedEdge]()
+            @tailrec
+            def loop(x: DirectedEdge): Unit = {
+              if (x.from != w) {
+                cycle = x :: cycle
+                loop(edgeTo(x.from))
+              } else {
+                cycle = x :: cycle
+              }
+            }
+            loop(e)
+            cycle
           }
+          val c = traceBack
         }
-        loop(e)
-        cycle = e :: cycle
-        true
-      } else false
+      }
     }
-    for {
-      e <- g.adj(v)
-      if (!hasCycle)
-    } if (!recurOnNewVertex(e)) traceBack(e)
-    
-    onStack(v) = false
+    if (!hasCycle) onStack(v) = false
   }
-  
 }

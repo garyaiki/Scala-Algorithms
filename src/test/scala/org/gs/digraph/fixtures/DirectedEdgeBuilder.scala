@@ -1,5 +1,5 @@
 /**
- *
+ * Builds arrays of directed edges
  */
 package org.gs.digraph.fixtures
 
@@ -14,7 +14,7 @@ import org.gs.digraph.DirectedEdge
  */
 trait DirectedEdgeBuilder extends BufferedSourceBuilder {
   val intPattern = """^\d+$""".r
-  val edgePattern = """^(\d+)\s+(\d+)\s+(\d+[.]\d+)$""".r
+  val edgePattern = """^(\d+)\s+(\d+)\s+(-?\d+[.]\d+)$""".r
   def readFileToTuple(buffSource: BufferedSource): (Int, Int, ArrayBuffer[DirectedEdge]) = {
     val savedLines = new ArrayBuffer[DirectedEdge]()
     val it = buffSource.getLines

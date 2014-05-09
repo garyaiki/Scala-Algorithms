@@ -36,5 +36,4 @@ class SymbolDigraphSuite extends FlatSpec {
     val wLAX = for (w <- g.adj(8)) yield keys(w)
     assert(wLAX.diff(List("LAS", "PHX")) === List())
   }
-
 } 

@@ -15,15 +15,7 @@ import org.gs.digraph.fixtures.DigraphBuilder
  */
 @RunWith(classOf[JUnitRunner])
 class DigraphSuite extends FlatSpec {
-  behavior of "a SymbolDigraph"
-  
-  it should "have edges" in new SymbolDigraphBuilder {
-    val d = buildSymbolGraph("http://algs4.cs.princeton.edu/41undirected/routes.txt", "\\s+")
-    println(d.g.e)
-    val size = d.keys.size
-    for(v <- 0 until size) println(s"index:$v key${d.name(v)} contains:${d.contains(d.name(v))} index:${d.index(d.name(v))}")
-    
-  }
+
 /*  
   trait DigraphBuilder {
     val tinyDAGdata = Array[(Int, Int)]((2, 3), (0, 6), (0, 1), (2, 0), (11, 12), (9, 12),
@@ -189,19 +181,5 @@ class DigraphSuite extends FlatSpec {
   }
 */
 
-  
-  behavior of "a SymbolDigraph"
-
-  it should "find routes" in new SymbolDigraphBuilder {
-    val d = buildSymbolGraph("http://algs4.cs.princeton.edu/41undirected/routes.txt", "\\s+")
-    val keys = d.keys
-    val g = d.g
-    assert("JFK" === keys(0))
-    val wJFK = for (w <- g.adj(0)) yield keys(w)
-    assert(wJFK.diff(List("MCO", "ATL", "ORD")) === List())
-    assert("LAX" === keys(8))
-    val wLAX = for (w <- g.adj(8)) yield keys(w)
-    assert(wLAX.diff(List("LAS", "PHX")) === List())
-  }
 
 } 

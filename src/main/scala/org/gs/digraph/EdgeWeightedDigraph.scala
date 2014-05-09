@@ -35,5 +35,4 @@ class EdgeWeightedDigraph(v: Int) extends BaseEdgeWeightedGraph[DirectedEdge](v)
     require(rangeGuard(v), s"verticies v:$v  not in 0..$v ")
     adj(v).size
   }
-
 }

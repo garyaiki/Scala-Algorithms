@@ -18,12 +18,6 @@ import org.gs.digraph.fixtures.TinyEdgeWeightedDigraphBuilder
 @RunWith(classOf[JUnitRunner])
 class DijkstraSPSuite extends FlatSpec {
 
-  behavior of "a EdgeWeightedDigraph"
-
-  it should "have no negative weights" in new TinyEdgeWeightedDigraphBuilder {
-    assert(g.edges.forall(_.weight >= 0))
-  }
-
   behavior of "a DijkstraSP"
   it should "build" in new TinyEdgeWeightedDigraphBuilder {
     val dsp = new DijkstraSP(g, 0)
