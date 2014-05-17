@@ -1,5 +1,7 @@
 /**
+ * Common trait for DirectedEdge, FlowEdge
  * @see http://algs4.cs.princeton.edu/44sp/DirectedEdge.java.html
+ * @see http://algs4.cs.princeton.edu/64maxflow/FlowEdge.java.html
  */
 package org.gs.digraph
 
@@ -8,11 +10,10 @@ import org.gs.graph.BaseEdge
  * @author Gary Struthers
  *
  */
-class DirectedEdge(v: Int, w: Int, weight: Double) 
-					extends BaseEdge(v, w, weight) with BaseDirectedEdge {
+trait BaseDirectedEdge{
   
-  def from() = v
+  def from():Int
   
-  def to() = w
+  def to():Int
   
 }

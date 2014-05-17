@@ -1,0 +1,29 @@
+/**
+ * ScalaTest, JUnit tests for FLowNetwork
+ * @see http://algs4.cs.princeton.edu/64maxflow/tinyFN.txt
+ */
+package org.gs.digraph
+
+import org.gs.digraph.fixtures.DirectedEdgeBuilder
+import org.junit.runner.RunWith
+import org.scalatest.FlatSpec
+import org.scalatest.junit.JUnitRunner
+import org.gs.digraph.fixtures.FlowEdgeBuilder
+
+/**
+ * @author Gary Struthers
+ *
+ */
+@RunWith(classOf[JUnitRunner])
+class FlowNetworkSuite extends FlatSpec {
+  behavior of "a FlowNetwork"
+  
+  it should "have at least on of each edge in tinyFN" in new FlowEdgeBuilder {
+    val managedResource = readURI("http://algs4.cs.princeton.edu/64maxflow/tinyFN.txt")
+    val tuple = managedResource.loan(readFileToTuple)
+    val a = new FlowNetwork(tuple._1)
+    
+    for (ed <- tuple._3) a.addEdge(ed)
+    assert(a.edges.toSet.size === tuple._2)
+  }
+}
