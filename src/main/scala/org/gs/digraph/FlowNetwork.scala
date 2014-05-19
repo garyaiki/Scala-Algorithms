@@ -9,7 +9,7 @@ import scala.collection.mutable.ListBuffer
  * @author Gary Struthers
  *
  */
-class FlowNetwork(v: Int) {
+class FlowNetwork(val v: Int) {
   require(v >= 0, s"Number of vertices, v:$v must be nonnegative")
   private var _e = 0
   private val _adj = Array.fill[List[FlowEdge]](v)(List[FlowEdge]())

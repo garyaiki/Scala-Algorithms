@@ -78,6 +78,23 @@ trait SymbolTableBuilder {
   }
 }
 
+trait WordArrayBuilder extends BufferedSourceBuilder {
+  
+  def readFileToArray(buffSource: BufferedSource): Array[String] = {
+    val savedLines = new ArrayBuffer[String]()
+    val it = buffSource.getLines
+    val words = for {
+      a <- it
+      i <- a.split("\\s+")
+    } yield i
+    words.toArray
+  }
+
+  def buildFromManagedResource(uri: String): Array[String] = {
+    val managedResource = readURI(uri)
+    managedResource.loan(readFileToArray)
+  }
+}
 trait IntArrayBuilder extends BufferedSourceBuilder {
   
   def readFileToArray(buffSource: BufferedSource): ArrayBuffer[Int] = {
