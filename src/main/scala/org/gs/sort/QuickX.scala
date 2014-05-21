@@ -31,8 +31,10 @@ class QuickX[A](implicit ord: A => Ordered[A]) {
 
   def insertionSort(): Unit = {
     var i = 1
+    @tailrec
     def loopI(): Unit = {
       var j = i
+      @tailrec
       def loopJ(): Unit = {
         if (_input(j) >= _input(j - 1)) j = 0 else {
           exchange(j, j - 1)
