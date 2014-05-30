@@ -28,5 +28,4 @@ object MergeSortList {
       merge(msort(less)(ys), msort(less)(zs), Nil).reverse
     }
   }
-
 }

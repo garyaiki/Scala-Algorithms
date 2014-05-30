@@ -25,7 +25,7 @@ class DepthFirstDirectedPaths(g: Digraph, s: Int) {
   }
   dfs(s)
 
-  def hasPathTo(v: Int) = marked(v)
+  def hasPathTo(v: Int): Boolean = marked(v)
 
   def pathTo(v: Int): Seq[Int] = {
     var pathStack = List[Int]()
@@ -38,7 +38,4 @@ class DepthFirstDirectedPaths(g: Digraph, s: Int) {
     }
     (loop(v) :: pathStack).toSeq
   }
-}
-object DepthFirstDirectedPaths {
-
 }

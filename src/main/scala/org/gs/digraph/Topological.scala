@@ -23,10 +23,10 @@ class Topological[A <: DigraphMarker](g: A) {
     }
     dfs.reversePost
   }
+
+  def hasOrder(): Boolean = _order != None
   
-  def hasOrder() = _order != None
-  
-  def order: Option[Seq[Int]] = _order match {
+  def order(): Option[Seq[Int]] = _order match {
     case null => None
     case x => Some(x)
   }

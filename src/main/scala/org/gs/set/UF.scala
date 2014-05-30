@@ -14,7 +14,7 @@ class UF(n: Int) {
   private val rank = Array.fill[Byte](n)(0)
 
   def count(): Int = _count
-  
+
   def find(p: Int): Int = {
     require(p >= 0 && p < id.length)
     def loop(pP: Int): Int =

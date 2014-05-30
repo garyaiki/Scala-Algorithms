@@ -12,20 +12,21 @@ import scala.annotation.tailrec
  */
 class DirectedCycle(g: Digraph) extends BaseDirectedCycle[Int](g.v){
 
-   def dfs(v: Int) {
+   def dfs(v: Int): Unit = {
     onStack(v) = true
     marked(v) = true
-    def recurOnNewVertex(w: Int):Boolean = {
+    def recurOnNewVertex(w: Int): Boolean = {
       if (!marked(w)) {
         edgeTo(w) = v
         dfs(w)
         true
       } else false
     }
-    def traceBack(w: Int):Boolean =  {
+
+    def traceBack(w: Int): Boolean =  {
       if(onStack(w)) {
-    	cycle = List[Int]()
-    	@tailrec
+        cycle = List[Int]()
+        @tailrec
         def loop(x: Int): Unit = {
           if (x != w) {
             cycle = x :: cycle
@@ -42,12 +43,7 @@ class DirectedCycle(g: Digraph) extends BaseDirectedCycle[Int](g.v){
       w <- g.adj(v)
       if (!hasCycle)
     } if(!recurOnNewVertex(w)) traceBack(w)
-    
+
     onStack(v) = false
   }
-
-
-}
-object DirectedCycle {
-
 }

@@ -23,28 +23,28 @@ abstract class IndexPriorityQueue[A: ClassTag](nMax: Int) {
   private val keys = new Array[A](nMax + 1)
   private val pq = new Array[Int](keys.size)
   private val qp = Array.fill[Int](keys.size)(-1)
-  
+
   def isEmpty(): Boolean = n == 0
-  
+
   def less(a: Int, b: Int)(implicit ord: Ordering[A]): Boolean = ord.lt(keys(pq(a)), keys(pq(b)))
-  
+
   def greater(a: Int, b: Int)(implicit ord: Ordering[A]):Boolean =  ord.gt(keys(pq(a)), keys(pq(b)))
 
-  private def rangeGuard(x: Int) = {
+  private def rangeGuard(x: Int): Boolean = {
     x match {
       case x if 0 to nMax contains x => true
       case _ => false
     }
   }
-  
+
   def contains(i: Int): Boolean  = {
     require(rangeGuard(i), s"i:$i not in 0 - nMax:$nMax")
     qp(i) != -1
   }
-  
+
   def size(): Int = n
 
-  private def exchange(i: Int, j: Int) {
+  private def exchange(i: Int, j: Int): Unit = {
     val swap = pq(i)
     pq.update(i, pq(j))
     pq.update(j, swap)
@@ -52,7 +52,7 @@ abstract class IndexPriorityQueue[A: ClassTag](nMax: Int) {
     qp(pq(i)) = i
   }
 
-  private def swim(k: Int, cmp: (Int, Int) => Boolean) {
+  private def swim(k: Int, cmp: (Int, Int) => Boolean): Unit = {
     @tailrec
     def loop(i: Int, j: Int) {
       if (i > 1 && cmp(j, i)) {
@@ -63,10 +63,10 @@ abstract class IndexPriorityQueue[A: ClassTag](nMax: Int) {
     loop(k, k./(2))
   }
 
-  private def sink(k: Int, cmp: (Int, Int) => Boolean) {
+  private def sink(k: Int, cmp: (Int, Int) => Boolean): Unit = {
     @tailrec
     def loop(k: Int): Unit = {
-      def calcJ() = {
+      def calcJ(): Int = {
         val j = k * 2
         val j1 = j + 1
         if ((j1 <= n) && cmp(j, j1)) j1 else j
@@ -171,7 +171,7 @@ abstract class IndexPriorityQueue[A: ClassTag](nMax: Int) {
   }
 
   def getKeys(): IndexedSeq[A] = for(i <- 1 until nMax ) yield keys(pq(i))
-  
+
   def checkHeap(cmp: (Int, Int) => Boolean): Boolean = {
     def loop(k: Int): Boolean = {
       if (k > n) true else {

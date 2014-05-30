@@ -12,8 +12,8 @@ class EdgeWeightedGraph(v: Int) extends BaseEdgeWeightedGraph[Edge](v) {
 
   def this(g: EdgeWeightedGraph) = {
     this(g.v)
-	buildADJ(g)
-  } 
+    buildADJ(g)
+  }
 
   def addEdge(ed: Edge): Unit = {
     val either = ed.either
@@ -34,7 +34,7 @@ class EdgeWeightedGraph(v: Int) extends BaseEdgeWeightedGraph[Edge](v) {
         if(edg.other(vV) > vV) list.prepend(edg) else if (edg.other(vV) == vV) {
           if (selfLoops % 2 == 0) list.prepend(edg)
           selfLoops += 1
-        }        
+        }
       }
       for {
         ed <- adj(vV)
@@ -45,5 +45,4 @@ class EdgeWeightedGraph(v: Int) extends BaseEdgeWeightedGraph[Edge](v) {
     } addEdgesAndSelfLoops(vV)
     list.toSeq
   }
-
 }

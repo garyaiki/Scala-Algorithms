@@ -35,22 +35,6 @@ class DigraphSuite extends FlatSpec {
     var tinyEWDAG = new EdgeWeightedDigraph(13)
   }
 */  
-  behavior of "a DirectedDFS"
-  it should "mark reachable verticies" in new DigraphBuilder {
-    val from1 = new DirectedDFS(tinyDG, 1)
-    assert(from1.marked === Array[Boolean](false, true, false, false, false, false, false, false,
-      false, false, false, false, false))
-    val from2 = new DirectedDFS(tinyDG, 2)
-    assert(from2.marked === Array[Boolean](true, true, true, true, true, true, false, false, false,
-      false, false, false, false))
-  }
-
-  it should "count reachable verticies" in new DigraphBuilder {
-    val from1 = new DirectedDFS(tinyDG, 1)
-    assert(from1.count === 1)
-    val from2 = new DirectedDFS(tinyDG, 2)
-    assert(from2.count === 6)
-  }
 
   behavior of "a DepthFirstDirectedPaths"
   it should "find paths from source vertex to end vertex" in new DigraphBuilder {

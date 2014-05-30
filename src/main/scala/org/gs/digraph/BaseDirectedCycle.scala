@@ -22,6 +22,6 @@ abstract class BaseDirectedCycle[A: ClassTag](v: Int) {
   } dfs(v)
 
   protected def dfs(v: Int)
-  
-  def hasCycle() = cycle != null && !cycle.isEmpty
+
+  def hasCycle(): Boolean = cycle != null && !cycle.isEmpty
 }

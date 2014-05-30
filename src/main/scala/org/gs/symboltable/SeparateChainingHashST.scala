@@ -14,14 +14,15 @@ class SeparateChainingHashST[T, U](initialSize: Int) {
   var n = 0
   var st = new Array[List[(T, U)]](m)
 
-  private def hash(key: T) = (key.hashCode & 0x7fffffff) % m
-  private def chainGet(x: (T, U), key: T) = (x._1 == key)
+  private def hash(key: T): Int = (key.hashCode & 0x7fffffff) % m
+  
+  private def chainGet(x: (T, U), key: T): Boolean = (x._1 == key)
 
-  def size() = n
+  def size(): Int = n
 
-  def isEmpty() = size == 0
+  def isEmpty(): Boolean = size == 0
 
-  def get(key: T) = {
+  def get(key: T): Option[U] = {
     val i = hash(key)
     if (st(i) == null) None else {
       val r = st(i).find(chainGet(_, key))
@@ -32,16 +33,16 @@ class SeparateChainingHashST[T, U](initialSize: Int) {
     }
   }
 
-  def contains(key: T) = get(key) != None
+  def contains(key: T): Boolean = get(key) != None
 
-  def delete(key: T) {
+  def delete(key: T): Unit = {
     val i = hash(key)
     val chainList = st(i)
     val j = chainList.indexWhere(chainGet(_, key))
     if (j != -1) st(i) = chainList.take(j) ++ chainList.takeRight(chainList.length - j - 1)
   }
 
-  def put(key: T, value: U) {
+  def put(key: T, value: U): Unit = {
     if (value == null) delete(key) else {
       if (n >= 10 * m) resize(2 * m)
       val i = hash(key)
@@ -55,7 +56,7 @@ class SeparateChainingHashST[T, U](initialSize: Int) {
     }
   }
 
-  def resize(chains: Int) {
+  def resize(chains: Int): Unit = {
     var tmp = new SeparateChainingHashST[T, U](chains)
     for {
       chain <- st
@@ -75,7 +76,4 @@ class SeparateChainingHashST[T, U](initialSize: Int) {
     } q.enqueue(kv._1)
     q.toSeq
   }
-}
-object SeparateChainingHashST {
-
 }

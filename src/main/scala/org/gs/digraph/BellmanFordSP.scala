@@ -33,7 +33,7 @@ class BellmanFordSP(g: EdgeWeightedDigraph, s: Int) {
     }
   }
   loop
-  
+
   def hasNegativeCycle(): Boolean = {
     cycle != null
   }
@@ -91,5 +91,4 @@ class BellmanFordSP(g: EdgeWeightedDigraph, s: Int) {
       Some(path.toSeq)
     }
   }
-
 }

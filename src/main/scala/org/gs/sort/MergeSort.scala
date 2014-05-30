@@ -12,8 +12,8 @@ import scala.annotation.tailrec
 object MergeSort {
 
   def msort[T](xs: List[T])(implicit ord: Ordering[T]): List[T] = {
-    
-    def less(a: T, b: T)(implicit ord: Ordering[T]) = ord.lt(a, b)
+
+    def less(a: T, b: T)(implicit ord: Ordering[T]): Boolean = ord.lt(a, b)
 
     @tailrec
     def merge(xs: List[T], ys: List[T], acc: List[T]): List[T] =

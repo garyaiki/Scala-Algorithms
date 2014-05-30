@@ -11,7 +11,7 @@ import scala.reflect.ClassTag
  * @param nMax maximum number of elements
  */
 class IndexMinPQ[A: ClassTag](nMax: Int) extends IndexPriorityQueue[A](nMax) {
-  
+
   def insert(i: Int, key: A)(implicit ord: Ordering[A]): Unit = { insert(i, key, greater) }
 
   def minIndex(): Int = index()
@@ -31,5 +31,4 @@ class IndexMinPQ[A: ClassTag](nMax: Int) extends IndexPriorityQueue[A](nMax) {
   def isMinHeap()(implicit ord: Ordering[A]): Boolean = checkHeap(greater)
 
   def keys()(implicit ord: Ordering[A]): Seq[A] = getKeys
-
 }

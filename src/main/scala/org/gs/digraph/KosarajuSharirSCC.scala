@@ -20,7 +20,7 @@ class KosarajuSharirSCC(g: Digraph) {
     dfs(v)
     count += 1
   }
-  
+
   def dfs(v: Int):Unit = {
     marked(v) = true
     id(v) = count
@@ -30,10 +30,8 @@ class KosarajuSharirSCC(g: Digraph) {
     } dfs(w)
   }
 
-  def stronglyConnected(v:Int, w: Int) = {
-    id(v) == id(w)
-  }
-  
-  def idStrongComponent(v:Int) = id(v)
+  def stronglyConnected(v:Int, w: Int): Boolean = id(v) == id(w)
+
+  def idStrongComponent(v:Int): Int = id(v)
 }
 

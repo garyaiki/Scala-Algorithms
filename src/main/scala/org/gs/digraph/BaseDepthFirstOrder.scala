@@ -25,11 +25,13 @@ abstract class BaseDepthFirstOrder(v: Int) {
 
   def dfs(v: Int): Unit
 
-  def pre(v: Int) = _pre(v)
-  def post(v: Int) = _post(v)
+  def pre(v: Int): Int = _pre(v)
 
-  def pre() = preOrder.toSeq
-  def post() = postOrder.toSeq
+  def post(v: Int): Int = _post(v)
+
+  def pre(): Seq[Int] = preOrder.toSeq
+
+  def post(): Seq[Int] = postOrder.toSeq
 
   def reversePost(): Seq[Int] = {
     var reverse = List[Int]()

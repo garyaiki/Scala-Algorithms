@@ -28,8 +28,5 @@ class FrequencyCounter[T, Int](keys: List[T]) {
   keys.foreach(countKeys(_))
   def getMax(): Int = ???
 }
-* 
+*
 */
-object BasicSymbolTable {
-
-}

@@ -19,9 +19,9 @@ class LinearProbingHashST[T, U](initialSize: Int) {
   private def hash(key: T) = (key.hashCode & 0x7fffffff) % m
   private def chainGet(x: (T, U), key: T) = (x._1 == key)
 
-  def size() = n
+  def size(): Int = n
 
-  def isEmpty() = size == 0
+  def isEmpty(): Boolean = size == 0
 
   def get(key: T): Option[U] = {
     val i = hash(key)
@@ -36,7 +36,7 @@ class LinearProbingHashST[T, U](initialSize: Int) {
     }
   }
 
-  def contains(key: T) = get(key) != None
+  def contains(key: T): Boolean = get(key) != None
 
   def delete(key: T) {
     @tailrec
@@ -60,17 +60,18 @@ class LinearProbingHashST[T, U](initialSize: Int) {
       st(j) = null.asInstanceOf[(T, U)]
       rehash(j)
       n = n - 1
-      def halveSizeIfEigthFull() = if (n > 0 && n <= m / 8) resize(m / 2)
+      def halveSizeIfEigthFull(): Unit = if (n > 0 && n <= m / 8) resize(m / 2)
       halveSizeIfEigthFull
     }
   }
 
   def put(key: T, value: U) {
     if (value == null) delete(key) else {
-      def doubleSizeIfHalfFull() = if (n >=m / 2) {
+      def doubleSizeIfHalfFull(): Unit = if (n >=m / 2) {
         resize(m * 2)
       }
       doubleSizeIfHalfFull
+      
       def loop(j: Int): Unit = {
         if (st(j) != null) {
           if (key.equals(st(j)._1)) st(j) = (key, value) else
@@ -101,10 +102,10 @@ class LinearProbingHashST[T, U](initialSize: Int) {
     } q.enqueue(kv._1)
     q.toSeq
   }
-  
+
   // debug methods
   def isLessThanHalfFull():Boolean = (m < 2 * n)
-  
+
   def allKeysCanBeFound():Boolean = {
     val q = Queue[T]()
     for {
@@ -113,7 +114,4 @@ class LinearProbingHashST[T, U](initialSize: Int) {
     } q.enqueue(kv._1)
     if (q.length > 0) false else true
   }
-}
-object LinearProbingHashST {
-
 }

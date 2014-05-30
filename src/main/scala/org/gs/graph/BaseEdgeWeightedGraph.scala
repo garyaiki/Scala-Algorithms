@@ -16,7 +16,7 @@ abstract class BaseEdgeWeightedGraph[A <: BaseEdge](val v: Int) {
   var e = 0
   val adj = Array.fill[List[A]](v)(List[A]())
 
-  protected def buildADJ[U <: BaseEdgeWeightedGraph[A]](g: U) {
+  protected def buildADJ[U <: BaseEdgeWeightedGraph[A]](g: U): Unit = {
     e = g.e
 
     for {
@@ -32,14 +32,14 @@ abstract class BaseEdgeWeightedGraph[A <: BaseEdge](val v: Int) {
     }
   }
 
-  def rangeGuard(x: Int) = {
+  def rangeGuard(x: Int): Boolean = {
     x match {
       case x if 0 until v contains x => true
       case _ => false
     }
   }
 
-  def edgesOnVertex(eV: Int) = {
+  def edgesOnVertex(eV: Int): Seq[A] = {
     require(rangeGuard(eV), s"verticies eV:$eV  not in 0..$v ")
     adj(eV).toSeq
   }

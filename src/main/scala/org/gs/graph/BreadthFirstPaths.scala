@@ -8,7 +8,7 @@ import scala.annotation.tailrec
 
 /**
  * @author Gary Struthers
- * @param g 
+ * @param g
  * @param s
  */
 class BreadthFirstPaths(g: Graph, s: Int) {
@@ -16,7 +16,7 @@ class BreadthFirstPaths(g: Graph, s: Int) {
   private[graph] val edgeTo = new Array[Int](g.v)
   private[graph] val _distTo = Array.fill[Int](g.v)(Int.MaxValue)
 
-  private def bfs(s: Int) {
+  private def bfs(s: Int): Unit = {
     val q = new Queue[Int]()
     _distTo(s) = 0
     marked(s) = true
@@ -34,9 +34,10 @@ class BreadthFirstPaths(g: Graph, s: Int) {
   }
   bfs(s)
 
-  def hasPathTo(v: Int) = marked(v)
-  def distTo(v: Int) = _distTo(v)
-  
+  def hasPathTo(v: Int): Boolean = marked(v)
+
+  def distTo(v: Int): Int = _distTo(v)
+
   def pathTo(v: Int): Option[Seq[Int]] = {
     val path = ListBuffer[Int]()
     if (!hasPathTo(v)) None else {
@@ -45,7 +46,7 @@ class BreadthFirstPaths(g: Graph, s: Int) {
           path.prepend(x)
           val y = edgeTo(x)
           loop(y)
-        }  
+        }
         path.prepend(v)
       }
       loop(v)
@@ -53,7 +54,4 @@ class BreadthFirstPaths(g: Graph, s: Int) {
     }
 
   }
-}
-object BreadthFirstPaths {
-
 }

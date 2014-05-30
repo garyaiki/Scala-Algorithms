@@ -21,9 +21,12 @@ class RedBlackSymbolTable[T, U](implicit ord: Ordering[T]) {
   }
 
   var root = null.asInstanceOf[Node[T, U]]
-  def less(a: T, b: T)(implicit ord: Ordering[T]) = ord.lt(a, b)
-  def greater(a: T, b: T)(implicit ord: Ordering[T]) = ord.gt(a, b)
-  def isRed(x: Node[T, U]) = if ((x == null) || (x.red == false)) false else true
+  
+  def less(a: T, b: T)(implicit ord: Ordering[T]): Boolean = ord.lt(a, b)
+  
+  def greater(a: T, b: T)(implicit ord: Ordering[T]): Boolean = ord.gt(a, b)
+  
+  def isRed(x: Node[T, U]): Boolean = if ((x == null) || (x.red == false)) false else true
 
   def rotateLeft(h: Node[T, U]) = {
     assert(h != null && isRed(h.right), "error: black or null passed to rotateLeft")
@@ -36,6 +39,7 @@ class RedBlackSymbolTable[T, U](implicit ord: Ordering[T]) {
     h.count = 1 + size(h.left) + size(h.right)
     x
   }
+  
   def rotateRight(h: Node[T, U]) = {
     assert(h != null && isRed(h.left), "error: black or null passed to rotateRight")
     val x = h.left // x is new root of subtree
@@ -57,6 +61,7 @@ class RedBlackSymbolTable[T, U](implicit ord: Ordering[T]) {
     h.left.red = !h.left.red
     h.right.red = !h.right.red
   }
+  
   def put(key: T, value: U): Unit = {
 
     def loop(x: Node[T, U])(implicit ord: Ordering[T]): Node[T, U] = {
@@ -97,29 +102,29 @@ class RedBlackSymbolTable[T, U](implicit ord: Ordering[T]) {
   }
 
   def delete(key: T): Unit = {
-    
-      if (!isRed(root.left) && !isRed(root.right)) root.red = true
-      def loop(x: Node[T, U], key: T): Node[T, U] = {
-        var h = x
-        if (ord.compare(key, x.key) < 0) {
-          if (!isRed(x.left) && !isRed(x.left.left)) h = moveRedLeft(x)
-          h.left = loop(h.left, key)
-        } else {
-          if (isRed(h.left)) h = rotateRight(x)
-          if ((ord.compare(key, h.key) == 0) && (h.right == null)) return null else {
-            if (!isRed(h.right) && !isRed(h.right.left)) h = moveRedRight(h)
-            if (ord.compare(key, h.key) == 0) {
-              val y = min(h.right)
-              h.key = y.key
-              h.value = y.value
-              h.right = deleteMin(h.right)
-            } else h.right = loop(h.right, key)
-          }
+
+    if (!isRed(root.left) && !isRed(root.right)) root.red = true
+    def loop(x: Node[T, U], key: T): Node[T, U] = {
+      var h = x
+      if (ord.compare(key, x.key) < 0) {
+        if (!isRed(x.left) && !isRed(x.left.left)) h = moveRedLeft(x)
+        h.left = loop(h.left, key)
+      } else {
+        if (isRed(h.left)) h = rotateRight(x)
+        if ((ord.compare(key, h.key) == 0) && (h.right == null)) return null else {
+          if (!isRed(h.right) && !isRed(h.right.left)) h = moveRedRight(h)
+          if (ord.compare(key, h.key) == 0) {
+            val y = min(h.right)
+            h.key = y.key
+            h.value = y.value
+            h.right = deleteMin(h.right)
+          } else h.right = loop(h.right, key)
         }
-        balance(h)
       }
-      root = loop(root, key)
-      if (!isEmpty) root.red = false
+      balance(h)
+    }
+    root = loop(root, key)
+    if (!isEmpty) root.red = false
   }
 
   def moveRedRight(hm: Node[T, U]): Node[T, U] = {
@@ -128,6 +133,7 @@ class RedBlackSymbolTable[T, U](implicit ord: Ordering[T]) {
     flipColors(hm)
     if (!isRed(hm.left.left)) rotateRight(hm) else hm
   }
+  
   def moveRedLeft(hm: Node[T, U]): Node[T, U] = {
     assert(hm != null, "null passed to moveRedLeft")
     assert(isRed(hm) && !isRed(hm.left) && !isRed(hm.left), "error: moveRedLeft colors")
@@ -138,6 +144,7 @@ class RedBlackSymbolTable[T, U](implicit ord: Ordering[T]) {
       rotateLeft(hm)
     } else hm
   }
+  
   def balance(h: Node[T, U]): Node[T, U] = {
     assert(h != null, "null passed to balance")
 
@@ -161,7 +168,7 @@ class RedBlackSymbolTable[T, U](implicit ord: Ordering[T]) {
     }
   }
 
-  def deleteMin() {
+  def deleteMin(): Unit = {
     if (!isRed(root.left) && !isRed(root.right)) root.red = true
     root = deleteMin(root)
     if (!isEmpty) root.red = false
@@ -188,10 +195,10 @@ class RedBlackSymbolTable[T, U](implicit ord: Ordering[T]) {
     if (!isEmpty) root.red = false
   }
 
-  private def size(x: Node[T, U]) = if (x == null) 0 else x.count
-  def size(): Int = {
-    size(root)
-  }
+  private def size(x: Node[T, U]): Int = if (x == null) 0 else x.count
+
+  def size(): Int = size(root)
+
   def size(lo: T, hi: T): Int = { // number of keys in lo..hi
     if (ord.compare(lo, hi) > 0) 0 else if (contains(hi)) rank(hi) - rank(lo) + 1 else
       rank(hi) - rank(lo)
@@ -204,14 +211,18 @@ class RedBlackSymbolTable[T, U](implicit ord: Ordering[T]) {
       case Some(x) => if (x == null) false else true
     }
   }
+  
   def isEmpty(): Boolean = if (root == null) true else false
+  
   def min(x: Node[T, U]): Node[T, U] = {
     assert(x != null, "null passed to min")
     if (x.left == null) x else min(x.left)
   }
+  
   def min(): T = {
     min(root).key
   }
+  
   def max(): T = {
     def max(x: Node[T, U]): Node[T, U] = {
       assert(x != null, "null passed to max")
@@ -219,7 +230,9 @@ class RedBlackSymbolTable[T, U](implicit ord: Ordering[T]) {
     }
     max(root).key
   }
+  
   def floor(key: T): T = { // largest key less than or equal to key
+    
     def loop(x: Node[T, U])(implicit ord: Ordering[T]): Node[T, U] = {
       if (x == null) null.asInstanceOf[Node[T, U]] else {
         val cmp = ord.compare(key, x.key)
@@ -234,6 +247,7 @@ class RedBlackSymbolTable[T, U](implicit ord: Ordering[T]) {
     }
     loop(root).key
   }
+  
   def ceiling(key: T): T = { // smallest key greater than or equal to key
     def loop(x: Node[T, U])(implicit ord: Ordering[T]): Node[T, U] = {
       if (x == null) null.asInstanceOf[Node[T, U]] else {
@@ -264,7 +278,9 @@ class RedBlackSymbolTable[T, U](implicit ord: Ordering[T]) {
     }
     loop(root)
   }
+  
   def select(rank: Int): Option[T] = { // key of rank k
+    
     def select(x: Node[T, U], k: Int): Node[T, U] = {
       val t = size(x.left)
       if (t > k) select(x.left, k) else {
@@ -274,6 +290,7 @@ class RedBlackSymbolTable[T, U](implicit ord: Ordering[T]) {
     val node = select(root, rank)
     if (node == null) None else Some(node.key)
   }
+  
   import scala.collection.mutable.Queue
   def keys(): Seq[T] = {
     val q = Queue[T]()
@@ -291,7 +308,7 @@ class RedBlackSymbolTable[T, U](implicit ord: Ordering[T]) {
     loop(root)
     q.toSeq
   }
-  /*
+/*
  * debugging code
  */
   def inorderTreeWalk(): String = {
@@ -325,7 +342,8 @@ class RedBlackSymbolTable[T, U](implicit ord: Ordering[T]) {
     }
     sb.toString
   }
-  override def toString(): String = {//TODO cleanup
+  
+  override def toString(): String = { //TODO cleanup
     def buildString(): StringBuilder = {
       val sb = new StringBuilder
       val node = root
@@ -407,7 +425,7 @@ class RedBlackSymbolTable[T, U](implicit ord: Ordering[T]) {
     buildString().toString
   }
 
-  def isBST(): Boolean = {   
+  def isBST(): Boolean = {
     def loop(x: Node[T, U], min: T, max: T): Boolean = {
       if (x == null) true else {
         if (min != null && ord.compare(x.key, min) <= 0) false else if (max != null && ord.compare(x.key, max) >= 0) false else
@@ -417,7 +435,7 @@ class RedBlackSymbolTable[T, U](implicit ord: Ordering[T]) {
     loop(root, null.asInstanceOf[T], null.asInstanceOf[T])
   }
 
-  def isSizeConsistent(): Boolean = {    
+  def isSizeConsistent(): Boolean = {
     def loop(x: Node[T, U]): Boolean = {
       if (x == null) true else if (x.count != size(x.left) + size(x.right) + 1) false else
         loop(x.left) && loop(x.right)
@@ -426,6 +444,7 @@ class RedBlackSymbolTable[T, U](implicit ord: Ordering[T]) {
   }
 
   def isRankConsistent(): Boolean = {
+    
     def checkRank: Boolean = {
       for (i <- 0 until size) {
         select(i) match {
@@ -435,6 +454,7 @@ class RedBlackSymbolTable[T, U](implicit ord: Ordering[T]) {
       }
       true
     }
+    
     def checkKeys: Boolean = {
       for (i <- keys) {
         select(rank(i)) match {
@@ -448,6 +468,7 @@ class RedBlackSymbolTable[T, U](implicit ord: Ordering[T]) {
   }
 
   def is23(): Boolean = {
+    
     def loop(x: Node[T, U]): Boolean = {
       if (x == null) true else {
         if (isRed(x.right)) false else if (x != root && isRed(x) && isRed(x.left)) false else
@@ -459,6 +480,7 @@ class RedBlackSymbolTable[T, U](implicit ord: Ordering[T]) {
 
   def isBalanced(): Boolean = {
     var black = 0
+    
     def loop(x: Node[T, U], black: Int): Boolean = {
       var blackVar = black
       if (x == null) black == 0 else {

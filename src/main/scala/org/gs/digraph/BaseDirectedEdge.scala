@@ -11,9 +11,9 @@ import org.gs.graph.BaseEdge
  *
  */
 trait BaseDirectedEdge{
-  
+
   def from():Int
-  
+
   def to():Int
-  
+
 }

@@ -19,15 +19,15 @@ import scala.annotation.tailrec
 abstract class PriorityQueue[A](pq: ArrayBuffer[A]) {
   if (pq.isEmpty) pq.append(null.asInstanceOf[A]) // don't use index 0
   else pq(0) = null.asInstanceOf[A]
-  
+
   private var n = 0
-  
+
   private[queue] def getNumberInQ() = n // only used for helpers
-  
+
   def isEmpty(): Boolean = n == 0
-  
+
   def less(a: Int, b: Int)(implicit ord: Ordering[A]): Boolean = ord.lt(pq(a), pq(b))
-  
+
   def greater(a: Int, b: Int)(implicit ord: Ordering[A]): Boolean = ord.gt(pq(a), pq(b))
 
   private def exchange(child: Int, parent: Int) {
@@ -50,7 +50,7 @@ abstract class PriorityQueue[A](pq: ArrayBuffer[A]) {
   private def sink(k: Int, cmp: (Int, Int) => Boolean) {
     @tailrec
     def loop(k: Int): Unit = {
-      def calcJ() = {
+      def calcJ(): Int = {
         val j = k * 2
         val j1 = j + 1
         if ((j1 <= n) && cmp(j, j1)) j1 else j
@@ -64,7 +64,7 @@ abstract class PriorityQueue[A](pq: ArrayBuffer[A]) {
     loop(k)
   }
 
-  def insert(key: A, cmp: (Int, Int) => Boolean): Unit = { 
+  def insert(key: A, cmp: (Int, Int) => Boolean): Unit = {
     n += 1
     pq.append(key)
     swim(n, cmp)

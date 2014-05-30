@@ -16,13 +16,13 @@ class EdgeWeightedDigraph(v: Int) extends BaseEdgeWeightedGraph[DirectedEdge](v)
     buildADJ(g)
   }
 
-  def addEdge(ed: DirectedEdge) {
+  def addEdge(ed: DirectedEdge): Unit = {
     val v = ed.from
     adj(v) = ed :: adj(v)
     e += 1//e + 1
   }
 
-  def edges() = {
+  def edges(): Seq[DirectedEdge] = {
     val list = ListBuffer[DirectedEdge]()
     for {
       vV <- 0 until v
@@ -31,7 +31,7 @@ class EdgeWeightedDigraph(v: Int) extends BaseEdgeWeightedGraph[DirectedEdge](v)
     list.toSeq
   }
 
-  def outdegree(v: Int) = {
+  def outdegree(v: Int): Int = {
     require(rangeGuard(v), s"verticies v:$v  not in 0..$v ")
     adj(v).size
   }

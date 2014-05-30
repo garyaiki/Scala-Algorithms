@@ -9,22 +9,22 @@ package org.gs.graph
  * @param weight
  */
 class Edge(v: Int, w: Int, weight: Double) extends BaseEdge(v, w, weight) with Ordered[Edge] {
-  
-  def either() = v
-  
-  def other(vertex: Int) = vertex match {
+
+  def either(): Int = v
+
+  def other(vertex: Int): Int = vertex match {
     case `v` => w
     case `w` => v
     case _ => throw new IllegalArgumentException(s"Illegal endpoint vertex:${vertex}")
   }
-  
-  def compare(that: Edge) = weight.compareTo(that.weight)
-  
-  def canEqual(other: Any) = other.isInstanceOf[Edge]
-  
-  override def hashCode = 41 * ( 41 + v) + w + weight.hashCode
-  
-  override def equals(that: Any) = that match {
+
+  def compare(that: Edge): Int = weight.compareTo(that.weight)
+
+  def canEqual(other: Any): Boolean = other.isInstanceOf[Edge]
+
+  override def hashCode(): Int = 41 * ( 41 + v) + w + weight.hashCode
+
+  override def equals(that: Any): Boolean = that match {
     case that: Edge => (that canEqual this) && this.hashCode == that.hashCode
   }
 }

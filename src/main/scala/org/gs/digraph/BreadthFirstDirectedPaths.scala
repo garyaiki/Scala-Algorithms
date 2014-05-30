@@ -13,7 +13,7 @@ class BreadthFirstDirectedPaths(g: Digraph, s: Int) {
   val marked = Array.fill[Boolean](g.v)(false)
   val edgeTo = new Array[Int](g.v)
   val distTo = Array.fill[Int](g.v)(Int.MaxValue)
-  
+
   private def bfs(s: Int) {
     val q = new Queue[Int]()
     marked(s) = true
@@ -22,19 +22,21 @@ class BreadthFirstDirectedPaths(g: Digraph, s: Int) {
     for {
       dq <- q
       w <- g.adj(dq)
-      if !(marked(w))   
+      if !(marked(w))
     } {
       edgeTo(w) = dq
       distTo(w) = distTo(dq) + 1
       marked(w) = true
       q.enqueue(w)
-    } 
+    }
   }
   bfs(s)
-  
-  def hasPathTo(v: Int) = marked(v)
-  def distance(v: Int) = distTo(v)
-  def pathTo(v: Int) = {
+
+  def hasPathTo(v: Int): Boolean = marked(v)
+
+  def distance(v: Int): Int = distTo(v)
+
+  def pathTo(v: Int): Seq[Int] = {
     var pathStack = List[Int]()
     @tailrec
     def loop(x: Int): Int = {
@@ -45,7 +47,4 @@ class BreadthFirstDirectedPaths(g: Digraph, s: Int) {
     }
     (loop(v) :: pathStack).toSeq
   }
-}
-object BreadthFirstDirectedPaths {
-
 }

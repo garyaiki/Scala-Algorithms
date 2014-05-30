@@ -22,7 +22,7 @@ class PrimMST(g: EdgeWeightedGraph) {
     if (!marked(v))
   } prim(v)
 
-  private def scan(v: Int) {
+  private def scan(v: Int): Unit = {
     marked(v) = true
     for {
       e <- g.adj(v)
@@ -38,7 +38,7 @@ class PrimMST(g: EdgeWeightedGraph) {
     }
   }
 
-  private def prim(s: Int) {
+  private def prim(s: Int): Unit = {
     distTo(s) = 0.0
     pq.insert(s, distTo(s))
     scan(s)
@@ -62,9 +62,5 @@ class PrimMST(g: EdgeWeightedGraph) {
     mst.toSeq
   }
 
-  def weight() = edges.foldLeft(0.0)(_ + _.weight)
-}
-
-object PrimMST {
-
+  def weight(): Double = edges.foldLeft(0.0)(_ + _.weight)
 }

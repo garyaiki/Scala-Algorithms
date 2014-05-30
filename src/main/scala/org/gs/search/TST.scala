@@ -21,7 +21,7 @@ class TST[A] {
     var value: Option[A] = None
   }
 
-  def size() = N
+  def size(): Int = N
 
   @tailrec
   private def get(x: Option[Node], key: String, d: Int): Option[Node] = {
@@ -101,7 +101,7 @@ class TST[A] {
     collect(root, "", q)
     q.toSeq
   }
-  
+
   private def collect(x: Option[Node], prefix: String, q: Queue[String]): Unit = {
     def loop(x: Option[Node], prefix: String): Unit = {
       x match {
@@ -136,11 +136,11 @@ class TST[A] {
       }
     }
   }
-  
+
   def wildcardMatch(pat: String): Seq[String] = {
     val q = new Queue[String]
     def collect(x: Option[Node], prefix: String, i: Int): Unit = {
-      x match { 
+      x match {
         case None =>
         case Some(y) => {
           val c = pat.charAt(i)

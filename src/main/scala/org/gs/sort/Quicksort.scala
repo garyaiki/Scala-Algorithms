@@ -21,8 +21,8 @@ class Quicksort[A] {
    * @param lt
    * @return
    */
-  def quicksort[A](xs: List[A])(implicit ord: A => Ordered[A]) = {
-    def less(a: A, b: A)(implicit ord: Ordering[A]) = ord.lt(a, b)
+  def quicksort[A](xs: List[A])(implicit ord: A => Ordered[A]): List[A] = {
+    def less(a: A, b: A)(implicit ord: Ordering[A]): Boolean = ord.lt(a, b)
     @annotation.tailrec
     def qsort(todo: List[List[A]], done: List[A]): List[A] = todo match {
       case Nil => done

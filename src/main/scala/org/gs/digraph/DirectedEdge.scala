@@ -9,10 +9,10 @@ import org.gs.graph.BaseEdge
  *
  */
 class DirectedEdge(v: Int, w: Int, weight: Double) 
-					extends BaseEdge(v, w, weight) with BaseDirectedEdge {
-  
-  def from() = v
-  
-  def to() = w
-  
+					                         extends BaseEdge(v, w, weight) with BaseDirectedEdge {
+
+  def from(): Int = v
+
+  def to(): Int = w
+
 }

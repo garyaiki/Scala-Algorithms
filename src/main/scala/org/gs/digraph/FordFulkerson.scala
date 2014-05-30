@@ -13,7 +13,7 @@ import scala.annotation.tailrec
  *
  */
 class FordFulkerson(g: FlowNetwork, s: Int, t: Int) {
-  def rangeGuard(x: Int) = {
+  def rangeGuard(x: Int): Boolean = {
     x match {
       case x if 0 until g.v contains x => true
       case _ => false
@@ -36,7 +36,7 @@ class FordFulkerson(g: FlowNetwork, s: Int, t: Int) {
     val Epsilon = 1e-11
     var feasible = true
     var msg = ""
-    def capacityGuard(e: FlowEdge) = {
+    def capacityGuard(e: FlowEdge): Boolean = {
       e match {
         case e if e.flow < -Epsilon => false
         case e if e.flow > e.capacity + Epsilon => false
@@ -129,7 +129,7 @@ class FordFulkerson(g: FlowNetwork, s: Int, t: Int) {
   }
   loopUsingAugmentedPath
   def value(): Double = _value
-  
+
   def inCut(v: Int): Boolean = {
     val R1 = 0 until marked.length
     require(R1.contains(v), s"vertex v:$v is not between 0 and ${marked.length}")

@@ -17,7 +17,7 @@ class DijkstraSP(g: EdgeWeightedDigraph, s: Int) {
   val edgeTo = new Array[DirectedEdge](g.v)
   val pq = new IndexMinPQ[Double](g.v)
   relaxVertices
-  
+
   private def relaxVertices() {
     def relax(e: DirectedEdge) {
       val v = e.from
@@ -41,9 +41,11 @@ class DijkstraSP(g: EdgeWeightedDigraph, s: Int) {
     loop
   }
 
-  def getDistTo(v: Int) = distTo(v)
-  def hasPathTo(v: Int) = distTo(v) < Double.PositiveInfinity
-  def pathTo(v: Int) = {
+  def getDistTo(v: Int): Double = distTo(v)
+
+  def hasPathTo(v: Int): Boolean = distTo(v) < Double.PositiveInfinity
+
+  def pathTo(v: Int): Option[List[DirectedEdge]] = {
     if (!hasPathTo(v)) None else {
       @tailrec
       def loop(e: DirectedEdge, path: List[DirectedEdge] ): List[DirectedEdge] = {

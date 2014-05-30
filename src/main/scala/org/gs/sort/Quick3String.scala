@@ -28,7 +28,6 @@ object Quick3String {
             exch(j, j - 1)
             loopJ(j - 1)
           }
-
         }
         if (i <= hi) {
           loopJ(i)
@@ -46,12 +45,16 @@ object Quick3String {
 
     def less(v: String, w: String): Boolean = {
       assert(v.substring(0, d).equals(w.substring(0, d)))
-      val r = d until min(v.length, w.length)
-      for (i <- r) {
-        if (v.charAt(i) < w.charAt(i)) return true //@TODO 
-        if (v.charAt(i) > w.charAt(i)) return false
+      val x = min(v.length, w.length)
+      @tailrec
+      def loop(i: Int): Boolean = {
+        if(i < x) {
+          if (v.charAt(i) < w.charAt(i)) true
+          else if (v.charAt(i) > w.charAt(i)) false
+          else loop(i + 1) 
+        } else v.length < w.length
       }
-      v.length < w.length
+      loop(d)
     }
 
     def charAt(s: String): Int = {
@@ -72,7 +75,7 @@ object Quick3String {
             exch(i, gt)
             loop(lt, gt - 1, i)
           } else loop(lt, gt, i + 1)
-        } else (lt, gt, i)     
+        } else (lt, gt, i)
       }
       val tuple = loop(lo, hi, lo + 1)
       sort(s, lo, tuple._1, d)
@@ -80,5 +83,4 @@ object Quick3String {
       sort(s, tuple._2 + 1, hi, d)
     }
   }
-
 }

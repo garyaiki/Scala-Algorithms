@@ -11,8 +11,9 @@ class OrderedSymbolTable[T, U](implicit ord: Ordering[T]) {
   }
 
   var root = null.asInstanceOf[Node[T, U]]
-  def less(a: T, b: T)(implicit ord: Ordering[T]) = ord.lt(a, b)
-  def greater(a: T, b: T)(implicit ord: Ordering[T]) = ord.gt(a, b)
+  def less(a: T, b: T)(implicit ord: Ordering[T]): Boolean = ord.lt(a, b)
+
+  def greater(a: T, b: T)(implicit ord: Ordering[T]): Boolean = ord.gt(a, b)
 
   def put(key: T, value: U): Unit = {
     def loop(x: Node[T, U])(implicit ord: Ordering[T]): Node[T, U] = {
@@ -116,7 +117,7 @@ class OrderedSymbolTable[T, U](implicit ord: Ordering[T]) {
     size(root)
   }
   def size(lo: T, hi: T): Int = ??? // number of keys in lo..hi
-  import scala.collection.immutable.Queue 
+  import scala.collection.immutable.Queue
   def keys(): Seq[T] = {
     val q = Queue[T]()
     def inorder(x: Node[T, U], q: Queue[T]): Queue[T] = {
@@ -142,8 +143,5 @@ class FrequencyCounter[T, Int](keys: List[T]) {
   keys.foreach(countKeys(_))
   def getMax(): Int = ???
 }
-* 
+*
 */
-object OrderedSymbolTable {
-
-}

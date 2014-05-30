@@ -26,8 +26,9 @@ class LazyPrimMST(g: EdgeWeightedGraph) {
     if (!marked(v))
   } prim(v)
 
-  def weight() = _weight
-  def edges() = mst.toSeq
+  def weight(): Double = _weight
+  
+  def edges(): Seq[Edge] = mst.toSeq
 
   private def scan(v: Int) {
     require(!marked(v), s"v:$v is already marked")
@@ -38,7 +39,7 @@ class LazyPrimMST(g: EdgeWeightedGraph) {
     } pq.insert(ed)
   }
 
-  private def prim(s: Int) {
+  private def prim(s: Int): Unit = {
     scan(s)
     @tailrec
     def loop(): Unit = {
@@ -69,8 +70,8 @@ class LazyPrimMST(g: EdgeWeightedGraph) {
 
   import scala.util.control.Breaks._
   /**
-   * This function only used for test. It's in the class to keep "mst" private and 
-   * "g" hidden from companion object 
+   * This function only used for test. It's in the class to keep "mst" private and
+   * "g" hidden from companion object
    */
   def checkIsMinSpanningForest(): Boolean = {
     var cutOptimiality = true
@@ -82,6 +83,7 @@ class LazyPrimMST(g: EdgeWeightedGraph) {
         if (f != e) uf.union(x, y)
       }
     }
+    
     def minWeightInCrossingCut(e: Edge): Boolean = {
       breakable {
         for (f <- g.edges) {
@@ -105,8 +107,4 @@ class LazyPrimMST(g: EdgeWeightedGraph) {
     }
     cutOptimiality
   }
-}
-
-object LazyPrimMST {
-
 }

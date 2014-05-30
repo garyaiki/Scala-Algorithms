@@ -13,7 +13,7 @@ import scala.util.control.Breaks.breakable
  */
 class EdgeWeightedDirectedCycle(g: EdgeWeightedDigraph) extends BaseDirectedCycle[DirectedEdge](g.v) {
 
-  def dfs(v: Int) {
+  def dfs(v: Int): Unit = {
     onStack(v) = true
     marked(v) = true
     breakable {

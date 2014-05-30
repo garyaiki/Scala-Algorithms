@@ -19,9 +19,7 @@ object Queue {
     private val leading: List[T],
     private val trailing: List[T]) extends Queue[T] {
 
-    def mirror =
-      if (leading.isEmpty) new QueueImpl(trailing.reverse, Nil)
-      else this
+    def mirror = if (leading.isEmpty) new QueueImpl(trailing.reverse, Nil) else this
 
     def head: T = mirror.leading.head
 
@@ -29,8 +27,7 @@ object Queue {
       val q = mirror
       new QueueImpl(q.leading.tail, q.trailing)
     }
-    
-    def enqueue(x: T) =
-      new QueueImpl(leading, x :: trailing)
+
+    def enqueue(x: T) = new QueueImpl(leading, x :: trailing)
   }
 }

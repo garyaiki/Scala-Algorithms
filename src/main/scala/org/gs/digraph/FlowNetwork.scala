@@ -19,7 +19,7 @@ class FlowNetwork(val v: Int) {
   def addEdge(e: FlowEdge): Unit = {
     val _v = e.from
     val w = e.to
-    def rangeGuard(x: Int) = {
+    def rangeGuard(x: Int): Boolean = {
       x match {
         case x if 0 until v contains x => true
         case _ => false
@@ -32,9 +32,9 @@ class FlowNetwork(val v: Int) {
     _adj(w) = e :: _adj(w)
     _e += 1
   }
-  
+
   def adj(v: Int): Seq[FlowEdge] = _adj(v).toSeq
-  
+
   def edges(): Seq[FlowEdge] = {
     val list = ListBuffer[FlowEdge]()
     for {
@@ -43,7 +43,7 @@ class FlowNetwork(val v: Int) {
     } list.+=(e)
     list.toSeq
   }
-  
+
   override def toString(): String = {
     val lf = sys.props("line.separator")
     val sb = new StringBuilder()

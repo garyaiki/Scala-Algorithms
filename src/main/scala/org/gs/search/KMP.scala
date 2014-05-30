@@ -22,7 +22,7 @@ class KMP(pattern: Array[Char], R: Int = 256) {
     dfa(pattern(j))(j) = j + 1
     X = dfa(pattern(j))(X)
   }
-  
+
   def search(text: Array[Char]): Int = {
     val M = pattern.length
     val N = text.length

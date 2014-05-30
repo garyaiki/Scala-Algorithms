@@ -46,7 +46,7 @@ class RabinKarp(pat: String) {
           if(patHash == txtHash) offset else loop(i + 1)
         } else N
       }
-      
+
       loop(M)
     }
   }

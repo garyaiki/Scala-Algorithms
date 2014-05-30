@@ -32,11 +32,11 @@ class AcyclicSP(g: EdgeWeightedDigraph, s: Int) {
       edgeTo(w) = e
     }
   }
-  
+
   def distTo(v: Int): Double = _distTo(v)
-  
+
   def hasPathTo(v: Int): Boolean = _distTo(v) < Double.PositiveInfinity
-  
+
   def pathTo(v: Int): Option[Seq[DirectedEdge]] = {
     if(!hasPathTo(v)) None else {
       val path = new ListBuffer[DirectedEdge]()

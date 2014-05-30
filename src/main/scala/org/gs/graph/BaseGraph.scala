@@ -13,9 +13,9 @@ package org.gs.graph
 abstract class BaseGraph(val v: Int) {
   var e = 0
   val adj = Array.fill[List[Int]](v)(List[Int]())
-  
+
   def addEdge(aV: Int, otherV: Int): Unit = {
-    def rangeGuard(x: Int) = {
+    def rangeGuard(x: Int): Boolean = {
       x match {
         case x if 0 until v contains x => true
         case _ => false
