@@ -12,7 +12,11 @@ import scala.util.control.Breaks.breakable
  *
  */
 class EdgeWeightedDirectedCycle(g: EdgeWeightedDigraph) extends BaseDirectedCycle[DirectedEdge](g.v) {
+  
+  
 
+
+  
   def dfs(v: Int): Unit = {
     onStack(v) = true
     marked(v) = true
@@ -27,19 +31,19 @@ class EdgeWeightedDirectedCycle(g: EdgeWeightedDigraph) extends BaseDirectedCycl
           edgeTo(w) = e
           dfs(w)
         } else if (onStack(w)) {
-          def traceBack(): List[DirectedEdge] = {
-            cycle = List[DirectedEdge]()
+          def traceBack(): Option[List[DirectedEdge]] = {
+            _cycle = Some(List[DirectedEdge]())
             @tailrec
             def loop(x: DirectedEdge): Unit = {
               if (x.from != w) {
-                cycle = x :: cycle
+                _cycle = Some(x :: _cycle.get)
                 loop(edgeTo(x.from))
               } else {
-                cycle = x :: cycle
+                _cycle = Some(x :: _cycle.get)
               }
             }
             loop(e)
-            cycle
+            _cycle
           }
           val c = traceBack
         }

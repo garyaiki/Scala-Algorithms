@@ -107,19 +107,6 @@ class DigraphSuite extends FlatSpec {
     assert(from9.distTo(4) === 2)
   }
 
-  behavior of "a DirectedCycle"
-  it should "find digraph's directed cycles" in new DigraphBuilder {
-    val tdg = new DirectedCycle(tinyDG)
-    assert(tdg.cycle.corresponds(List(3, 5, 4, 3))(equals))
-    val tdag = new DirectedCycle(tinyDAG)
-    assert((tdag.hasCycle) === false)
-  }
-
-  it should "show digraph has no directed cycles" in new DigraphBuilder {
-    val tdag = new DirectedCycle(tinyDAG)
-    assert((tdag.hasCycle) === false)
-  }
-
   behavior of "a DepthFirstOrder"
   it should "find pre-order of a Digraph" in new DigraphBuilder {
     val dfo = new DepthFirstOrder(tinyDAG)

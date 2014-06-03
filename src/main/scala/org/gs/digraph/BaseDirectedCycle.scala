@@ -15,7 +15,7 @@ abstract class BaseDirectedCycle[A: ClassTag](v: Int) {
   val marked = Array.fill[Boolean](v)(false)
   val onStack = Array.fill[Boolean](v)(false)
   val edgeTo = new Array[A](v)
-  var cycle = null.asInstanceOf[List[A]]
+  protected var _cycle: Option[List[A]] = None
   for {
     v <- 0 until v
     if (!marked(v))
@@ -23,5 +23,8 @@ abstract class BaseDirectedCycle[A: ClassTag](v: Int) {
 
   protected def dfs(v: Int)
 
-  def hasCycle(): Boolean = cycle != null && !cycle.isEmpty
+  def cycle() = _cycle
+
+  def hasCycle(): Boolean = _cycle != None
+
 }

@@ -25,7 +25,7 @@ class EdgeWeightedDirectedCycleSuite extends FlatSpec {
     if (a.hasCycle) {
       var first = null.asInstanceOf[DirectedEdge]
       var last = null.asInstanceOf[DirectedEdge]
-      for(e <- a.cycle) { 
+      for(e <- a.cycle.get) { 
         if(first == null) first = e
         if(last != null) {
           if(last.to != e.from) fail(s"cycle edges last:$last and e:$e not incident")

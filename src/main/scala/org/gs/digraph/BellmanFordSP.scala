@@ -48,7 +48,7 @@ class BellmanFordSP(g: EdgeWeightedDigraph, s: Int) {
     } spt.addEdge(edgeTo(v))
 
     val finder = new EdgeWeightedDirectedCycle(spt)
-    cycle = finder.cycle
+    cycle = finder.cycle.get//@FIXME
   }
 
   private def relax(v: Int): Unit = {

@@ -14,7 +14,7 @@ import scala.annotation.tailrec
 class AcyclicSP(g: EdgeWeightedDigraph, s: Int) {
   val _distTo = Array.fill[Double](g.v)(Double.PositiveInfinity)
   _distTo(s) = 0.0
-  val edgeTo = new Array[DirectedEdge](g.v)
+  val edgeTo = Array.fill[Option[DirectedEdge]](g.v)(None)
   val topological = new Topological(g)
   topological.order match {
     case None => throw new IllegalArgumentException(s"EdgeWeightedDigraph:$g is not acyclic")
@@ -29,7 +29,7 @@ class AcyclicSP(g: EdgeWeightedDigraph, s: Int) {
     val w = e.to
     if(_distTo(w) > _distTo(v) + e.weight) {
       _distTo(w) = _distTo(v) + e.weight
-      edgeTo(w) = e
+      edgeTo(w) = Some(e)
     }
   }
 
@@ -42,12 +42,17 @@ class AcyclicSP(g: EdgeWeightedDigraph, s: Int) {
       val path = new ListBuffer[DirectedEdge]()
       @tailrec
       def loop(e: DirectedEdge) {
-        if(e != null) {
-          e +=: path
-          loop(edgeTo(e.from))
+        e +=: path
+        edgeTo(e.from) match {
+          case None =>
+          case Some(x) => loop(x)
         }
       }
-      loop(edgeTo(v))
+
+      edgeTo(v) match {
+        case None =>
+        case Some(x) => loop(x)
+      }
       Some(path.toSeq)
     }
   }

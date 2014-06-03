@@ -3,7 +3,6 @@
  */
 package org.gs.digraph
 
-
 /**
  * @author Gary Struthers
  *
@@ -15,19 +14,20 @@ class Topological[A <: DigraphMarker](g: A) {
     case d: Digraph => new DirectedCycle(d)
     case e: EdgeWeightedDigraph => new EdgeWeightedDirectedCycle(e)
   }
-  var _order: Seq[Int] = null
-  if(!finder.hasCycle) _order = {
-    val dfs = g match {
-      case d: Digraph => new DepthFirstOrder(d)
-      case e: EdgeWeightedDigraph => new EdgeWeightedDepthFirstOrder(e)
-    }
-    dfs.reversePost
+  
+  private def createOrder(noCycle: Boolean): Option[Seq[Int]] = {
+    if (noCycle) {
+      val dfs = g match {
+        case d: Digraph => new DepthFirstOrder(d)
+        case e: EdgeWeightedDigraph => new EdgeWeightedDepthFirstOrder(e)
+      }
+      Some(dfs.reversePost)
+    } else None
   }
 
+  private lazy val _order = createOrder(!finder.hasCycle)
+
   def hasOrder(): Boolean = _order != None
-  
-  def order(): Option[Seq[Int]] = _order match {
-    case null => None
-    case x => Some(x)
-  }
+
+  def order(): Option[Seq[Int]] = _order 
 }
