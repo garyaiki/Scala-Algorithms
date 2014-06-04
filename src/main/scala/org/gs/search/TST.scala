@@ -55,7 +55,7 @@ class TST[A] {
   }
 
   def put(s: String, value: A): Unit = {
-    if (!contains(s)) N = N + 1
+    if (!contains(s)) N += 1
 
     def put(x: Option[Node], d: Int): Option[Node] = {
       val c = s.charAt(d)

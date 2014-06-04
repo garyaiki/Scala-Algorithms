@@ -103,5 +103,3 @@ abstract class PriorityQueue[A](pq: ArrayBuffer[A]) {
     loop(1)
   }
 }
-
-

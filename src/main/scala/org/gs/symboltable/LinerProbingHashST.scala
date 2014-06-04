@@ -49,7 +49,7 @@ class LinearProbingHashST[T, U](initialSize: Int) {
       val kv = st(k)
       if (kv != null) {
         st(k) = null.asInstanceOf[(T, U)]
-        n = n - 1
+        n -= 1
         put(kv._1, kv._2)
         rehash((k + 1) % m)
       }
@@ -59,7 +59,7 @@ class LinearProbingHashST[T, U](initialSize: Int) {
       val j = find(i)
       st(j) = null.asInstanceOf[(T, U)]
       rehash(j)
-      n = n - 1
+      n -= 1
       def halveSizeIfEigthFull(): Unit = if (n > 0 && n <= m / 8) resize(m / 2)
       halveSizeIfEigthFull
     }
@@ -67,7 +67,7 @@ class LinearProbingHashST[T, U](initialSize: Int) {
 
   def put(key: T, value: U) {
     if (value == null) delete(key) else {
-      def doubleSizeIfHalfFull(): Unit = if (n >=m / 2) {
+      def doubleSizeIfHalfFull(): Unit = if (n >= m / 2) {
         resize(m * 2)
       }
       doubleSizeIfHalfFull

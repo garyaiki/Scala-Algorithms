@@ -104,7 +104,7 @@ abstract class IndexPriorityQueue[A: ClassTag](nMax: Int) {
     require(n > 0, s"n:$n priority queue underflow")
     val top = pq(1)
     exchange(1, n)
-    n = n - 1
+    n -= 1
     sink(1, cmp)
     qp(top) = -1
     pq(n + 1) = -1
@@ -149,7 +149,7 @@ abstract class IndexPriorityQueue[A: ClassTag](nMax: Int) {
     require(contains(i), s"index:$i is not in the priority queue")
     val index = qp(i)
     exchange(index, n)
-    n = n - 1
+    n -= 1
     swim(index, cmp)
     sink(index, cmp)
     keys(i) = null.asInstanceOf[A]
@@ -185,5 +185,3 @@ abstract class IndexPriorityQueue[A: ClassTag](nMax: Int) {
     loop(1)
   }
 }
-
-
