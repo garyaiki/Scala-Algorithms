@@ -13,8 +13,6 @@ import org.gs.queue.MinPQ
 import org.gs.set.UF
 import org.gs.graph.Edge
 import org.gs.graph.EdgeWeightedGraph
-import scala.util.control.Breaks.break
-import scala.util.control.Breaks.breakable
 
 class LazyPrimMST(g: EdgeWeightedGraph) {
   private var _weight: Double = 0.0
@@ -27,7 +25,7 @@ class LazyPrimMST(g: EdgeWeightedGraph) {
   } prim(v)
 
   def weight(): Double = _weight
-  
+
   def edges(): Seq[Edge] = mst.toSeq
 
   private def scan(v: Int) {
@@ -83,28 +81,40 @@ class LazyPrimMST(g: EdgeWeightedGraph) {
         if (f != e) uf.union(x, y)
       }
     }
-    
+
     def minWeightInCrossingCut(e: Edge): Boolean = {
-      breakable {
-        for (f <- g.edges) {
-          val x = f.either
-          val y = f.other(x)
-          if (!uf.connected(x, y)) {
-            if (f.weight < e.weight) {
-              cutOptimiality = false
-              break
-            }
+      def cutCheck(f: Edge): Boolean = {
+        val x = f.either
+        val y = f.other(x)
+        if (!uf.connected(x, y) && f.weight < e.weight) false else true
+      }
+      @tailrec
+      def loopE(es: Seq[Edge]): Boolean = {
+        es match {
+          case last +: Seq() => cutCheck(last)
+          case head +: tail => {
+            if(cutCheck(head)) loopE(tail) else false
           }
         }
       }
-      cutOptimiality
+
+      val es = g.edges
+      loopE(es)
     }
-    breakable {
-      for (e <- edges) {
+    val es = edges
+    @tailrec
+    def loopMW(es: Seq[Edge]): Boolean = {
+      def doEdge(e: Edge): Boolean = {
         mstEdges(e)
-        if (!minWeightInCrossingCut(e)) break
+        if (!minWeightInCrossingCut(e)) false else true
       }
+      es match {
+          case last +: Seq() => doEdge(last)
+          case head +: tail => {
+            if(doEdge(head)) loopMW(tail) else false
+          }
+        }
     }
-    cutOptimiality
+    loopMW(es)
   }
 }

@@ -5,11 +5,10 @@ package org.gs.digraph
 
 import org.junit.runner.RunWith
 import org.scalatest.FlatSpec
-import scala.util.control.Breaks._
 import org.scalatest.junit.JUnitRunner
 import org.gs.digraph.fixtures.DijkstraSPBuilder
 import org.gs.digraph.fixtures.TinyEdgeWeightedDigraphBuilder
-
+import scala.annotation.tailrec
 
 /**
  * @author Gary Struthers
@@ -32,58 +31,56 @@ class DijkstraSPSuite extends FlatSpec {
   }
 
   it should "have consistent distTo and edgeTo for all verticies" in new DijkstraSPBuilder {
-    var consistent = true
-    breakable {
-      for {
-        v <- 0 until g.v
-        if (v != s0)
-      } {
-        if (dsp0.edgeTo(v) == null && dsp0.distTo(v) != Double.PositiveInfinity) {
-          consistent = false
-          break
-        }
-      }
+    @tailrec
+    def loop(i: Int): Boolean = {
+      if (i < g.v) {
+        if ((i != s0) && (dsp0.edgeTo(i) == null && dsp0.distTo(i) != Double.PositiveInfinity))
+          false else loop(i + 1)
+      } else true
     }
+    var consistent = loop(0)
+
     assert(consistent)
   }
 
   it should "have all edges where distTo(w) <= distTo(v) + e.weight" in new DijkstraSPBuilder {
-    var valid = true
-    breakable {
-      for {
-        v <- 0 until g.v
-        e <- g.adj(v)
-      } {
-        val w = e.to
-        if (dsp0.distTo(v) + e.weight < dsp0.distTo(w)) {
-          valid = false
-          break
+    @tailrec
+    def loopV(i: Int): Boolean = {
+      if (i < g.v) {
+        val es = g.adj(i)
+        @tailrec
+        def loopE(es: List[DirectedEdge]): Boolean = {
+          es match {
+            case Nil => true
+            case e :: xs => {
+              val w = e.to
+              if (dsp0.distTo(1) + e.weight < dsp0.distTo(w)) false else loopE(xs)
+            }
+          }
         }
-      }
+        loopE(es)
+        loopV(i + 1)
+      } else true
     }
+    var valid = loopV(0)
+
     assert(valid)
   }
 
   it should "have all edges where distTo(w) == distTo(v) + e.weight" in new DijkstraSPBuilder {
-    var valid = true
-    breakable {
-      for {
-        w <- 0 until g.v
-      } {
+    def loop(w: Int): Boolean = {
+      if(w < g.v) {
         val e = dsp0.edgeTo(w)
         if (e != null) {
           val v = e.from
-          if (w != e.to) {
-            valid = false
-            break
-          }
-          if (dsp0.distTo(v) + e.weight != dsp0.distTo(w)) {
-            valid = false
-            break
-          }
+          if (w != e.to) false
+          if (dsp0.distTo(v) + e.weight != dsp0.distTo(w)) false
         }
-      }
+        loop(w + 1)
+      } else true
     }
+    var valid = loop(0) //true 
+
     assert(valid)
   }
 
@@ -125,10 +122,9 @@ class DijkstraSPSuite extends FlatSpec {
           case Some(x) => assert(x.corresponds(List(tinyEdgeArray(7), tinyEdgeArray(10)))(equals))
           case None => fail(s"path from 0 to $v not found")
         }
-        case x if 8 until g.v contains x => assertResult(None) {dsp0.pathTo(v)}
+        case x if 8 until g.v contains x => assertResult(None) { dsp0.pathTo(v) }
         case _ => fail(s"v:$v is not a valid vertex")
       }
     }
-
   }
 }
