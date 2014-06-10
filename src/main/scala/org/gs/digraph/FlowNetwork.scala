@@ -33,15 +33,15 @@ class FlowNetwork(val v: Int) {
     _e += 1
   }
 
-  def adj(v: Int): Seq[FlowEdge] = _adj(v).toSeq
+  def adj(v: Int): List[FlowEdge] = _adj(v)
 
-  def edges(): Seq[FlowEdge] = {
+  def edges(): List[FlowEdge] = {
     val list = ListBuffer[FlowEdge]()
     for {
       vV <- 0 until v
       e <- adj(vV)
     } list.+=(e)
-    list.toSeq
+    list.toList
   }
 
   override def toString(): String = {
@@ -52,6 +52,7 @@ class FlowNetwork(val v: Int) {
       sb.append(s"$v : ")
       for {
         e <- adj(v)
+        if(e.to != v)
       } sb.append(s"$e  ")
       sb.append(lf)
     }

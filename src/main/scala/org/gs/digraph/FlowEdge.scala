@@ -19,7 +19,7 @@ class FlowEdge(v: Int, w: Int, val capacity: Double) extends BaseDirectedEdge {
     _flow = flow
   }
 
-  override def toString(): String = f"$v%d->$w%d ${capacity % .5f} ${_flow % .5f} "
+  override def toString(): String = f"$v%d->$w%d $capacity ${_flow} "
 
   def from(): Int = v
 
