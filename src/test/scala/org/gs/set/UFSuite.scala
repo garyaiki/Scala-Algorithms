@@ -1,5 +1,5 @@
 /**
- *
+ * @see http://algs4.cs.princeton.edu/15uf/largeUF.txt
  */
 package org.gs.set
 
@@ -14,7 +14,7 @@ import org.gs.fixtures.IntArrayBuilder
  *
  */
 @RunWith(classOf[JUnitRunner])
-class SetSuite extends FlatSpec {
+class UFSuite extends FlatSpec {
   trait UnionFindBuilder {
     val tinyUFdata = Array((4,3),(3,8),(6,5),(9,4),(2,1),(5,0),(7,2),(6,1))
     val tinyUF = new UF(10)

@@ -15,11 +15,13 @@ trait QueueBuilder {
   for {
     c <- testChars
   } maxPQ.insert(c)
+  
   val minPQ = new MinPQ(new ArrayBuffer[Char](20))
   for {
     c <- testChars
   } minPQ.insert(c)
 }
+
 @RunWith(classOf[JUnitRunner])
 class MaxPriorityQueueSuite extends FlatSpec {
 

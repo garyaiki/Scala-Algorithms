@@ -3,6 +3,8 @@
  */
 package org.gs.set
 
+import scala.annotation.tailrec
+
 /**
  * @author Gary Struthers
  * @param n number of sites
@@ -17,11 +19,13 @@ class UF(n: Int) {
 
   def find(p: Int): Int = {
     require(p >= 0 && p < id.length)
-    def loop(pP: Int): Int =
-      if (pP != id(pP)) {
-        id(pP) = id(id(pP))
-        loop(id(pP))
-      } else pP
+    @tailrec
+    def loop(p: Int): Int =
+      if (p != id(p)) {
+        id(p) = id(id(p))
+        loop(id(p))
+      } else p
+      
     loop(p)
   }
 

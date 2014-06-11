@@ -1,15 +1,20 @@
 package org.gs.symboltable
-
-import org.scalatest.FunSuite
+/*
+ * @see http://algs4.cs.princeton.edu/33balanced/tinyST.txt
+ * @see http://algs4.cs.princeton.edu/33balanced/RedBlackBST.java.html
+ */
+import org.scalatest.FlatSpec
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import org.scalatest.BeforeAndAfter
 import scala.collection.mutable.ArrayBuffer
 import org.scalatest.PrivateMethodTester
 import math.Ordering
-
+/*
+ * @author Gary Struthers
+ */
 @RunWith(classOf[JUnitRunner])
-class RedBlackSymbolTableSuite extends FunSuite with BeforeAndAfter with PrivateMethodTester {
+class RedBlackSymbolTableSuite extends FlatSpec with BeforeAndAfter with PrivateMethodTester {
   var testInput: ArrayBuffer[(Char, Int)] = _
   var lo = 0
   before {
@@ -18,7 +23,8 @@ class RedBlackSymbolTableSuite extends FunSuite with BeforeAndAfter with Private
       ('S', 0), ('B', 77), ('N', 66), ('H', 66), ('J', 55))
   }
 
-  test("put and get 1 key value") {
+  behavior of "a RedBlackSymbolTable"
+  it should "put and get 1 key value" in {
     val ost = new RedBlackSymbolTable[Char, Int]()(Ordering.Char)
 
     val item = testInput(0)
@@ -32,7 +38,7 @@ class RedBlackSymbolTableSuite extends FunSuite with BeforeAndAfter with Private
     assert(ost.isBalanced, "Not balanced")
   }
 
-  test("put and get 2 key values") {
+  it should "put and get 2 key values" in {
     val ost = new RedBlackSymbolTable[Char, Int]()(Ordering.Char)
     var item = testInput(0)
     ost.put(item._1, item._2)
@@ -44,14 +50,14 @@ class RedBlackSymbolTableSuite extends FunSuite with BeforeAndAfter with Private
 
   }
 
-  test("get invalid key") {
+  it should "get invalid key" in {
     val ost = new RedBlackSymbolTable[Char, Int]()(Ordering.Char)
     val item = testInput(0)
     val value = ost.get('K')
     assert(value === None)
   }
 
-  test("isEmpty") {
+  it should "isEmpty" in {
     val ost = new RedBlackSymbolTable[Char, Int]()(Ordering.Char)
     assert(ost.isEmpty === true)
     val item = testInput(0)
@@ -59,7 +65,7 @@ class RedBlackSymbolTableSuite extends FunSuite with BeforeAndAfter with Private
     assert(ost.isEmpty === false)
   }
 
-  test("debug put contains") {
+  it should "debug put contains" in {
     val ost = new RedBlackSymbolTable[Char, Int]()(Ordering.Char)
     var item = testInput(0)
     ost.put(item._1, item._2)
@@ -108,7 +114,7 @@ class RedBlackSymbolTableSuite extends FunSuite with BeforeAndAfter with Private
     assert(ost.isBalanced, "Not balanced")
   }
 
-  test("contains") {
+  it should "contains" in {
     val ost = new RedBlackSymbolTable[Char, Int]()(Ordering.Char)
     for (item <- testInput) ost.put(item._1, item._2)
     assert(ost.contains('S') === true)
@@ -121,25 +127,26 @@ class RedBlackSymbolTableSuite extends FunSuite with BeforeAndAfter with Private
     assert(ost.isBalanced, "Not balanced")
   }
 
-  test("size") {
+  it should "size" in {
     val ost = new RedBlackSymbolTable[Char, Int]()(Ordering.Char)
     for (item <- testInput) ost.put(item._1, item._2)
     assert(ost.size === testInput.length)
   }
 
-  test("size inclusive range") {
+  it should "size inclusive range" in {
     val ost = new RedBlackSymbolTable[Char, Int]()(Ordering.Char)
     for (item <- testInput) ost.put(item._1, item._2)
     assert(ost.size('A', 'U') === testInput.length - 1)
   }
-  test("floor") {
+  
+  it should "floor" in {
     val ost = new RedBlackSymbolTable[Char, Int]()(Ordering.Char)
     for (item <- testInput) ost.put(item._1, item._2)
     assert(ost.floor('S') === 'S')
     assert(ost.floor('Z') === 'X')
   }
 
-  test("ceiling") {
+  it should "ceiling" in {
     val ost = new RedBlackSymbolTable[Char, Int]()(Ordering.Char)
     for (item <- testInput) ost.put(item._1, item._2)
     assert(ost.ceiling('S') === 'S')
@@ -147,7 +154,7 @@ class RedBlackSymbolTableSuite extends FunSuite with BeforeAndAfter with Private
     assert(ost.ceiling('D') === 'E')
   }
 
-  test("select") {
+  it should "select" in {
     val ost = new RedBlackSymbolTable[Char, Int]()(Ordering.Char)
     for (item <- testInput) ost.put(item._1, item._2)
     var k = ost.select(0)
@@ -159,14 +166,14 @@ class RedBlackSymbolTableSuite extends FunSuite with BeforeAndAfter with Private
     k = ost.select(ost.size - 1)
     assert(k === Some('X'))
   }
-  test("rank") {
+  it should "rank" in {
     val ost = new RedBlackSymbolTable[Char, Int]()(Ordering.Char)
     for (item <- testInput) ost.put(item._1, item._2)
     assert(ost.rank('S') === 15)
     assert(ost.rank('Z') === ost.size())
   }
 
-  test("keys") {
+  it should "keys" in {
     val ost = new RedBlackSymbolTable[Char, Int]()(Ordering.Char)
     for (item <- testInput) ost.put(item._1, item._2)
     val keys = ost.keys()
@@ -174,19 +181,19 @@ class RedBlackSymbolTableSuite extends FunSuite with BeforeAndAfter with Private
     assert(str === "ABCEHIJKLMNOPQRSTUX")
   }
 
-  test("min") {
+  it should "min" in {
     val ost = new RedBlackSymbolTable[Char, Int]()(Ordering.Char)
     for (item <- testInput) ost.put(item._1, item._2)
     assert(ost.min === 'A')
   }
 
-  test("max") {
+  it should "max" in {
     val ost = new RedBlackSymbolTable[Char, Int]()(Ordering.Char)
     for (item <- testInput) ost.put(item._1, item._2)
     assert(ost.max === 'X')
   }
 
-  test("delete") {
+  it should "delete" in {
     val ost = new RedBlackSymbolTable[Char, Int]()(Ordering.Char)
     for (item <- testInput) ost.put(item._1, item._2)
     assert(ost.contains('S') === true)
@@ -199,7 +206,7 @@ class RedBlackSymbolTableSuite extends FunSuite with BeforeAndAfter with Private
     assert(ost.isBalanced, "Not balanced")
   }
 
-  test("deleteMin") {
+  it should "deleteMin" in {
     val ost = new RedBlackSymbolTable[Char, Int]()(Ordering.Char)
     for (item <- testInput) ost.put(item._1, item._2)
     assert(ost.get('M') === Some(63))
@@ -215,7 +222,7 @@ class RedBlackSymbolTableSuite extends FunSuite with BeforeAndAfter with Private
     val str = keys.mkString
     assert(str === "BCEHIJKLMNOPQRSTUX")
   }
-  test("deleteMax") {
+  it should "deleteMax" in {
     val ost = new RedBlackSymbolTable[Char, Int]()(Ordering.Char)
     for (item <- testInput) ost.put(item._1, item._2)
     ost.deleteMax

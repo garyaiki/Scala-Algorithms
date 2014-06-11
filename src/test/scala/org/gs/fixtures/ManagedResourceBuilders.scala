@@ -36,15 +36,15 @@ trait BufferedSourceBuilder {
 }
 
 trait StringArrayBuilder extends BufferedSourceBuilder {
-  
-  def readFileToArray(buffSource: BufferedSource): ArrayBuffer[String] = {
+
+  def readFileToArray(buffSource: BufferedSource): Array[String] = {
     val savedLines = new ArrayBuffer[String]()
     val it = buffSource.getLines
     for (a <- it) savedLines.append(a)
-    savedLines
+    savedLines.toArray
   }
 
-  def buildFromManagedResource(uri: String): ArrayBuffer[String] = {
+  def buildFromManagedResource(uri: String): Array[String] = {
     val managedResource = readURI(uri)
     managedResource.loan(readFileToArray)
   }
@@ -52,17 +52,16 @@ trait StringArrayBuilder extends BufferedSourceBuilder {
 
 trait SymbolTableBuilder {
 
-  def buildStringIndex(delimiter: String, savedLines: ArrayBuffer[String]): TreeMap[String, Int] = {
-    var st = new TreeMap[String, Int]()
+  def buildStringIndex(delimiter: String, savedLines: Array[String]): TreeMap[String, Int] = {
+    val buf = new ArrayBuffer[String]()
     for {
       a <- savedLines
       s <- a.split(delimiter)
-      if (!st.contains(s))
-    } {
-      val kv = (s, st.size)
-      st = st + kv
-    }
-    st
+      if (!buf.contains(s))
+    } buf += s
+
+    val kvs = buf.zipWithIndex
+    TreeMap[String, Int](kvs:_*)
   }
 
   def invertIndexKeys(st: TreeMap[String, Int]) = {
@@ -79,7 +78,7 @@ trait SymbolTableBuilder {
 }
 
 trait WordArrayBuilder extends BufferedSourceBuilder {
-  
+
   def readFileToArray(buffSource: BufferedSource): Array[String] = {
     val savedLines = new ArrayBuffer[String]()
     val it = buffSource.getLines
@@ -96,7 +95,7 @@ trait WordArrayBuilder extends BufferedSourceBuilder {
   }
 }
 trait IntArrayBuilder extends BufferedSourceBuilder {
-  
+
   def readFileToArray(buffSource: BufferedSource): ArrayBuffer[Int] = {
     val savedLines = new ArrayBuffer[Int]()
     val it = buffSource.getLines

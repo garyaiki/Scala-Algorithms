@@ -1,6 +1,6 @@
 package org.gs.symboltable
 
-import org.scalatest.FunSuite
+import org.scalatest.FlatSpec
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import org.scalatest.BeforeAndAfter
@@ -8,7 +8,7 @@ import scala.collection.mutable.ArrayBuffer
 import org.scalatest.PrivateMethodTester
 
 @RunWith(classOf[JUnitRunner])
-class SeparateChainingHashSTSuite extends FunSuite with BeforeAndAfter with PrivateMethodTester {
+class SeparateChainingHashSTSuite extends FlatSpec with BeforeAndAfter with PrivateMethodTester {
   var testInput: ArrayBuffer[(Char, Int)] = _
   var lo = 0
   before {
@@ -16,7 +16,7 @@ class SeparateChainingHashSTSuite extends FunSuite with BeforeAndAfter with Priv
       ('P', 3), ('U', 45), ('I', 27), ('M', 63), ('Q', 52), ('C', 15), ('X', 30), ('O', 81), ('S', 0))
   }
 
-  test("put and get 1 key value") {
+  it should "put and get 1 key value" in {
     val ost = new SeparateChainingHashST[Char, Int](50)
     val item = testInput(0)
     ost.put(item._1, item._2)
@@ -24,7 +24,7 @@ class SeparateChainingHashSTSuite extends FunSuite with BeforeAndAfter with Priv
     assert(value === Some(23))
   }
 
-  test("put and get 2 key values") {
+  it should "put and get 2 key values" in {
     val ost = new SeparateChainingHashST[Char, Int](50)
     var item = testInput(0)
     ost.put(item._1, item._2)
@@ -35,14 +35,14 @@ class SeparateChainingHashSTSuite extends FunSuite with BeforeAndAfter with Priv
     assert(ost.get('K') === Some(23))
   }
 
-  test("get invalid key") {
+  it should "get invalid key" in {
     val ost = new SeparateChainingHashST[Char, Int](50)
     val item = testInput(0)
     val value = ost.get('K')
     assert(value === None)
   }
 
-  test("isEmpty") {
+  it should "isEmpty" in {
     val ost = new SeparateChainingHashST[Char, Int](50)
     assert(ost.isEmpty === true)
     val item = testInput(0)
@@ -50,20 +50,20 @@ class SeparateChainingHashSTSuite extends FunSuite with BeforeAndAfter with Priv
     assert(ost.isEmpty === false)
   }
 
-  test("contains") {
+  it should "contains" in {
     val ost = new SeparateChainingHashST[Char, Int](50)
     for (item <- testInput) ost.put(item._1, item._2)
     assert(ost.contains('S') === true)
     assert(ost.contains('z') === false)
   }
 
-  test("size") {
+  it should "size" in {
     val ost = new SeparateChainingHashST[Char, Int](50)
     for (item <- testInput) ost.put(item._1, item._2)
     assert(ost.size === testInput.length)
   }
 
-  test("keys") {
+  it should "keys" in {
     val ost = new SeparateChainingHashST[Char, Int](50)
     for (item <- testInput) ost.put(item._1, item._2)
     val keys = ost.keys()
@@ -71,7 +71,7 @@ class SeparateChainingHashSTSuite extends FunSuite with BeforeAndAfter with Priv
     assert(keys.mkString === "ACEIKLMOPQRSTUX")
   }
 
-  test("delete") {
+  it should "delete" in {
     val ost = new SeparateChainingHashST[Char, Int](50)
     for (item <- testInput) ost.put(item._1, item._2)
     ost.delete('Q')
@@ -80,7 +80,7 @@ class SeparateChainingHashSTSuite extends FunSuite with BeforeAndAfter with Priv
     assert(keys.mkString === "ACEIKLMOPRSTUX")
   }
 
-  test("double size") {
+  it should "double size" in {
     val ost = new SeparateChainingHashST[Char, Int](testInput.length / 10)
     val oldSize = ost.st.size
     for (item <- testInput) ost.put(item._1, item._2)
