@@ -15,7 +15,7 @@ class LinearProbingHashSTSuite extends FlatSpec with BeforeAndAfter with Private
     testInput = ArrayBuffer[(Char, Int)](('K', 23), ('R', 84), ('A', 42), ('T', 11), ('E', 32), ('L', 74),
       ('P', 3), ('U', 45), ('I', 27), ('M', 63), ('Q', 52), ('C', 15), ('X', 30), ('O', 81), ('S', 0))
   }
-/*
+  /*
  * it should "put and get 1 key value" in {
  */
   it should "put and get 1 key value" in {
@@ -82,9 +82,11 @@ class LinearProbingHashSTSuite extends FlatSpec with BeforeAndAfter with Private
     assert(keys.mkString === "ACEIKLMOPRSTUX")
   }
 
-  it should "double size" in {
+  it should "resize" in {
     val ost = new LinearProbingHashST[Char, Int](testInput.length)
+    assert(ost.size === 0)
+
     for (item <- testInput) ost.put(item._1, item._2)
-    assert(ost.st.size === (testInput.length * 2))
+    assert(ost.size === testInput.length)
   }
 }

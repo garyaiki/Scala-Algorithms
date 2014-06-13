@@ -11,18 +11,35 @@ package org.gs.graph
  * @param v number of vertices
  */
 abstract class BaseGraph(val v: Int) {
-  var e = 0
-  val adj = Array.fill[List[Int]](v)(List[Int]())
+  private var e = 0
+  protected[gs] val adj = Array.fill[List[Int]](v)(List[Int]())
 
-  def addEdge(aV: Int, otherV: Int): Unit = {
+  def addEdge(vv: Int, w: Int): Unit = {
     def rangeGuard(x: Int): Boolean = {
       x match {
         case x if 0 until v contains x => true
         case _ => false
       }
     }
-    require(rangeGuard(aV) && rangeGuard(otherV), s"aV:$aV and otherV:$otherV must be in 0-$v")
+    require(rangeGuard(vv) && rangeGuard(w), s"aV:$vv and otherV:$w must be in 0-$v")
     e += 1
-    adj(aV) = otherV :: adj(aV)
+    adj(vv) = w :: adj(vv)
+  }
+  
+  override def toString(): String = {
+    val lf = sys.props("line.separator")
+    val sb = new StringBuilder()
+    sb.append(s"$v ${e} $lf")
+    def addLines(v: Int) {
+      sb.append(s"$v : ")
+      for {
+        e <- adj(v)
+      } sb.append(s"$e  ")
+      sb.append(lf)
+    }
+    for {
+      vV <- 0 until v
+    } addLines(vV)
+    sb.toString
   }
 }

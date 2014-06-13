@@ -12,7 +12,7 @@ import scala.annotation.tailrec
  * @param <T>
  * @param <U>
  */
-class RedBlackSymbolTable[T, U](implicit ord: Ordering[T]) {
+class RedBlackBST[T, U](implicit ord: Ordering[T]) {
   class Node[T, U](var key: T, var value: U, var count: Int = 1, var red: Boolean = true) {
     var left = null.asInstanceOf[Node[T, U]]
     var right = null.asInstanceOf[Node[T, U]]
@@ -20,13 +20,13 @@ class RedBlackSymbolTable[T, U](implicit ord: Ordering[T]) {
     // red is color of parent link
   }
 
-  var root = null.asInstanceOf[Node[T, U]]
+  private var root = null.asInstanceOf[Node[T, U]]
   
   def less(a: T, b: T)(implicit ord: Ordering[T]): Boolean = ord.lt(a, b)
   
   def greater(a: T, b: T)(implicit ord: Ordering[T]): Boolean = ord.gt(a, b)
   
-  def isRed(x: Node[T, U]): Boolean = if ((x == null) || (x.red == false)) false else true
+  private def isRed(x: Node[T, U]): Boolean = if ((x == null) || (x.red == false)) false else true
 
   def rotateLeft(h: Node[T, U]) = {
     assert(h != null && isRed(h.right), "error: black or null passed to rotateLeft")
@@ -83,7 +83,7 @@ class RedBlackSymbolTable[T, U](implicit ord: Ordering[T]) {
     root = loop(root)
     root.red = false
   }
-  //@TODO refactor
+
   def get(key: T)(implicit ord: Ordering[T]): Option[U] = {
     @tailrec
     def loop(x: Node[T, U])(implicit ord: Ordering[T]): Option[U] = {
@@ -127,14 +127,14 @@ class RedBlackSymbolTable[T, U](implicit ord: Ordering[T]) {
     if (!isEmpty) root.red = false
   }
 
-  def moveRedRight(hm: Node[T, U]): Node[T, U] = {
+  private def moveRedRight(hm: Node[T, U]): Node[T, U] = {
     assert(hm != null, "null passed to moveRedRight")
     assert(isRed(hm) && !isRed(hm.right) && !isRed(hm.right.left), "error: moveRedRight colors")
     flipColors(hm)
     if (!isRed(hm.left.left)) rotateRight(hm) else hm
   }
   
-  def moveRedLeft(hm: Node[T, U]): Node[T, U] = {
+  private def moveRedLeft(hm: Node[T, U]): Node[T, U] = {
     assert(hm != null, "null passed to moveRedLeft")
     assert(isRed(hm) && !isRed(hm.left) && !isRed(hm.left), "error: moveRedLeft colors")
 
@@ -145,7 +145,7 @@ class RedBlackSymbolTable[T, U](implicit ord: Ordering[T]) {
     } else hm
   }
   
-  def balance(h: Node[T, U]): Node[T, U] = {
+  private def balance(h: Node[T, U]): Node[T, U] = {
     assert(h != null, "null passed to balance")
 
     var x = h
@@ -157,7 +157,7 @@ class RedBlackSymbolTable[T, U](implicit ord: Ordering[T]) {
     x
   }
 
-  def deleteMin(h: Node[T, U]): Node[T, U] = {
+  private def deleteMin(h: Node[T, U]): Node[T, U] = {
     var hm = h
 
     if (hm.left == null) null.asInstanceOf[Node[T, U]] else {
@@ -214,7 +214,7 @@ class RedBlackSymbolTable[T, U](implicit ord: Ordering[T]) {
   
   def isEmpty(): Boolean = if (root == null) true else false
   
-  def min(x: Node[T, U]): Node[T, U] = {
+  private def min(x: Node[T, U]): Node[T, U] = {
     assert(x != null, "null passed to min")
     if (x.left == null) x else min(x.left)
   }

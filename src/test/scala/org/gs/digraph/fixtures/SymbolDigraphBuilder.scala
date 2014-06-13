@@ -9,17 +9,17 @@ import org.gs.digraph.Digraph
 import scala.io.BufferedSource
 import org.gs.fixtures.SymbolTableBuilder
 import org.gs.graph.fixtures.BaseSymbolGraphBuilder
-import org.gs.graph.fixtures.SymbolGraph
+import org.gs.graph.SymbolGraph
 import org.gs.fixtures.StringArrayBuilder
 
 /**
  * @author Gary Struthers
  */
-
 trait SymbolDigraphBuilder 
     extends StringArrayBuilder
     with SymbolTableBuilder
     with BaseSymbolGraphBuilder {
+  
   def buildSymbolGraph(uri: String, delimiter: String): SymbolGraph[Digraph] = {
     val savedLines = buildFromManagedResource(uri)
     val st = buildStringIndex(delimiter, savedLines)

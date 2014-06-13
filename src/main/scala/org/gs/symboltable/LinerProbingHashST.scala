@@ -12,9 +12,9 @@ import scala.annotation.tailrec
  * @param <U>
  */
 class LinearProbingHashST[T, U](initialSize: Int) {
-  var m = initialSize
-  var n = 0
-  var st = new Array[(T, U)](m)
+  private var m = initialSize
+  private var n = 0
+  private var st = new Array[(T, U)](m)
 
   private def hash(key: T) = (key.hashCode & 0x7fffffff) % m
   private def chainGet(x: (T, U), key: T) = (x._1 == key)
@@ -83,8 +83,8 @@ class LinearProbingHashST[T, U](initialSize: Int) {
     }
   }
 
-  def resize(capacity: Int) {
-    var tmp = new LinearProbingHashST[T, U](capacity)
+  private def resize(capacity: Int) {
+    val tmp = new LinearProbingHashST[T, U](capacity)
     for {
       kv <- st
       if (kv != null)

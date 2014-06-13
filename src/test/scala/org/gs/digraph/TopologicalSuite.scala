@@ -1,8 +1,7 @@
 package org.gs.digraph
 /**
  * ScalaTest, JUnit for Topological
- * @see http://algs4.cs.princeton.edu/44sp/tinyDG.txt
- * @see http://algs4.cs.princeton.edu/42directed/tinyDAG.txt
+ * @see http://algs4.cs.princeton.edu/42directed/jobs.txt
  */
 import org.scalatest.FlatSpec
 import org.junit.runner.RunWith
@@ -17,27 +16,15 @@ import org.gs.digraph.fixtures.SymbolDigraphBuilder
 class TopologicalSuite extends FlatSpec {
 
   behavior of "a Topological"
-  it should "find routes" in new SymbolDigraphBuilder {
+  it should "find jobs" in new SymbolDigraphBuilder {
     val d = buildSymbolGraph("http://algs4.cs.princeton.edu/42directed/jobs.txt", "/")
     val t = new Topological(d.g)
+    val equals = (_: Int) == (_: Int)
+    val check = List(9, 8, 4, 5, 0, 1, 7, 11, 12, 10, 2, 3, 6)
     t.order match {
-      case Some(x) => for(v <- x) println(s"${d.name(v)}")
-      case None => fail("no topological order")
-    }
-    
-  }
-  ignore should "find topological order of a Digraph" in new DigraphBuilder {
-    val tdg = new Topological(tinyDG)
-    tdg.order match {
-      case Some(x) => assert(x.diff(expectedOrderTinyDG) === List())
+      case Some(x) => assert(x.corresponds(check)(equals))
       case None => fail("no topological order")
     }
   }
-
-  ignore should "show a Digraph has no topological order" in new DigraphBuilder {
-    val tdag = new Topological(tinyDAG)
-    assert(tdag.order === None)
-  }
-
 
 } 

@@ -10,9 +10,9 @@ package org.gs.symboltable
  * @param <U>
  */
 class SeparateChainingHashST[T, U](initialSize: Int) {
-  var m = initialSize
-  var n = 0
-  var st = new Array[List[(T, U)]](m)
+  private var m = initialSize
+  private var n = 0
+  private var st = new Array[List[(T, U)]](m)
 
   private def hash(key: T): Int = (key.hashCode & 0x7fffffff) % m
   
@@ -56,8 +56,8 @@ class SeparateChainingHashST[T, U](initialSize: Int) {
     }
   }
 
-  def resize(chains: Int): Unit = {
-    var tmp = new SeparateChainingHashST[T, U](chains)
+  private def resize(chains: Int): Unit = {
+    val tmp = new SeparateChainingHashST[T, U](chains)
     for {
       chain <- st
       kv <- chain
@@ -66,9 +66,8 @@ class SeparateChainingHashST[T, U](initialSize: Int) {
     st = tmp.st
   }
 
-  import scala.collection.mutable.Queue
   def keys(): Seq[T] = {
-    val q = Queue[T]()
+    val q = scala.collection.mutable.Queue[T]()
     for {
       chain <- st
       if(chain != null)

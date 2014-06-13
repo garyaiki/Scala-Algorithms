@@ -14,7 +14,7 @@ import math.Ordering
  * @author Gary Struthers
  */
 @RunWith(classOf[JUnitRunner])
-class RedBlackSymbolTableSuite extends FlatSpec with BeforeAndAfter with PrivateMethodTester {
+class RedBlackBSTSuite extends FlatSpec with BeforeAndAfter with PrivateMethodTester {
   var testInput: ArrayBuffer[(Char, Int)] = _
   var lo = 0
   before {
@@ -25,7 +25,7 @@ class RedBlackSymbolTableSuite extends FlatSpec with BeforeAndAfter with Private
 
   behavior of "a RedBlackSymbolTable"
   it should "put and get 1 key value" in {
-    val ost = new RedBlackSymbolTable[Char, Int]()(Ordering.Char)
+    val ost = new RedBlackBST[Char, Int]()(Ordering.Char)
 
     val item = testInput(0)
     ost.put(item._1, item._2)
@@ -39,7 +39,7 @@ class RedBlackSymbolTableSuite extends FlatSpec with BeforeAndAfter with Private
   }
 
   it should "put and get 2 key values" in {
-    val ost = new RedBlackSymbolTable[Char, Int]()(Ordering.Char)
+    val ost = new RedBlackBST[Char, Int]()(Ordering.Char)
     var item = testInput(0)
     ost.put(item._1, item._2)
     assert(ost.get('K') === Some(23))
@@ -51,14 +51,14 @@ class RedBlackSymbolTableSuite extends FlatSpec with BeforeAndAfter with Private
   }
 
   it should "get invalid key" in {
-    val ost = new RedBlackSymbolTable[Char, Int]()(Ordering.Char)
+    val ost = new RedBlackBST[Char, Int]()(Ordering.Char)
     val item = testInput(0)
     val value = ost.get('K')
     assert(value === None)
   }
 
   it should "isEmpty" in {
-    val ost = new RedBlackSymbolTable[Char, Int]()(Ordering.Char)
+    val ost = new RedBlackBST[Char, Int]()(Ordering.Char)
     assert(ost.isEmpty === true)
     val item = testInput(0)
     ost.put(item._1, item._2)
@@ -66,7 +66,7 @@ class RedBlackSymbolTableSuite extends FlatSpec with BeforeAndAfter with Private
   }
 
   it should "debug put contains" in {
-    val ost = new RedBlackSymbolTable[Char, Int]()(Ordering.Char)
+    val ost = new RedBlackBST[Char, Int]()(Ordering.Char)
     var item = testInput(0)
     ost.put(item._1, item._2)
     item = testInput(1)
@@ -115,7 +115,7 @@ class RedBlackSymbolTableSuite extends FlatSpec with BeforeAndAfter with Private
   }
 
   it should "contains" in {
-    val ost = new RedBlackSymbolTable[Char, Int]()(Ordering.Char)
+    val ost = new RedBlackBST[Char, Int]()(Ordering.Char)
     for (item <- testInput) ost.put(item._1, item._2)
     assert(ost.contains('S') === true)
     assert(ost.contains('z') === false)
@@ -128,26 +128,26 @@ class RedBlackSymbolTableSuite extends FlatSpec with BeforeAndAfter with Private
   }
 
   it should "size" in {
-    val ost = new RedBlackSymbolTable[Char, Int]()(Ordering.Char)
+    val ost = new RedBlackBST[Char, Int]()(Ordering.Char)
     for (item <- testInput) ost.put(item._1, item._2)
     assert(ost.size === testInput.length)
   }
 
   it should "size inclusive range" in {
-    val ost = new RedBlackSymbolTable[Char, Int]()(Ordering.Char)
+    val ost = new RedBlackBST[Char, Int]()(Ordering.Char)
     for (item <- testInput) ost.put(item._1, item._2)
     assert(ost.size('A', 'U') === testInput.length - 1)
   }
   
   it should "floor" in {
-    val ost = new RedBlackSymbolTable[Char, Int]()(Ordering.Char)
+    val ost = new RedBlackBST[Char, Int]()(Ordering.Char)
     for (item <- testInput) ost.put(item._1, item._2)
     assert(ost.floor('S') === 'S')
     assert(ost.floor('Z') === 'X')
   }
 
   it should "ceiling" in {
-    val ost = new RedBlackSymbolTable[Char, Int]()(Ordering.Char)
+    val ost = new RedBlackBST[Char, Int]()(Ordering.Char)
     for (item <- testInput) ost.put(item._1, item._2)
     assert(ost.ceiling('S') === 'S')
     assert(ost.ceiling('F') === 'H')
@@ -155,7 +155,7 @@ class RedBlackSymbolTableSuite extends FlatSpec with BeforeAndAfter with Private
   }
 
   it should "select" in {
-    val ost = new RedBlackSymbolTable[Char, Int]()(Ordering.Char)
+    val ost = new RedBlackBST[Char, Int]()(Ordering.Char)
     for (item <- testInput) ost.put(item._1, item._2)
     var k = ost.select(0)
     k = ost.select(1)
@@ -167,14 +167,14 @@ class RedBlackSymbolTableSuite extends FlatSpec with BeforeAndAfter with Private
     assert(k === Some('X'))
   }
   it should "rank" in {
-    val ost = new RedBlackSymbolTable[Char, Int]()(Ordering.Char)
+    val ost = new RedBlackBST[Char, Int]()(Ordering.Char)
     for (item <- testInput) ost.put(item._1, item._2)
     assert(ost.rank('S') === 15)
     assert(ost.rank('Z') === ost.size())
   }
 
   it should "keys" in {
-    val ost = new RedBlackSymbolTable[Char, Int]()(Ordering.Char)
+    val ost = new RedBlackBST[Char, Int]()(Ordering.Char)
     for (item <- testInput) ost.put(item._1, item._2)
     val keys = ost.keys()
     val str = keys.mkString
@@ -182,19 +182,19 @@ class RedBlackSymbolTableSuite extends FlatSpec with BeforeAndAfter with Private
   }
 
   it should "min" in {
-    val ost = new RedBlackSymbolTable[Char, Int]()(Ordering.Char)
+    val ost = new RedBlackBST[Char, Int]()(Ordering.Char)
     for (item <- testInput) ost.put(item._1, item._2)
     assert(ost.min === 'A')
   }
 
   it should "max" in {
-    val ost = new RedBlackSymbolTable[Char, Int]()(Ordering.Char)
+    val ost = new RedBlackBST[Char, Int]()(Ordering.Char)
     for (item <- testInput) ost.put(item._1, item._2)
     assert(ost.max === 'X')
   }
 
   it should "delete" in {
-    val ost = new RedBlackSymbolTable[Char, Int]()(Ordering.Char)
+    val ost = new RedBlackBST[Char, Int]()(Ordering.Char)
     for (item <- testInput) ost.put(item._1, item._2)
     assert(ost.contains('S') === true)
     ost.delete('S')
@@ -207,7 +207,7 @@ class RedBlackSymbolTableSuite extends FlatSpec with BeforeAndAfter with Private
   }
 
   it should "deleteMin" in {
-    val ost = new RedBlackSymbolTable[Char, Int]()(Ordering.Char)
+    val ost = new RedBlackBST[Char, Int]()(Ordering.Char)
     for (item <- testInput) ost.put(item._1, item._2)
     assert(ost.get('M') === Some(63))
     ost.deleteMin
@@ -223,7 +223,7 @@ class RedBlackSymbolTableSuite extends FlatSpec with BeforeAndAfter with Private
     assert(str === "BCEHIJKLMNOPQRSTUX")
   }
   it should "deleteMax" in {
-    val ost = new RedBlackSymbolTable[Char, Int]()(Ordering.Char)
+    val ost = new RedBlackBST[Char, Int]()(Ordering.Char)
     for (item <- testInput) ost.put(item._1, item._2)
     ost.deleteMax
     assert(ost.get('X') === None)

@@ -1,14 +1,11 @@
 package org.gs.digraph
 /**
- * @see http://algs4.cs.princeton.edu/44sp/tinyDG.txt
- * @see http://algs4.cs.princeton.edu/42directed/tinyDAG.txt
+ * @see http://algs4.cs.princeton.edu/41undirected/routes.txt
  */
 import org.scalatest.FlatSpec
 import org.junit.runner.RunWith
-import scala.collection.mutable.Queue
 import org.scalatest.junit.JUnitRunner
 import org.gs.digraph.fixtures.SymbolDigraphBuilder
-import org.gs.digraph.fixtures.DigraphBuilder
 /**
  * @author Gary Struthers
  *
@@ -19,7 +16,6 @@ class SymbolDigraphSuite extends FlatSpec {
   
   it should "have edges" in new SymbolDigraphBuilder {
     val d = buildSymbolGraph("http://algs4.cs.princeton.edu/41undirected/routes.txt", "\\s+")
-    println(d.g.e)
     val size = d.keys.size
     for(v <- 0 until size) println(s"index:$v key${d.name(v)} contains:${d.contains(d.name(v))} index:${d.index(d.name(v))}")
     

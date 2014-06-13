@@ -5,9 +5,7 @@ package org.gs.digraph
  */
 import org.scalatest.FlatSpec
 import org.junit.runner.RunWith
-import scala.collection.mutable.Queue
 import org.scalatest.junit.JUnitRunner
-import org.gs.digraph.fixtures.SymbolDigraphBuilder
 import org.gs.digraph.fixtures.DigraphBuilder
 /**
  * @author Gary Struthers
@@ -15,142 +13,19 @@ import org.gs.digraph.fixtures.DigraphBuilder
  */
 @RunWith(classOf[JUnitRunner])
 class DigraphSuite extends FlatSpec {
-
-/*  
-  trait DigraphBuilder {
-    val tinyDAGdata = Array[(Int, Int)]((2, 3), (0, 6), (0, 1), (2, 0), (11, 12), (9, 12),
-      (9, 10), (9, 11), (3, 5), (8, 7), (5, 4), (0, 5), (6, 4), (6, 9), (7, 6))
-    var tinyDAG = new Digraph(13)
-    for (t <- tinyDAGdata) tinyDAG.addEdge(t._1, t._2)
-
-    val tinyDGdata = Array[(Int, Int)]((4, 2), (2, 3), (3, 2), (6, 0), (0, 1), (2, 0),
-      (11, 12), (12, 9), (9, 10), (9, 11), (7, 9), (10, 12), (11, 4), (4, 3), (3, 5),
-      (6, 8), (8, 6), (5, 4), (0, 5), (6, 4), (6, 9), (7, 6))
-
-    var tinyDG = new Digraph(13)
-    for (t <- tinyDGdata) tinyDG.addEdge(t._1, t._2)
-
-    val equals = (_: Int) == (_: Int)
-    
-    var tinyEWDAG = new EdgeWeightedDigraph(13)
+  behavior of "a Digraph"
+  it should "build a Digraph" in new DigraphBuilder {
+    assert(tinyDAG.adj.flatten.corresponds(List(5,1,6,0,3,5,4,9,4,6,7,11,10,12,12))(equals))
+    assert(tinyDG.adj.flatten.corresponds(List(5,1,0,3,5,2,3,2,4,9,4,8,0,6,9,6,11,10,12,4,12,9))
+        (equals))
   }
-*/  
+  
+  it should "reverse a Digraph" in new DigraphBuilder {
+    val reversedDAG = tinyDAG.reverse
+    assert(reversedDAG.adj.flatten.corresponds(List(2,0,2,6,5,3,0,7,0,8,6,9,9,11,9))(equals))
 
-  behavior of "a DepthFirstDirectedPaths"
-  it should "find paths from source vertex to end vertex" in new DigraphBuilder {
-    val from3 = new DepthFirstDirectedPaths(tinyDG, 3)
-    assert(from3.pathTo(0).corresponds(List(3, 5, 4, 2, 0))(equals))
-    assert(from3.pathTo(1).corresponds(List(3, 5, 4, 2, 0, 1))(equals))
-    assert(from3.pathTo(2).corresponds(List(3, 5, 4, 2))(equals))
-    assert(from3.pathTo(3).corresponds(List(3))(equals))
-    assert(from3.pathTo(4).corresponds(List(3, 5, 4))(equals))
-    assert(from3.pathTo(5).corresponds(List(3, 5))(equals))
+    val reversedDG = tinyDG.reverse
+    assert(reversedDG.adj.flatten.corresponds(List(6,2,0,4,3,4,2,11,6,5,3,0,8,7,6,12,7,6,9,9,11,10))
+        (equals))
   }
-
-  it should "find absent paths from source vertex to end vertex" in new DigraphBuilder {
-    val from3 = new DepthFirstDirectedPaths(tinyDG, 3)
-    assert(from3.hasPathTo(6) === false)
-    assert(from3.hasPathTo(7) === false)
-    assert(from3.hasPathTo(8) === false)
-    assert(from3.hasPathTo(9) === false)
-    assert(from3.hasPathTo(10) === false)
-    assert(from3.hasPathTo(11) === false)
-    assert(from3.hasPathTo(12) === false)
-  }
-
-  behavior of "a BreadthFirstDirectedPaths"
-  it should "find paths from source vertex to end vertex" in new DigraphBuilder {
-    val fromZero = new BreadthFirstDirectedPaths(tinyDG, 0)
-    assert((fromZero.pathTo(4)).corresponds(List(0, 5, 4))(equals))
-    val from3 = new BreadthFirstDirectedPaths(tinyDG, 3)
-    assert(from3.pathTo(0).corresponds(List(3, 2, 0))(equals))
-    assert(from3.pathTo(1).corresponds(List(3, 2, 0, 1))(equals))
-    //@FIXME assert(from3.distTo(1) === 2)
-    assert(from3.pathTo(2).corresponds(List(3, 2))(equals))
-    assert(from3.pathTo(3).corresponds(List(3))(equals))
-    assert(from3.pathTo(4).corresponds(List(3, 5, 4))(equals))
-    assert(from3.pathTo(5).corresponds(List(3, 5))(equals))
-    //@FIXME   assert(from3.hasPathTo(1) === true)
-    //assert((from3.pathTo(6)).mkString(",") === "3") //@FIXME
-    val from7 = new BreadthFirstDirectedPaths(tinyDG, 7)
-    assert(from7.pathTo(4).corresponds(List(7, 6, 4))(equals))
-    val from9 = new BreadthFirstDirectedPaths(tinyDG, 9)
-    assert(from9.pathTo(4).corresponds(List(9, 11, 4))(equals)) //@FIXME,2,0")
-  }
-
-  it should "find absent paths from source vertex to end vertex" in new DigraphBuilder {
-    val fromZero = new BreadthFirstDirectedPaths(tinyDG, 0)
-    assert((fromZero.pathTo(4)).corresponds(List(0, 5, 4))(equals))
-    val from3 = new BreadthFirstDirectedPaths(tinyDG, 3)
-    assert(from3.hasPathTo(6) === false)
-    assert(from3.hasPathTo(7) === false)
-    assert(from3.hasPathTo(8) === false)
-    assert(from3.hasPathTo(9) === false)
-    assert(from3.hasPathTo(10) === false)
-    assert(from3.hasPathTo(11) === false)
-    assert(from3.hasPathTo(12) === false)
-  }
-
-  it should "find distances from source vertex to end vertex" in new DigraphBuilder {
-    val from0 = new BreadthFirstDirectedPaths(tinyDG, 0)
-    assert(from0.distTo(4) === 2)
-    val from3 = new BreadthFirstDirectedPaths(tinyDG, 3)
-    assert(from3.distTo(0) === 2)
-    //@FIXME assert(from3.distTo(1) === 2)
-    assert(from3.distTo(2) === 1)
-    assert(from3.distTo(3) === 0)
-    assert(from3.distTo(4) === 2)
-    assert(from3.distTo(5) === 1)
-    val from7 = new BreadthFirstDirectedPaths(tinyDG, 7)
-    assert(from7.distTo(4) === 2)
-    val from9 = new BreadthFirstDirectedPaths(tinyDG, 9)
-    assert(from9.distTo(4) === 2)
-  }
-
-  behavior of "a DepthFirstOrder"
-  it should "find pre-order of a Digraph" in new DigraphBuilder {
-    val dfo = new DepthFirstOrder(tinyDAG)
-    assert(dfo.preOrder.corresponds(List(0, 5, 4, 1, 6, 9, 11, 12, 10, 2, 3, 7, 8))(equals))
-    val dfoDG = new DepthFirstOrder(tinyDG)
-    assert(dfoDG.preOrder.corresponds(List(0, 5, 4, 3, 2, 1, 6, 9, 11, 12, 10, 8, 7))(equals))
-  }
-
-  it should "find post-order of a Digraph" in new DigraphBuilder {
-    val dfo = new DepthFirstOrder(tinyDAG)
-    assert(dfo.postOrder.corresponds(List(4, 5, 1, 12, 11, 10, 9, 6, 0, 3, 2, 7, 8))(equals))
-    val dfoDG = new DepthFirstOrder(tinyDG)
-    assert(dfoDG.postOrder.corresponds(List(2, 3, 4, 5, 1, 0, 12, 11, 10, 9, 8, 6, 7))(equals))
-  }
-
-  it should "find reverse post-order of a Digraph" in new DigraphBuilder {
-    val dfo = new DepthFirstOrder(tinyDAG)
-    assert(dfo.reversePost.corresponds(List(8, 7, 2, 3, 0, 6, 9, 10, 11, 12, 1, 5, 4))(equals))
-    val dfoDG = new DepthFirstOrder(tinyDG)
-    assert(dfoDG.reversePost.corresponds(List(7, 6, 8, 9, 10, 11, 12, 0, 1, 5, 4, 3, 2))(equals))
-  }
-/*  
-  behavior of "a EdgeWeightedDepthFirstOrder"
-  it should "find pre-order of a EdgeWeightedDigraph" in new DigraphBuilder {
-    val dfo = new EdgeWeightedDepthFirstOrder(tinyDAG)
-    assert(dfo.preOrder.corresponds(List(0, 5, 4, 1, 6, 9, 11, 12, 10, 2, 3, 7, 8))(equals))
-    val dfoDG = new EdgeWeightedDepthFirstOrder(tinyDG)
-    assert(dfoDG.preOrder.corresponds(List(0, 5, 4, 3, 2, 1, 6, 9, 11, 12, 10, 8, 7))(equals))
-  }
-
-  it should "find post-order of a EdgeWeightedDigraph" in new DigraphBuilder {
-    val dfo = new EdgeWeightedDepthFirstOrder(tinyDAG)
-    assert(dfo.postOrder.corresponds(List(4, 5, 1, 12, 11, 10, 9, 6, 0, 3, 2, 7, 8))(equals))
-    val dfoDG = new EdgeWeightedDepthFirstOrder(tinyDG)
-    assert(dfoDG.postOrder.corresponds(List(2, 3, 4, 5, 1, 0, 12, 11, 10, 9, 8, 6, 7))(equals))
-  }
-
-  it should "find reverse post-order of a EdgeWeightedDigraph" in new DigraphBuilder {
-    val dfo = new EdgeWeightedDepthFirstOrder(tinyDAG)
-    assert(dfo.reversePost.corresponds(List(8, 7, 2, 3, 0, 6, 9, 10, 11, 12, 1, 5, 4))(equals))
-    val dfoDG = new EdgeWeightedDepthFirstOrder(tinyDG)
-    assert(dfoDG.reversePost.corresponds(List(7, 6, 8, 9, 10, 11, 12, 0, 1, 5, 4, 3, 2))(equals))
-  }
-*/
-
-
 } 

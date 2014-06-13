@@ -38,7 +38,7 @@ class BreadthFirstPaths(g: Graph, s: Int) {
 
   def distTo(v: Int): Int = _distTo(v)
 
-  def pathTo(v: Int): Option[Seq[Int]] = {
+  def pathTo(v: Int): Option[List[Int]] = {
     val path = ListBuffer[Int]()
     if (!hasPathTo(v)) None else {
       def loop(x: Int): Unit = {
@@ -50,8 +50,7 @@ class BreadthFirstPaths(g: Graph, s: Int) {
         path.prepend(v)
       }
       loop(v)
-      Some(path)
+      Some(path.toList)
     }
-
   }
 }

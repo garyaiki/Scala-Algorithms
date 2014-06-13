@@ -15,7 +15,7 @@ class Topological[A <: DigraphMarker](g: A) {
     case e: EdgeWeightedDigraph => new EdgeWeightedDirectedCycle(e)
   }
   
-  private def createOrder(noCycle: Boolean): Option[Seq[Int]] = {
+  private def createOrder(noCycle: Boolean): Option[List[Int]] = {
     if (noCycle) {
       val dfs = g match {
         case d: Digraph => new DepthFirstOrder(d)
@@ -29,5 +29,5 @@ class Topological[A <: DigraphMarker](g: A) {
 
   def hasOrder(): Boolean = _order != None
 
-  def order(): Option[Seq[Int]] = _order 
+  def order(): Option[List[Int]] = _order 
 }

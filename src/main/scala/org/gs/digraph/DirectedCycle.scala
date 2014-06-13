@@ -11,7 +11,7 @@ import scala.annotation.tailrec
  */
 class DirectedCycle(g: Digraph) extends BaseDirectedCycle[Int](g.v) {
   
-  def dfs(v: Int) {
+  protected def dfs(v: Int) {
     onStack(v) = true
     marked(v) = true
 

@@ -9,10 +9,12 @@ package org.gs.digraph
  */
 class DirectedDFS(g: Digraph, sources: Int*) {
   val marked = new Array[Boolean](g.v)
-  var count = 0
+  private var _count = 0
 
+  def count(): Int = _count
+  
   private def dfs(v: Int): Unit = {
-    count += 1
+    _count += 1
     marked(v) = true
     for {
       w <- g.adj(v)

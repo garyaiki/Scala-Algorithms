@@ -80,10 +80,10 @@ class SeparateChainingHashSTSuite extends FlatSpec with BeforeAndAfter with Priv
     assert(keys.mkString === "ACEIKLMOPRSTUX")
   }
 
-  it should "double size" in {
+  it should "resize" in {
     val ost = new SeparateChainingHashST[Char, Int](testInput.length / 10)
-    val oldSize = ost.st.size
+    assert(ost.size === 0)
     for (item <- testInput) ost.put(item._1, item._2)
-    assert(ost.st.size === (oldSize * 2))
+    assert(ost.size === testInput.size)
   }
 }
