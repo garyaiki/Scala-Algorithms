@@ -73,6 +73,7 @@ class TST[A] {
   }
 
   def longestPrefixOf(s: String): Option[String] = {
+    
     def loop(length: Int, x: Option[Node], i: Int): Int = {
       x match {
         case None => length
@@ -103,6 +104,7 @@ class TST[A] {
   }
 
   private def collect(x: Option[Node], prefix: String, q: Queue[String]): Unit = {
+    
     def loop(x: Option[Node], prefix: String): Unit = {
       x match {
         case None =>
@@ -120,11 +122,11 @@ class TST[A] {
     loop(x, prefix)
   }
 
-  def prefixMatch(prefix: String): Seq[String] = {
+  def prefixMatch(prefix: String): List[String] = {
     val q = new Queue[String]
     val x = get(root, prefix, 0)
     x match {
-      case None => q.toSeq
+      case None => q.toList
       case Some(y) => {
         y.value match {
           case None =>
@@ -132,13 +134,14 @@ class TST[A] {
         }
         collect(y.mid, prefix + y.c, q)
         collect(y.right, prefix, q)
-        q.toSeq
+        q.toList
       }
     }
   }
 
-  def wildcardMatch(pat: String): Seq[String] = {
+  def wildcardMatch(pat: String): List[String] = {
     val q = new Queue[String]
+    
     def collect(x: Option[Node], prefix: String, i: Int): Unit = {
       x match {
         case None =>
@@ -154,6 +157,6 @@ class TST[A] {
       }
     }
     collect(root, "", 0)
-    q.toSeq
+    q.toList
   }
 }

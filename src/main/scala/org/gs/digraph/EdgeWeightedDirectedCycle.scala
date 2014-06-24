@@ -9,21 +9,24 @@ import scala.annotation.tailrec
  * @author Gary Struthers
  *
  */
-class EdgeWeightedDirectedCycle(g: EdgeWeightedDigraph) extends BaseDirectedCycle[DirectedEdge](g.v) {
+class EdgeWeightedDirectedCycle(g: EdgeWeightedDigraph) 
+    extends BaseDirectedCycle[DirectedEdge](g.v) {
 
-  def dfs(v: Int): Unit = {
+  protected def dfs(v: Int): Unit = {
     onStack(v) = true
     marked(v) = true
+    
     @tailrec
-    def loopE(es: List[DirectedEdge]): Unit = {
+    def loopEdges(es: List[DirectedEdge]): Unit = {
       es match {
         case e :: xs => {
           search(e)
-          loopE(xs)
+          loopEdges(xs)
         }
         case _ =>
       }
     }
+    
     def search(e: DirectedEdge): Unit = {
       if (!hasCycle) {
         val w = e.to
@@ -32,8 +35,10 @@ class EdgeWeightedDirectedCycle(g: EdgeWeightedDigraph) extends BaseDirectedCycl
           edgeTo(w) = e
           dfs(w)
         } else if (onStack(w)) {
+          
           def traceBack(): Option[List[DirectedEdge]] = {
             _cycle = Some(List[DirectedEdge]())
+            
             @tailrec
             def loop(x: DirectedEdge): Unit = {
               if (x.from != w) {
@@ -51,7 +56,7 @@ class EdgeWeightedDirectedCycle(g: EdgeWeightedDigraph) extends BaseDirectedCycl
       }
     }
     val es = g.adj(v)
-    loopE(es)
+    loopEdges(es)
 
     if (!hasCycle) onStack(v) = false
   }

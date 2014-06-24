@@ -13,7 +13,7 @@ import org.scalatest.junit.JUnitRunner
  *
  */
 @RunWith(classOf[JUnitRunner])
-class AcyclicSuite extends FlatSpec {
+class AcyclicSPSuite extends FlatSpec {
   it should "match expected paths" in new DirectedEdgeBuilder {    
     def expectedPaths() = {
       val paths = new Array[List[DirectedEdge]](tuple._1)
@@ -42,5 +42,4 @@ class AcyclicSuite extends FlatSpec {
       } 
     }
   }
-
 }

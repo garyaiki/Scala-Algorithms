@@ -17,9 +17,7 @@ object LSD {
     for(d <- (w - 1) to 0 by -1) {
       val count = new Array[Int](R + 1)
 
-      for(i <- 0 until N) {
-        count(a(i).charAt(d).toInt + 1) += 1
-      }
+      for(i <- 0 until N) count(a(i).charAt(d).toInt + 1) += 1
 
       for(r <- 0 until R) count(r + 1) += count(r)
 

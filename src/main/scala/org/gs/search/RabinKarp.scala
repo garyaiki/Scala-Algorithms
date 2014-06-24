@@ -12,11 +12,11 @@ import scala.annotation.tailrec
  *
  */
 class RabinKarp(pat: String) {
-  val R = 256
-  val M = pat.length
-  val Q = BigInt.probablePrime(31, new Random()).longValue
-  val RM = precomputeRM(1, 1)
-  val patHash = hash(pat, M)
+  private val R = 256
+  private val M = pat.length
+  private val Q = BigInt.probablePrime(31, new Random()).longValue
+  private val RM = precomputeRM(1, 1)
+  private val patHash = hash(pat, M)
 
   @tailrec
   private def precomputeRM(i: Int, rm: Long): Long = {
@@ -24,6 +24,7 @@ class RabinKarp(pat: String) {
   }
 
   private def hash(key: String, M: Int): Long = {
+
     @tailrec
     def loop(h: Long, j: Int): Long = {
       if (j < M) loop((R * h + key.charAt(j)) % Q, j + 1) else h
@@ -37,6 +38,7 @@ class RabinKarp(pat: String) {
     val N = txt.length
     var txtHash = hash(txt, M)
     if(patHash == txtHash) 0 else {
+
       @tailrec
       def loop(i: Int): Int = {
         if(i < N) {
@@ -51,4 +53,3 @@ class RabinKarp(pat: String) {
     }
   }
 }
-

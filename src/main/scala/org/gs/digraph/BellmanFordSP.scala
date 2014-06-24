@@ -18,7 +18,7 @@ class BellmanFordSP(g: EdgeWeightedDigraph, s: Int) {
   private val onQueue = Array.fill[Boolean](g.v)(false)
   private val queue = new Queue[Int]()
   private var cost = 0
-  private var cycle = null.asInstanceOf[Seq[DirectedEdge]]
+  private var cycle = null.asInstanceOf[List[DirectedEdge]]
   private def getEdgeTo(v: Int): DirectedEdge = edgeTo(v)
   _distTo(s) = 0.0
   queue.enqueue(s)
@@ -34,11 +34,9 @@ class BellmanFordSP(g: EdgeWeightedDigraph, s: Int) {
   }
   loop
 
-  def hasNegativeCycle(): Boolean = {
-    cycle != null
-  }
+  def hasNegativeCycle(): Boolean = cycle != null
 
-  def negativeCycle(): Seq[DirectedEdge] = cycle
+  def negativeCycle(): List[DirectedEdge] = cycle
 
   private def findNegativeCycle(): Unit = {
     val spt = new EdgeWeightedDigraph(edgeTo.length)
@@ -48,7 +46,10 @@ class BellmanFordSP(g: EdgeWeightedDigraph, s: Int) {
     } spt.addEdge(edgeTo(v))
 
     val finder = new EdgeWeightedDirectedCycle(spt)
-    cycle = finder.cycle.get//@FIXME
+    finder.cycle match {
+      case Some(x) => cycle = x
+      case _ =>
+    }
   }
 
   private def relax(v: Int): Unit = {
@@ -76,10 +77,11 @@ class BellmanFordSP(g: EdgeWeightedDigraph, s: Int) {
 
   def hasPathTo(v: Int): Boolean = _distTo(v) < Double.PositiveInfinity
 
-  def pathTo(v: Int): Option[Seq[DirectedEdge]] = {
+  def pathTo(v: Int): Option[List[DirectedEdge]] = {
     require(!hasNegativeCycle, s"negative cycle from $s to $v")
     if(!hasPathTo(v)) None else {
       val path = new ListBuffer[DirectedEdge]()
+      
       @tailrec
       def loop(e: DirectedEdge) {
         if(e != null) {
@@ -88,7 +90,7 @@ class BellmanFordSP(g: EdgeWeightedDigraph, s: Int) {
         }
       }
       loop(edgeTo(v))
-      Some(path.toSeq)
+      Some(path.toList)
     }
   }
 }

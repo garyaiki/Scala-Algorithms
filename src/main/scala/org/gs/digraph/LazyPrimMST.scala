@@ -26,7 +26,7 @@ class LazyPrimMST(g: EdgeWeightedGraph) {
 
   def weight(): Double = _weight
 
-  def edges(): Seq[Edge] = mst.toSeq
+  def edges(): List[Edge] = mst.toList
 
   private def scan(v: Int) {
     require(!marked(v), s"v:$v is already marked")
@@ -66,7 +66,6 @@ class LazyPrimMST(g: EdgeWeightedGraph) {
     loop
   }
 
-  import scala.util.control.Breaks._
   /**
    * This function only used for test. It's in the class to keep "mst" private and
    * "g" hidden from companion object

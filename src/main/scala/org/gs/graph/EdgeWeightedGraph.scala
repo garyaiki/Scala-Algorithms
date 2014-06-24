@@ -26,7 +26,7 @@ class EdgeWeightedGraph(v: Int) extends BaseEdgeWeightedGraph[Edge](v) {
     e += 1
   }
 
-  def edges(): Seq[Edge] = {
+  def edges(): List[Edge] = {
     val list = ListBuffer[Edge]()
     def addEdgesAndSelfLoops(vV: Int) {
       var selfLoops = 0
@@ -43,6 +43,6 @@ class EdgeWeightedGraph(v: Int) extends BaseEdgeWeightedGraph[Edge](v) {
     for {
       vV <- 0 until v
     } addEdgesAndSelfLoops(vV)
-    list.toSeq
+    list.toList
   }
 }

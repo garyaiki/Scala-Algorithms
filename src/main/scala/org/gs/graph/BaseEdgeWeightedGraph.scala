@@ -13,19 +13,19 @@ import scala.collection.mutable.ListBuffer
  */
 abstract class BaseEdgeWeightedGraph[A <: BaseEdge](val v: Int) {
   require(v >= 0, s"Number of vertices, v:$v must be nonnegative")
-  var e = 0
-  val adj = Array.fill[List[A]](v)(List[A]())
+  protected[gs] var e = 0
+  protected[gs] val adj = Array.fill[List[A]](v)(List[A]())
 
   protected def buildADJ[U <: BaseEdgeWeightedGraph[A]](g: U): Unit = {
     e = g.e
 
     for {
       v <- 0 until g.v
-      reverse = ListBuffer[A]()
+      reverse = List[A]()
     } {
       for {
         e <- g.adj(v)
-      } reverse.prepend(e)
+      } e :: reverse
       for {
         er <- reverse
       } adj(v) = er :: adj(v)
@@ -39,12 +39,12 @@ abstract class BaseEdgeWeightedGraph[A <: BaseEdge](val v: Int) {
     }
   }
 
-  def edgesOnVertex(eV: Int): Seq[A] = {
+  def edgesOnVertex(eV: Int): List[A] = {
     require(rangeGuard(eV), s"verticies eV:$eV  not in 0..$v ")
-    adj(eV).toSeq
+    adj(eV)
   }
 
-  def edges():Seq[A]
+  def edges():List[A]
 
   override def toString(): String = {
     val lf = sys.props("line.separator")

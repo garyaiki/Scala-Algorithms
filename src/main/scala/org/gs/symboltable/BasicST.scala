@@ -17,16 +17,4 @@ class BasicSymbolTable[T, U]() {
   def size(): Int = ???
   def keys(): Seq[T] = ???
 }
-/*
-class FrequencyCounter[T, Int](keys: List[T]) {
-  val st = new BasicSymbolTable[T, Int]
 
-  private def countKeys(k: T): Unit = {
-    val count: Int = st.get(k).getOrElse(0)
-    st.put(k, (count + 1))
-  }
-  keys.foreach(countKeys(_))
-  def getMax(): Int = ???
-}
-*
-*/

@@ -52,14 +52,14 @@ class PrimMST(g: EdgeWeightedGraph) {
     loop
   }
 
-  def edges(): Seq[Edge] = {
+  def edges(): List[Edge] = {
     val mst = new Queue[Edge]()
     val length = edgeTo.length
     for (v <- 0 until length) {
       val e = edgeTo(v)
       if (e != null) mst.enqueue(e)
     }
-    mst.toSeq
+    mst.toList
   }
 
   def weight(): Double = edges.foldLeft(0.0)(_ + _.weight)

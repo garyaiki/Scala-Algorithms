@@ -61,7 +61,7 @@ trait SymbolTableBuilder {
     } buf += s
 
     val kvs = buf.zipWithIndex
-    TreeMap[String, Int](kvs:_*)
+    TreeMap[String, Int](kvs: _*)
   }
 
   def invertIndexKeys(st: TreeMap[String, Int]) = {
@@ -95,7 +95,8 @@ trait WordArrayBuilder extends BufferedSourceBuilder {
   }
 }
 trait IntArrayBuilder extends BufferedSourceBuilder {
-
+  val equals = (_: Int) == (_: Int)
+  
   def readFileToArray(buffSource: BufferedSource): ArrayBuffer[Int] = {
     val savedLines = new ArrayBuffer[Int]()
     val it = buffSource.getLines

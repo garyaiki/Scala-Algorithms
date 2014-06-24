@@ -12,10 +12,10 @@ import org.gs.queue.IndexMinPQ
  */
 class DijkstraSP(g: EdgeWeightedDigraph, s: Int) {
   require(g.edges.forall(_.weight >= 0))
-  val distTo = Array.fill[Double](g.v)(Double.PositiveInfinity)
+  private[digraph] val distTo = Array.fill[Double](g.v)(Double.PositiveInfinity)
   distTo(s) = 0.0
-  val edgeTo = new Array[DirectedEdge](g.v)
-  val pq = new IndexMinPQ[Double](g.v)
+  private[digraph] val edgeTo = new Array[DirectedEdge](g.v)
+  private val pq = new IndexMinPQ[Double](g.v)
   relaxVertices
 
   private def relaxVertices() {

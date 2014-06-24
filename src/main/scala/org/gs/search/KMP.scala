@@ -10,10 +10,11 @@ import scala.annotation.tailrec
  *
  */
 class KMP(pattern: Array[Char], R: Int = 256) {
-  val M = pattern.length
-  val dfa = Array.ofDim[Int](R, M)
+  private val M = pattern.length
+  private val dfa = Array.ofDim[Int](R, M)
   dfa(pattern(0))(0) = 1
-  var X = 0
+  private var X = 0
+  
   for{
     j <- 1 until M
     c <- 0 until R
@@ -26,12 +27,14 @@ class KMP(pattern: Array[Char], R: Int = 256) {
   def search(text: Array[Char]): Int = {
     val M = pattern.length
     val N = text.length
+
     @tailrec
     def loop(i: Int, j: Int): (Int, Int) = {
       if(i < N && j < M) {
         loop(i + 1, dfa(text(i))(j))
       } else (i, j)
     }
+
     val tuple = loop(0, 0)
     if(tuple._2 == M) tuple._1 -M else N
   }

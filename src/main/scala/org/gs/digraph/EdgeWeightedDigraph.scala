@@ -22,13 +22,13 @@ class EdgeWeightedDigraph(v: Int) extends BaseEdgeWeightedGraph[DirectedEdge](v)
     e += 1//e + 1
   }
 
-  def edges(): Seq[DirectedEdge] = {
+  def edges(): List[DirectedEdge] = {
     val list = ListBuffer[DirectedEdge]()
     for {
       vV <- 0 until v
       e <- adj(vV)
     } list.+=(e)
-    list.toSeq
+    list.toList
   }
 
   def outdegree(v: Int): Int = {

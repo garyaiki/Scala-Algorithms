@@ -10,14 +10,14 @@ import scala.annotation.tailrec
  *
  */
 class BreadthFirstDirectedPaths(g: Digraph, s: Int) {
-  val marked = Array.fill[Boolean](g.v)(false)
-  val edgeTo = new Array[Int](g.v)
-  val distTo = Array.fill[Int](g.v)(Int.MaxValue)
+  private val marked = Array.fill[Boolean](g.v)(false)
+  private val edgeTo = new Array[Int](g.v)
+  private val _distTo = Array.fill[Int](g.v)(Int.MaxValue)
 
   private def bfs(s: Int) {
     val q = new Queue[Int]()
     marked(s) = true
-    distTo(s) = 0
+    _distTo(s) = 0
     q.enqueue(s)
     for {
       dq <- q
@@ -25,7 +25,7 @@ class BreadthFirstDirectedPaths(g: Digraph, s: Int) {
       if !(marked(w))
     } {
       edgeTo(w) = dq
-      distTo(w) = distTo(dq) + 1
+      _distTo(w) = _distTo(dq) + 1
       marked(w) = true
       q.enqueue(w)
     }
@@ -34,17 +34,15 @@ class BreadthFirstDirectedPaths(g: Digraph, s: Int) {
 
   def hasPathTo(v: Int): Boolean = marked(v)
 
-  def distance(v: Int): Int = distTo(v)
+  def distTo(v: Int): Int = _distTo(v)
 
-  def pathTo(v: Int): Seq[Int] = {
-    var pathStack = List[Int]()
+  def pathTo(v: Int): List[Int] = {
     @tailrec
-    def loop(x: Int): Int = {
-      if(distTo(x) == 0) x else {
-        pathStack = x :: pathStack
-        loop(edgeTo(x))
+    def loop(x: Int, xs: List[Int]): List[Int] = {
+      if (_distTo(x) == 0) x :: xs else {
+        loop(edgeTo(x), x :: xs)
       }
     }
-    (loop(v) :: pathStack).toSeq
+    loop(v, List[Int]())
   }
 }

@@ -9,7 +9,7 @@ package org.gs.digraph
  *
  */
 class DijkstraAllPairsSP(g: EdgeWeightedDigraph) {
-  val all = for (v <- 0 until g.v) yield new DijkstraSP(g, v)
+  private val all = for (v <- 0 until g.v) yield new DijkstraSP(g, v)
 
   def path(s: Int, t: Int): Option[List[DirectedEdge]] = all(s).pathTo(t)
 

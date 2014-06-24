@@ -20,8 +20,10 @@ object Quick3String {
 
   private def sort(s: Array[String], lo: Int, hi: Int, d: Int): Unit = {
     def insertion() {
+      
       @tailrec
       def loopI(i: Int): Unit = {
+        
         @tailrec
         def loopJ(j: Int): Unit = {
           if (j > lo && less(s(j), s(j - 1))) {
@@ -29,11 +31,13 @@ object Quick3String {
             loopJ(j - 1)
           }
         }
+        
         if (i <= hi) {
           loopJ(i)
           loopI(i + 1)
         }
       }
+      
       loopI(lo)
     }
 
@@ -46,6 +50,7 @@ object Quick3String {
     def less(v: String, w: String): Boolean = {
       assert(v.substring(0, d).equals(w.substring(0, d)))
       val x = min(v.length, w.length)
+      
       @tailrec
       def loop(i: Int): Boolean = {
         if(i < x) {
@@ -64,6 +69,7 @@ object Quick3String {
 
     if (hi <= lo + Cutoff) insertion() else {
       val v = charAt(s(lo))
+      
       @tailrec
       def loop(lt: Int, gt: Int, i: Int): (Int, Int, Int) = {
         if (i <= gt) {
@@ -77,6 +83,7 @@ object Quick3String {
           } else loop(lt, gt, i + 1)
         } else (lt, gt, i)
       }
+      
       val tuple = loop(lo, hi, lo + 1)
       sort(s, lo, tuple._1, d)
       if(v >= 0) sort(s, tuple._1, tuple._2, d + 1)
