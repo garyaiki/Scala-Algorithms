@@ -12,6 +12,7 @@ import scala.annotation.tailrec
  */
 class FordFulkerson(g: FlowNetwork, s: Int, t: Int) {
   private val Epsilon = 1e-11
+  
   private def rangeGuard(x: Int): Boolean = {
     x match {
       case x if 0 until g.v contains x => true
@@ -33,10 +34,12 @@ class FordFulkerson(g: FlowNetwork, s: Int, t: Int) {
     def capacityGuard(e: FlowEdge): Boolean = {
       if ((e.flow < -Epsilon) || (e.flow > e.capacity + Epsilon)) false else true
     }
+    
     @tailrec
     def checkCapacityConstraints(v: Int): Boolean = {
       if (v < g.v) {
         val es = g.adj(v)
+        
         @tailrec
         def checkEdgeCapacityConstraints(es: List[FlowEdge]): Boolean = {
           es match {
@@ -56,6 +59,7 @@ class FordFulkerson(g: FlowNetwork, s: Int, t: Int) {
     def lessThanSinkExcess(): Boolean = {
       if (abs(_value - excess(t)) > Epsilon) false else true
     }
+    
     @tailrec
     def loopVNetFlow(v: Int): Boolean = {
       if (v < g.v) {
@@ -71,6 +75,7 @@ class FordFulkerson(g: FlowNetwork, s: Int, t: Int) {
     val edgeTo = new Array[FlowEdge](g.v)
     val marked = Array.fill[Boolean](g.v)(false)
     marked(s) = true
+    
     @tailrec
     def loopQ(q: Queue[Int]): Unit = {
       if (!q.isEmpty) {
@@ -88,9 +93,11 @@ class FordFulkerson(g: FlowNetwork, s: Int, t: Int) {
         loopQ(q)
       }
     }
+    
     loopQ(Queue[Int](s))
     if (marked(t)) (Some(edgeTo), marked) else (None, marked)
   }
+  
   @tailrec
   private def onAugmentedPath(prevPath: Option[Array[FlowEdge]], prevMarked: Array[Boolean]): (Option[Array[FlowEdge]], Array[Boolean]) = {
     hasAugmentingPath match {
@@ -152,7 +159,7 @@ object FordFulkerson {
     val ff = new FordFulkerson(g, s, t)
 
     def check(): Boolean = {
-      if (ff.isFeasible && ff.inCut(s) && ff.inCut(t)) true /*{
+      if (ff.isFeasible && ff.inCut(s) && ff.inCut(t)) true /*{@FIXME
 
         val mincutValues = for {
           v <- 0 until g.v

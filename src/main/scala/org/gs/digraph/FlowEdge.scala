@@ -1,5 +1,5 @@
 /**
- *
+ * @see http://algs4.cs.princeton.edu/64maxflow/FlowEdge.java.html
  */
 package org.gs.digraph
 

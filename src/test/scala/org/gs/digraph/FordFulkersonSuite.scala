@@ -25,7 +25,9 @@ class FordFulkersonSuite extends FlatSpec {
 
     for (ed <- tuple._3) g.addEdge(ed)
     assert(g.edges.toSet.size === tuple._2)
+    
     val maxflow = FordFulkerson(g, 0, tuple._1 - 1).get
+    
     def testMinCut(ff: FordFulkerson): Unit = {//@FIXME
       val minCut = for {
         v <- 0 until g.v
