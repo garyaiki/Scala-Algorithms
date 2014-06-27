@@ -6,6 +6,12 @@ package org.gs.queue
  * @see http://algs4.cs.princeton.edu/13stacks/Queue.java.html
  */
 
+/**
+ * Immutable interface for hidden Queue implementation
+ * @author Gary Struthers
+ *
+ * @param <T>
+ */
 trait Queue[T] {
   def head: T
   def tail: Queue[T]
@@ -15,8 +21,18 @@ trait Queue[T] {
 
 object Queue {
 
-  def apply[T](xs: T*): Queue[T] = new QueueImpl[T](xs.toList, Nil)
-
+/**
+ * @param xs a variable number of objects of type T
+ * @return an initialized Queue companion object
+ * @see QueueSuite for usage
+ */
+def apply[T](xs: T*): Queue[T] = new QueueImpl[T](xs.toList, Nil)
+  /*
+   * To Enqueue in constant time prepend to the trailing list
+   * To Dequeue in constant time take the head of the leading list. If leading is empty, reverse
+   * trailing and assign it to head. The cost of reversing is amortized. After taking head, tail is
+   * the remaining Queue
+   */
   private class QueueImpl[T] (
     val leading: List[T],
     val trailing: List[T]) extends Queue[T] {
