@@ -11,7 +11,7 @@ import scala.reflect.ClassTag
 /**
  * @author Gary Struthers
  *
- * @param <A> elements are generic and ordered
+ * @param <A> elements are generic and ordered ClassTag preserves Array type at runtime
  */
 class QuickX[A: ClassTag](implicit ord: A => Ordered[A]) {
 
@@ -20,6 +20,7 @@ class QuickX[A: ClassTag](implicit ord: A => Ordered[A]) {
     a.toArray
   }
 
+  /** exchange xs(i) and xs(j) */
   def exchange(i: Int, j: Int, xs: Array[A]) {
     val iVal = xs(j)
     val jVal = xs(i)
@@ -27,6 +28,10 @@ class QuickX[A: ClassTag](implicit ord: A => Ordered[A]) {
     xs.update(j, jVal)
   }
 
+  /**
+   * Insertion sort is faster when partition or array has fewer elements than 10
+   * Exchange 2 elements when the one on the left is greater than the one on the right
+   */
   def insertionSort(xs: Array[A]): Unit = {
     var i = 1
     @tailrec
@@ -58,20 +63,36 @@ class QuickX[A: ClassTag](implicit ord: A => Ordered[A]) {
       hi - 1
     }
 
+    /**
+     * Scan from left of array until finding element greater than partition
+     * @param i partition
+     * @param xs array
+     * @return new i index
+     */
     def scanLR(i: Int, xs: Array[A]): Int = {
+      /** stop incrementing when x >= lo */
       def stopInc(x: A): Boolean = x >= xs(lo)
 
+      /** start index */
       def from(): Int = if (lo < i) i else lo + 1
 
       xs.indexWhere(stopInc(_), from)
     }
 
+    /**
+     * Scan from right of array until finding element greater than partition
+     * @param i partition
+     * @param xs array
+     * @return new j index
+     */
     def scanRL(j: Int, xs: Array[A]): Int = {
+      /** stop decrementing when x <= lo */
       def stopDec(x: A) = (x <= xs(lo))
+      
       xs.lastIndexWhere(stopDec(_), j)
     }
 
-    @tailrec
+    @tailrec /** scan both partition, put i, j in order, loop */
     def loop(i: Int, j: Int, xs: Array[A]): Int = {
       val newIJ = (scanLR(i, xs), scanRL(j, xs))
       if (newIJ._1 == newIJ._2) newIJ._2
@@ -97,9 +118,10 @@ class QuickX[A: ClassTag](implicit ord: A => Ordered[A]) {
   }
 
   /**
-   * @param a
-   * @param shuffle
-   * @return
+   * Quicksort recursively partition and sort partions
+   * @param a generic array
+   * @param shuffle optionally shuffle for performance
+   * @return sorted array
    */
   def sort(a: Array[A], shuffle: Boolean = true): Array[A] = {
     val unsorted = if (shuffle) shuffleArrayBuffer(a) else a

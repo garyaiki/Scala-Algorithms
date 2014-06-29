@@ -17,17 +17,17 @@ object Merge {
 
   /**
    * Recursive mergesort
-   * @param xs list of generic type T to sort
+   * @param xs list of generic type A to sort
    * @param ord implicit ordering of type T
    * @return sorted list
    */
-  def msort[T](xs: List[T])(implicit ord: Ordering[T]): List[T] = {
+  def msort[A](xs: List[A])(implicit ord: Ordering[A]): List[A] = {
 
     /** generic is a less than b */
-    def less(a: T, b: T)(implicit ord: Ordering[T]): Boolean = ord.lt(a, b)
+    def less(a: A, b: A)(implicit ord: Ordering[A]): Boolean = ord.lt(a, b)
 
     @tailrec /** prepend smaller element to accumulator then return it when one half is empty */
-    def merge(xs: List[T], ys: List[T], acc: List[T]): List[T] =
+    def merge(xs: List[A], ys: List[A], acc: List[A]): List[A] =
       (xs, ys) match {
         case (Nil, _) => ys.reverse ::: acc
         case (_, Nil) => xs.reverse ::: acc
