@@ -6,27 +6,35 @@ package org.gs.symboltable
 import scala.annotation.tailrec
 
 /**
+ * Hash key to index value, when there is a collision try succeeding indexes insert in empty one
  * @author Gary Struthers
  *
- * @param <T>
- * @param <U>
+ * @param <A> generic key type
+ * @param <B> generic value type
+ * @param initialSize of array
  */
-class LinearProbingHashST[T, U](initialSize: Int) {
+class LinearProbingHashST[A, B](initialSize: Int) {
   private var m = initialSize
   private var n = 0
-  private var st = new Array[(T, U)](m)
+  private var st = new Array[(A, B)](m)
 
-  private def hash(key: T) = (key.hashCode & 0x7fffffff) % m
-  private def chainGet(x: (T, U), key: T) = (x._1 == key)
+  /** turn hash into array index */
+  private def hash(key: A) = (key.hashCode & 0x7fffffff) % m
 
+  private def chainGet(x: (A, B), key: A) = (x._1 == key)
+
+  /** number of key value pairs */
   def size(): Int = n
 
+  /** @return true if zero pairs */
   def isEmpty(): Boolean = size == 0
 
-  def get(key: T): Option[U] = {
+  /** get value for key if it is present */
+  def get(key: A): Option[B] = {
     val i = hash(key)
+    
     @tailrec
-    def loop(j: Int): Option[(T, U)] = {
+    def loop(j: Int): Option[(A, B)] = {
       if (st(j) == null) None else if (key.equals(st(j)._1)) Some(st(j)) else
         loop((j + 1) % m)
     }
@@ -36,28 +44,32 @@ class LinearProbingHashST[T, U](initialSize: Int) {
     }
   }
 
-  def contains(key: T): Boolean = get(key) != None
+  /** @return true if key present */
+  def contains(key: A): Boolean = get(key) != None
 
-  def delete(key: T) {
+  /** delete pair for key if it is present */
+  def delete(key: A) {
     @tailrec
     def find(j: Int): Int = {
       if (key.equals(st(j)._1)) j else
         find(j + 1 % m)
     }
+
     @tailrec
     def rehash(k: Int): Unit = {
       val kv = st(k)
       if (kv != null) {
-        st(k) = null.asInstanceOf[(T, U)]
+        st(k) = null.asInstanceOf[(A, B)]
         n -= 1
         put(kv._1, kv._2)
         rehash((k + 1) % m)
       }
     }
+
     if (contains(key)) {
       val i = hash(key)
       val j = find(i)
-      st(j) = null.asInstanceOf[(T, U)]
+      st(j) = null.asInstanceOf[(A, B)]
       rehash(j)
       n -= 1
       def halveSizeIfEigthFull(): Unit = if (n > 0 && n <= m / 8) resize(m / 2)
@@ -65,13 +77,14 @@ class LinearProbingHashST[T, U](initialSize: Int) {
     }
   }
 
-  def put(key: T, value: U) {
+  /** insert pair, double size if half full */
+  def put(key: A, value: B) {
     if (value == null) delete(key) else {
       def doubleSizeIfHalfFull(): Unit = if (n >= m / 2) {
         resize(m * 2)
       }
       doubleSizeIfHalfFull
-      
+
       def loop(j: Int): Unit = {
         if (st(j) != null) {
           if (key.equals(st(j)._1)) st(j) = (key, value) else
@@ -84,7 +97,7 @@ class LinearProbingHashST[T, U](initialSize: Int) {
   }
 
   private def resize(capacity: Int) {
-    val tmp = new LinearProbingHashST[T, U](capacity)
+    val tmp = new LinearProbingHashST[A, B](capacity)
     for {
       kv <- st
       if (kv != null)
@@ -94,23 +107,23 @@ class LinearProbingHashST[T, U](initialSize: Int) {
   }
 
   import scala.collection.mutable.Queue
-  def keys(): Seq[T] = {
-    val q = Queue[T]()
+  def keys(): List[A] = {
+    val q = Queue[A]()
     for {
       kv <- st
       if (kv != null)
     } q.enqueue(kv._1)
-    q.toSeq
+    q.toList
   }
 
   // debug methods
-  def isLessThanHalfFull():Boolean = (m < 2 * n)
+  def isLessThanHalfFull(): Boolean = (m < 2 * n)
 
-  def allKeysCanBeFound():Boolean = {
-    val q = Queue[T]()
+  def allKeysCanBeFound(): Boolean = {
+    val q = Queue[A]()
     for {
       kv <- st
-      if(get(kv._1) == null)
+      if (get(kv._1) == null)
     } q.enqueue(kv._1)
     if (q.length > 0) false else true
   }

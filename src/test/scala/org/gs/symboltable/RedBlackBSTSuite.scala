@@ -123,7 +123,7 @@ class RedBlackBSTSuite extends FlatSpec with BeforeAndAfter with PrivateMethodTe
     assert(ost.isSizeConsistent, "Subtree counts not consistent")
     assert(ost.isRankConsistent, "Ranks not consistent")
     assert(ost.is23, "Not a 2-3 tree")
-    val str = ost.inorderTreeWalk
+    val str = ost.inorderTreeWalk()
     assert(ost.isBalanced, "Not balanced")
   }
 
