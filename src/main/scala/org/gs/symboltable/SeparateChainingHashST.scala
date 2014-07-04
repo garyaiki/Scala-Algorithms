@@ -18,7 +18,7 @@ class SeparateChainingHashST[A, B](initialSize: Int) {
 
   /** turn hash into array index */
   private def hash(key: A): Int = (key.hashCode & 0x7fffffff) % m
-  
+
   private def chainGet(x: (A, B), key: A): Boolean = (x._1 == key)
 
   /** number of key value pairs */
@@ -75,11 +75,14 @@ class SeparateChainingHashST[A, B](initialSize: Int) {
     st = tmp.st
   }
 
+  /**
+   * @return keys in a list
+   */
   def keys(): List[A] = {
     val q = scala.collection.mutable.Queue[A]()
     for {
       chain <- st
-      if(chain != null)
+      if (chain != null)
       kv <- chain
     } q.enqueue(kv._1)
     q.toList

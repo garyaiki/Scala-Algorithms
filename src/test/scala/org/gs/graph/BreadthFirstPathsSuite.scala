@@ -110,7 +110,7 @@ class BreadthFirstPathsSuite extends FlatSpec {
     assert(from0.distTo(75230) === 2)
     //println(s"marked:${from0.marked(82707)} edgeTo:${from0.edgeTo(82707)} distTo:${from0.distTo(82707)}")
     for {
-      v <- 0 until g.v
+      v <- 0 until g.V
       w <- g.adj(v)
       if (from0.hasPathTo(v))
     } {

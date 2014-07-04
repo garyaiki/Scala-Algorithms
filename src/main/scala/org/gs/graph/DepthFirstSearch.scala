@@ -4,14 +4,18 @@
 package org.gs.graph
 
 /**
+ * Depth first search of a graph
+ * 
+ * Mark a vertex as visited then, recursively visit its adjacent vertices that haven't been marked
  * @author Gary Struthers
- * @param g
- * @param s
+ * @param g [[org.gs.graph.Graph]]
+ * @param s source vertex
  */
 class DepthFirstSearch(g: Graph, s: Int) {
-  val marked = new Array[Boolean](g.v)
+  val marked = new Array[Boolean](g.V)
   private var _count = 0
 
+   /** @return number of vertices connected to s */
   def count(): Int = _count
   
   private def dfs(v: Int): Unit = {

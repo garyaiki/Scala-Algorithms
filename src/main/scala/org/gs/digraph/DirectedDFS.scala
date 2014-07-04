@@ -8,7 +8,7 @@ package org.gs.digraph
  *
  */
 class DirectedDFS(g: Digraph, sources: Int*) {
-  val marked = new Array[Boolean](g.v)
+  val marked = new Array[Boolean](g.V)
   private var _count = 0
 
   def count(): Int = _count

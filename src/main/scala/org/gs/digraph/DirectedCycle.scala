@@ -9,7 +9,7 @@ import scala.annotation.tailrec
  * @author Gary Struthers
  *
  */
-class DirectedCycle(g: Digraph) extends BaseDirectedCycle[Int](g.v) {
+class DirectedCycle(g: Digraph) extends BaseDirectedCycle[Int](g.V) {
   
   protected def dfs(v: Int) {
     onStack(v) = true

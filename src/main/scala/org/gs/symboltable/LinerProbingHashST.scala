@@ -77,7 +77,7 @@ class LinearProbingHashST[A, B](initialSize: Int) {
     }
   }
 
-  /** insert pair, double size if half full */
+  /** insert key value pair, double size if half full */
   def put(key: A, value: B) {
     if (value == null) delete(key) else {
       def doubleSizeIfHalfFull(): Unit = if (n >= m / 2) {
@@ -107,6 +107,9 @@ class LinearProbingHashST[A, B](initialSize: Int) {
   }
 
   import scala.collection.mutable.Queue
+  /**
+   * @return keys in a list
+   */
   def keys(): List[A] = {
     val q = Queue[A]()
     for {

@@ -9,8 +9,8 @@ package org.gs.digraph
  */
 class KosarajuSharirSCC(g: Digraph) {
   val depthFirstOrder = new DepthFirstOrder(g.reverse)
-  val marked = Array.fill[Boolean](g.v)(false)
-  val id = new Array[Int](g.v)
+  val marked = Array.fill[Boolean](g.V)(false)
+  val id = new Array[Int](g.V)
 
   def searchUnmarked(count: Int, rp: List[Int]): Int = {
     rp match {

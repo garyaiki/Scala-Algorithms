@@ -36,7 +36,7 @@ class KosarajuSharirSCCSuite extends FlatSpec {
       components(i) = new Queue[Int]()
     }
     for {
-      v <- 0 until tinyDG.v
+      v <- 0 until tinyDG.V
     } {
       components(scc.id(v)).enqueue(v)
     }
@@ -77,7 +77,7 @@ class KosarajuSharirSCCSuite extends FlatSpec {
       components(i) = new Queue[Int]()
     }
     for {
-      v <- 0 until g.v
+      v <- 0 until g.V
     } {
       components(scc.id(v)).enqueue(v)
     }

@@ -10,9 +10,9 @@ import scala.annotation.tailrec
  *
  */
 class BreadthFirstDirectedPaths(g: Digraph, s: Int) {
-  private val marked = Array.fill[Boolean](g.v)(false)
-  private val edgeTo = new Array[Int](g.v)
-  private val _distTo = Array.fill[Int](g.v)(Int.MaxValue)
+  private val marked = Array.fill[Boolean](g.V)(false)
+  private val edgeTo = new Array[Int](g.V)
+  private val _distTo = Array.fill[Int](g.V)(Int.MaxValue)
 
   private def bfs(s: Int) {
     val q = new Queue[Int]()

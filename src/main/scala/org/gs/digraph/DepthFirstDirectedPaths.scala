@@ -10,8 +10,8 @@ import scala.annotation.tailrec
  *
  */
 class DepthFirstDirectedPaths(g: Digraph, s: Int) {
-  private val marked = new Array[Boolean](g.v)
-  private val edgeTo = new Array[Int](g.v)
+  private val marked = new Array[Boolean](g.V)
+  private val edgeTo = new Array[Int](g.V)
 
   private def dfs(v: Int) {
     marked(v) = true

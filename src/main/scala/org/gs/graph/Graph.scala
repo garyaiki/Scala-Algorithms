@@ -4,13 +4,15 @@
 package org.gs.graph
 
 /**
+ * Undirected graph extends [[org.gs.graph.BaseGraph]]
  * @author Gary Struthers
  * @param v number of vertices
  */
 class Graph(v: Int) extends BaseGraph(v) {
 
-  override def addEdge(aV: Int, otherV: Int): Unit = {
-    super.addEdge(aV, otherV)
-    adj(otherV) = aV :: adj(otherV)
+  /** add edge between vertices v and other then add v to other's adjacency list */ 
+  override def addEdge(v: Int, other: Int): Unit = {
+    super.addEdge(v, other)
+    adj(other) = v :: adj(other)
   }
 }

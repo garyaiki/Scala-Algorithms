@@ -7,7 +7,7 @@ package org.gs.digraph
  * @author Gary Struthers
  *
  */
-class DepthFirstOrder(g: Digraph) extends BaseDepthFirstOrder(g.v){
+class DepthFirstOrder(g: Digraph) extends BaseDepthFirstOrder(g.V){
 
   protected def dfs(v: Int): Unit = {
     marked(v) = true
