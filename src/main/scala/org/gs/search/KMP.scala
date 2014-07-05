@@ -6,7 +6,7 @@ package org.gs.search
 import scala.annotation.tailrec
 
 /**
- * @author Gary Struthers
+ * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  *
  */
 class KMP(pattern: Array[Char], R: Int = 256) {

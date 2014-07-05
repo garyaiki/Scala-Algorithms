@@ -6,7 +6,7 @@ package org.gs.graph
 import scala.collection.mutable.ListBuffer
 
 /**
- * @author Gary Struthers
+ * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  *
  * @param <T> Edge, DirectedEdge
  * @param v number of vertices in EdgeWeightedGraph, EdgeWeightedDigraph

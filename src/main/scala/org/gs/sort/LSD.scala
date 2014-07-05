@@ -4,7 +4,7 @@
 package org.gs.sort
 
 /**
- * @author Gary Struthers
+ * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  *
  */
 object LSD {

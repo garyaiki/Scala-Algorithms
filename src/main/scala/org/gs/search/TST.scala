@@ -7,7 +7,7 @@ import scala.annotation.tailrec
 import scala.collection.mutable.Queue
 
 /**
- * @author Gary Struthers
+ * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  *
  */
 class TST[A] {

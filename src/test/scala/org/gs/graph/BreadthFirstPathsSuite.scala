@@ -84,8 +84,8 @@ class BreadthFirstPathsSuite extends FlatSpec {
 
   // -Xms1g -Xmx2g
   it should "find distances from source to target vertices in largeG.txt" in {
-    val builder = new UnweightedGraphBuilder("http://algs4.cs.princeton.edu/41undirected/largeG.txt")
-    val largeG = builder.graph
+    val gb = new UnweightedGraphBuilder("http://algs4.cs.princeton.edu/41undirected/largeG.txt")
+    val largeG = gb.graph
     val from0 = new BreadthFirstPaths(largeG, 0)
     assert(from0.distTo(0) === 0, s"source:0 v:1 distTo:${from0.distTo(1)}")
     assert(from0.distTo(1) === 418, s"source:0 v:1 distTo:${from0.distTo(1)}")

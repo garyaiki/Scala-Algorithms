@@ -6,7 +6,7 @@ package org.gs.digraph
 import scala.reflect.ClassTag
 
 /**
- * @author Gary Struthers
+ * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  *
  * @param <A> Int or DirectedEdge
  * @param v number of vertices in a Digraph or EdgeWeightedDigraph

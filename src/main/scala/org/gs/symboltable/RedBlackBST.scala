@@ -21,7 +21,7 @@ sealed class Node[A, B](var key: A, var value: B, var count: Int = 1, var red: B
 /**
  * Balanced search tree with Red/Black nodes
  *
- * @author Gary Struthers
+ * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  *
  * @param <A> generic key type
  * @param <U> generic value type

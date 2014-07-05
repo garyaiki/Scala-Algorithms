@@ -9,7 +9,7 @@ import scala.collection.mutable.ArrayBuffer
 
 /**
  * For max value on Q extends [[PriorityQueue]]
- * @author Gary Struthers
+ * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  *
  * @param <A> keys are generic and ordered using [[PriorityQueue.less]]
  * @param pq priority queue array

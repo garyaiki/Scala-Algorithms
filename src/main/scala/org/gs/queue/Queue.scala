@@ -8,7 +8,7 @@ package org.gs.queue
 
 /**
  * Immutable interface for hidden Queue implementation
- * @author Gary Struthers
+ * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  *
  * @param <T>
  */

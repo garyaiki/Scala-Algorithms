@@ -7,7 +7,7 @@ import scala.annotation.tailrec
 import org.gs.queue.IndexMinPQ
 
 /**
- * @author Gary Struthers
+ * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  *
  */
 class DijkstraSP(g: EdgeWeightedDigraph, s: Int) {

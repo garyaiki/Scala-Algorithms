@@ -6,7 +6,7 @@ package org.gs.digraph
 import scala.collection.mutable.ListBuffer
 
 /**
- * @author Gary Struthers
+ * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  *
  */
 class FlowNetwork(val v: Int) {

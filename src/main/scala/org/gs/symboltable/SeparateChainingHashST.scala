@@ -5,7 +5,7 @@ package org.gs.symboltable
 
 /**
  * Hash keys to array index allow for collisions with a list at each index
- * @author Gary Struthers
+ * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  *
  * @param <A> generic key type, its hash code is used
  * @param <B> generic value type

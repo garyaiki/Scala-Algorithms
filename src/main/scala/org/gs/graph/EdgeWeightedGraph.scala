@@ -5,7 +5,7 @@ package org.gs.graph
 
 import scala.collection.mutable.ListBuffer
 /**
- * @author Gary Struthers
+ * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  * @param v number of vertices
  */
 class EdgeWeightedGraph(v: Int) extends BaseEdgeWeightedGraph[Edge](v) {

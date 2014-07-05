@@ -9,7 +9,7 @@ import scala.annotation.tailrec
 import scala.reflect.ClassTag
 
 /**
- * @author Gary Struthers
+ * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  *
  * @param <A> elements are generic and ordered ClassTag preserves Array type at runtime
  */

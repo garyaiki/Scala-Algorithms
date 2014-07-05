@@ -11,7 +11,7 @@ import scala.annotation.tailrec
 
 /**
  *
- * @author Gary Struthers
+ * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  *
  * @param <A> keys are generic and ordered
  * @param pq queue, appends keys

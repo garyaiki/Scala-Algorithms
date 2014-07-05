@@ -11,7 +11,7 @@ import scala.annotation.tailrec
  *
  * Enqueue a vertex that has been marked but its adjacencies haven't been. Then dequeue a vertex and
  * enqueue all its unmarked adjacencies and mark them
- * @author Gary Struthers
+ * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  * @param g [[org.gs.graph.Graph]]
  * @param s source vertex
  */

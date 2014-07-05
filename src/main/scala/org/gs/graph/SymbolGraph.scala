@@ -7,7 +7,7 @@ import scala.collection.immutable.TreeMap
 
 
 /**
- * @author Gary Struthers
+ * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  */
 class SymbolGraph[T <: BaseGraph](st: TreeMap[String, Int], val keys: Array[String], val g: T) {
   def contains(s: String): Boolean = st.contains(s)

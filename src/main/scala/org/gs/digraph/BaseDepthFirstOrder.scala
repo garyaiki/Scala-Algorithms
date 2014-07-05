@@ -6,7 +6,7 @@ package org.gs.digraph
 import scala.collection.mutable.Queue
 
 /**
- * @author Gary Struthers
+ * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  * @param v number of vertices in digraph
  *
  */

@@ -4,7 +4,7 @@
 package org.gs.graph
 
 /**
- * @author Gary Struthers
+ * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  * @ param v edge from vertex
  * @param w edge to vertex
  * @param weight

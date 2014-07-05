@@ -7,7 +7,7 @@ import scala.annotation.tailrec
 
 /**
  * Hash key to index value, when there is a collision try succeeding indexes insert in empty one
- * @author Gary Struthers
+ * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  *
  * @param <A> generic key type
  * @param <B> generic value type

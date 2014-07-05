@@ -10,7 +10,7 @@ import math.Ordering
 import scala.annotation.tailrec
 /**
  * Divide list in 2 then sort each half, recursively
- * @author Gary Struthers
+ * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  *
  */
 object Merge {

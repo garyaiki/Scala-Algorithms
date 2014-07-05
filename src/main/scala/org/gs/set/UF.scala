@@ -7,7 +7,7 @@ import scala.annotation.tailrec
 
 /**
  * Partition points into connected components
- * @author Gary Struthers
+ * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  * @param n number of sites
  * count is the number of components
  * id(i) is the parent of i

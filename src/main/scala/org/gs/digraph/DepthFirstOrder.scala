@@ -4,7 +4,7 @@
 package org.gs.digraph
 
 /**
- * @author Gary Struthers
+ * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  *
  */
 class DepthFirstOrder(g: Digraph) extends BaseDepthFirstOrder(g.V){

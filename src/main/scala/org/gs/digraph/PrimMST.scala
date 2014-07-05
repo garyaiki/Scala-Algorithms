@@ -9,7 +9,7 @@ import org.gs.graph.Edge
 import org.gs.graph.EdgeWeightedGraph
 
 /**
- * @author Gary Struthers
+ * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  * @param g EdgeWeightedGraph
  */
 class PrimMST(g: EdgeWeightedGraph) {

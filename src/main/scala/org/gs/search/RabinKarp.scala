@@ -8,7 +8,7 @@ import scala.util.Random
 import scala.annotation.tailrec
 
 /**
- * @author Gary Struthers
+ * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  *
  */
 class RabinKarp(pat: String) {

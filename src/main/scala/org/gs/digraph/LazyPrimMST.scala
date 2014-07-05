@@ -3,7 +3,7 @@
  */
 package org.gs.digraph
 /**
- * @author Gary Struthers
+ * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  *
  */
 import scala.collection.mutable.ArrayBuffer

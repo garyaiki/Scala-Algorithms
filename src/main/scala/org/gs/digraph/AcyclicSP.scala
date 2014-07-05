@@ -7,7 +7,7 @@ import scala.collection.mutable.ListBuffer
 import scala.annotation.tailrec
 
 /**
- * @author Gary Struthers
+ * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  * @param g acyclic digraph
  * @param s source vertex
  */

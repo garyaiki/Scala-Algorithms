@@ -8,7 +8,7 @@ import scala.math.min
 import scala.util.Random
 /**
  * Sorts an array of strings
- * @author Gary Struthers
+ * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  *
  */
 object Quick3String {

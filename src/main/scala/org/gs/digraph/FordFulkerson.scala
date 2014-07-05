@@ -7,7 +7,7 @@ import scala.math.{ abs, min }
 import scala.collection.mutable.Queue
 import scala.annotation.tailrec
 /**
- * @author Gary Struthers
+ * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  *
  */
 class FordFulkerson(g: FlowNetwork, s: Int, t: Int) {
