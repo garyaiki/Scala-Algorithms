@@ -6,9 +6,21 @@ import org.scalatest.FlatSpec
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import org.gs.fixtures.IntArrayBuilder
+import org.gs.graph.fixtures.UnweightedEdgeBuilder
+
+class UnweightedGraphBuilder(fileURL: String) extends UnweightedEdgeBuilder {
+  private val managedResource = readURI(fileURL)
+  private val tuple = managedResource.loan(readFileToTuple)
+  private val edges = tuple._3
+  private val _graph = new Graph(tuple._1)
+  for (i <- edges) _graph.addEdge(i._1, i._2)
+  val graph = _graph
+}
 
 @RunWith(classOf[JUnitRunner])
 class BreadthFirstPathsSuite extends FlatSpec {
+  val builder = new UnweightedGraphBuilder("http://algs4.cs.princeton.edu/41undirected/tinyCG.txt")
+  val tinyCG = builder.graph
 
   trait ConnectedGraphBuilder {
     val tinyCGdata = Array[(Int, Int)]((0, 5), (2, 4), (2, 3), (1, 2), (0, 1), (3, 4), (3, 5),
@@ -19,104 +31,68 @@ class BreadthFirstPathsSuite extends FlatSpec {
   }
 
   behavior of "a BreadthFirstPaths"
-  it should "distance of 0 from same vertex" in new ConnectedGraphBuilder {
-    for (i <- 0 until tinyCGdata.size) {
+  it should "have zero distance from a vertex to itself" in {
+    for (i <- 0 until tinyCG.V) {
       val g = new BreadthFirstPaths(tinyCG, i)
       assert(g.distTo(i) === 0, s"i:$i distTo itself:${g.distTo(i)}")
     }
-    /*    def showHasPathTo() {
-      for (i <- 0 until tinyCGdata.size) {
-        val g = new BreadthFirstPaths(tinyCG, i)
-        for (j <- 0 until tinyCGdata.size) {
-          println(s"i:$i j:$j hasPathTo:${g.hasPathTo(j)}")
-        }
-      }
-    } */
   }
 
-  it should "each edge v-w dist[w] <= dist[v] + 1 where v reachable from s" in
-    new ConnectedGraphBuilder {
-      for (i <- 0 until tinyCGdata.size) {
-        val g = new BreadthFirstPaths(tinyCG, i)
-        for {
-          v <- 0 until tinyCGdata.size
-          w <- tinyCG.adj(v)
-          if (g.hasPathTo(v))
-        } {
-          assert(g.hasPathTo(v) == g.hasPathTo(w), s"source:$i edge v:$v - w:$w")
-          assert(g.distTo(w) <= g.distTo(v) + 1,
-            s"source:$i v:$v - w:$w distTo w:${g.distTo(w)}  distTo v + 1:${g.distTo(v) + 1}")
-        }
-      }
-    }
-
-  it should "satisfy distTo[w] + distTo[v] + 1 where v = edgeTo[w]" in
-    new ConnectedGraphBuilder {
-      for (i <- 0 until tinyCGdata.size) {
-        val g = new BreadthFirstPaths(tinyCG, i)
-        for {
-          w <- 0 until tinyCGdata.size
-          if (g.hasPathTo(w) && i != w)
-
-        } {
-          val v = g.edgeTo(w)
-          assert(g.hasPathTo(v) == g.hasPathTo(w), s"source:$i edge v:$v - w:$w")
-          assert(g.distTo(w) <= g.distTo(v) + 1,
-            s"source:$i v:$v - w:$w distTo w:${g.distTo(w)}  distTo v + 1:${g.distTo(v) + 1}")
-        }
-      }
-    }
-  it should "show if source hasPathTo target vertices" in new ConnectedGraphBuilder {
+  it should "find if source has path to target vertices" in {
     val from0 = new BreadthFirstPaths(tinyCG, 0)
     for (j <- 1 to 5) {
       assert(from0.hasPathTo(j), s"0 - j:$j")
     }
-    for (j <- 6 to 7) {
-      assert(from0.hasPathTo(j) === false, s"0 - j:$j")
+  }
+
+  it should "have each edge v-w dist[w] <= dist[v] + 1 where v reachable from s" in {
+    for (i <- 0 until tinyCG.V) {
+      val g = new BreadthFirstPaths(tinyCG, i)
+      for {
+        v <- 0 until tinyCG.V
+        w <- tinyCG.adj(v)
+      } {
+        assert(g.hasPathTo(v) == g.hasPathTo(w), s"source:$i edge v:$v - w:$w")
+        assert(g.distTo(w) <= g.distTo(v) + 1,
+          s"source:$i v:$v - w:$w distTo w:${g.distTo(w)}  distTo v + 1:${g.distTo(v) + 1}")
+      }
     }
   }
 
-  it should "show distance from source to target vertices" in new ConnectedGraphBuilder {
+  it should "satisfy constraint distTo[w] + distTo[v] + 1 where v = edgeTo[w]" in {
+    for (i <- 0 until tinyCG.V) {
+      val g = new BreadthFirstPaths(tinyCG, i)
+      for {
+        w <- 0 until tinyCG.V
+        if (g.hasPathTo(w) && i != w)
+      } {
+        val v = g.edgeTo(w)
+        assert(g.distTo(w) <= g.distTo(v) + 1,
+          s"source:$i v:$v - w:$w distTo w:${g.distTo(w)}  distTo v + 1:${g.distTo(v) + 1}")
+      }
+    }
+  }
+
+  it should "find distance from source to target vertices" in {
     val from0 = new BreadthFirstPaths(tinyCG, 0)
     assert(from0.distTo(1) === 1)
     assert(from0.distTo(2) === 1)
     assert(from0.distTo(3) === 2)
     assert(from0.distTo(4) === 2)
     assert(from0.distTo(5) === 1)
-    assert(from0.distTo(6) === Int.MaxValue)
-    assert(from0.distTo(7) === Int.MaxValue)
   }
 
   // -Xms1g -Xmx2g
-  it should "build largeG.txt" in new IntArrayBuilder {
-    val managedResource = readURI("http://algs4.cs.princeton.edu/41undirected/largeG.txt")
-    val savedLines = managedResource.loan(readFileToArray)
-    val v = savedLines(0)
-    val e = savedLines(1)
-    val g = new Graph(v)
-    val twoInts = savedLines.drop(2).grouped(2)
-    for {
-      t <- twoInts
-    } g.addEdge(t(0), t(1))
-    val from0 = new BreadthFirstPaths(g, 0)
-    //    for(i <- 0 until g.v) if(from0.hasPathTo(i)) println(s"0 hasPathTo $i distance to:${from0.distance(i)}")
-    //    println(s"0 distance to 713461:${from0.distance(713461)}")
-    assert(from0.distTo(762) === 2)
-    assert(from0.distTo(932942) === 1)
-    assert(from0.distTo(474885) === 2)
-    assert(from0.distTo(460790) === 1)
-    assert(from0.distTo(53370) === 2)
-    assert(from0.distTo(713461) === 1)
-    assert(from0.distTo(75230) === 2)
-    //println(s"marked:${from0.marked(82707)} edgeTo:${from0.edgeTo(82707)} distTo:${from0.distTo(82707)}")
-    for {
-      v <- 0 until g.V
-      w <- g.adj(v)
-      if (from0.hasPathTo(v))
-    } {
-      assert(from0.hasPathTo(v) == from0.hasPathTo(w), s"source:0 edge v:$v - w:$w")
-      assert(from0.distTo(w) <= from0.distTo(v) + 1,
-        s"source:0 v:$v - w:$w distTo w:${from0.distTo(w)}  distTo v + 1:${from0.distTo(v) + 1}")
-    }
+  it should "find distances from source to target vertices in largeG.txt" in {
+    val builder = new UnweightedGraphBuilder("http://algs4.cs.princeton.edu/41undirected/largeG.txt")
+    val largeG = builder.graph
+    val from0 = new BreadthFirstPaths(largeG, 0)
+    assert(from0.distTo(0) === 0, s"source:0 v:1 distTo:${from0.distTo(1)}")
+    assert(from0.distTo(1) === 418, s"source:0 v:1 distTo:${from0.distTo(1)}")
+    assert(from0.distTo(2) === 323, s"source:0 v:2 distTo:${from0.distTo(2)}")
+    assert(from0.distTo(3) === 168, s"source:0 v:3 distTo:${from0.distTo(3)}")
+    assert(from0.distTo(4) === 144, s"source:0 v:4 distTo:${from0.distTo(4)}")
+    assert(from0.distTo(5) === 566, s"source:0 v:5 distTo:${from0.distTo(5)}")
+    assert(from0.distTo(6) === 349, s"source:0 v:6 distTo:${from0.distTo(6)}")
   }
 }
