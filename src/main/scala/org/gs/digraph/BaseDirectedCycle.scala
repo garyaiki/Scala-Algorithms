@@ -1,11 +1,9 @@
-/**
- * Common code for DirectedCycle, EdgeWeightedDirectedCycle
- */
+
 package org.gs.digraph
 
 import scala.reflect.ClassTag
 
-/**
+/** Superclass of [[org.gs.digraph.DirectedCycle]], [[org.gs.digraph.EdgeWeightedDirectedCycle]]
  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  *
  * @param <A> Int or DirectedEdge
@@ -23,7 +21,9 @@ abstract class BaseDirectedCycle[A: ClassTag](v: Int) {
 
   protected def dfs(v: Int): Unit
 
+  /**  @return directed cycle as a List if a cycle exists */
   def cycle(): Option[List[A]] = _cycle
 
+  /** @return if digraph has a directed cycle */
   def hasCycle(): Boolean = _cycle != None
 }

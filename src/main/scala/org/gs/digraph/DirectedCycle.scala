@@ -6,8 +6,13 @@ package org.gs.digraph
 import scala.annotation.tailrec
 
 /**
+ * Find any directed cycles in digraph
+ * 
+ * Extends [[org.gs.digraph.BaseDirectedCycle]]
+ * 
  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
- *
+ * @param g [[org.gs.digraph.Digraph]]
+ * @param g.V number of vertices
  */
 class DirectedCycle(g: Digraph) extends BaseDirectedCycle[Int](g.V) {
   

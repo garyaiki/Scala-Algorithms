@@ -6,8 +6,11 @@ package org.gs.digraph
 import scala.annotation.tailrec
 
 /**
- * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+ * Find paths from single source vertex
  *
+ * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+ * @param g [[org.gs.digraph.Digraph]]
+ * @param s a single source vertex
  */
 class DepthFirstDirectedPaths(g: Digraph, s: Int) {
   private val marked = new Array[Boolean](g.V)
@@ -25,10 +28,13 @@ class DepthFirstDirectedPaths(g: Digraph, s: Int) {
   }
   dfs(s)
 
+  /** @return if there is a path from s to v */
   def hasPathTo(v: Int): Boolean = marked(v)
 
+  /** @return the path from s to v */
   def pathTo(v: Int): List[Int] = {
     var pathStack = List[Int]()
+    
     @tailrec
     def loop(x: Int): Int = {
       if (x == s) x else {

@@ -1,5 +1,5 @@
 /**
- * Common code for Graph, Digraph
+ * 
  * @see http://algs4.cs.princeton.edu/41undirected/Graph.java.html
  * @see http://algs4.cs.princeton.edu/42directed/Digraph.java.html
  *
@@ -7,8 +7,9 @@
 package org.gs.graph
 
 /**
+ * Superclass of [[org.gs.graph.Graph]], [[org.gs.digraph.Digraph]]
  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
- * @param v number of vertices
+ * @param V number of vertices
  */
 abstract class BaseGraph(val V: Int) {
   private var e = 0

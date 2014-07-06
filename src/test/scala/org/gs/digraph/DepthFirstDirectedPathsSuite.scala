@@ -25,7 +25,7 @@ class DepthFirstDirectedPathsSuite extends FlatSpec {
     assert(from3.pathTo(5).corresponds(List(3, 5))(equals))
   }
 
-  it should "find absent paths from source vertex to end vertex" in new DigraphBuilder {
+  it should "not find absent paths from source vertex to end vertex" in new DigraphBuilder {
     val from3 = new DepthFirstDirectedPaths(tinyDG, 3)
     assert(from3.hasPathTo(6) === false)
     assert(from3.hasPathTo(7) === false)

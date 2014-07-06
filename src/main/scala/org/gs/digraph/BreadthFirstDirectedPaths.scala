@@ -6,8 +6,11 @@ import scala.collection.mutable.Queue
 import scala.annotation.tailrec
 
 /**
- * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+ * Find shortest path from source vertex
  *
+ * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+ * @param g [[org.gs.digraph.Digraph]]
+ * @param s a single source vertex
  */
 class BreadthFirstDirectedPaths(g: Digraph, s: Int) {
   private val marked = Array.fill[Boolean](g.V)(false)
@@ -32,10 +35,13 @@ class BreadthFirstDirectedPaths(g: Digraph, s: Int) {
   }
   bfs(s)
 
+  /** @return if there is a path from s to v */
   def hasPathTo(v: Int): Boolean = marked(v)
 
+  /** @return number of edges in shortest path from s to v */
   def distTo(v: Int): Int = _distTo(v)
 
+  /** @return the path from s to v */
   def pathTo(v: Int): List[Int] = {
     @tailrec
     def loop(x: Int, xs: List[Int]): List[Int] = {

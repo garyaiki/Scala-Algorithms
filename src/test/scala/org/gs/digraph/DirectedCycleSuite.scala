@@ -19,14 +19,15 @@ class DirectedCycleSuite extends FlatSpec {
   behavior of "a DirectedCycle"
   it should "find digraph's directed cycles" in new DigraphBuilder {
     val tdg = new DirectedCycle(tinyDG)
-    assert(tdg.cycle.get.corresponds(List(3, 5, 4, 3))(equals))
-/*    
+    assert(tdg.cycle.get.corresponds(List(3, 5, 4, 3))(equals), 
+        s"directed cycle found ${tdg.cycle.get} expected ${List(3, 5, 4, 3)}")
+    
     val tdag = new DirectedCycle(tinyDAG)
-    assert((tdag.hasCycle) === false) */
+    assert((tdag.hasCycle) === false) 
   }
-/*
-  it should "show digraph has no directed cycles" in new DigraphBuilder {
+
+  it should "show when digraph has no directed cycles" in new DigraphBuilder {
     val tdag = new DirectedCycle(tinyDAG)
     assert((tdag.hasCycle) === false)
-  } */
+  }
 }
