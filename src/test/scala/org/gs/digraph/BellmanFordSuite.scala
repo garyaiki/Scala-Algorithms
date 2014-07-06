@@ -1,6 +1,4 @@
-/**
- * ScalaTest, JUnit tests for BellmanFordSP
- */
+
 package org.gs.digraph
 
 import org.gs.digraph.fixtures.DirectedEdgeBuilder
@@ -10,9 +8,10 @@ import org.scalatest.junit.JUnitRunner
 import org.scalatest.PrivateMethodTester._
 import org.gs.digraph.fixtures.BellmanFordBuilder
 
-/**
+/** [[http://doc.scalatest.org/2.2.0/#org.scalatest.FlatSpec ScalaTest]] for
+ * [[org.gs.digraph.BellmanFordSP]]
  * @author Gary Struthers
- *
+ * @see http://algs4.cs.princeton.edu/44sp/tinyEWDn.txt
  */
 @RunWith(classOf[JUnitRunner])
 class BellmanFordSuite extends FlatSpec {

@@ -1,5 +1,6 @@
 package org.gs.graph
 /**
+ * @see http://algs4.cs.princeton.edu/41undirected/tinyCG.txt
  * @see http://algs4.cs.princeton.edu/41undirected/largeG.txt
  */
 import org.scalatest.FlatSpec
@@ -7,7 +8,10 @@ import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import org.gs.fixtures.IntArrayBuilder
 import org.gs.graph.fixtures.UnweightedEdgeBuilder
-
+/** [[http://doc.scalatest.org/2.2.0/#org.scalatest.FlatSpec ScalaTest]] for
+ * [[org.gs.graph.BreadthFirstPaths]]
+ * @author Gary Struthers
+ */
 class UnweightedGraphBuilder(fileURL: String) extends UnweightedEdgeBuilder {
   private val managedResource = readURI(fileURL)
   private val tuple = managedResource.loan(readFileToTuple)

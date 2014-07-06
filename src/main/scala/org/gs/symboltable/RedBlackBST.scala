@@ -25,7 +25,7 @@ sealed class Node[A, B](var key: A, var value: B, var count: Int = 1, var red: B
  *
  * @param <A> generic key type
  * @param <U> generic value type
- * @param ord implicit [[math.Ordering]]
+ * @param ord implicit Ordering
  */
 class RedBlackBST[A, B](implicit ord: Ordering[A]) {
 
