@@ -6,7 +6,7 @@ import scala.reflect.ClassTag
 /** Superclass of [[org.gs.digraph.DirectedCycle]], [[org.gs.digraph.EdgeWeightedDirectedCycle]]
  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  *
- * @param <A> Int or DirectedEdge
+ * @param <A> use Int for DirectedCycle or use DirectedEdge for EdgeWeightedDirectedCycle
  * @param v number of vertices in a Digraph or EdgeWeightedDigraph
  */
 abstract class BaseDirectedCycle[A: ClassTag](v: Int) {

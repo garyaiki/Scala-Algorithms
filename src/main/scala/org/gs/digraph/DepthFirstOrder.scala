@@ -3,9 +3,13 @@
  */
 package org.gs.digraph
 
-/**
+/** Find pre-order, post-order, & reverse post-order of digraph using depth first search
+ *  
+ * Extends [[org.gs.digraph.BaseDepthFirstOrder]]
+ *  
  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
- *
+ * @param g [[org.gs.digraph.Digraph]]
+ * @param g.V number of vertices in g
  */
 class DepthFirstOrder(g: Digraph) extends BaseDepthFirstOrder(g.V){
 

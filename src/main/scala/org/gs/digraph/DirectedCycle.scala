@@ -6,7 +6,7 @@ package org.gs.digraph
 import scala.annotation.tailrec
 
 /**
- * Find any directed cycles in digraph
+ * Find any directed cycles in digraph using depth first search
  * 
  * Extends [[org.gs.digraph.BaseDirectedCycle]]
  * 
@@ -31,6 +31,7 @@ class DirectedCycle(g: Digraph) extends BaseDirectedCycle[Int](g.V) {
     def traceBack(w: Int): Boolean = {
       if (onStack(w)) {
         _cycle = Some(List[Int]())
+        
         @tailrec
         def loop(x: Int): Unit = {
           if (x != w) {

@@ -5,7 +5,8 @@ package org.gs.digraph
 
 import org.gs.graph.BaseGraph
 
-trait DigraphMarker //EdgeWeightedDigraph, Topological use this to tell a Graph from a Digraph 
+/** EdgeWeightedDigraph, Topological use this to tell a Graph from a Digraph */
+trait DigraphMarker
 /**
  * Directed Graph 
  * 
