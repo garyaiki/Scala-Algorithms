@@ -1,13 +1,11 @@
 package org.gs.queue
-/**
- * This copies a example from Programming in Scala instead of translating from Algorthms
+/** This copies a example from Programming in Scala instead of translating from Algorthms
  * I added an isEmpty method
  * @see http://booksites.artima.com/programming_in_scala_2ed/examples/type-parameterization/Queues5.scala
  * @see http://algs4.cs.princeton.edu/13stacks/Queue.java.html
  */
 
-/**
- * Immutable interface for hidden Queue implementation
+/** Immutable interface for hidden Queue implementation
  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  *
  * @param <T>
@@ -21,8 +19,7 @@ trait Queue[T] {
 
 object Queue {
 
-/**
- * @param xs a variable number of objects of type T
+/** @param xs a variable number of objects of type T
  * @return an initialized Queue companion object
  * @see QueueSuite for usage
  */

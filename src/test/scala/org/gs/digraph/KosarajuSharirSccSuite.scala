@@ -1,6 +1,5 @@
 package org.gs.digraph
-/**
- * @see http://algs4.cs.princeton.edu/44sp/tinyDG.txt
+/** @see http://algs4.cs.princeton.edu/44sp/tinyDG.txt
  * @see http://algs4.cs.princeton.edu/42directed/mediumDG.txt
  */
 import org.scalatest.FlatSpec
@@ -11,8 +10,7 @@ import org.gs.digraph.fixtures.SymbolDigraphBuilder
 import org.gs.digraph.fixtures.DigraphBuilder
 import org.gs.fixtures.IntArrayBuilder
 import org.gs.digraph.fixtures.DirectedEdgeBuilder
-/**
- * @author Gary Struthers
+/** @author Gary Struthers
  *
  */
 @RunWith(classOf[JUnitRunner])

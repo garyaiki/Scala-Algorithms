@@ -1,10 +1,8 @@
-/**
- * @see http://algs4.cs.princeton.edu/34hash/SeparateChainingHashST.java.html
+/** @see http://algs4.cs.princeton.edu/34hash/SeparateChainingHashST.java.html
  */
 package org.gs.symboltable
 
-/**
- * Hash keys to array index allow for collisions with a list at each index
+/** Hash keys to array index allow for collisions with a list at each index
  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  *
  * @param <A> generic key type, its hash code is used

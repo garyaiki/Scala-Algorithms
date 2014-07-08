@@ -1,12 +1,10 @@
-/**
- * @see http://algs4.cs.princeton.edu/34hash/LinearProbingHashST.java.html
+/** @see http://algs4.cs.princeton.edu/34hash/LinearProbingHashST.java.html
  */
 package org.gs.symboltable
 
 import scala.annotation.tailrec
 
-/**
- * Hash key to index value, when there is a collision try succeeding indexes insert in empty one
+/** Hash key to index value, when there is a collision try succeeding indexes insert in empty one
  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  *
  * @param <A> generic key type

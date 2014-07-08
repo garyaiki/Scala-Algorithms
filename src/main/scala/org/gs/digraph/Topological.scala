@@ -3,8 +3,7 @@
  */
 package org.gs.digraph
 
-/**
- * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+/** @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  *
  * @param <A> constrains g to extending DigraphMarker
  * @param g either a Digraph or EdgeWeightedDigraph

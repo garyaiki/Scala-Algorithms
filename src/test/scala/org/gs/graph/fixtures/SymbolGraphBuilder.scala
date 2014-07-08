@@ -1,6 +1,5 @@
 package org.gs.graph.fixtures
-/**
- * @see http://algs4.cs.princeton.edu/41undirected/SymbolGraph.java.html
+/** @see http://algs4.cs.princeton.edu/41undirected/SymbolGraph.java.html
  */
 import scala.collection.immutable.TreeMap
 
@@ -9,8 +8,7 @@ import org.gs.fixtures.SymbolTableBuilder
 import org.gs.graph.SymbolGraph
 import org.gs.graph.Graph
 
-/**
- * @author Gary Struthers
+/** @author Gary Struthers
  */
 trait SymbolGraphBuilder extends StringArrayBuilder with SymbolTableBuilder with BaseSymbolGraphBuilder {
   def buildSymbolGraph(uri: String, delimiter: String): SymbolGraph[Graph] = {

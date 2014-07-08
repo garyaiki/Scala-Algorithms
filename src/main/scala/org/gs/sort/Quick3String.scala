@@ -1,13 +1,11 @@
-/**
- * @see http://algs4.cs.princeton.edu/51radix/Quick3string.java.html
+/** @see http://algs4.cs.princeton.edu/51radix/Quick3string.java.html
  */
 package org.gs.sort
 
 import scala.annotation.tailrec
 import scala.math.min
 import scala.util.Random
-/**
- * Sorts an array of strings
+/** Sorts an array of strings
  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  *
  */

@@ -1,13 +1,11 @@
-/**
- * 
+/** 
  * @see http://algs4.cs.princeton.edu/41undirected/Graph.java.html
  * @see http://algs4.cs.princeton.edu/42directed/Digraph.java.html
  *
  */
 package org.gs.graph
 
-/**
- * Superclass of [[org.gs.graph.Graph]], [[org.gs.digraph.Digraph]]
+/** Superclass of [[org.gs.graph.Graph]], [[org.gs.digraph.Digraph]]
  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  * @param V number of vertices
  */

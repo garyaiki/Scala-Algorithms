@@ -1,6 +1,5 @@
 package org.gs.graph
-/**
- * @see http://algs4.cs.princeton.edu/41undirected/tinyCG.txt
+/** @see http://algs4.cs.princeton.edu/41undirected/tinyCG.txt
  * @see http://algs4.cs.princeton.edu/41undirected/largeG.txt
  */
 import org.scalatest.FlatSpec

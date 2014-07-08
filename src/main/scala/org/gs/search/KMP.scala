@@ -1,12 +1,10 @@
-/**
- * @see http://algs4.cs.princeton.edu/53substring/KMP.java.html
+/** @see http://algs4.cs.princeton.edu/53substring/KMP.java.html
  */
 package org.gs.search
 
 import scala.annotation.tailrec
 
-/**
- * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+/** @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  *
  */
 class KMP(pattern: Array[Char], R: Int = 256) {

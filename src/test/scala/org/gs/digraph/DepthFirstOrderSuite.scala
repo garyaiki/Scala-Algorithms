@@ -1,13 +1,11 @@
 package org.gs.digraph
-/**
- * @see http://algs4.cs.princeton.edu/42directed/tinyDAG.txt
+/** @see http://algs4.cs.princeton.edu/42directed/tinyDAG.txt
  */
 import org.scalatest.FlatSpec
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import org.gs.digraph.fixtures.DigraphBuilder
-/**
- * @author Gary Struthers
+/** @author Gary Struthers
  *
  */
 @RunWith(classOf[JUnitRunner])

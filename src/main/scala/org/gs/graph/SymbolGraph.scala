@@ -1,13 +1,11 @@
-/**
- * @see http://algs4.cs.princeton.edu/41undirected/SymbolGraph.java.html
+/** @see http://algs4.cs.princeton.edu/41undirected/SymbolGraph.java.html
  */
 package org.gs.graph
 
 import scala.collection.immutable.TreeMap
 
 
-/**
- * Graph where vertex names are strings
+/** Graph where vertex names are strings
  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  * @param <A> generic graph type, must extend [[org.gs.graph.BaseGraph]]
  * @param st ordered key value map

@@ -1,5 +1,4 @@
 /**
- *
  */
 package org.gs.digraph
 
@@ -9,8 +8,7 @@ import org.scalautils._
 import org.scalautils.Tolerance._
 import org.scalatest.junit.JUnitRunner
 
-/**
- * @author Gary Struthers
+/** @author Gary Struthers
  *
  */
 @RunWith(classOf[JUnitRunner])

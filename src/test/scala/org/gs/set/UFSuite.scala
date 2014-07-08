@@ -1,5 +1,4 @@
-/**
- * @see http://algs4.cs.princeton.edu/15uf/largeUF.txt
+/** @see http://algs4.cs.princeton.edu/15uf/largeUF.txt
  */
 package org.gs.set
 
@@ -9,8 +8,7 @@ import org.scalatest.junit.JUnitRunner
 import org.gs.fixtures.BufferedSourceBuilder
 import org.gs.fixtures.IntArrayBuilder
 
-/**
- * @author Gary Struthers
+/** @author Gary Struthers
  *
  */
 @RunWith(classOf[JUnitRunner])

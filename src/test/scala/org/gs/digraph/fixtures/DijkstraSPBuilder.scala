@@ -1,5 +1,4 @@
 /**
- *
  */
 package org.gs.digraph.fixtures
 
@@ -9,8 +8,7 @@ import org.gs.digraph.DirectedEdge
 import scala.reflect.ClassTag
 import scala.collection.mutable.ArraySeq
 
-/**
- * @author Gary Struthers
+/** @author Gary Struthers
  * 
 */
 

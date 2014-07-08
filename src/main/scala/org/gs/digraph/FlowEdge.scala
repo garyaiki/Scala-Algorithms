@@ -1,10 +1,8 @@
-/**
- * @see http://algs4.cs.princeton.edu/64maxflow/FlowEdge.java.html
+/** @see http://algs4.cs.princeton.edu/64maxflow/FlowEdge.java.html
  */
 package org.gs.digraph
 
-/**
- * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+/** @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  *
  */
 class FlowEdge(v: Int, w: Int, val capacity: Double) extends BaseDirectedEdge {

@@ -1,5 +1,4 @@
-/**
- * @see http://algs4.cs.princeton.edu/42directed/SymbolDigraph.java.html
+/** @see http://algs4.cs.princeton.edu/42directed/SymbolDigraph.java.html
  */
 package org.gs.digraph.fixtures
 
@@ -12,8 +11,7 @@ import org.gs.graph.fixtures.BaseSymbolGraphBuilder
 import org.gs.graph.SymbolGraph
 import org.gs.fixtures.StringArrayBuilder
 
-/**
- * @author Gary Struthers
+/** @author Gary Struthers
  */
 trait SymbolDigraphBuilder 
     extends StringArrayBuilder

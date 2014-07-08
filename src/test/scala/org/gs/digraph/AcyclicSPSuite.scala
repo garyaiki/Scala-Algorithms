@@ -1,5 +1,4 @@
-/**
- * ScalaTest, JUnit tests for AcyclicSP
+/** ScalaTest, JUnit tests for AcyclicSP
  */
 package org.gs.digraph
 
@@ -8,8 +7,7 @@ import org.junit.runner.RunWith
 import org.scalatest.FlatSpec
 import org.scalatest.junit.JUnitRunner
 
-/**
- * @author Gary Struthers
+/** @author Gary Struthers
  *
  */
 @RunWith(classOf[JUnitRunner])

@@ -1,6 +1,5 @@
 package org.gs.queue
-/**
- * @author Gary Struthers
+/** @author Gary Struthers
  *
  */
 import scala.collection.mutable.ArrayBuffer

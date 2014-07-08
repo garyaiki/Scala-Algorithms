@@ -1,10 +1,8 @@
-/**
- * @see http://algs4.cs.princeton.edu/42directed/KosarajuSharirSCC.java.html
+/** @see http://algs4.cs.princeton.edu/42directed/KosarajuSharirSCC.java.html
  */
 package org.gs.digraph
 
-/**
- * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+/** @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  * @param g digraph
  */
 class KosarajuSharirSCC(g: Digraph) {

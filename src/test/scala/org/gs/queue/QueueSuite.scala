@@ -8,8 +8,7 @@ import org.scalatest.FlatSpec
 import org.gs.fixtures.WordArrayBuilder
 import scala.collection.mutable.ArrayBuffer
 
-/**
- * @author Gary Struthers
+/** @author Gary Struthers
  *
  */
 @RunWith(classOf[JUnitRunner])

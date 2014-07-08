@@ -1,12 +1,10 @@
 package org.gs.digraph
-/**
- * @see http://algs4.cs.princeton.edu/42directed/BreadthFirstDirectedPaths.java.html
+/** @see http://algs4.cs.princeton.edu/42directed/BreadthFirstDirectedPaths.java.html
  */
 import scala.collection.mutable.Queue
 import scala.annotation.tailrec
 
-/**
- * Find shortest path from source vertex
+/** Find shortest path from source vertex
  *
  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  * @param g [[org.gs.digraph.Digraph]]

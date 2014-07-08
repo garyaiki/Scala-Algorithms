@@ -1,5 +1,4 @@
-/**
- * ScalaTest, JUnit tests for Ternary Search Trie
+/** ScalaTest, JUnit tests for Ternary Search Trie
  * @see http://algs4.cs.princeton.edu/52trie/TST.java.html
  */
 package org.gs.search
@@ -9,8 +8,7 @@ import org.scalatest.FlatSpec
 import org.scalatest.junit.JUnitRunner
 import org.gs.fixtures.WordArrayBuilder
 
-/**
- * @author Gary Struthers
+/** @author Gary Struthers
  *
  */
 @RunWith(classOf[JUnitRunner])

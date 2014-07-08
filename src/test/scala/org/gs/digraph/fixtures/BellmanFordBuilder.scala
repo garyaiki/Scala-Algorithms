@@ -1,5 +1,4 @@
 /**
- *
  */
 package org.gs.digraph.fixtures
 
@@ -10,8 +9,7 @@ import org.gs.digraph.DirectedEdge
 import scala.collection.mutable.ArrayBuffer
 import scalaz.std.tuple
 
-/**
- * @author Gary Struthers
+/** @author Gary Struthers
  *
  */
 trait BellmanFordBuilder extends DirectedEdgeBuilder {

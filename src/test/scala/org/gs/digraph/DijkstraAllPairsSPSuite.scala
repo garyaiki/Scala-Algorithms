@@ -1,5 +1,4 @@
 /**
- *
  */
 package org.gs.digraph
 
@@ -14,8 +13,7 @@ trait DijkstraAllPairsSPBuilder extends TinyEdgeWeightedDigraphBuilder {
   val verticesLength = g.v
   val allPairsSP = new DijkstraAllPairsSP(g)
 }
-/**
- * @author Gary Struthers
+/** @author Gary Struthers
  *
  */
 @RunWith(classOf[JUnitRunner])

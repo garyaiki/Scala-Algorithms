@@ -1,5 +1,4 @@
-/**
- * @see http://algs4.cs.princeton.edu/42directed/DepthFirstOrder.java.html
+/** @see http://algs4.cs.princeton.edu/42directed/DepthFirstOrder.java.html
  */
 package org.gs.digraph
 
@@ -11,7 +10,7 @@ package org.gs.digraph
  * @param g [[org.gs.digraph.Digraph]]
  * @param g.V number of vertices in g
  */
-class DepthFirstOrder(g: Digraph) extends BaseDepthFirstOrder(g.V){
+class DepthFirstOrder(g: Digraph ) extends BaseDepthFirstOrder(g.V) {
 
   protected def dfs(v: Int): Unit = {
     marked(v) = true

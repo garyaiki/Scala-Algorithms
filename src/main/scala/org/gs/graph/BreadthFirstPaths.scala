@@ -1,13 +1,11 @@
 package org.gs.graph
-/**
- * @see http://algs4.cs.princeton.edu/41undirected/BreadthFirstPaths.java.html
+/** @see http://algs4.cs.princeton.edu/41undirected/BreadthFirstPaths.java.html
  */
 import scala.collection.mutable.Queue
 import scala.collection.mutable.ListBuffer
 import scala.annotation.tailrec
 
-/**
- * Find shortest path from source vertex to v
+/** Find shortest path from source vertex to v
  *
  * Enqueue a vertex that has been marked but its adjacencies haven't been. Then dequeue a vertex and
  * enqueue all its unmarked adjacencies and mark them

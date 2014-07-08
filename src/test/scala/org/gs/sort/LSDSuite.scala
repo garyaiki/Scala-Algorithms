@@ -1,5 +1,4 @@
-/**
- * ScalaTest, JUnit tests for LSD
+/** ScalaTest, JUnit tests for LSD
  * @see http://algs4.cs.princeton.edu/51radix/LSD.java.html
  */
 package org.gs.sort
@@ -9,8 +8,7 @@ import org.scalatest.FlatSpec
 import org.gs.fixtures.WordArrayBuilder
 import org.scalatest.junit.JUnitRunner
 
-/**
- * @author Gary Struthers
+/** @author Gary Struthers
  *
  */
 @RunWith(classOf[JUnitRunner])

@@ -1,10 +1,8 @@
-/**
- * @see http://algs4.cs.princeton.edu/41undirected/Graph.java.html
+/** @see http://algs4.cs.princeton.edu/41undirected/Graph.java.html
  */
 package org.gs.graph
 
-/**
- * Undirected graph extends [[org.gs.graph.BaseGraph]]
+/** Undirected graph extends [[org.gs.graph.BaseGraph]]
  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  * @param v number of vertices
  */

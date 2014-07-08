@@ -1,5 +1,4 @@
-/**
- * ScalaTest, JUnit tests for Quick3String
+/** ScalaTest, JUnit tests for Quick3String
  * @see http://algs4.cs.princeton.edu/51radix/Quick3string.java.html
  */
 package org.gs.sort
@@ -9,8 +8,7 @@ import org.scalatest.FlatSpec
 import org.gs.fixtures.WordArrayBuilder
 import org.scalatest.junit.JUnitRunner
 
-/**
- * @author Gary Struthers
+/** @author Gary Struthers
  *
  */
 @RunWith(classOf[JUnitRunner])

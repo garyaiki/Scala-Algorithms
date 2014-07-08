@@ -1,5 +1,4 @@
-/**
- * Builds arrays of directed edges
+/** Builds arrays of directed edges
  */
 package org.gs.digraph.fixtures
 
@@ -8,8 +7,7 @@ import scala.io.BufferedSource
 import scala.collection.mutable.ArrayBuffer
 import org.gs.digraph.DirectedEdge
 
-/**
- * @author Gary Struthers
+/** @author Gary Struthers
  *
  */
 trait DirectedEdgeBuilder extends BufferedSourceBuilder {

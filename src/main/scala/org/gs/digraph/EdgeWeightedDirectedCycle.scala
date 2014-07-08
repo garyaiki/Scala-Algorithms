@@ -1,12 +1,10 @@
-/**
- * @see http://algs4.cs.princeton.edu/44sp/EdgeWeightedDirectedCycle.java.html
+/** @see http://algs4.cs.princeton.edu/44sp/EdgeWeightedDirectedCycle.java.html
  */
 package org.gs.digraph
 
 import scala.annotation.tailrec
 
-/**
- * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+/** @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  *
  */
 class EdgeWeightedDirectedCycle(g: EdgeWeightedDigraph) 

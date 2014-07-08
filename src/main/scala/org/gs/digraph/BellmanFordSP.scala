@@ -1,5 +1,4 @@
-/**
- * @see http://algs4.cs.princeton.edu/44sp/BellmanFordSP.java.html
+/** @see http://algs4.cs.princeton.edu/44sp/BellmanFordSP.java.html
  */
 package org.gs.digraph
 
@@ -7,8 +6,7 @@ import scala.collection.mutable.Queue
 import scala.annotation.tailrec
 import scala.collection.mutable.ListBuffer
 
-/**
- * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+/** @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  * @param g acyclic digraph
  * @param s source vertex
  */

@@ -1,5 +1,4 @@
-/**
- * ScalaTest, JUnit tests for FLowNetwork
+/** ScalaTest, JUnit tests for FLowNetwork
  * @see http://algs4.cs.princeton.edu/64maxflow/tinyFN.txt
  */
 package org.gs.digraph
@@ -10,8 +9,7 @@ import org.scalatest.FlatSpec
 import org.scalatest.junit.JUnitRunner
 import org.gs.digraph.fixtures.FlowEdgeBuilder
 
-/**
- * @author Gary Struthers
+/** @author Gary Struthers
  *
  */
 @RunWith(classOf[JUnitRunner])

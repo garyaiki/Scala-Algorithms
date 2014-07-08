@@ -1,13 +1,11 @@
-/**
- * @see http://algs4.cs.princeton.edu/33balanced/RedBlackBST.java.html
+/** @see http://algs4.cs.princeton.edu/33balanced/RedBlackBST.java.html
  */
 package org.gs.symboltable
 
 import math.Ordering
 import scala.annotation.tailrec
 
-/**
- * Red Black Node
+/** Red Black Node
  * @param key generic
  * @param value generic
  * @param count number of subtrees
@@ -18,8 +16,7 @@ sealed class Node[A, B](var key: A, var value: B, var count: Int = 1, var red: B
   var right = null.asInstanceOf[Node[A, B]]
 }
 
-/**
- * Balanced search tree with Red/Black nodes
+/** Balanced search tree with Red/Black nodes
  *
  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  *

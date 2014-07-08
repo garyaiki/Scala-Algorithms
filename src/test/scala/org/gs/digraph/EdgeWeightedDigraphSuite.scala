@@ -1,5 +1,4 @@
-/**
- * @see http://algs4.cs.princeton.edu/44sp/tinyEWD.txt
+/** @see http://algs4.cs.princeton.edu/44sp/tinyEWD.txt
  */
 package org.gs.digraph
 
@@ -10,8 +9,7 @@ import org.scalatest.junit.JUnitRunner
 import org.gs.digraph.fixtures.TinyEdgeWeightedDigraphBuilder
 
 
-/**
- * @author Gary Struthers
+/** @author Gary Struthers
  *
  */
 @RunWith(classOf[JUnitRunner])

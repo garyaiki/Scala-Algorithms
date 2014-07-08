@@ -1,18 +1,18 @@
-/**
- * @see http://algs4.cs.princeton.edu/42directed/Digraph.java.html
+/** @see http://algs4.cs.princeton.edu/42directed/Digraph.java.html
  */
 package org.gs.digraph
 
 import org.gs.graph.BaseGraph
 
 /** EdgeWeightedDigraph, Topological use this to tell a Graph from a Digraph */
-trait DigraphMarker
-/**
- * Directed Graph 
+trait DigraphMarker 
+
+/** Directed Graph 
  * 
  * Extends [[org.gs.graph.BaseGraph]] and adds DigraphMarker to distinguish it from Graph
- * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  *
+ * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+ * @param V number of vertices
  */
 class Digraph(v: Int) extends BaseGraph(v) with DigraphMarker {
 

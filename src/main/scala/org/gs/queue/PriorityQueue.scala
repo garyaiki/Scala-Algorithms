@@ -10,7 +10,6 @@ import math.Ordering
 import scala.annotation.tailrec
 
 /**
- *
  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  *
  * @param <A> keys are generic and ordered

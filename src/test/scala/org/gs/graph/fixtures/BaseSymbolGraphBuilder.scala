@@ -1,5 +1,4 @@
 /**
- *
  */
 package org.gs.graph.fixtures
 
@@ -9,8 +8,7 @@ import scala.collection.immutable.TreeMap
 import org.gs.graph.BaseGraph
 import org.gs.fixtures.BufferedSourceBuilder
 
-/**
- * @author Gary Struthers
+/** @author Gary Struthers
  *
  */
 trait BaseSymbolGraphBuilder {

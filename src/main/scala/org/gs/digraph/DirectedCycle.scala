@@ -1,12 +1,10 @@
-/**
- * @see http://algs4.cs.princeton.edu/44sp/DirectedCycle.java.html
+/** @see http://algs4.cs.princeton.edu/44sp/DirectedCycle.java.html
  */
 package org.gs.digraph
 
 import scala.annotation.tailrec
 
-/**
- * Find any directed cycles in digraph using depth first search
+/** Find any directed cycles in digraph using depth first search
  * 
  * Extends [[org.gs.digraph.BaseDirectedCycle]]
  * 

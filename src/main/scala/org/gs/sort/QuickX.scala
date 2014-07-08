@@ -1,5 +1,4 @@
-/**
- * @see http://algs4.cs.princeton.edu/23quicksort/QuickX.java.html
+/** @see http://algs4.cs.princeton.edu/23quicksort/QuickX.java.html
  */
 package org.gs.sort
 
@@ -8,8 +7,7 @@ import scala.util.Random
 import scala.annotation.tailrec
 import scala.reflect.ClassTag
 
-/**
- * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+/** @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  *
  * @param <A> elements are generic and ordered ClassTag preserves Array type at runtime
  */

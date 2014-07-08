@@ -1,13 +1,11 @@
-/**
- * @see http://algs4.cs.princeton.edu/44sp/DijkstraSP.java.html
+/** @see http://algs4.cs.princeton.edu/44sp/DijkstraSP.java.html
  */
 package org.gs.digraph
 
 import scala.annotation.tailrec
 import org.gs.queue.IndexMinPQ
 
-/**
- * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+/** @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  *
  */
 class DijkstraSP(g: EdgeWeightedDigraph, s: Int) {

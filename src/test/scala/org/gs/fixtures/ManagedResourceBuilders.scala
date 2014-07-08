@@ -1,5 +1,4 @@
-/**
- * @see https://github.com/jsuereth/scala-in-depth-source/blob/master/chapter11/src/main/scala/scalax/resource/resource.scala
+/** @see https://github.com/jsuereth/scala-in-depth-source/blob/master/chapter11/src/main/scala/scalax/resource/resource.scala
  */
 package org.gs.fixtures
 
@@ -9,8 +8,7 @@ import org.gs.digraph.Digraph
 import scala.io.BufferedSource
 import scala.collection.mutable.ArrayBuffer
 
-/**
- * @author Gary Struthers
+/** @author Gary Struthers
  *
  */
 trait ManagedResource[T] {

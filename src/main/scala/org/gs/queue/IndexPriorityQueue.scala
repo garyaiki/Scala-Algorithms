@@ -11,7 +11,6 @@ import scala.annotation.tailrec
 import scala.reflect.ClassTag
 
 /**
- *
  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  *
  * @param <A> keys are generic, ClassTag retains its type at runtime

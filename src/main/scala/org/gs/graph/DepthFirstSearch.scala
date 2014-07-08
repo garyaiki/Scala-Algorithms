@@ -1,10 +1,8 @@
-/**
- * @see http://algs4.cs.princeton.edu/41undirected/DepthFirstSearch.java.html
+/** @see http://algs4.cs.princeton.edu/41undirected/DepthFirstSearch.java.html
  */
 package org.gs.graph
 
-/**
- * Depth first search of a graph
+/** Depth first search of a graph
  * 
  * Mark a vertex as visited then, recursively visit its adjacent vertices that haven't been marked
  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.

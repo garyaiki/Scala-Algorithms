@@ -1,13 +1,11 @@
-/**
- * @see http://algs4.cs.princeton.edu/52trie/TST.java.html
+/** @see http://algs4.cs.princeton.edu/52trie/TST.java.html
  */
 package org.gs.search
 
 import scala.annotation.tailrec
 import scala.collection.mutable.Queue
 
-/**
- * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+/** @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  *
  */
 class TST[A] {

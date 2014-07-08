@@ -1,6 +1,5 @@
 package org.gs.graph
-/**
- * @see http://algs4.cs.princeton.edu/41undirected/mediumG.txt
+/** @see http://algs4.cs.princeton.edu/41undirected/mediumG.txt
  */
 import org.scalatest.FlatSpec
 import org.junit.runner.RunWith

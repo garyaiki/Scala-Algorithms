@@ -1,5 +1,4 @@
-/**
- * @see http://algs4.cs.princeton.edu/43mst/PrimMST.java.html
+/** @see http://algs4.cs.princeton.edu/43mst/PrimMST.java.html
  */
 package org.gs.digraph
 import scala.collection.mutable.Queue
@@ -8,8 +7,7 @@ import org.gs.queue.IndexMinPQ
 import org.gs.graph.Edge
 import org.gs.graph.EdgeWeightedGraph
 
-/**
- * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+/** @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  * @param g EdgeWeightedGraph
  */
 class PrimMST(g: EdgeWeightedGraph) {

@@ -1,13 +1,11 @@
-/**
- * @see http://algs4.cs.princeton.edu/44sp/AcyclicSP.java.html
+/** @see http://algs4.cs.princeton.edu/44sp/AcyclicSP.java.html
  */
 package org.gs.digraph
 
 import scala.collection.mutable.ListBuffer
 import scala.annotation.tailrec
 
-/**
- * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+/** @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  * @param g acyclic digraph
  * @param s source vertex
  */

@@ -1,10 +1,8 @@
-/**
- * @see http://algs4.cs.princeton.edu/51radix/LSD.java.html
+/** @see http://algs4.cs.princeton.edu/51radix/LSD.java.html
  */
 package org.gs.sort
 
-/**
- * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+/** @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  *
  */
 object LSD {

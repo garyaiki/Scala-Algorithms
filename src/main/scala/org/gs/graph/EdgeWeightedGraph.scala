@@ -1,11 +1,9 @@
-/**
- * @see http://algs4.cs.princeton.edu/43mst/EdgeWeightedGraph.java.html
+/** @see http://algs4.cs.princeton.edu/43mst/EdgeWeightedGraph.java.html
  */
 package org.gs.graph
 
 import scala.collection.mutable.ListBuffer
-/**
- * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+/** @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  * @param v number of vertices
  */
 class EdgeWeightedGraph(v: Int) extends BaseEdgeWeightedGraph[Edge](v) {

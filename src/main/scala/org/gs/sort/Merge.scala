@@ -1,5 +1,4 @@
-/**
- * This is uses an example from Stack Overflow instead of translating from Algorthms
+/** This is uses an example from Stack Overflow instead of translating from Algorthms
  * @see http://stackoverflow.com/questions/2201472/merge-sort-from-programming-scala-causes-stack-overflow
  * @see http://algs4.cs.princeton.edu/22mergesort/Merge.java.html
  * I added implicit Ordering @see [[scala.math.Ordering]]
@@ -8,8 +7,7 @@ package org.gs.sort
 
 import math.Ordering
 import scala.annotation.tailrec
-/**
- * Divide list in 2 then sort each half, recursively
+/** Divide list in 2 then sort each half, recursively
  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  *
  */

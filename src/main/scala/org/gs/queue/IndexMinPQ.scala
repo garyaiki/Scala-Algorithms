@@ -1,11 +1,9 @@
-/**
- * @see http://algs4.cs.princeton.edu/24pq/IndexMinPQ.java.html
+/** @see http://algs4.cs.princeton.edu/24pq/IndexMinPQ.java.html
  */
 package org.gs.queue
 import scala.reflect.ClassTag
 
-/**
- * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+/** @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  *
  * @param <A> keys are generic and ordered
  * @param nMax maximum number of elements

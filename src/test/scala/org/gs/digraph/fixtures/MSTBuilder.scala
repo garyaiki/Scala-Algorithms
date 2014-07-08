@@ -1,5 +1,4 @@
 /**
- *
  */
 package org.gs.digraph.fixtures
 
@@ -10,8 +9,7 @@ import org.gs.digraph.PrimMST
 import scala.annotation.tailrec
 
 
-/**
- * @author Gary Struthers
+/** @author Gary Struthers
  *
  */
   trait Builder {

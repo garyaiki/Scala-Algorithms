@@ -1,5 +1,4 @@
-/**
- * @see http://algs4.cs.princeton.edu/42directed/jobs.txt
+/** @see http://algs4.cs.princeton.edu/42directed/jobs.txt
  */
 package org.gs.digraph.fixtures
 
@@ -7,8 +6,7 @@ import org.gs.digraph.EdgeWeightedDigraph
 import org.gs.digraph.DijkstraSP
 import org.gs.digraph.DirectedEdge
 
-/**
- * @author Gary Struthers
+/** @author Gary Struthers
  * 
 */
 trait TopologicalBuilder {

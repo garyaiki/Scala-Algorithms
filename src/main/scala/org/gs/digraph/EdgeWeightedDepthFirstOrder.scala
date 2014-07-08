@@ -1,12 +1,10 @@
-/**
- * @see http://algs4.cs.princeton.edu/42directed/DepthFirstOrder.java.html
+/** @see http://algs4.cs.princeton.edu/42directed/DepthFirstOrder.java.html
  */
 package org.gs.digraph
 
 import scala.collection.mutable.Queue
 
-/**
- * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+/** @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  *
  */
 class EdgeWeightedDepthFirstOrder(g: EdgeWeightedDigraph) extends BaseDepthFirstOrder(g.v){

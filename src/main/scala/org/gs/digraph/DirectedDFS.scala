@@ -1,10 +1,8 @@
-/**
- * @see http://algs4.cs.princeton.edu/42directed/DirectedDFS.java.html
+/** @see http://algs4.cs.princeton.edu/42directed/DirectedDFS.java.html
  */
 package org.gs.digraph
 
-/**
- * Find reachable vertices from single or multiple source vertices
+/** Find reachable vertices from single or multiple source vertices
  * 
  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  * @param g [[org.gs.digraph.Digraph]]
