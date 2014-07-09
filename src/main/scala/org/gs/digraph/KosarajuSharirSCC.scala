@@ -2,15 +2,20 @@
  */
 package org.gs.digraph
 
-/** @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+import scala.annotation.tailrec
+
+/** 
+ *  
+ * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  * @param g digraph
  */
 class KosarajuSharirSCC(g: Digraph) {
-  val depthFirstOrder = new DepthFirstOrder(g.reverse)
-  val marked = Array.fill[Boolean](g.V)(false)
-  val id = new Array[Int](g.V)
+  private val depthFirstOrder = new DepthFirstOrder(g.reverse)
+  private val marked = Array.fill[Boolean](g.V)(false)
+  private val _id = new Array[Int](g.V)
 
-  def searchUnmarked(count: Int, rp: List[Int]): Int = {
+  @tailrec
+  private def searchUnmarked(count: Int, rp: List[Int]): Int = {
     rp match {
       case v :: xs => {
         if (!marked(v)) {
@@ -23,19 +28,23 @@ class KosarajuSharirSCC(g: Digraph) {
       case Nil => count
     }
   }
+  
+  /** @return number of strong components */
   val count = searchUnmarked(0, depthFirstOrder.reversePost)
 
-  def dfs(v: Int, count: Int): Unit = {
+  private def dfs(v: Int, count: Int): Unit = {
     marked(v) = true
-    id(v) = count
+    _id(v) = count
     for {
       w <- g.adj(v)
       if (!marked(w))
     } dfs(w, count)
   }
 
-  def stronglyConnected(v: Int, w: Int): Boolean = id(v) == id(w)
+  /** @return if @param v and @param w are strongly connected */
+  def stronglyConnected(v: Int, w: Int): Boolean = _id(v) == _id(w)
 
-  def idStrongComponent(v: Int): Int = id(v)
+  /** @return component id of @param v vertex */
+  def id(v: Int): Int = _id(v)
 }
 

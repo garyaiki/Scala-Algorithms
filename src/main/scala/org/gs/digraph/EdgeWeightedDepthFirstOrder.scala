@@ -7,7 +7,7 @@ import scala.collection.mutable.Queue
 /** @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  *
  */
-class EdgeWeightedDepthFirstOrder(g: EdgeWeightedDigraph) extends BaseDepthFirstOrder(g.v){
+class EdgeWeightedDepthFirstOrder(g: EdgeWeightedDigraph) extends BaseDepthFirstOrder(g.V){
 
   def dfs(v: Int): Unit = {
     marked(v) = true

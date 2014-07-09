@@ -10,13 +10,13 @@ import org.gs.graph.BaseEdgeWeightedGraph
 class EdgeWeightedDigraph(v: Int) extends BaseEdgeWeightedGraph[DirectedEdge](v) with DigraphMarker {
 
   def this(g: EdgeWeightedDigraph) = {
-    this(g.v)
+    this(g.V)
     buildADJ(g)
   }
 
   def addEdge(ed: DirectedEdge): Unit = {
     val v = ed.from
-    adj(v) = ed :: adj(v)
+    _adj(v) = ed :: _adj(v)
     e += 1//e + 1
   }
 

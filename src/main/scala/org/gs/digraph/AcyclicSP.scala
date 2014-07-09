@@ -10,9 +10,9 @@ import scala.annotation.tailrec
  * @param s source vertex
  */
 class AcyclicSP(g: EdgeWeightedDigraph, s: Int) {
-  private val _distTo = Array.fill[Double](g.v)(Double.PositiveInfinity)
+  private val _distTo = Array.fill[Double](g.V)(Double.PositiveInfinity)
   _distTo(s) = 0.0
-  private val edgeTo = Array.fill[Option[DirectedEdge]](g.v)(None)
+  private val edgeTo = Array.fill[Option[DirectedEdge]](g.V)(None)
   val topological = new Topological(g)
   
   topological.order match {

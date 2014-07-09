@@ -8,7 +8,7 @@ import scala.annotation.tailrec
  *
  */
 class EdgeWeightedDirectedCycle(g: EdgeWeightedDigraph) 
-    extends BaseDirectedCycle[DirectedEdge](g.v) {
+    extends BaseDirectedCycle[DirectedEdge](g.V) {
 
   protected def dfs(v: Int): Unit = {
     onStack(v) = true

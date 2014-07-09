@@ -1,24 +1,25 @@
-/** Common code for EdgeWeightedGraph, EdgeWeightedDigraph
+/** @see http://algs4.cs.princeton.edu/43mst/EdgeWeightedGraph.java.html
  */
 package org.gs.graph
 
 import scala.collection.mutable.ListBuffer
 
-/** @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
- *
- * @param <T> Edge, DirectedEdge
- * @param v number of vertices in EdgeWeightedGraph, EdgeWeightedDigraph
+/** Common code for [[org.gs.graph.EdgeWeightedGraph]], [[org.gs.diggraph.EdgeWeightedDigraph]]
+ *  
+ * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+ * @param <A> [[org.gs.graph.BaseEdge]] :> [[org.gs.graph.Edge]],[[org.gs.digraph.DirectedEdge]]
+ * @param vertices in [[org.gs.graph.EdgeWeightedGraph]] or [[org.gs.digraph.EdgeWeightedDigraph]]
  */
-abstract class BaseEdgeWeightedGraph[A <: BaseEdge](val v: Int) {
-  require(v >= 0, s"Number of vertices, v:$v must be nonnegative")
+abstract class BaseEdgeWeightedGraph[A <: BaseEdge](val V: Int) {
+  require(V >= 0, s"Number of vertices, v:$V must be nonnegative")
   protected[gs] var e = 0
-  protected[gs] val adj = Array.fill[List[A]](v)(List[A]())
+  protected[gs] val _adj = Array.fill[List[A]](V)(List[A]())
 
   protected def buildADJ[U <: BaseEdgeWeightedGraph[A]](g: U): Unit = {
     e = g.e
 
     for {
-      v <- 0 until g.v
+      v <- 0 until g.V
       reverse = List[A]()
     } {
       for {
@@ -26,38 +27,40 @@ abstract class BaseEdgeWeightedGraph[A <: BaseEdge](val v: Int) {
       } e :: reverse
       for {
         er <- reverse
-      } adj(v) = er :: adj(v)
+      } _adj(v) = er :: _adj(v)
     }
   }
 
-  def rangeGuard(x: Int): Boolean = {
+  protected def rangeGuard(x: Int): Boolean = {
     x match {
-      case x if 0 until v contains x => true
+      case x if 0 until V contains x => true
       case _ => false
     }
   }
 
-  def edgesOnVertex(eV: Int): List[A] = {
-    require(rangeGuard(eV), s"verticies eV:$eV  not in 0..$v ")
-    adj(eV)
+  /** @return edges incident on @param v */
+  def adj(v: Int): List[A] = {
+    require(rangeGuard(v), s"verticies v:$v  not in 0..$V ")
+    _adj(v)
   }
 
+  /** @return edges in graph */
   def edges():List[A]
 
   override def toString(): String = {
     val lf = sys.props("line.separator")
     val sb = new StringBuilder()
-    sb.append(s"$v $e $lf")
-    def addLines(vV: Int) {
-      sb.append(s"$vV : ")
+    sb.append(s"$V $e $lf")
+    def addLines(v: Int) {
+      sb.append(s"$v : ")
       for {
-        ed <- adj(vV)
+        ed <- _adj(v)
       } sb.append(s"$ed  ")
       sb.append(lf)
     }
     for {
-      vV <- 0 until v
-    } addLines(vV)
+      v <- 0 until V
+    } addLines(v)
     sb.toString
   }
 }

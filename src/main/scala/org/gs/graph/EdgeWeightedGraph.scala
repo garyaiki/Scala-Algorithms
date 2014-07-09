@@ -3,41 +3,52 @@
 package org.gs.graph
 
 import scala.collection.mutable.ListBuffer
-/** @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+/** Graph where edges have real values as weights
+ *  
+ * Extends [[org.gs.graph.BaseEdgeWeightedGraph]]
+ * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  * @param v number of vertices
  */
+
 class EdgeWeightedGraph(v: Int) extends BaseEdgeWeightedGraph[Edge](v) {
 
+  /** Alternate constructor makes a deep copy of @param g */
   def this(g: EdgeWeightedGraph) = {
-    this(g.v)
+    this(g.V)
     buildADJ(g)
   }
 
+  /** @param ed add [[[[org.gs.graph.Edge]] to graph */
   def addEdge(ed: Edge): Unit = {
     val either = ed.either
     val other = ed.other(either)
     require(rangeGuard(either) && rangeGuard(other),
       s"verticies either:$either w:$other not in 0..$v ")
 
-    adj(either) = ed :: adj(either)
-    adj(other) = ed :: adj(other)
+    _adj(either) = ed :: _adj(either)
+    _adj(other) = ed :: _adj(other)
     e += 1
   }
 
+  /** @return edges in graph */
   def edges(): List[Edge] = {
     val list = ListBuffer[Edge]()
-    def addEdgesAndSelfLoops(vV: Int) {
+    def addEdgesAndSelfLoops(v: Int) {
       var selfLoops = 0
+      
       def addEdges(edg: Edge) {
-        if(edg.other(vV) > vV) list.prepend(edg) else if (edg.other(vV) == vV) {
+        if(edg.other(v) > v) list.prepend(edg)
+        else if (edg.other(v) == v) {
           if (selfLoops % 2 == 0) list.prepend(edg)
           selfLoops += 1
         }
       }
+      
       for {
-        ed <- adj(vV)
+        ed <- adj(v)
       } addEdges(ed)
     }
+    
     for {
       vV <- 0 until v
     } addEdgesAndSelfLoops(vV)

@@ -14,7 +14,7 @@ import org.gs.digraph.fixtures.SymbolDigraphBuilder
 class TopologicalSuite extends FlatSpec {
 
   behavior of "a Topological"
-  it should "find jobs" in new SymbolDigraphBuilder {
+  it should "find topological order of jobs in a digraph " in new SymbolDigraphBuilder {
     val d = buildSymbolGraph("http://algs4.cs.princeton.edu/42directed/jobs.txt", "/")
     val t = new Topological(d.g)
     val equals = (_: Int) == (_: Int)

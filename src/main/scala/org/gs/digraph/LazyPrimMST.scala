@@ -15,10 +15,10 @@ import org.gs.graph.EdgeWeightedGraph
 class LazyPrimMST(g: EdgeWeightedGraph) {
   private var _weight: Double = 0.0
   private val mst = new Queue[Edge]()
-  private val marked = Array.fill[Boolean](g.v)(false)
+  private val marked = Array.fill[Boolean](g.V)(false)
   private val pq = new MinPQ[Edge](new ArrayBuffer((g.e) * 2))
   for {
-    v <- 0 until g.v
+    v <- 0 until g.V
     if (!marked(v))
   } prim(v)
 
@@ -70,7 +70,7 @@ class LazyPrimMST(g: EdgeWeightedGraph) {
    */
   def checkIsMinSpanningForest(): Boolean = {
     var cutOptimiality = true
-    val uf = new UF(g.v)
+    val uf = new UF(g.V)
     def mstEdges(e: Edge) {
       for (f <- mst) {
         val x = f.either

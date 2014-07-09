@@ -10,7 +10,7 @@ import org.gs.digraph.fixtures.TinyEdgeWeightedDigraphBuilder
 import org.scalatest.junit.JUnitRunner
 
 trait DijkstraAllPairsSPBuilder extends TinyEdgeWeightedDigraphBuilder {
-  val verticesLength = g.v
+  val verticesLength = g.V
   val allPairsSP = new DijkstraAllPairsSP(g)
 }
 /** @author Gary Struthers

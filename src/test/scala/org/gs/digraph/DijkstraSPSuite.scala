@@ -31,7 +31,7 @@ class DijkstraSPSuite extends FlatSpec {
   it should "have consistent distTo and edgeTo for all verticies" in new DijkstraSPBuilder {
     @tailrec
     def loop(i: Int): Boolean = {
-      if (i < g.v) {
+      if (i < g.V) {
         if ((i != s0) && (dsp0.edgeTo(i) == null && dsp0.distTo(i) != Double.PositiveInfinity))
           false else loop(i + 1)
       } else true
@@ -44,7 +44,7 @@ class DijkstraSPSuite extends FlatSpec {
   it should "have all edges where distTo(w) <= distTo(v) + e.weight" in new DijkstraSPBuilder {
     @tailrec
     def loopV(i: Int): Boolean = {
-      if (i < g.v) {
+      if (i < g.V) {
         val es = g.adj(i)
         @tailrec
         def loopE(es: List[DirectedEdge]): Boolean = {
@@ -67,7 +67,7 @@ class DijkstraSPSuite extends FlatSpec {
 
   it should "have all edges where distTo(w) == distTo(v) + e.weight" in new DijkstraSPBuilder {
     def loop(w: Int): Boolean = {
-      if(w < g.v) {
+      if(w < g.V) {
         val e = dsp0.edgeTo(w)
         if (e != null) {
           val v = e.from
@@ -85,7 +85,7 @@ class DijkstraSPSuite extends FlatSpec {
   it should "have shortest paths from 0 to all vertices" in new DijkstraSPBuilder {
     val equals = (_: DirectedEdge) == (_: DirectedEdge)
     for {
-      v <- 0 until g.v
+      v <- 0 until g.V
     } {
       v match {
         case 0 => dsp0.pathTo(v) match {
@@ -120,7 +120,7 @@ class DijkstraSPSuite extends FlatSpec {
           case Some(x) => assert(x.corresponds(List(tinyEdgeArray(7), tinyEdgeArray(10)))(equals))
           case None => fail(s"path from 0 to $v not found")
         }
-        case x if 8 until g.v contains x => assertResult(None) { dsp0.pathTo(v) }
+        case x if 8 until g.V contains x => assertResult(None) { dsp0.pathTo(v) }
         case _ => fail(s"v:$v is not a valid vertex")
       }
     }

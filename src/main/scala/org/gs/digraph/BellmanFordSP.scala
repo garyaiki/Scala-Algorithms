@@ -11,9 +11,9 @@ import scala.collection.mutable.ListBuffer
  * @param s source vertex
  */
 class BellmanFordSP(g: EdgeWeightedDigraph, s: Int) {
-  private val _distTo = Array.fill[Double](g.v)(Double.PositiveInfinity)
-  private val edgeTo = new Array[DirectedEdge](g.v)
-  private val onQueue = Array.fill[Boolean](g.v)(false)
+  private val _distTo = Array.fill[Double](g.V)(Double.PositiveInfinity)
+  private val edgeTo = new Array[DirectedEdge](g.V)
+  private val onQueue = Array.fill[Boolean](g.V)(false)
   private val queue = new Queue[Int]()
   private var cost = 0
   private var cycle = null.asInstanceOf[List[DirectedEdge]]
@@ -63,7 +63,7 @@ class BellmanFordSP(g: EdgeWeightedDigraph, s: Int) {
           onQueue(w) = true
         }
       }
-      if (cost % g.v == 0) findNegativeCycle
+      if (cost % g.V == 0) findNegativeCycle
       cost += 1
     }
   }

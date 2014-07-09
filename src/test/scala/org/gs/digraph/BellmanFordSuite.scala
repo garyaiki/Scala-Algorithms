@@ -28,7 +28,7 @@ class BellmanFordSuite extends FlatSpec {
     assert(e == null, s"edgeTo(s):$e inconsistent")
 
     for {
-      v <- 0 until g.v
+      v <- 0 until g.V
       e <- g.adj(v)
     } {
       val w = e.to
@@ -36,7 +36,7 @@ class BellmanFordSuite extends FlatSpec {
     }
 
     for {
-      w <- 0 until g.v
+      w <- 0 until g.V
       if (a.invokePrivate(getEdgeTo(w)) != null)
     } {
       val e = a invokePrivate getEdgeTo(w)

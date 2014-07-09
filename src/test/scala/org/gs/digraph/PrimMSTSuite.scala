@@ -62,7 +62,7 @@ class PrimMSTSuite extends FlatSpec {
   it should "be a minimal spanning forest" in new PrimMSTBuilder {
     def checkIsMinSpanningForest(): Boolean = {
       var cutOptimiality = true
-      val uf = new UF(g.v)
+      val uf = new UF(g.V)
       val mst = primMST.edges
       
       def mstEdges(e: Edge) {

@@ -41,7 +41,7 @@ abstract class BaseDepthFirstOrder(v: Int) {
   /** @return vertices in post-order of vertex v */
   def post(): List[Int] = postOrder.toList
 
-  /** @return vertices in reverse post-order of vertex v */
+  /** @return vertices in reverse post-order, which is a topological order, of vertex v */
   def reversePost(): List[Int] = {
     var reverse = List[Int]()
     for {

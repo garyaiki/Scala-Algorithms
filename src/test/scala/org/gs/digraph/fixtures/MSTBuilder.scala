@@ -38,7 +38,7 @@ import scala.annotation.tailrec
     val tinyMST = Array((0, 2, 0.26000), (0, 7, 0.16000), (1, 7, 0.19000), (6, 2, 0.40000),
       (2, 3, 0.17000), (4, 5, 0.35000), (5, 7, 0.28000))
     val tinyMSTArray = for(e <- tinyMST) yield new Edge(e._1, e._2, e._3)
-    val uf = new UF(g.v)
+    val uf = new UF(g.V)
 
     def buildUF(edges: Seq[Edge]): Boolean = {
       @tailrec

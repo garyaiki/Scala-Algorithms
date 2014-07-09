@@ -11,12 +11,12 @@ import org.gs.graph.EdgeWeightedGraph
  * @param g EdgeWeightedGraph
  */
 class PrimMST(g: EdgeWeightedGraph) {
-  private val edgeTo = new Array[Edge](g.v)
-  private val distTo = Array.fill[Double](g.v)(Double.MaxValue)
-  private val marked = Array.fill[Boolean](g.v)(false)
-  private val pq = new IndexMinPQ[Double](g.v)
+  private val edgeTo = new Array[Edge](g.V)
+  private val distTo = Array.fill[Double](g.V)(Double.MaxValue)
+  private val marked = Array.fill[Boolean](g.V)(false)
+  private val pq = new IndexMinPQ[Double](g.V)
   for {
-    v <- 0 until g.v
+    v <- 0 until g.V
     if (!marked(v))
   } prim(v)
 
