@@ -7,8 +7,11 @@ import org.gs.queue.IndexMinPQ
 import org.gs.graph.Edge
 import org.gs.graph.EdgeWeightedGraph
 
-/** @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
- * @param g EdgeWeightedGraph
+/** Compute a minimal spanning tree in an edge weighted graph
+ * 
+ * Only the shortest edge connecting a vertex to the tree remains on queue
+ * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+ * @param g [[org.gs.graph.EdgeWeightedGraph]]
  */
 class PrimMST(g: EdgeWeightedGraph) {
   private val edgeTo = new Array[Edge](g.V)
@@ -40,6 +43,7 @@ class PrimMST(g: EdgeWeightedGraph) {
     distTo(s) = 0.0
     pq.insert(s, distTo(s))
     scan(s)
+    
     @tailrec
     def loop(): Unit = {
       if (!pq.isEmpty) {
@@ -50,6 +54,10 @@ class PrimMST(g: EdgeWeightedGraph) {
     loop
   }
 
+  /** @return sum of edge weights in a MST */
+  def weight(): Double = edges.foldLeft(0.0)(_ + _.weight)
+  
+  /** @return edges of a MST */
   def edges(): List[Edge] = {
     val mst = new Queue[Edge]()
     val length = edgeTo.length
@@ -60,5 +68,4 @@ class PrimMST(g: EdgeWeightedGraph) {
     mst.toList
   }
 
-  def weight(): Double = edges.foldLeft(0.0)(_ + _.weight)
 }

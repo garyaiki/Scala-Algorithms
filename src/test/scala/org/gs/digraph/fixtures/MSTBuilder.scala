@@ -7,6 +7,7 @@ import org.gs.graph.Edge
 import org.gs.graph.EdgeWeightedGraph
 import org.gs.digraph.PrimMST
 import scala.annotation.tailrec
+import org.gs.graph.fixtures.EdgeBuilder
 
 
 /** @author Gary Struthers
@@ -53,5 +54,16 @@ import scala.annotation.tailrec
         } else false
       }
       loop(0)
+    }
+  }
+  
+  trait EdgeWeightedGraphBuilder extends EdgeBuilder {
+    def buildGraph(uri: String): EdgeWeightedGraph = {
+      val managedResource = readURI(uri)
+      val tuple = managedResource.loan(readFileToTuple)
+      val g = new EdgeWeightedGraph(tuple._1)
+      val edges = tuple._3
+      for (ed <- edges) g.addEdge(ed)
+      g
     }
   }

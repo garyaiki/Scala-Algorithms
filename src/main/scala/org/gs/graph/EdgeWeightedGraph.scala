@@ -3,9 +3,7 @@
 package org.gs.graph
 
 import scala.collection.mutable.ListBuffer
-/** Graph where edges have real values as weights
- *  
- * Extends [[org.gs.graph.BaseEdgeWeightedGraph]]
+/** Graph where edges have real values as weights. Extends [[org.gs.graph.BaseEdgeWeightedGraph]]
  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
  * @param v number of vertices
  */
