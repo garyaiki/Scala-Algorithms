@@ -1,5 +1,5 @@
 /** Builds arrays of directed edges
- */
+  */
 package org.gs.digraph.fixtures
 
 import org.gs.fixtures.BufferedSourceBuilder
@@ -8,8 +8,8 @@ import scala.collection.mutable.ArrayBuffer
 import org.gs.digraph.FlowEdge
 
 /** @author Gary Struthers
- *
- */
+  *
+  */
 trait FlowEdgeBuilder extends BufferedSourceBuilder {
   val intPattern = """^\d+$""".r
   val edgePattern = """^(\d+)\s+(\d+)\s+(-?\d+[.]\d+)$""".r

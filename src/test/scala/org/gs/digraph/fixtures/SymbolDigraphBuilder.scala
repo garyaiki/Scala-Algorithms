@@ -1,5 +1,5 @@
 /** @see http://algs4.cs.princeton.edu/42directed/SymbolDigraph.java.html
- */
+  */
 package org.gs.digraph.fixtures
 
 import scala.io.Source
@@ -12,7 +12,7 @@ import org.gs.graph.SymbolGraph
 import org.gs.fixtures.StringArrayBuilder
 
 /** @author Gary Struthers
- */
+  */
 trait SymbolDigraphBuilder 
     extends StringArrayBuilder
     with SymbolTableBuilder

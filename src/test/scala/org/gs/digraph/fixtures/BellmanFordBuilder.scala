@@ -1,5 +1,5 @@
 /**
- */
+  */
 package org.gs.digraph.fixtures
 
 import org.gs.digraph.BellmanFordSP
@@ -10,8 +10,8 @@ import scala.collection.mutable.ArrayBuffer
 import scalaz.std.tuple
 
 /** @author Gary Struthers
- *
- */
+  *
+  */
 trait BellmanFordBuilder extends DirectedEdgeBuilder {
   def buildVEDirectedEdges(url: String, s: Int): (Int, Int, ArrayBuffer[DirectedEdge]) = {
     val managedResource = readURI(url)

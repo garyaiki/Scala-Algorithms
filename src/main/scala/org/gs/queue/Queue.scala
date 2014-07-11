@@ -1,15 +1,15 @@
 package org.gs.queue
 /** This copies a example from Programming in Scala instead of translating from Algorthms
- * I added an isEmpty method
- * @see http://booksites.artima.com/programming_in_scala_2ed/examples/type-parameterization/Queues5.scala
- * @see http://algs4.cs.princeton.edu/13stacks/Queue.java.html
- */
+  * I added an isEmpty method
+  * @see http://booksites.artima.com/programming_in_scala_2ed/examples/type-parameterization/Queues5.scala
+  * @see http://algs4.cs.princeton.edu/13stacks/Queue.java.html
+  */
 
 /** Immutable interface for hidden Queue implementation
- * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
- *
- * @param <T>
- */
+  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+  *
+  * @param <T>
+  */
 trait Queue[T] {
   def head: T
   def tail: Queue[T]
@@ -20,9 +20,9 @@ trait Queue[T] {
 object Queue {
 
 /** @param xs a variable number of objects of type T
- * @return an initialized Queue companion object
- * @see QueueSuite for usage
- */
+  * @return an initialized Queue companion object
+  * @see QueueSuite for usage
+  */
 def apply[T](xs: T*): Queue[T] = new QueueImpl[T](xs.toList, Nil)
   /*
    * To Enqueue in constant time prepend to the trailing list

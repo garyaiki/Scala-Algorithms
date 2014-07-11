@@ -1,5 +1,5 @@
 /** @see http://algs4.cs.princeton.edu/15uf/largeUF.txt
- */
+  */
 package org.gs.set
 
 import org.scalatest.FlatSpec
@@ -9,8 +9,8 @@ import org.gs.fixtures.BufferedSourceBuilder
 import org.gs.fixtures.IntArrayBuilder
 
 /** @author Gary Struthers
- *
- */
+  *
+  */
 @RunWith(classOf[JUnitRunner])
 class UFSuite extends FlatSpec {
   trait UnionFindBuilder {

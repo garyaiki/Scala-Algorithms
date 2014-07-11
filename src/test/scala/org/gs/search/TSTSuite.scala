@@ -1,6 +1,6 @@
 /** ScalaTest, JUnit tests for Ternary Search Trie
- * @see http://algs4.cs.princeton.edu/52trie/TST.java.html
- */
+  * @see http://algs4.cs.princeton.edu/52trie/TST.java.html
+  */
 package org.gs.search
 
 import org.junit.runner.RunWith
@@ -9,8 +9,8 @@ import org.scalatest.junit.JUnitRunner
 import org.gs.fixtures.WordArrayBuilder
 
 /** @author Gary Struthers
- *
- */
+  *
+  */
 @RunWith(classOf[JUnitRunner])
 class TSTSuite extends FlatSpec {
   behavior of "a TST"

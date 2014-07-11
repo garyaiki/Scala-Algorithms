@@ -1,22 +1,25 @@
 /** @see http://algs4.cs.princeton.edu/43mst/EdgeWeightedGraph.java.html
- */
+  */
 package org.gs.graph
 
 import scala.collection.mutable.ListBuffer
-/** Graph where edges have real values as weights. Extends [[org.gs.graph.BaseEdgeWeightedGraph]]
- * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
- * @param v number of vertices
- */
+/** Graph where edges have real values as weights.
+  *
+  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+  *
+  * @constructor creates a new EdgeWeightedGraph with vertex count
+  * @param v number of vertices
+  */
 
 class EdgeWeightedGraph(v: Int) extends BaseEdgeWeightedGraph[Edge](v) {
 
-  /** Alternate constructor makes a deep copy of @param g */
+  /** @constructor makes a deep copy of @param g */
   def this(g: EdgeWeightedGraph) = {
     this(g.V)
     buildADJ(g)
   }
 
-  /** @param ed add [[[[org.gs.graph.Edge]] to graph */
+  /** @param ed add [[org.gs.graph.Edge]] to graph */
   def addEdge(ed: Edge): Unit = {
     val either = ed.either
     val other = ed.other(either)

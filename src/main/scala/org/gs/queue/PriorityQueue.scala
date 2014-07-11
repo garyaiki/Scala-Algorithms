@@ -1,8 +1,8 @@
 /*
- * Common code for MaxPQ, MinPQ
- * @see http://algs4.cs.princeton.edu/24pq/MaxPQ.java.html
- * @see http://algs4.cs.princeton.edu/24pq/MinPQ.java.html
- */
+  * Common code for MaxPQ, MinPQ
+  * @see http://algs4.cs.princeton.edu/24pq/MaxPQ.java.html
+  * @see http://algs4.cs.princeton.edu/24pq/MinPQ.java.html
+  */
 package org.gs.queue
 
 import collection.mutable.ArrayBuffer
@@ -10,11 +10,11 @@ import math.Ordering
 import scala.annotation.tailrec
 
 /**
- * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
- *
- * @param <A> keys are generic and ordered
- * @param pq queue, appends keys
- */
+  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+  *
+  * @tparam A keys are generic and ordered
+  * @param pq queue, appends keys
+  */
 abstract class PriorityQueue[A](pq: ArrayBuffer[A]) {
   if (pq.isEmpty) pq.append(null.asInstanceOf[A]) // don't use index 0
   else pq(0) = null.asInstanceOf[A]

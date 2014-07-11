@@ -1,9 +1,9 @@
 /** @see http://algs4.cs.princeton.edu/43mst/tinyEWG.txt
- */
+  */
 package org.gs.digraph
 /** @author Gary Struthers
- *
- */
+  *
+  */
 import org.scalatest.FlatSpec
 import org.junit.runner.RunWith
 import org.gs.graph.Edge

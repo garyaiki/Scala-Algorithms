@@ -1,12 +1,14 @@
 /** @see http://algs4.cs.princeton.edu/43mst/LazyPrimMST.java.html
- */
+  */
 package org.gs.digraph
+
 /** Compute a minimal spanning tree in an edge weighted graph
- *
- * Note: test with largeEWG took 5 minutes same test with PrimMST took 45 seconds
- * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
- * @param g [[org.gs.graph.EdgeWeightedGraph]]
- */
+  *
+  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+  * 
+  * @constructor creates a new LazyPrimMST with an EdgeWeightedGraph
+  * @param g [[org.gs.graph.EdgeWeightedGraph]]
+  */
 import scala.collection.mutable.ArrayBuffer
 import scala.collection.mutable.Queue
 import scala.annotation.tailrec

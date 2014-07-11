@@ -1,6 +1,6 @@
 package org.gs.graph
 /** @see http://algs4.cs.princeton.edu/41undirected/tinyG.txt
- */
+  */
 import org.scalatest.FlatSpec
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner

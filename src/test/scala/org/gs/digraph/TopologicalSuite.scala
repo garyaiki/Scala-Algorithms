@@ -1,15 +1,15 @@
 package org.gs.digraph
 /** ScalaTest, JUnit for Topological
- * @see http://algs4.cs.princeton.edu/42directed/jobs.txt
- */
+  * @see http://algs4.cs.princeton.edu/42directed/jobs.txt
+  */
 import org.scalatest.FlatSpec
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import org.gs.digraph.fixtures.DigraphBuilder
 import org.gs.digraph.fixtures.SymbolDigraphBuilder
 /** @author Gary Struthers
- *
- */
+  *
+  */
 @RunWith(classOf[JUnitRunner])
 class TopologicalSuite extends FlatSpec {
 

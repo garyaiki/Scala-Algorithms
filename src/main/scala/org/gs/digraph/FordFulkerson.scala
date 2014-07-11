@@ -1,13 +1,14 @@
 /** @see http://algs4.cs.princeton.edu/64maxflow/FordFulkerson.java.html
- */
+  */
 package org.gs.digraph
 
 import scala.math.{ abs, min }
 import scala.collection.mutable.Queue
 import scala.annotation.tailrec
 /** @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
- *
- */
+  *
+  * @constructor creates a new FordFulkerson with a FlowNetwork, source and target vertices
+  */
 class FordFulkerson(g: FlowNetwork, s: Int, t: Int) {
   private val Epsilon = 1e-11
   
@@ -23,6 +24,7 @@ class FordFulkerson(g: FlowNetwork, s: Int, t: Int) {
   private def excess(v: Int) = {
 
     def excessFlow(z: Double, e: FlowEdge): Double = (if (v == e.from) -e.flow else +e.flow) + z
+
     g.adj(v).foldLeft(0.0)(excessFlow(_, _))
   }
   private var _value = excess(t)
@@ -47,6 +49,7 @@ class FordFulkerson(g: FlowNetwork, s: Int, t: Int) {
         }
 
         if (checkEdgeCapacityConstraints(es)) checkCapacityConstraints(v + 1) else false
+
       } else true
     }
 
@@ -97,7 +100,9 @@ class FordFulkerson(g: FlowNetwork, s: Int, t: Int) {
   }
   
   @tailrec
-  private def onAugmentedPath(prevPath: Option[Array[FlowEdge]], prevMarked: Array[Boolean]): (Option[Array[FlowEdge]], Array[Boolean]) = {
+  private def onAugmentedPath(prevPath: Option[Array[FlowEdge]], prevMarked: Array[Boolean]):
+      (Option[Array[FlowEdge]], Array[Boolean]) = {
+    
     hasAugmentingPath match {
       case (None, m) => (Some(prevPath.get), prevMarked)
       case (Some(edgeTo), marked) => {
@@ -152,6 +157,7 @@ class FordFulkerson(g: FlowNetwork, s: Int, t: Int) {
   }
 }
 
+/** Factory for [[org.gs.digraph.FordFulkerson]] instances with additional validation */
 object FordFulkerson {
   def apply(g: FlowNetwork, s: Int, t: Int): Option[FordFulkerson] = {
     val ff = new FordFulkerson(g, s, t)

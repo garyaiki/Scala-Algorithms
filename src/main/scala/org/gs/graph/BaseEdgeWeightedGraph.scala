@@ -1,15 +1,17 @@
 /** @see http://algs4.cs.princeton.edu/43mst/EdgeWeightedGraph.java.html
- */
+  */
 package org.gs.graph
 
 import scala.collection.mutable.ListBuffer
 
-/** Common code for [[org.gs.graph.EdgeWeightedGraph]], [[org.gs.diggraph.EdgeWeightedDigraph]]
- *  
- * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
- * @param <A> [[org.gs.graph.BaseEdge]] :> [[org.gs.graph.Edge]],[[org.gs.digraph.DirectedEdge]]
- * @param vertices in [[org.gs.graph.EdgeWeightedGraph]] or [[org.gs.digraph.EdgeWeightedDigraph]]
- */
+/** Common code for edge weighted graphs
+  *  
+  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+  * 
+  * @constructor called by subclass with number of vertices
+  * @tparam A [[org.gs.graph.BaseEdge]] :> [[org.gs.graph.Edge]],[[org.gs.digraph.DirectedEdge]]
+  * @param vertices in [[org.gs.graph.EdgeWeightedGraph]] or [[org.gs.digraph.EdgeWeightedDigraph]]
+  */
 abstract class BaseEdgeWeightedGraph[A <: BaseEdge](val V: Int) {
   require(V >= 0, s"Number of vertices, v:$V must be nonnegative")
   protected[gs] var e = 0

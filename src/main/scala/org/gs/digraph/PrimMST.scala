@@ -1,5 +1,5 @@
 /** @see http://algs4.cs.princeton.edu/43mst/PrimMST.java.html
- */
+  */
 package org.gs.digraph
 import scala.collection.mutable.Queue
 import scala.annotation.tailrec
@@ -8,11 +8,14 @@ import org.gs.graph.Edge
 import org.gs.graph.EdgeWeightedGraph
 
 /** Compute a minimal spanning tree in an edge weighted graph
- * 
- * Only the shortest edge connecting a vertex to the tree remains on queue
- * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
- * @param g [[org.gs.graph.EdgeWeightedGraph]]
- */
+  * 
+  * Only the shortest edge connecting a vertex to the tree remains on queue
+  * 
+  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+  * 
+  * @constructor creates a new PrimMST with an EdgeWeightedGraph
+  * @param g [[org.gs.graph.EdgeWeightedGraph]]
+  */
 class PrimMST(g: EdgeWeightedGraph) {
   private val edgeTo = new Array[Edge](g.V)
   private val distTo = Array.fill[Double](g.V)(Double.MaxValue)

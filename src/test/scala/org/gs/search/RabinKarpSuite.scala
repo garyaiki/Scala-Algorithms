@@ -1,6 +1,6 @@
 /** ScalaTest, JUnit tests for Boyer Moore
- * @see http://algs4.cs.princeton.edu/53substring/RabinKarp.java.html
- */
+  * @see http://algs4.cs.princeton.edu/53substring/RabinKarp.java.html
+  */
 package org.gs.search
 
 import org.junit.runner.RunWith
@@ -8,8 +8,8 @@ import org.scalatest.FlatSpec
 import org.scalatest.junit.JUnitRunner
 
 /** @author Gary Struthers
- *
- */
+  *
+  */
 @RunWith(classOf[JUnitRunner])
 class RabinKarpSuite extends FlatSpec {
   behavior of "a RabinKarp"

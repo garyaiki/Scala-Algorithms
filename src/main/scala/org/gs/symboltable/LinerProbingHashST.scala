@@ -1,16 +1,16 @@
 /** @see http://algs4.cs.princeton.edu/34hash/LinearProbingHashST.java.html
- */
+  */
 package org.gs.symboltable
 
 import scala.annotation.tailrec
 
 /** Hash key to index value, when there is a collision try succeeding indexes insert in empty one
- * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
- *
- * @param <A> generic key type
- * @param <B> generic value type
- * @param initialSize of array
- */
+  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+  *
+  * @tparam A generic key type
+  * @param <B> generic value type
+  * @param initialSize of array
+  */
 class LinearProbingHashST[A, B](initialSize: Int) {
   private var m = initialSize
   private var n = 0

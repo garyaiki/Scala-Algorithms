@@ -1,5 +1,5 @@
 /** @see https://github.com/jsuereth/scala-in-depth-source/blob/master/chapter11/src/main/scala/scalax/resource/resource.scala
- */
+  */
 package org.gs.fixtures
 
 import scala.io.Source
@@ -9,8 +9,8 @@ import scala.io.BufferedSource
 import scala.collection.mutable.ArrayBuffer
 
 /** @author Gary Struthers
- *
- */
+  *
+  */
 trait ManagedResource[T] {
   def loan[U](f: T => U): U
 }

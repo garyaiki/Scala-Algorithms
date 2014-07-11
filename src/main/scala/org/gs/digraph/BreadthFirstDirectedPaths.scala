@@ -1,15 +1,17 @@
 package org.gs.digraph
 /** @see http://algs4.cs.princeton.edu/42directed/BreadthFirstDirectedPaths.java.html
- */
+  */
 import scala.collection.mutable.Queue
 import scala.annotation.tailrec
 
 /** Find shortest path from source vertex
- *
- * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
- * @param g [[org.gs.digraph.Digraph]]
- * @param s a single source vertex
- */
+  *
+  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+  * 
+  * @constructor creates a new BreadthFirstDirectedPaths with a digraph and source vertex
+  * @param g [[org.gs.digraph.Digraph]]
+  * @param s a single source vertex
+  */
 class BreadthFirstDirectedPaths(g: Digraph, s: Int) {
   private val marked = Array.fill[Boolean](g.V)(false)
   private val edgeTo = new Array[Int](g.V)

@@ -1,5 +1,5 @@
 /** @see http://algs4.cs.princeton.edu/44sp/tinyEWD.txt
- */
+  */
 package org.gs.digraph
 
 import org.junit.runner.RunWith
@@ -10,8 +10,8 @@ import org.gs.digraph.fixtures.TinyEdgeWeightedDigraphBuilder
 import scala.annotation.tailrec
 
 /** @author Gary Struthers
- *
- */
+  *
+  */
 @RunWith(classOf[JUnitRunner])
 class DijkstraSPSuite extends FlatSpec {
 

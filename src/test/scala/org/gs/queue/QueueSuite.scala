@@ -1,7 +1,7 @@
 package org.gs.queue
 /*
- * @see http://algs4.cs.princeton.edu/13stacks/tobe.txt
- */
+  * @see http://algs4.cs.princeton.edu/13stacks/tobe.txt
+  */
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import org.scalatest.FlatSpec
@@ -9,8 +9,8 @@ import org.gs.fixtures.WordArrayBuilder
 import scala.collection.mutable.ArrayBuffer
 
 /** @author Gary Struthers
- *
- */
+  *
+  */
 @RunWith(classOf[JUnitRunner])
 class QueueSuite extends FlatSpec {
   behavior of "a Queue"

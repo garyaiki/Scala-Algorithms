@@ -1,13 +1,14 @@
 /** @see http://algs4.cs.princeton.edu/44sp/DijkstraSP.java.html
- */
+  */
 package org.gs.digraph
 
 import scala.annotation.tailrec
 import org.gs.queue.IndexMinPQ
 
 /** @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
- *
- */
+  *
+  * @constructor creates a new DijkstraSP with an edge weighted digraph and source vertex
+  */
 class DijkstraSP(g: EdgeWeightedDigraph, s: Int) {
   require(g.edges.forall(_.weight >= 0))
   private[digraph] val distTo = Array.fill[Double](g.V)(Double.PositiveInfinity)
@@ -17,6 +18,7 @@ class DijkstraSP(g: EdgeWeightedDigraph, s: Int) {
   relaxVertices
 
   private def relaxVertices() {
+
     def relax(e: DirectedEdge) {
       val v = e.from
       val w = e.to
@@ -27,6 +29,7 @@ class DijkstraSP(g: EdgeWeightedDigraph, s: Int) {
         else pq.insert(w, distTo(w))
       }
     }
+
     @tailrec
     def loop() {
       if (!pq.isEmpty) {
@@ -35,6 +38,7 @@ class DijkstraSP(g: EdgeWeightedDigraph, s: Int) {
         loop
       }
     }
+
     pq.insert(s, distTo(s))
     loop
   }
@@ -45,12 +49,14 @@ class DijkstraSP(g: EdgeWeightedDigraph, s: Int) {
 
   def pathTo(v: Int): Option[List[DirectedEdge]] = {
     if (!hasPathTo(v)) None else {
+
       @tailrec
       def loop(e: DirectedEdge, path: List[DirectedEdge] ): List[DirectedEdge] = {
         if(e != null) {
           loop(edgeTo(e.from), e :: path)
         } else path
       }
+
       val path = loop(edgeTo(v), List[DirectedEdge]())
       Some(path)
     }

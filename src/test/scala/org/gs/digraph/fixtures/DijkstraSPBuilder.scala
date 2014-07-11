@@ -1,5 +1,5 @@
 /**
- */
+  */
 package org.gs.digraph.fixtures
 
 import org.gs.digraph.EdgeWeightedDigraph
@@ -9,7 +9,7 @@ import scala.reflect.ClassTag
 import scala.collection.mutable.ArraySeq
 
 /** @author Gary Struthers
- * 
+  * 
 */
 
 trait TinyEdgeWeightedArrayBuilder {

@@ -1,16 +1,17 @@
 package org.gs.queue
 /***
- * @see http://algs4.cs.princeton.edu/24pq/IndexMaxPQ.java.html
- */
+  * @see http://algs4.cs.princeton.edu/24pq/IndexMaxPQ.java.html
+  */
 import scala.reflect.ClassTag
 
-
-
-/** @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
- *
- * @param <A> keys are generic and ordered
- * @param nMax maximum number of elements
- */
+/** Max priority queue with index
+  *  
+  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+  *
+  * @constructor creates a new IndexMaxPQ with maximum number of elements
+  * @tparam A keys are generic and ordered
+  * @param nMax maximum number of elements
+  */
 class IndexMaxPQ[A: ClassTag](nMax: Int) extends IndexPriorityQueue[A](nMax) {
 
   def insert(i: Int, key: A)(implicit ord: Ordering[A]) { insert(i, key, less) }

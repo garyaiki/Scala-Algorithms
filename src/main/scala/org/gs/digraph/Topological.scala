@@ -1,15 +1,17 @@
 /*
- * @see http://algs4.cs.princeton.edu/42directed/Topological.java.html
- */
+  * @see http://algs4.cs.princeton.edu/42directed/Topological.java.html
+  */
 package org.gs.digraph
 
 /** Find topological order of a digraph
- *  
- * The reverse post-order of a directed acyclic graph (DAG) is its topological order 
- * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
- * @param <A> constrains g to classes that mixin [[org.gs.digraph.DigraphMarker]]
- * @param g either a [[org.gs.digraph.Digraph]] or [[org.gs.digraph.EdgeWeightedDigraph]]
- */
+  *  
+  * The reverse post-order of a directed acyclic graph (DAG) is its topological order 
+  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+  * 
+  * @constructor creates a new Topological with either a Digraph or EdgeWeightedDigraph
+  * @tparam A constrains g to classes that mixin [[org.gs.digraph.DigraphMarker]]
+  * @param g either a [[org.gs.digraph.Digraph]] or [[org.gs.digraph.EdgeWeightedDigraph]]
+  */
 class Topological[A <: DigraphMarker](g: A) {
   val finder = g match {
     case d: Digraph => new DirectedCycle(d)

@@ -1,6 +1,6 @@
 /** ScalaTest, JUnit tests for QuickX
- * @see http://algs4.cs.princeton.edu/23quicksort/QuickX.java.html
- */
+  * @see http://algs4.cs.princeton.edu/23quicksort/QuickX.java.html
+  */
 package org.gs.sort
 
 import org.gs.fixtures.WordArrayBuilder
@@ -9,8 +9,8 @@ import org.scalatest.FlatSpec
 import org.scalatest.junit.JUnitRunner
 
 /** @author Gary Struthers
- *
- */
+  *
+  */
 @RunWith(classOf[JUnitRunner])
 class QuickXSuite extends FlatSpec {
   behavior of "a QuickX"

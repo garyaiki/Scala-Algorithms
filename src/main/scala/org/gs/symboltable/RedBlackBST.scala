@@ -1,29 +1,29 @@
 /** @see http://algs4.cs.princeton.edu/33balanced/RedBlackBST.java.html
- */
+  */
 package org.gs.symboltable
 
 import math.Ordering
 import scala.annotation.tailrec
 
 /** Red Black Node
- * @param key generic
- * @param value generic
- * @param count number of subtrees
- * @param red true if link to parent is red false if black
- */
+  * @param key generic
+  * @param value generic
+  * @param count number of subtrees
+  * @param red true if link to parent is red false if black
+  */
 sealed class Node[A, B](var key: A, var value: B, var count: Int = 1, var red: Boolean = true) {
   var left = null.asInstanceOf[Node[A, B]]
   var right = null.asInstanceOf[Node[A, B]]
 }
 
 /** Balanced search tree with Red/Black nodes
- *
- * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
- *
- * @param <A> generic key type
- * @param <U> generic value type
- * @param ord implicit Ordering
- */
+  *
+  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+  *
+  * @tparam A generic key type
+  * @param <U> generic value type
+  * @param ord implicit Ordering
+  */
 class RedBlackBST[A, B](implicit ord: Ordering[A]) {
 
   private var root = null.asInstanceOf[Node[A, B]]

@@ -1,14 +1,16 @@
 /** @see http://algs4.cs.princeton.edu/42directed/KosarajuSharirSCC.java.html
- */
+  */
 package org.gs.digraph
 
 import scala.annotation.tailrec
 
 /** 
- *  
- * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
- * @param g digraph
- */
+  *  
+  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+  * 
+  * @constructor creates a new KosarajuSharirSCC with a digraph
+  * @param g digraph
+  */
 class KosarajuSharirSCC(g: Digraph) {
   private val depthFirstOrder = new DepthFirstOrder(g.reverse)
   private val marked = Array.fill[Boolean](g.V)(false)

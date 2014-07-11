@@ -1,17 +1,18 @@
 /** @see http://algs4.cs.princeton.edu/42directed/DepthFirstOrder.java.html
- */
+  */
 package org.gs.digraph
 
 import scala.collection.mutable.Queue
 
 /** Common code for finding pre-order, post-order, & reverse post-order in digraphs
- *
- * Superclass of [[org.gs.digraph.DepthFirstOrder]] & [[org.gs.digraph.EdgeWeightedDepthFirstOrder]]
- * 
- * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
- * @param v number of vertices in digraph
- *
- */
+  *
+  * 
+  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+  * 
+  * @constructor called by subclass with number of vertices
+  * @param v number of vertices in digraph
+  *
+  */
 abstract class BaseDepthFirstOrder(v: Int) {
 
   protected val _pre = new Array[Int](v)

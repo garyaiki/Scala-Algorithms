@@ -1,18 +1,18 @@
 /**
- * @see http://algs4.cs.princeton.edu/24pq/MaxPQ.java.html
- *
+  * @see http://algs4.cs.princeton.edu/24pq/MaxPQ.java.html
+  *
 */
 package org.gs.queue
 
 import scala.collection.mutable.ArrayBuffer
 
 /** For max value on Q extends [[PriorityQueue]]
- * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
- *
- * @param <A> keys are generic and ordered using [[PriorityQueue.less]]
- * @param pq priority queue array
- *
- */
+  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+  *
+  * @tparam A keys are generic and ordered using [[PriorityQueue.less]]
+  * @param pq priority queue array
+  *
+  */
 class MaxPQ[A](pq: ArrayBuffer[A]) extends PriorityQueue(pq) {
 
   /** insert key ordering with [[PriorityQueue.less]] */

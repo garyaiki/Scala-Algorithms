@@ -1,7 +1,7 @@
 package org.gs.digraph
 /** @see http://algs4.cs.princeton.edu/44sp/tinyDG.txt
- * @see http://algs4.cs.princeton.edu/42directed/mediumDG.txt
- */
+  * @see http://algs4.cs.princeton.edu/42directed/mediumDG.txt
+  */
 import org.scalatest.FlatSpec
 import org.junit.runner.RunWith
 import scala.collection.mutable.Queue
@@ -11,8 +11,8 @@ import org.gs.digraph.fixtures.DigraphBuilder
 import org.gs.fixtures.IntArrayBuilder
 import org.gs.digraph.fixtures.DirectedEdgeBuilder
 /** @author Gary Struthers
- *
- */
+  *
+  */
 @RunWith(classOf[JUnitRunner])
 class KosarajuSharirSCCSuite extends FlatSpec {
 

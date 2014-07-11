@@ -1,13 +1,15 @@
 /** @see http://algs4.cs.princeton.edu/43mst/Edge.java.html
- */
+  */
 package org.gs.graph
-/** Weighted Edge for graphs extends [[org.gs.graph.BaseEdge]]
- *  
- * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
- * @param v vertex at one end of edge
- * @param w vertex at the other end of edge
- * @param weight of Edge uses scala.math.Ordered for comparison 
- */
+/** Weighted Edge for graphs
+  *  
+  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+  *
+  * @constructor creates a new Edge with both vertices and weight
+  * @param v vertex at one end of edge
+  * @param w vertex at the other end of edge
+  * @param weight of Edge uses scala.math.Ordered for comparison 
+  */
 class Edge(v: Int, w: Int, weight: Double) extends BaseEdge(v, w, weight) with Ordered[Edge] {
 
   /** @return edge's "from" vertex */

@@ -1,14 +1,14 @@
 /** @see http://algs4.cs.princeton.edu/53substring/RabinKarp.java.html
- * MonteCarlo only, not Las Vegas
- */
+  * MonteCarlo only, not Las Vegas
+  */
 package org.gs.search
 
 import scala.util.Random
 import scala.annotation.tailrec
 
 /** @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
- *
- */
+  *
+  */
 class RabinKarp(pat: String) {
   private val R = 256
   private val M = pat.length

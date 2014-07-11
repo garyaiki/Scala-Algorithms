@@ -1,5 +1,5 @@
 /**
- */
+  */
 package org.gs.digraph
 
 import org.scalatest.FlatSpec
@@ -9,8 +9,8 @@ import org.scalautils.Tolerance._
 import org.scalatest.junit.JUnitRunner
 
 /** @author Gary Struthers
- *
- */
+  *
+  */
 @RunWith(classOf[JUnitRunner])
 class FlowEdgeSuite extends FlatSpec {
   behavior of "a FlowEdge"

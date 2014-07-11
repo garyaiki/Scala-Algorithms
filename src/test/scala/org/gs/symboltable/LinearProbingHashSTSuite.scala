@@ -16,8 +16,8 @@ class LinearProbingHashSTSuite extends FlatSpec with BeforeAndAfter with Private
       ('P', 3), ('U', 45), ('I', 27), ('M', 63), ('Q', 52), ('C', 15), ('X', 30), ('O', 81), ('S', 0))
   }
   /*
- * it should "put and get 1 key value" in {
- */
+  * it should "put and get 1 key value" in {
+  */
   it should "put and get 1 key value" in {
     val ost = new LinearProbingHashST[Char, Int](50)
     val item = testInput(0)

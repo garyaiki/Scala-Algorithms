@@ -1,6 +1,6 @@
 /** ScalaTest, JUnit tests for Boyer Moore
- * @see http://algs4.cs.princeton.edu/53substring/BoyerMoore.java.html
- */
+  * @see http://algs4.cs.princeton.edu/53substring/BoyerMoore.java.html
+  */
 package org.gs.search
 
 import org.junit.runner.RunWith
@@ -8,8 +8,8 @@ import org.scalatest.FlatSpec
 import org.scalatest.junit.JUnitRunner
 
 /** @author Gary Struthers
- *
- */
+  *
+  */
 @RunWith(classOf[JUnitRunner])
 class BoyerMooreSuite extends FlatSpec {
   behavior of "a BoyerMoore"

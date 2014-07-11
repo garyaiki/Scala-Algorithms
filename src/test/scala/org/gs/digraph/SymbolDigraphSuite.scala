@@ -1,13 +1,13 @@
 package org.gs.digraph
 /** @see http://algs4.cs.princeton.edu/41undirected/routes.txt
- */
+  */
 import org.scalatest.FlatSpec
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import org.gs.digraph.fixtures.SymbolDigraphBuilder
 /** @author Gary Struthers
- *
- */
+  *
+  */
 @RunWith(classOf[JUnitRunner])
 class SymbolDigraphSuite extends FlatSpec {
   behavior of "a SymbolDigraph"

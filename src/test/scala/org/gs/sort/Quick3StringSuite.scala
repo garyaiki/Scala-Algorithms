@@ -1,6 +1,6 @@
 /** ScalaTest, JUnit tests for Quick3String
- * @see http://algs4.cs.princeton.edu/51radix/Quick3string.java.html
- */
+  * @see http://algs4.cs.princeton.edu/51radix/Quick3string.java.html
+  */
 package org.gs.sort
 
 import org.junit.runner.RunWith
@@ -9,8 +9,8 @@ import org.gs.fixtures.WordArrayBuilder
 import org.scalatest.junit.JUnitRunner
 
 /** @author Gary Struthers
- *
- */
+  *
+  */
 @RunWith(classOf[JUnitRunner])
 class Quick3StringSuite extends FlatSpec {
   behavior of "a Quick3String"

@@ -1,5 +1,5 @@
 /** @see http://algs4.cs.princeton.edu/44sp/BellmanFordSP.java.html
- */
+  */
 package org.gs.digraph
 
 import scala.collection.mutable.Queue
@@ -7,9 +7,11 @@ import scala.annotation.tailrec
 import scala.collection.mutable.ListBuffer
 
 /** @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
- * @param g acyclic digraph
- * @param s source vertex
- */
+  * 
+  * @constructor creates a new BellmanFordSP with an edge weighted digraph and source vertex
+  * @param g acyclic digraph
+  * @param s source vertex
+  */
 class BellmanFordSP(g: EdgeWeightedDigraph, s: Int) {
   private val _distTo = Array.fill[Double](g.V)(Double.PositiveInfinity)
   private val edgeTo = new Array[DirectedEdge](g.V)

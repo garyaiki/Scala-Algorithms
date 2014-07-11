@@ -1,12 +1,13 @@
 /** @see http://algs4.cs.princeton.edu/64maxflow/FlowNetwork.java.html
- */
+  */
 package org.gs.digraph
 
 import scala.collection.mutable.ListBuffer
 
 /** @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
- *
- */
+  *
+  * @constructor creates a new FlowNetwork with a vertex count
+  */
 class FlowNetwork(val v: Int) {
   require(v >= 0, s"Number of vertices, v:$v must be nonnegative")
   private var _e = 0

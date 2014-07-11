@@ -1,5 +1,5 @@
 /** ScalaTest, JUnit tests for BellmanFordSP
- */
+  */
 package org.gs.digraph
 
 import org.gs.digraph.fixtures.DirectedEdgeBuilder
@@ -8,8 +8,8 @@ import org.scalatest.FlatSpec
 import org.scalatest.junit.JUnitRunner
 
 /** @author Gary Struthers
- *
- */
+  *
+  */
 @RunWith(classOf[JUnitRunner])
 class EdgeWeightedDirectedCycleSuite extends FlatSpec {
   it should "certify that digraph is either acyclic or has a directed cycle" in new DirectedEdgeBuilder {

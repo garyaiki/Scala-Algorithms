@@ -1,6 +1,6 @@
 /** ScalaTest, JUnit tests for Merge
- * @see http://algs4.cs.princeton.edu/51radix/shells.txt
- */
+  * @see http://algs4.cs.princeton.edu/51radix/shells.txt
+  */
 package org.gs.sort
 
 import org.gs.fixtures.WordArrayBuilder
@@ -9,8 +9,8 @@ import org.scalatest.FlatSpec
 import org.scalatest.junit.JUnitRunner
 
 /** @author Gary Struthers
- *
- */
+  *
+  */
 @RunWith(classOf[JUnitRunner])
 class MergeSuite extends FlatSpec {
   behavior of "a Merge"

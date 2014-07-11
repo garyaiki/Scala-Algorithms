@@ -1,5 +1,5 @@
 /** ScalaTest, JUnit tests for AcyclicSP
- */
+  */
 package org.gs.digraph
 
 import org.gs.digraph.fixtures.DirectedEdgeBuilder
@@ -8,8 +8,8 @@ import org.scalatest.FlatSpec
 import org.scalatest.junit.JUnitRunner
 
 /** @author Gary Struthers
- *
- */
+  *
+  */
 @RunWith(classOf[JUnitRunner])
 class AcyclicSPSuite extends FlatSpec {
   it should "match expected paths" in new DirectedEdgeBuilder {    

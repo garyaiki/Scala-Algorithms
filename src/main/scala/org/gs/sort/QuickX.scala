@@ -1,5 +1,5 @@
 /** @see http://algs4.cs.princeton.edu/23quicksort/QuickX.java.html
- */
+  */
 package org.gs.sort
 
 import scala.collection.mutable.ArrayBuffer
@@ -8,9 +8,9 @@ import scala.annotation.tailrec
 import scala.reflect.ClassTag
 
 /** @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
- *
- * @param <A> elements are generic and ordered ClassTag preserves Array type at runtime
- */
+  *
+  * @tparam A elements are generic and ordered ClassTag preserves Array type at runtime
+  */
 class QuickX[A: ClassTag](implicit ord: A => Ordered[A]) {
 
   private def shuffleArrayBuffer[A: ClassTag](xs: Array[A]): Array[A] = {

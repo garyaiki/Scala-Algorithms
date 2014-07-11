@@ -1,14 +1,16 @@
 /** @see http://algs4.cs.princeton.edu/44sp/AcyclicSP.java.html
- */
+  */
 package org.gs.digraph
 
 import scala.collection.mutable.ListBuffer
 import scala.annotation.tailrec
 
 /** @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
- * @param g acyclic digraph
- * @param s source vertex
- */
+  * 
+  * @constructor creates AcyclicSP with a digraph and source vertex
+  * @param g acyclic digraph
+  * @param s source vertex
+  */
 class AcyclicSP(g: EdgeWeightedDigraph, s: Int) {
   private val _distTo = Array.fill[Double](g.V)(Double.PositiveInfinity)
   _distTo(s) = 0.0

@@ -1,7 +1,7 @@
 package org.gs.queue
 /** @author Gary Struthers
- *
- */
+  *
+  */
 import scala.collection.mutable.ArrayBuffer
 import scala.math.Ordering._
 import org.junit.runner.RunWith

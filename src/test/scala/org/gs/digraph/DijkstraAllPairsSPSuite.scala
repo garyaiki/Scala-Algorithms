@@ -1,5 +1,5 @@
 /**
- */
+  */
 package org.gs.digraph
 
 import org.scalatest.FlatSpec
@@ -14,8 +14,8 @@ trait DijkstraAllPairsSPBuilder extends TinyEdgeWeightedDigraphBuilder {
   val allPairsSP = new DijkstraAllPairsSP(g)
 }
 /** @author Gary Struthers
- *
- */
+  *
+  */
 @RunWith(classOf[JUnitRunner])
 class DijkstraAllPairsSPSuite extends FlatSpec {
   behavior of "a DijkstraAllPairsSP"

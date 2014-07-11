@@ -1,5 +1,5 @@
 /**
- */
+  */
 package org.gs.graph.fixtures
 
 import org.gs.fixtures.SymbolTableBuilder
@@ -9,8 +9,8 @@ import org.gs.graph.BaseGraph
 import org.gs.fixtures.BufferedSourceBuilder
 
 /** @author Gary Struthers
- *
- */
+  *
+  */
 trait BaseSymbolGraphBuilder {
   
   def buildGraph[T <: BaseGraph](

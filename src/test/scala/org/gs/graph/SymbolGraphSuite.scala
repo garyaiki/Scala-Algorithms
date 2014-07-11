@@ -1,10 +1,10 @@
 package org.gs.graph
 /** [[http://doc.scalatest.org/2.2.0/#org.scalatest.FlatSpec ScalaTest]] for
- *  [[org.gs.graph.SymbolGraph]]
- * @author Gary Struthers
- * @see http://algs4.cs.princeton.edu/41undirected/movies.txt
- * @see http://algs4.cs.princeton.edu/41undirected/routes.txt
- */
+  *  [[org.gs.graph.SymbolGraph]]
+  * @author Gary Struthers
+  * @see http://algs4.cs.princeton.edu/41undirected/movies.txt
+  * @see http://algs4.cs.princeton.edu/41undirected/routes.txt
+  */
 import org.scalatest.FlatSpec
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner

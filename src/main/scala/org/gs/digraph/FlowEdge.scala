@@ -1,15 +1,17 @@
 /** @see http://algs4.cs.princeton.edu/64maxflow/FlowEdge.java.html
- */
+  */
 package org.gs.digraph
 
 /** @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
- *
- */
+  *
+  * @constructor creates a new FlowEdge with start and end vertices and capacity
+  */
 class FlowEdge(v: Int, w: Int, val capacity: Double) extends BaseDirectedEdge {
   require(v >= 0 && w >= 0 && capacity >= 0 && !capacity.isNaN(),
     "s invalid arg(s) v:$v w:$w capacity$capacity")
   private var _flow = 0.0
 
+  /** @constructor creates a new FlowEdge with start and end vertices, capacity and flow  */
   def this(v: Int, w: Int, capacity: Double, flow: Double) {
     this(v, w, capacity)
     require(_flow >= 0 && flow <= capacity,
