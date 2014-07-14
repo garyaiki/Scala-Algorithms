@@ -40,13 +40,13 @@ abstract class BaseEdgeWeightedGraph[A <: BaseEdge](val V: Int) {
     }
   }
 
-  /** @return edges incident on @param v */
+  /** returns edges incident on  v */
   def adj(v: Int): List[A] = {
     require(rangeGuard(v), s"verticies v:$v  not in 0..$V ")
     _adj(v)
   }
 
-  /** @return edges in graph */
+  /** returns edges in graph */
   def edges():List[A]
 
   override def toString(): String = {

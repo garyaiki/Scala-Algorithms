@@ -104,19 +104,19 @@ abstract class IndexPriorityQueue[A: ClassTag](nMax: Int) {
     swim(n, cmp)
   }
 
-  /** @return index associated with min or max key */
+  /** returns index associated with min or max key */
   protected def index(): Int = {
     require(n > 0, s"n:$n priority queue underflow")
     pq(1)
   }
 
-  /** @return min or max key */
+  /** returns min or max key */
   protected def topKey(): A = {
     require(n > 0, s"n:$n priority queue underflow")
     keys(pq(1))
   }
 
-  /** @return min or max key and removes it from q */
+  /** returns min or max key and removes it from q */
   protected def delTop(cmp: (Int, Int) => Boolean): Int = {
     require(n > 0, s"n:$n priority queue underflow")
     val top = pq(1)
@@ -128,7 +128,7 @@ abstract class IndexPriorityQueue[A: ClassTag](nMax: Int) {
     top
   }
 
-  /** @return key associated with index */
+  /** returns key associated with index */
   def keyOf(i: Int): A = {
     require(rangeGuard(i), s"i:$i not in 0 - nMax:$nMax")
     require(contains(i), s"index:$i is not in the priority queue")
@@ -197,7 +197,7 @@ abstract class IndexPriorityQueue[A: ClassTag](nMax: Int) {
     qp(i) = -1
   }
 
-  /** @return string of keys */
+  /** returns string of keys */
   override def toString(): String = {
     val sb = new StringBuilder()
     val size = pq.size
@@ -212,8 +212,8 @@ abstract class IndexPriorityQueue[A: ClassTag](nMax: Int) {
     sb.toString.trim()
   }
 
-  /** @return keys in order */
-  def getKeys(): IndexedSeq[A] = for (i <- 1 until nMax) yield keys(pq(i))
+  /** returns keys */
+  protected def getKeys(): IndexedSeq[A] = for (i <- 1 until nMax) yield keys(pq(i))
 
   /** check parent in position has left child at k * 2, right child at k * 2 + 1 */
   def checkHeap(cmp: (Int, Int) => Boolean): Boolean = {

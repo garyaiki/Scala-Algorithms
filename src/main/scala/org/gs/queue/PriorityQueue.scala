@@ -97,7 +97,7 @@ abstract class PriorityQueue[A](pq: ArrayBuffer[A]) {
     }
   }
 
-  /** @return string of keys */
+  /** returns string of keys */
   def toString(keys: Seq[A]): String = {
     val sb = new StringBuilder()
     for {

@@ -25,6 +25,6 @@ abstract class BaseDirectedCycle[A: ClassTag](v: Int) {
   /**  @return directed cycle as a List if a cycle exists */
   def cycle(): Option[List[A]] = _cycle
 
-  /** @return if digraph has a directed cycle */
+  /** returns if digraph has a directed cycle */
   def hasCycle(): Boolean = _cycle != None
 }

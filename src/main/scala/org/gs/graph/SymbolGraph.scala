@@ -17,7 +17,7 @@ import scala.collection.immutable.TreeMap
   */
 class SymbolGraph[A <: BaseGraph](st: TreeMap[String, Int], val keys: Array[String], val g: A) {
   
-  /** Does graph contain @param s */
+  /** Does graph contain  s */
   def contains(s: String): Boolean = st.contains(s)
   
   /**

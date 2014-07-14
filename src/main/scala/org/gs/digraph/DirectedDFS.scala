@@ -29,7 +29,7 @@ class DirectedDFS(g: Digraph, sources: Int*) {
   val marked = new Array[Boolean](g.V)
   private var _count = 0
 
-  /** @return number of vertices reachable from s */
+  /** returns number of vertices reachable from s */
   def count(): Int = _count
   
   private def dfs(v: Int): Unit = {
@@ -45,6 +45,6 @@ class DirectedDFS(g: Digraph, sources: Int*) {
     if(!marked(v))
   } dfs(v)
 
-  /** @return if there is a path from any source to v */
+  /** returns if there is a path from any source to v */
   def isMarked(v: Int): Boolean = marked(v)
 }

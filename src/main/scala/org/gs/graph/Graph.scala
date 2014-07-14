@@ -6,7 +6,7 @@ package org.gs.graph
   *
   * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   *
-  * @Constructor creates a new Graph with vertex count
+  * @constructor creates a new Graph with vertex count
   * @param v number of vertices
   */
 class Graph(v: Int) extends BaseGraph(v) {

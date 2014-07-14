@@ -4,7 +4,9 @@ package org.gs.digraph
 
 import scala.collection.mutable.ListBuffer
 import org.gs.graph.BaseEdgeWeightedGraph
-/** @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+/** Digraph with edges having direction and weight
+  *  
+  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   *
   * @constructor creates a new EdgeWeightedDigraph with a vertex count
   */
@@ -16,12 +18,14 @@ class EdgeWeightedDigraph(v: Int) extends BaseEdgeWeightedGraph[DirectedEdge](v)
     buildADJ(g)
   }
 
+  /** add directed edge to digraph */
   def addEdge(ed: DirectedEdge): Unit = {
     val v = ed.from
     _adj(v) = ed :: _adj(v)
     e += 1//e + 1
   }
 
+  /** returns all edges in digraph */
   def edges(): List[DirectedEdge] = {
     val list = ListBuffer[DirectedEdge]()
     for {
@@ -31,6 +35,7 @@ class EdgeWeightedDigraph(v: Int) extends BaseEdgeWeightedGraph[DirectedEdge](v)
     list.toList
   }
 
+  /** returns number of directed edges from vertex */
   def outdegree(v: Int): Int = {
     require(rangeGuard(v), s"verticies v:$v  not in 0..$v ")
     adj(v).size

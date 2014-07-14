@@ -12,7 +12,7 @@ import org.gs.digraph.DirectedEdge
   */
 trait DirectedEdgeBuilder extends BufferedSourceBuilder {
   val intPattern = """^\d+$""".r
-  val edgePattern = """^(\d+)\s+(\d+)\s+(-?\d+[.]\d+)$""".r
+  val edgePattern = """^\s*(\d+)\s+(\d+)\s+(-?\d+[.]\d+)$""".r
   def readFileToTuple(buffSource: BufferedSource): (Int, Int, ArrayBuffer[DirectedEdge]) = {
     val savedLines = new ArrayBuffer[DirectedEdge]()
     val it = buffSource.getLines
@@ -24,6 +24,7 @@ trait DirectedEdgeBuilder extends BufferedSourceBuilder {
       s match {
         case edgePattern(a,b,c) => savedLines.append(new DirectedEdge(a.toInt,b.toInt, c.toDouble))
         case intPattern() => if(v == 0) v = s.toInt else e = s.toInt
+        case _ => println(s"DirectedEdgeBuilder error s:${s.toString}")
       }
     }
     (v, e, savedLines)

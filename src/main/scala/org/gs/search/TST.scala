@@ -5,8 +5,13 @@ package org.gs.search
 import scala.annotation.tailrec
 import scala.collection.mutable.Queue
 
-/** @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+/** Ternary search trie
   *
+  * symbol table with string keys
+  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+  *
+  * @constructor creates a new TST
+  * @tparam A generic value type
   */
 class TST[A] {
   private var N = 0
@@ -19,6 +24,7 @@ class TST[A] {
     var value: Option[A] = None
   }
 
+  /** returns number of key value paire */
   def size(): Int = N
 
   @tailrec
@@ -36,6 +42,7 @@ class TST[A] {
     }
   }
 
+  /** returns value for key if present */
   def get(key: String): Option[A] = {
     require(key != null && !key.isEmpty, s"key:$key is null or empty")
 
@@ -45,6 +52,7 @@ class TST[A] {
     }
   }
 
+  /** returns if key in symbol table */
   def contains(key: String): Boolean = {
     get(key) match {
       case None => false
@@ -52,6 +60,11 @@ class TST[A] {
     }
   }
 
+  /** Put a key value in symbol table
+    *
+    * @param s key
+    * @param value
+    */
   def put(s: String, value: A): Unit = {
     if (!contains(s)) N += 1
 
@@ -70,6 +83,7 @@ class TST[A] {
     root = put(root, 0)
   }
 
+  /** returns longest prefix of s in symbol table */
   def longestPrefixOf(s: String): Option[String] = {
     
     def loop(length: Int, x: Option[Node], i: Int): Int = {
@@ -95,6 +109,7 @@ class TST[A] {
     }
   }
 
+  /** returns all keys */
   def keys(): Seq[String] = {
     val q = new Queue[String]
     collect(root, "", q)
@@ -120,6 +135,7 @@ class TST[A] {
     loop(x, prefix)
   }
 
+  /** returns all keys beginning with prefix */
   def prefixMatch(prefix: String): List[String] = {
     val q = new Queue[String]
     val x = get(root, prefix, 0)
@@ -137,6 +153,7 @@ class TST[A] {
     }
   }
 
+  /** returns all keys matching a wildcard pattern */ 
   def wildcardMatch(pat: String): List[String] = {
     val q = new Queue[String]
     

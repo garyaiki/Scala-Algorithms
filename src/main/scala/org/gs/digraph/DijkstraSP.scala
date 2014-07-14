@@ -5,14 +5,16 @@ package org.gs.digraph
 import scala.annotation.tailrec
 import org.gs.queue.IndexMinPQ
 
-/** @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+/** Solves for shortest path from a source where edge weights are non-negative
+  *  
+  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   *
   * @constructor creates a new DijkstraSP with an edge weighted digraph and source vertex
   */
 class DijkstraSP(g: EdgeWeightedDigraph, s: Int) {
   require(g.edges.forall(_.weight >= 0))
-  private[digraph] val distTo = Array.fill[Double](g.V)(Double.PositiveInfinity)
-  distTo(s) = 0.0
+  private[digraph] val _distTo = Array.fill[Double](g.V)(Double.PositiveInfinity)
+  _distTo(s) = 0.0
   private[digraph] val edgeTo = new Array[DirectedEdge](g.V)
   private val pq = new IndexMinPQ[Double](g.V)
   relaxVertices
@@ -22,11 +24,11 @@ class DijkstraSP(g: EdgeWeightedDigraph, s: Int) {
     def relax(e: DirectedEdge) {
       val v = e.from
       val w = e.to
-      if (distTo(w) > distTo(v) + e.weight) {
-        distTo(w) = distTo(v) + e.weight
+      if (_distTo(w) > _distTo(v) + e.weight) {
+        _distTo(w) = _distTo(v) + e.weight
         edgeTo(w) = e
-        if (pq.contains(w)) pq.decreaseKey(w, distTo(w))
-        else pq.insert(w, distTo(w))
+        if (pq.contains(w)) pq.decreaseKey(w, _distTo(w))
+        else pq.insert(w, _distTo(w))
       }
     }
 
@@ -39,14 +41,17 @@ class DijkstraSP(g: EdgeWeightedDigraph, s: Int) {
       }
     }
 
-    pq.insert(s, distTo(s))
+    pq.insert(s, _distTo(s))
     loop
   }
 
-  def getDistTo(v: Int): Double = distTo(v)
+  /** returns length of shortest path from source to v */
+  def distTo(v: Int): Double = _distTo(v)
 
-  def hasPathTo(v: Int): Boolean = distTo(v) < Double.PositiveInfinity
+  /** returns if there is a path from source to v */
+  def hasPathTo(v: Int): Boolean = _distTo(v) < Double.PositiveInfinity
 
+  /** returns path from source to v if it exists */
   def pathTo(v: Int): Option[List[DirectedEdge]] = {
     if (!hasPathTo(v)) None else {
 

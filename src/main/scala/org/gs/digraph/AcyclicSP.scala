@@ -5,9 +5,12 @@ package org.gs.digraph
 import scala.collection.mutable.ListBuffer
 import scala.annotation.tailrec
 
-/** @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
-  * 
-  * @constructor creates AcyclicSP with a digraph and source vertex
+/** Solves for shortest path from a source where edge weights can be positive, negative, or zero
+  *
+  * Uses [[org.gs.digraph.Topological]] order
+  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+  *
+  * @constructor creates a new AcyclicSP with a digraph and source vertex
   * @param g acyclic digraph
   * @param s source vertex
   */
@@ -15,7 +18,7 @@ class AcyclicSP(g: EdgeWeightedDigraph, s: Int) {
   private val _distTo = Array.fill[Double](g.V)(Double.PositiveInfinity)
   _distTo(s) = 0.0
   private val edgeTo = Array.fill[Option[DirectedEdge]](g.V)(None)
-  val topological = new Topological(g)
+  private val topological = new Topological(g)
   
   topological.order match {
     case None => throw new IllegalArgumentException(s"EdgeWeightedDigraph:$g is not acyclic")
@@ -34,10 +37,13 @@ class AcyclicSP(g: EdgeWeightedDigraph, s: Int) {
     }
   }
 
+  /** returns length of shortest path from source to v */
   def distTo(v: Int): Double = _distTo(v)
 
+  /** returns if there is a path from source to v */
   def hasPathTo(v: Int): Boolean = _distTo(v) < Double.PositiveInfinity
 
+  /** returns path from source to v if it exists */
   def pathTo(v: Int): Option[Seq[DirectedEdge]] = {
     if(!hasPathTo(v)) None else {
       val path = new ListBuffer[DirectedEdge]()

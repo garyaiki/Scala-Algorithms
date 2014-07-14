@@ -31,7 +31,7 @@ class KosarajuSharirSCC(g: Digraph) {
     }
   }
   
-  /** @return number of strong components */
+  /** returns number of strong components */
   val count = searchUnmarked(0, depthFirstOrder.reversePost)
 
   private def dfs(v: Int, count: Int): Unit = {
@@ -43,10 +43,10 @@ class KosarajuSharirSCC(g: Digraph) {
     } dfs(w, count)
   }
 
-  /** @return if @param v and @param w are strongly connected */
+  /** returns if  v and  w are strongly connected */
   def stronglyConnected(v: Int, w: Int): Boolean = _id(v) == _id(w)
 
-  /** @return component id of @param v vertex */
+  /** returns component id of  v vertex */
   def id(v: Int): Int = _id(v)
 }
 

@@ -4,7 +4,9 @@ package org.gs.digraph
 
 import scala.annotation.tailrec
 
-/** @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+/** Find if an edge weighted digraph has a directed cycle, return it if it does
+  *
+  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   *
   * @constructor creates a new EdgeWeightedDirectedCycle with an EdgeWeightedDigraph
   */

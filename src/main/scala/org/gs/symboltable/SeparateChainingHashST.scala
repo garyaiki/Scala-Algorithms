@@ -22,7 +22,7 @@ class SeparateChainingHashST[A, B](initialSize: Int) {
   /** number of key value pairs */
   def size(): Int = n
 
-  /** @return true if zero pairs */
+  /** returns true if zero pairs */
   def isEmpty(): Boolean = size == 0
 
   /** get value for key if it is present */
@@ -37,7 +37,7 @@ class SeparateChainingHashST[A, B](initialSize: Int) {
     }
   }
 
-  /** @return true if key present */
+  /** returns true if key present */
   def contains(key: A): Boolean = get(key) != None
 
   /** delete pair for key if it is present */

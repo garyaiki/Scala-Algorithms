@@ -48,10 +48,10 @@ class BreadthFirstPaths(g: Graph, s: Int) {
   /** is there a path from source vertex s to v */
   def hasPathTo(v: Int): Boolean = marked(v)
 
-  /** @return number of edges in shortest path from source vertex to v */
+  /** returns number of edges in shortest path from source vertex to v */
   def distTo(v: Int): Int = _distTo(v)
 
-  /** @return a list of vertices in the shortest path from the source vertex to v */
+  /** returns a list of vertices in the shortest path from the source vertex to v */
   def pathTo(v: Int): Option[List[Int]] = {
     if (!hasPathTo(v)) None else {
       @tailrec

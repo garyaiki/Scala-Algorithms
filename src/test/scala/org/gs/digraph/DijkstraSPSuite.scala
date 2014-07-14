@@ -2,12 +2,15 @@
   */
 package org.gs.digraph
 
+import org.scalautils._
+import org.scalautils.Tolerance._
 import org.junit.runner.RunWith
 import org.scalatest.FlatSpec
 import org.scalatest.junit.JUnitRunner
 import org.gs.digraph.fixtures.DijkstraSPBuilder
 import org.gs.digraph.fixtures.TinyEdgeWeightedDigraphBuilder
 import scala.annotation.tailrec
+import org.gs.digraph.fixtures.EdgeWeightedDigraphBuilder
 
 /** @author Gary Struthers
   *
@@ -125,4 +128,14 @@ class DijkstraSPSuite extends FlatSpec {
       }
     }
   }
+      
+  it should "calulate shortest path distance of mediumEWG" in new EdgeWeightedDigraphBuilder {
+    val g = buildGraph("http://algs4.cs.princeton.edu/44sp/mediumEWD.txt")
+    val dsp = new DijkstraSP(g, 0)
+    val distance1 = dsp.distTo(44)
+    assert(distance1 === 0.06 +- 0.005, s"dist from 0 to 44:$distance1")
+    val distance2 = dsp.distTo(97)
+    assert(distance2 === 0.08 +- 0.005, s"dist from 0 to 97:$distance2")
+  }
+
 }

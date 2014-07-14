@@ -57,10 +57,10 @@ class PrimMST(g: EdgeWeightedGraph) {
     loop
   }
 
-  /** @return sum of edge weights in a MST */
+  /** returns sum of edge weights in a MST */
   def weight(): Double = edges.foldLeft(0.0)(_ + _.weight)
   
-  /** @return edges of a MST */
+  /** returns edges of a MST */
   def edges(): List[Edge] = {
     val mst = new Queue[Edge]()
     val length = edgeTo.length

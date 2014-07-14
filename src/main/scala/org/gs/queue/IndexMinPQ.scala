@@ -21,13 +21,13 @@ class IndexMinPQ[A: ClassTag](nMax: Int) extends IndexPriorityQueue[A](nMax) {
     */
   def insert(i: Int, key: A)(implicit ord: Ordering[A]): Unit = { insert(i, key, greater) }
 
-  /** @return index associated with min key */
+  /** returns index associated with min key */
   def minIndex(): Int = index()
 
-  /** @return min key */
+  /** returns min key */
   def minKey(): A = topKey
 
-  /** @return min key and removes it from q */
+  /** returns min key and removes it from queue */
   def delMin()(implicit ord: Ordering[A]): Int = delTop(greater)
 
   /** Change key at index to new value, because it can be > or < current, it both swims and sinks
@@ -64,6 +64,6 @@ class IndexMinPQ[A: ClassTag](nMax: Int) extends IndexPriorityQueue[A](nMax) {
   /** check parent in position has left child at k * 2, right child at k * 2 + 1 */
   def isMinHeap()(implicit ord: Ordering[A]): Boolean = checkHeap(greater)
 
-  /** @return keys in order */
+  /** returns keys in order */
   def keys()(implicit ord: Ordering[A]): Seq[A] = getKeys
 }

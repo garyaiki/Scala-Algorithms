@@ -30,19 +30,19 @@ abstract class BaseDepthFirstOrder(v: Int) {
   /** @param v vertex for depth first search to find pre-order & post-order */
   protected def dfs(v: Int): Unit
 
-  /** @return pre-order number of vertex v */
+  /** returns pre-order number of vertex v */
   def pre(v: Int): Int = _pre(v)
 
-  /** @return post-order number of vertex v */
+  /** returns post-order number of vertex v */
   def post(v: Int): Int = _post(v)
 
-  /** @return vertices in pre-order of vertex v */
+  /** returns vertices in pre-order of vertex v */
   def pre(): List[Int] = preOrder.toList
 
-  /** @return vertices in post-order of vertex v */
+  /** returns vertices in post-order of vertex v */
   def post(): List[Int] = postOrder.toList
 
-  /** @return vertices in reverse post-order, which is a topological order, of vertex v */
+  /** returns vertices in reverse post-order, which is a topological order, of vertex v */
   def reversePost(): List[Int] = {
     var reverse = List[Int]()
     for {

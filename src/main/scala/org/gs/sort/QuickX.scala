@@ -7,9 +7,13 @@ import scala.util.Random
 import scala.annotation.tailrec
 import scala.reflect.ClassTag
 
-/** @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+/** Quicksort
   *
+  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+  *
+  * @constructor creates a new QuickX
   * @tparam A elements are generic and ordered ClassTag preserves Array type at runtime
+  * @param ord implicitly provides ordering
   */
 class QuickX[A: ClassTag](implicit ord: A => Ordered[A]) {
 
@@ -18,7 +22,7 @@ class QuickX[A: ClassTag](implicit ord: A => Ordered[A]) {
     a.toArray
   }
 
-  /** exchange xs(i) and xs(j) */
+  /** exchange i and j in array */
   def exchange(i: Int, j: Int, xs: Array[A]) {
     val iVal = xs(j)
     val jVal = xs(i)
@@ -26,15 +30,16 @@ class QuickX[A: ClassTag](implicit ord: A => Ordered[A]) {
     xs.update(j, jVal)
   }
 
-  /**
-   * Insertion sort is faster when partition or array has fewer elements than 10
+  /** Insertion sort is faster when partition or array has fewer than 10 elements
    * Exchange 2 elements when the one on the left is greater than the one on the right
    */
   def insertionSort(xs: Array[A]): Unit = {
     var i = 1
+    
     @tailrec
     def loopI(): Unit = {
       var j = i
+      
       @tailrec
       def loopJ(): Unit = {
         if (xs(j) >= xs(j - 1)) j = 0 else {
@@ -43,10 +48,12 @@ class QuickX[A: ClassTag](implicit ord: A => Ordered[A]) {
         }
         if (j > 0) loopJ
       }
+      
       i += 1
       loopJ
       if (i < xs.length) loopI
     }
+    
     loopI
   }
 
@@ -61,8 +68,8 @@ class QuickX[A: ClassTag](implicit ord: A => Ordered[A]) {
       hi - 1
     }
 
-    /**
-     * Scan from left of array until finding element greater than partition
+    /** Scan from left of array until finding element greater than partition
+     *
      * @param i partition
      * @param xs array
      * @return new i index
@@ -77,8 +84,8 @@ class QuickX[A: ClassTag](implicit ord: A => Ordered[A]) {
       xs.indexWhere(stopInc(_), from)
     }
 
-    /**
-     * Scan from right of array until finding element greater than partition
+    /** Scan from right of array until finding element greater than partition
+     *
      * @param i partition
      * @param xs array
      * @return new j index
@@ -115,8 +122,8 @@ class QuickX[A: ClassTag](implicit ord: A => Ordered[A]) {
     }
   }
 
-  /**
-   * Quicksort recursively partition and sort partions
+  /** Quicksort recursively partition and sort partions
+   *
    * @param a generic array
    * @param shuffle optionally shuffle for performance
    * @return sorted array

@@ -17,10 +17,10 @@ class UF(n: Int) {
   private val id = Array.range(0, n) 
   private val rank = Array.fill[Byte](n)(0)
 
-  /** @return number of components */
+  /** returns number of components */
   def count(): Int = _count
 
-  /** @return component identifier for p  */
+  /** returns component identifier for p  */
   def find(p: Int): Int = {
     require(p >= 0 && p < id.length)
     
@@ -34,7 +34,7 @@ class UF(n: Int) {
     loop(p)
   }
 
-  /** @return if p and q in the same component  */
+  /** returns if p and q in the same component  */
   def connected(p: Int, q: Int): Boolean = find(p) == find(q)
 
   /**

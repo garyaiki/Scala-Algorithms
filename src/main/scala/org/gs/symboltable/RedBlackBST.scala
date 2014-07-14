@@ -234,10 +234,10 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
     if (x.left == null) x else min(x.left)
   }
 
-  /** @return smallest key */
+  /** returns smallest key */
   def min(): A = min(root).key
 
-  /** @return largest key */
+  /** returns largest key */
   def max(): A = {
     def max(x: Node[A, B]): Node[A, B] = {
       assert(x != null, "null passed to max")
@@ -246,7 +246,7 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
     max(root).key
   }
 
-  /** @return largest key less than or equal to key */
+  /** returns largest key less than or equal to key */
   def floor(key: A): A = {
 
     def loop(x: Node[A, B])(implicit ord: Ordering[A]): Node[A, B] = {
@@ -264,7 +264,7 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
     loop(root).key
   }
 
-  /** @return smallest key greater than or equal to key */
+  /** returns smallest key greater than or equal to key */
   def ceiling(key: A): A = {
 
     def loop(x: Node[A, B])(implicit ord: Ordering[A]): Node[A, B] = {
@@ -283,7 +283,7 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
     loop(root).key
   }
 
-  /** @return number of keys less than key */
+  /** returns number of keys less than key */
   def rank(key: A): Int = {
 
     def loop(x: Node[A, B])(implicit ord: Ordering[A]): Int = {
@@ -299,7 +299,7 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
     loop(root)
   }
 
-  /** @return key of rank k */
+  /** returns key of rank k */
   def select(rank: Int): Option[A] = {
 
     def select(x: Node[A, B], k: Int): Node[A, B] = {
@@ -352,7 +352,7 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
     sb.toString
   }
 
-  /** @return string of nodes from top down by level */
+  /** returns string of nodes from top down by level */
   def levelOrderTreeWalk(): String = {
     val sb = new StringBuilder()
     val q = new Queue[Node[A, B]]()
@@ -370,7 +370,7 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
     sb.toString
   }
 
-  /** @return all node args left to right as string */
+  /** returns all node args left to right as string */
   override def toString(): String = {
     inorderTreeWalk(true)
   }

@@ -18,7 +18,7 @@ trait DigraphMarker
   */
 class Digraph(v: Int) extends BaseGraph(v) with DigraphMarker {
 
-  /** @return a reverse order copy */
+  /** returns a reverse order copy */
   def reverse(): Digraph = {
     val r = new Digraph(v)
     for {

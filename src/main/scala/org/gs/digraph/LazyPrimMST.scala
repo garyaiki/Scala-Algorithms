@@ -27,10 +27,10 @@ class LazyPrimMST(g: EdgeWeightedGraph) {
     if (!marked(v))
   } prim(v)
 
-  /** @return sum of edge weights in a MST */
+  /** returns sum of edge weights in a MST */
   def weight(): Double = _weight
 
-  /** @return edges of a MST */
+  /** returns edges of a MST */
   def edges(): List[Edge] = mst.toList
 
   private def scan(v: Int) {

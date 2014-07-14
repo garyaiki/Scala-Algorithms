@@ -13,7 +13,7 @@ import scala.collection.mutable.ListBuffer
 
 class EdgeWeightedGraph(v: Int) extends BaseEdgeWeightedGraph[Edge](v) {
 
-  /** @constructor makes a deep copy of @param g */
+  /** @constructor makes a deep copy of  g */
   def this(g: EdgeWeightedGraph) = {
     this(g.V)
     buildADJ(g)
@@ -31,7 +31,7 @@ class EdgeWeightedGraph(v: Int) extends BaseEdgeWeightedGraph[Edge](v) {
     e += 1
   }
 
-  /** @return edges in graph */
+  /** returns edges in graph */
   def edges(): List[Edge] = {
     val list = ListBuffer[Edge]()
     def addEdgesAndSelfLoops(v: Int) {

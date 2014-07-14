@@ -63,10 +63,14 @@ class BellmanFordSuite extends FlatSpec {
     val a = buildBellmanFordSP(g, tuple._3)
     val getEdgeTo = PrivateMethod[DirectedEdge]('getEdgeTo)
 
-    var weight = a.negativeCycle.foldLeft(0.0)(_ + _.weight)
+    var nc = a.negativeCycle match {
+      case None => fail(s"negative cycle from source vertex:$s not found")
+      case Some(x) => x
+    }
+    val weight = nc.foldLeft(0.0)(_ + _.weight)
     assert(weight < 0.0, s"weight:$weight of negative cycle from source vertex:$s must be negative")
     val ncPaths = expectedTinyEWDncPaths(tuple._3)
-    assert(a.negativeCycle.diff(ncPaths) === List())
+    assert(nc.diff(ncPaths) === List())
   }
 
 }

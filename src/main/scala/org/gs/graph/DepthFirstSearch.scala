@@ -16,7 +16,7 @@ class DepthFirstSearch(g: Graph, s: Int) {
   val marked = new Array[Boolean](g.V)
   private var _count = 0
 
-   /** @return number of vertices connected to s */
+   /** returns number of vertices connected to s */
   def count(): Int = _count
   
   private def dfs(v: Int): Unit = {

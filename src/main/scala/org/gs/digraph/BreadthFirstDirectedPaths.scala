@@ -35,13 +35,13 @@ class BreadthFirstDirectedPaths(g: Digraph, s: Int) {
   }
   bfs(s)
 
-  /** @return if there is a path from s to v */
+  /** returns if there is a path from s to v */
   def hasPathTo(v: Int): Boolean = marked(v)
 
-  /** @return number of edges in shortest path from s to v */
+  /** returns number of edges in shortest path from s to v */
   def distTo(v: Int): Int = _distTo(v)
 
-  /** @return the path from s to v */
+  /** returns the path from s to v */
   def pathTo(v: Int): List[Int] = {
     @tailrec
     def loop(x: Int, xs: List[Int]): List[Int] = {

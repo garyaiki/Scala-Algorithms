@@ -30,9 +30,9 @@ class Topological[A <: DigraphMarker](g: A) {
 
   private lazy val _order = createOrder(!finder.hasCycle)
 
-  /** @return if it has a topological order */
+  /** returns if it has a topological order */
   def hasOrder(): Boolean = _order != None
 
-  /** @return list of vertex numbers in topological order */
+  /** returns list of vertex numbers in topological order */
   def order(): Option[List[Int]] = _order 
 }
