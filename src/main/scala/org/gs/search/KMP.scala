@@ -4,8 +4,12 @@ package org.gs.search
 
 import scala.annotation.tailrec
 
-/** @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
-  *
+/** Search text for a pattern using Knuth-Morris-Pratt algorithm
+  *  
+  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+  * @constructor creates a new KMP from a character array constrained to an R character alphabet
+  * @param pattern
+  * @param radix
   */
 class KMP(pattern: Array[Char], R: Int = 256) {
   private val M = pattern.length
@@ -22,6 +26,7 @@ class KMP(pattern: Array[Char], R: Int = 256) {
     X = dfa(pattern(j))(X)
   }
 
+  /** returns text offset of match, text length for no match */
   def search(text: Array[Char]): Int = {
     val M = pattern.length
     val N = text.length

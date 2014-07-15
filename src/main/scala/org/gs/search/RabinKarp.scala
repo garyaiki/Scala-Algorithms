@@ -1,13 +1,17 @@
 /** @see http://algs4.cs.princeton.edu/53substring/RabinKarp.java.html
-  * MonteCarlo only, not Las Vegas
   */
 package org.gs.search
 
 import scala.util.Random
 import scala.annotation.tailrec
 
-/** @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+/** Search text for matches to a pattern
   *
+  * MonteCarlo only, doesn't do Las Vegas per-character check
+  * 
+  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+  * @constructor creates a new RabinKarp
+  * @param pattern to match
   */
 class RabinKarp(pat: String) {
   private val R = 256
@@ -31,6 +35,11 @@ class RabinKarp(pat: String) {
     loop(0, 0)
   }
 
+  /** Search for exact match
+    * 
+    * @param text to search
+    * @return offset to start of match or text length for no match
+    */
   def search(txt: String): Int = {
     require(txt.length >= M, s"text length:${txt.length} shorter than pattern length:$M")
     val N = txt.length
