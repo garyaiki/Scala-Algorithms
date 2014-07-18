@@ -20,7 +20,10 @@ abstract class PriorityQueue[A](pq: ArrayBuffer[A]) {
   else pq(0) = null.asInstanceOf[A]
 
   /** number of elements in Q */
-  def size(): Int = pq.length
+  def size(): Int = pq.length match {
+    case i if i == 0 => 0
+    case j if j > 0 => j - 1
+  }
   
   private var n = 0
 

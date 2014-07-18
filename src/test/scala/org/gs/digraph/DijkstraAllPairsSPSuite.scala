@@ -19,14 +19,12 @@ trait DijkstraAllPairsSPBuilder extends TinyEdgeWeightedDigraphBuilder {
 @RunWith(classOf[JUnitRunner])
 class DijkstraAllPairsSPSuite extends FlatSpec {
   behavior of "a DijkstraAllPairsSP"
-  it should "build" in new TinyEdgeWeightedDigraphBuilder {
+  it should "create a new DijkstraAllPairsSP from an EWD" in new TinyEdgeWeightedDigraphBuilder {
     val allPairsSP = new DijkstraAllPairsSP(g)
   }
   
-  it should "show from = 0 - to = 1..7 vertex distances" in new DijkstraAllPairsSPBuilder {
-    for {
-      t <- 1 to 7
-    } {
+  it should "find shortest paths from source to sinks" in new DijkstraAllPairsSPBuilder {
+    for(t <- 1 to 7) {
       t match {
         case 1 => assert(allPairsSP.dist(0,t) === 1.05 +- 0.01)
         case 2 => assert(allPairsSP.dist(0,t) === 0.26 +- 0.01)
@@ -38,6 +36,5 @@ class DijkstraAllPairsSPSuite extends FlatSpec {
         case _ =>
       }
     }
-    
   }
 }

@@ -36,7 +36,6 @@ class PrimMSTSuite extends FlatSpec {
 
   it should "match expected edges in a MST" in new PrimMSTBuilder {
     val edges = primMST.edges.toArray
-    println(edges.mkString(" "))
     val diff = edges.diff(tinyMSTArray)
     assert(edges.diff(tinyMSTArray).size === 0)
   }

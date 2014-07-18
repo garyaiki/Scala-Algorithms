@@ -6,6 +6,14 @@ import scala.io.BufferedSource
 import scala.collection.mutable.ArrayBuffer
 import org.gs.fixtures.BufferedSourceBuilder
 
+class UnweightedDigraphBuilder(fileURL: String) extends DigraphBuilder {
+  val managedResource = readURI(fileURL)
+  val vEpairs = managedResource.loan(readFileToTuple)
+  val savedLines = vEpairs._3
+  val g = new Digraph(vEpairs._1)
+  for(t <- savedLines) g.addEdge(t._1, t._2)
+}
+
 trait DigraphBuilder extends BufferedSourceBuilder {
   val tinyDAGdata = Array[(Int, Int)]((2, 3), (0, 6), (0, 1), (2, 0), (11, 12), (9, 12),
     (9, 10), (9, 11), (3, 5), (8, 7), (5, 4), (0, 5), (6, 4), (6, 9), (7, 6))
@@ -30,15 +38,12 @@ trait DigraphBuilder extends BufferedSourceBuilder {
     val it = buffSource.getLines
     var v = 0
     var e = 0
-    for {
-      s <- it
-    } {
+    for (s <- it)
       s match {
         case pairPattern(a, b) => savedLines.append((a.trim.toInt, b.trim.toInt))
         case intPattern() => if (v == 0) v = s.trim.toInt else e = s.trim.toInt
-        case _ => println(s)
+        case _ => println(s"readFileToTuple match error:$s")
       }
-    }
     (v, e, savedLines)
   }
 }

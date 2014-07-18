@@ -16,7 +16,7 @@ import org.gs.digraph.fixtures.FlowEdgeBuilder
 class FlowNetworkSuite extends FlatSpec {
   behavior of "a FlowNetwork"
   
-  it should "have at least on of each edge in tinyFN" in new FlowEdgeBuilder {
+  it should "have all vertices and edges in tinyFN" in new FlowEdgeBuilder {
     val managedResource = readURI("http://algs4.cs.princeton.edu/64maxflow/tinyFN.txt")
     val tuple = managedResource.loan(readFileToTuple)
     val v = tuple._1

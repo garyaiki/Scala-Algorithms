@@ -92,6 +92,7 @@ trait WordArrayBuilder extends BufferedSourceBuilder {
     managedResource.loan(readFileToArray)
   }
 }
+
 trait IntArrayBuilder extends BufferedSourceBuilder {
   val equals = (_: Int) == (_: Int)
   

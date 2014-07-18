@@ -5,13 +5,14 @@ package org.gs.digraph
 import scala.math.{ abs, min }
 import scala.collection.mutable.Queue
 import scala.annotation.tailrec
+import scala.collection.mutable.ArrayBuffer
 /** @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   *
   * @constructor creates a new FordFulkerson with a FlowNetwork, source and target vertices
   */
 class FordFulkerson(g: FlowNetwork, s: Int, t: Int) {
   private val Epsilon = 1e-11
-  
+
   private def rangeGuard(x: Int): Boolean = {
     x match {
       case x if 0 until g.v contains x => true
@@ -34,12 +35,12 @@ class FordFulkerson(g: FlowNetwork, s: Int, t: Int) {
     def capacityGuard(e: FlowEdge): Boolean = {
       if ((e.flow < -Epsilon) || (e.flow > e.capacity + Epsilon)) false else true
     }
-    
+
     @tailrec
     def checkCapacityConstraints(v: Int): Boolean = {
       if (v < g.v) {
         val es = g.adj(v)
-        
+
         @tailrec
         def checkEdgeCapacityConstraints(es: List[FlowEdge]): Boolean = {
           es match {
@@ -60,7 +61,7 @@ class FordFulkerson(g: FlowNetwork, s: Int, t: Int) {
     def lessThanSinkExcess(): Boolean = {
       if (abs(_value - excess(t)) > Epsilon) false else true
     }
-    
+
     @tailrec
     def loopVNetFlow(v: Int): Boolean = {
       if (v < g.v) {
@@ -76,7 +77,7 @@ class FordFulkerson(g: FlowNetwork, s: Int, t: Int) {
     val edgeTo = new Array[FlowEdge](g.v)
     val marked = Array.fill[Boolean](g.v)(false)
     marked(s) = true
-    
+
     @tailrec
     def loopQ(q: Queue[Int]): Unit = {
       if (!q.isEmpty) {
@@ -94,17 +95,20 @@ class FordFulkerson(g: FlowNetwork, s: Int, t: Int) {
         loopQ(q)
       }
     }
-    
+
     loopQ(Queue[Int](s))
-    if (marked(t)) (Some(edgeTo), marked) else (None, marked)
+    if (marked(t)) {
+      (Some(edgeTo), marked)
+    } else {
+      (None, marked)
+    }
   }
-  
+
   @tailrec
-  private def onAugmentedPath(prevPath: Option[Array[FlowEdge]], prevMarked: Array[Boolean]):
-      (Option[Array[FlowEdge]], Array[Boolean]) = {
-    
+  private def onAugmentedPath(prevPath: Option[Array[FlowEdge]]): (Option[Array[FlowEdge]], Array[Boolean]) = {
+
     hasAugmentingPath match {
-      case (None, m) => (Some(prevPath.get), prevMarked)
+      case (None, marked) => (Some(prevPath.get), marked)
       case (Some(edgeTo), marked) => {
         @tailrec
         def bottleneckCapacity(v: Int, bottle: Double): Double = {
@@ -127,11 +131,11 @@ class FordFulkerson(g: FlowNetwork, s: Int, t: Int) {
         augmentFlow(t)
 
         _value += bottle
-        onAugmentedPath(Some(edgeTo), marked)
+        onAugmentedPath(Some(edgeTo))
       }
     }
   }
-  private val pathAndMarked = onAugmentedPath(None, null)
+  private val pathAndMarked = onAugmentedPath(None)
 
   val edgeTo = pathAndMarked._1
 
@@ -163,16 +167,17 @@ object FordFulkerson {
     val ff = new FordFulkerson(g, s, t)
 
     def check(): Boolean = {
-      if (ff.isFeasible && ff.inCut(s) && ff.inCut(t)) true /*{@FIXME
+      if (ff.isFeasible && ff.inCut(s) && !ff.inCut(t)) {
 
         val mincutValues = for {
           v <- 0 until g.v
           e <- g.adj(v)
           if (v == e.from && ff.inCut(e.from) && !ff.inCut(e.to))
         } yield e.capacity
+
         val mincutvalue = mincutValues.foldLeft(0.0)(_ + _)
         if (abs(mincutvalue - ff.value) > ff.Epsilon) false else true
-      }*/ else false
+      } else false
     }
     if (check) Some(ff) else None
   }

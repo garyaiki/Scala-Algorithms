@@ -12,14 +12,13 @@ import org.gs.digraph.fixtures.SymbolDigraphBuilder
 class SymbolDigraphSuite extends FlatSpec {
   behavior of "a SymbolDigraph"
   
-  it should "have edges" in new SymbolDigraphBuilder {
+  it should "find unique vertices" in new SymbolDigraphBuilder {
     val d = buildSymbolGraph("http://algs4.cs.princeton.edu/41undirected/routes.txt", "\\s+")
     val size = d.keys.size
-    for(v <- 0 until size) println(s"index:$v key${d.name(v)} contains:${d.contains(d.name(v))} index:${d.index(d.name(v))}")
-    
+    assert(size === 10, s"found $size vertices in routes.txt should be 10")    
   }
   
-  it should "find routes" in new SymbolDigraphBuilder {
+  it should "find adjacent edges to vertices" in new SymbolDigraphBuilder {
     val d = buildSymbolGraph("http://algs4.cs.princeton.edu/41undirected/routes.txt", "\\s+")
     val keys = d.keys
     val g = d.g
