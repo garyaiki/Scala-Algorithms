@@ -13,7 +13,7 @@ import org.gs.digraph.fixtures.DigraphBuilder
 class DepthFirstDirectedPathsSuite extends FlatSpec { 
 
   behavior of "a DepthFirstDirectedPaths"
-  it should "find paths from source vertex to end vertex" in new DigraphBuilder {
+  it should "find paths from source vertex to end verticies" in new DigraphBuilder {
     val from3 = new DepthFirstDirectedPaths(tinyDG, 3)
     assert(from3.pathTo(0).corresponds(List(3, 5, 4, 2, 0))(equals))
     assert(from3.pathTo(1).corresponds(List(3, 5, 4, 2, 0, 1))(equals))
@@ -23,7 +23,7 @@ class DepthFirstDirectedPathsSuite extends FlatSpec {
     assert(from3.pathTo(5).corresponds(List(3, 5))(equals))
   }
 
-  it should "not find absent paths from source vertex to end vertex" in new DigraphBuilder {
+  it should "not find source to end vertices that have no path" in new DigraphBuilder {
     val from3 = new DepthFirstDirectedPaths(tinyDG, 3)
     assert(from3.hasPathTo(6) === false)
     assert(from3.hasPathTo(7) === false)

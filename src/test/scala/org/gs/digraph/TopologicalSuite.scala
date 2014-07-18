@@ -18,11 +18,11 @@ class TopologicalSuite extends FlatSpec {
     val d = buildSymbolGraph("http://algs4.cs.princeton.edu/42directed/jobs.txt", "/")
     val t = new Topological(d.g)
     val equals = (_: Int) == (_: Int)
-    val check = List(9, 8, 4, 5, 0, 1, 7, 11, 12, 10, 2, 3, 6)
     t.order match {
-      case Some(x) => assert(x.corresponds(check)(equals))
+      case Some(x) => {
+        assert(x.corresponds(List(9, 8, 4, 5, 0, 1, 7, 11, 12, 10, 2, 3, 6))(equals))
+      }
       case None => fail("no topological order")
     }
   }
-
 } 

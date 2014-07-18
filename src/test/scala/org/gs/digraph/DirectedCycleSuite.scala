@@ -15,7 +15,7 @@ import org.gs.digraph.fixtures.DigraphBuilder
 class DirectedCycleSuite extends FlatSpec {
 
   behavior of "a DirectedCycle"
-  it should "find digraph's directed cycles" in new DigraphBuilder {
+  it should "find a directed cycle if digraph has one" in new DigraphBuilder {
     val tdg = new DirectedCycle(tinyDG)
     assert(tdg.cycle.get.corresponds(List(3, 5, 4, 3))(equals), 
         s"directed cycle found ${tdg.cycle.get} expected ${List(3, 5, 4, 3)}")
@@ -24,7 +24,7 @@ class DirectedCycleSuite extends FlatSpec {
     assert((tdag.hasCycle) === false) 
   }
 
-  it should "show when digraph has no directed cycles" in new DigraphBuilder {
+  it should "confirm a digraph has no directed cycles" in new DigraphBuilder {
     val tdag = new DirectedCycle(tinyDAG)
     assert((tdag.hasCycle) === false)
   }

@@ -7,7 +7,7 @@ import scala.annotation.tailrec
 /** Find shortest path from source vertex
   *
   * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
-  * 
+  *
   * @constructor creates a new BreadthFirstDirectedPaths with a digraph and source vertex
   * @param g [[org.gs.digraph.Digraph]]
   * @param s a single source vertex
@@ -22,7 +22,25 @@ class BreadthFirstDirectedPaths(g: Digraph, s: Int) {
     marked(s) = true
     _distTo(s) = 0
     q.enqueue(s)
-    for {
+
+    def loopQ(): Unit = {
+      if (!q.isEmpty) {
+        val v = q.dequeue
+        for {
+          w <- g.adj(v)
+          if (!marked(w))
+        } {
+          edgeTo(w) = v
+          _distTo(w) = _distTo(v) + 1
+          marked(w) = true
+          q.enqueue(w)
+        }
+        loopQ
+      }
+    }
+    
+    loopQ
+/*    for {
       dq <- q
       w <- g.adj(dq)
       if !(marked(w))
@@ -31,7 +49,7 @@ class BreadthFirstDirectedPaths(g: Digraph, s: Int) {
       _distTo(w) = _distTo(dq) + 1
       marked(w) = true
       q.enqueue(w)
-    }
+    }*/
   }
   bfs(s)
 

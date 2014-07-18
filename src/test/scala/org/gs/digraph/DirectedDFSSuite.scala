@@ -32,13 +32,13 @@ class DirectedDFSSuite extends FlatSpec {
     assert(from2.count === 6)
   }
 
-  it should "count reachable verticies from 2 sources" in new DigraphBuilder {
+  it should "count reachable verticies from variable arg of source vertices" in new DigraphBuilder {
     val from1And2 = new DirectedDFS(tinyDG, 1, 2)
     assert(from1And2.count === 6)
   }
   
   
-  it should "count reachable verticies from 2 sources in an array" in new DigraphBuilder {
+  it should "count reachable verticies from an array arg of source vertices" in new DigraphBuilder {
     val from1And2 = new DirectedDFS(tinyDG, Array[Int](1, 2): _*)
     assert(from1And2.count === 6)
   }

@@ -33,6 +33,8 @@ trait DigraphBuilder extends BufferedSourceBuilder {
 
   val intPattern = """^\d+$""".r
   val pairPattern = """^(\s*\d+)\s{1,2}(\d+\s*)$""".r
+  val emptyPattern = """^\d*$""".r
+
   def readFileToTuple(buffSource: BufferedSource): (Int, Int, ArrayBuffer[(Int, Int)]) = {
     val savedLines = new ArrayBuffer[(Int, Int)]()
     val it = buffSource.getLines
@@ -42,7 +44,8 @@ trait DigraphBuilder extends BufferedSourceBuilder {
       s match {
         case pairPattern(a, b) => savedLines.append((a.trim.toInt, b.trim.toInt))
         case intPattern() => if (v == 0) v = s.trim.toInt else e = s.trim.toInt
-        case _ => println(s"readFileToTuple match error:$s")
+        case emptyPattern() =>
+        case _ => println(s"DigraphBuilder.readFileToTuple match error:$s")
       }
     (v, e, savedLines)
   }
