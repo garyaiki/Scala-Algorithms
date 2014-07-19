@@ -70,5 +70,4 @@ class PrimMST(g: EdgeWeightedGraph) {
     }
     mst.toList
   }
-
 }

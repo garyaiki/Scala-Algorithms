@@ -47,6 +47,7 @@ class LazyPrimMST(g: EdgeWeightedGraph) {
     
     @tailrec
     def loop(): Unit = {
+
       def doEdge(edg: Edge) {
         val v = edg.either
         val w = edg.other(v)

@@ -47,6 +47,7 @@ abstract class PriorityQueue[A](pq: ArrayBuffer[A]) {
 
   /** move k above its parents while its value is larger */
   private def swim(k: Int, cmp: (Int, Int) => Boolean) {
+
     @tailrec
     def loop(i: Int, j: Int) {
       if (i > 1 && cmp(j, i)) {
@@ -59,8 +60,10 @@ abstract class PriorityQueue[A](pq: ArrayBuffer[A]) {
 
   /** move k below the larger of its two children until its value is smaller */
   private def sink(k: Int, cmp: (Int, Int) => Boolean) {
+
     @tailrec
     def loop(k: Int): Unit = {
+
       def calcJ(): Int = {
         val j = k * 2
         val j1 = j + 1
@@ -112,6 +115,7 @@ abstract class PriorityQueue[A](pq: ArrayBuffer[A]) {
 
   /** check parent in position has left child at k * 2, right child at k * 2 + 1 */
   def checkHeap(cmp: (Int, Int) => Boolean): Boolean = {
+
     def loop(k: Int): Boolean = {
       val n = getNumberInQ
       if (k > n) true else {

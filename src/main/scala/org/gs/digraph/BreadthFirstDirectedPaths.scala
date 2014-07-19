@@ -40,16 +40,6 @@ class BreadthFirstDirectedPaths(g: Digraph, s: Int) {
     }
     
     loopQ
-/*    for {
-      dq <- q
-      w <- g.adj(dq)
-      if !(marked(w))
-    } {
-      edgeTo(w) = dq
-      _distTo(w) = _distTo(dq) + 1
-      marked(w) = true
-      q.enqueue(w)
-    }*/
   }
   bfs(s)
 

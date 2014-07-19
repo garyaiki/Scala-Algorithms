@@ -23,9 +23,7 @@ class KosarajuSharirSCC(g: Digraph) {
         if (!marked(v)) {
           dfs(v, count)
           searchUnmarked(count + 1, xs)
-        } else {
-          searchUnmarked(count, xs)
-        }
+        } else searchUnmarked(count, xs)
       }
       case Nil => count
     }

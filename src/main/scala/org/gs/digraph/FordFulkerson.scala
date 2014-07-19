@@ -19,6 +19,7 @@ class FordFulkerson(g: FlowNetwork, s: Int, t: Int) {
       case _ => false
     }
   }
+  
   require(rangeGuard(s) && rangeGuard(t), s"source verticies s:$s or t:$t not in 0..${g.v} ")
   require(s != t, s"source s:$s equals target t:$t")
 
@@ -28,13 +29,13 @@ class FordFulkerson(g: FlowNetwork, s: Int, t: Int) {
 
     g.adj(v).foldLeft(0.0)(excessFlow(_, _))
   }
+
   private var _value = excess(t)
 
   private def isFeasible(): Boolean = {
 
-    def capacityGuard(e: FlowEdge): Boolean = {
+    def capacityGuard(e: FlowEdge): Boolean =
       if ((e.flow < -Epsilon) || (e.flow > e.capacity + Epsilon)) false else true
-    }
 
     @tailrec
     def checkCapacityConstraints(v: Int): Boolean = {
@@ -54,20 +55,15 @@ class FordFulkerson(g: FlowNetwork, s: Int, t: Int) {
       } else true
     }
 
-    def lessThanSourceExcess(): Boolean = {
-      if (abs(_value + excess(s)) > Epsilon) false else true
-    }
+    def lessThanSourceExcess(): Boolean = if (abs(_value + excess(s)) > Epsilon) false else true
 
-    def lessThanSinkExcess(): Boolean = {
-      if (abs(_value - excess(t)) > Epsilon) false else true
-    }
+    def lessThanSinkExcess(): Boolean = if (abs(_value - excess(t)) > Epsilon) false else true
 
     @tailrec
-    def loopVNetFlow(v: Int): Boolean = {
+    def loopVNetFlow(v: Int): Boolean =
       if (v < g.v) {
         if ((v != s && v != t) && (abs(excess(v)) > Epsilon)) false else loopVNetFlow(v + 1)
       } else true
-    }
 
     checkCapacityConstraints(0) && lessThanSourceExcess && lessThanSinkExcess && loopVNetFlow(0)
   }
@@ -97,11 +93,7 @@ class FordFulkerson(g: FlowNetwork, s: Int, t: Int) {
     }
 
     loopQ(Queue[Int](s))
-    if (marked(t)) {
-      (Some(edgeTo), marked)
-    } else {
-      (None, marked)
-    }
+    if (marked(t)) (Some(edgeTo), marked) else (None, marked)
   }
 
   @tailrec
@@ -136,9 +128,7 @@ class FordFulkerson(g: FlowNetwork, s: Int, t: Int) {
     }
   }
   private val pathAndMarked = onAugmentedPath(None)
-
   val edgeTo = pathAndMarked._1
-
   private val marked = pathAndMarked._2
 
   def value(): Double = _value

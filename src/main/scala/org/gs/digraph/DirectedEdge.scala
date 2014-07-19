@@ -15,10 +15,10 @@ import org.gs.graph.BaseEdge
 class DirectedEdge(v: Int, w: Int, weight: Double) 
     extends BaseEdge(v, w, weight) with BaseDirectedEdge {
 
-  /** returns vertex at start of directed edge */
+  /** returns vertex at head of directed edge */
   def from(): Int = v
 
-  /** returns vertex at end of directed edge */
+  /** returns vertex at tail of directed edge */
   def to(): Int = w
 
 }

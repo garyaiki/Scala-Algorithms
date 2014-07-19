@@ -55,9 +55,8 @@ class NFA(regexp: String) {
       if (dfs.marked(v))
     } pc(v)  = v :: pc(v)
 
-    def add(a: ArrayBuffer[List[Int]])(v: Int): Unit = {
+    def add(a: ArrayBuffer[List[Int]])(v: Int): Unit = 
       if (a.length <= v) a += List(v) else a(v) = v :: a(v)
-    }
 
     @tailrec
     def computePossibleStates(i: Int): Boolean = {

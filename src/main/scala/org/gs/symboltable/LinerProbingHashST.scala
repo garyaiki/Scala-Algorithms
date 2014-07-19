@@ -32,10 +32,9 @@ class LinearProbingHashST[A, B](initialSize: Int) {
     val i = hash(key)
     
     @tailrec
-    def loop(j: Int): Option[(A, B)] = {
-      if (st(j) == null) None else if (key.equals(st(j)._1)) Some(st(j)) else
-        loop((j + 1) % m)
-    }
+    def loop(j: Int): Option[(A, B)] =
+      if (st(j) == null) None else if (key.equals(st(j)._1)) Some(st(j)) else loop((j + 1) % m)
+
     loop(i) match {
       case None => None
       case Some(x) => Some(x._2)
@@ -47,11 +46,9 @@ class LinearProbingHashST[A, B](initialSize: Int) {
 
   /** delete pair for key if it is present */
   def delete(key: A) {
+
     @tailrec
-    def find(j: Int): Int = {
-      if (key.equals(st(j)._1)) j else
-        find(j + 1 % m)
-    }
+    def find(j: Int): Int = if (key.equals(st(j)._1)) j else find(j + 1 % m)
 
     @tailrec
     def rehash(k: Int): Unit = {
@@ -78,15 +75,13 @@ class LinearProbingHashST[A, B](initialSize: Int) {
   /** insert key value pair, double size if half full */
   def put(key: A, value: B) {
     if (value == null) delete(key) else {
-      def doubleSizeIfHalfFull(): Unit = if (n >= m / 2) {
-        resize(m * 2)
-      }
+      def doubleSizeIfHalfFull(): Unit = if (n >= m / 2) resize(m * 2)
+
       doubleSizeIfHalfFull
 
       def loop(j: Int): Unit = {
         if (st(j) != null) {
-          if (key.equals(st(j)._1)) st(j) = (key, value) else
-            loop((j + 1) % m)
+          if (key.equals(st(j)._1)) st(j) = (key, value) else loop((j + 1) % m)
         } else st(j) = (key, value)
       }
       loop(hash(key))

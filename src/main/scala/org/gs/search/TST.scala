@@ -93,19 +93,17 @@ class TST[A] {
           val c = s.charAt(i)
           if (c < y.c) loop(length, y.left, i)
           else if (c > y.c) loop(length, y.right, i)
-          else {
+          else 
             y.value match {
               case None => loop(i + 1, y.mid, i + 1)
               case Some(v) => loop(length, y.mid, i + 1)
-            }
           }
         }
       }
     }
     if (s == null || s.isEmpty) None else {
       val len = loop(0, root, 0)
-      if (len == 0) None else
-        Some(s.substring(0, len))
+      if (len == 0) None else Some(s.substring(0, len))
     }
   }
 
@@ -118,7 +116,7 @@ class TST[A] {
 
   private def collect(x: Option[Node], prefix: String, q: Queue[String]): Unit = {
     
-    def loop(x: Option[Node], prefix: String): Unit = {
+    def loop(x: Option[Node], prefix: String): Unit =
       x match {
         case None =>
         case Some(y) => {
@@ -131,7 +129,7 @@ class TST[A] {
           loop(y.right, prefix)
         }
       }
-    }
+    
     loop(x, prefix)
   }
 

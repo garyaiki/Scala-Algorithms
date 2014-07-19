@@ -40,6 +40,7 @@ class DirectedDFS(g: Digraph, sources: Int*) {
       if (!marked(w))
     } dfs(w)
   }
+  
   for{
     v <- sources
     if(!marked(v))

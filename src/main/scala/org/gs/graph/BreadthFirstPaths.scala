@@ -24,6 +24,7 @@ class BreadthFirstPaths(g: Graph, s: Int) {
   private def bfs(s: Int): Unit = {
     _distTo(s) = 0
     marked(s) = true
+
     @tailrec
     def loop(q: Queue[Int]): Unit = {
       if (!q.isEmpty) {

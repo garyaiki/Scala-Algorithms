@@ -45,14 +45,10 @@ class EdgeWeightedGraph(v: Int) extends BaseEdgeWeightedGraph[Edge](v) {
         }
       }
       
-      for {
-        ed <- adj(v)
-      } addEdges(ed)
+      for( ed <- adj(v)) addEdges(ed)
     }
     
-    for {
-      vV <- 0 until v
-    } addEdgesAndSelfLoops(vV)
+    for( vV <- 0 until v) addEdgesAndSelfLoops(vV)
     list.toList
   }
 }

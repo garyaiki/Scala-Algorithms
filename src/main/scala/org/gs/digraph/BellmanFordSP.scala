@@ -24,7 +24,9 @@ class BellmanFordSP(g: EdgeWeightedDigraph, s: Int) {
   private val queue = new Queue[Int]()
   private var cost = 0
   private var cycle = null.asInstanceOf[List[DirectedEdge]]
+  
   private def getEdgeTo(v: Int): DirectedEdge = edgeTo(v)
+  
   _distTo(s) = 0.0
   queue.enqueue(s)
   onQueue(s) = true
@@ -61,9 +63,7 @@ class BellmanFordSP(g: EdgeWeightedDigraph, s: Int) {
   }
 
   private def relax(v: Int): Unit = {
-    for {
-      e <- g.adj(v)
-    } {
+    for( e <- g.adj(v) ) {
       val w = e.to
       if (_distTo(w) > _distTo(v) + e.weight) {
         _distTo(w) = _distTo(v) + e.weight

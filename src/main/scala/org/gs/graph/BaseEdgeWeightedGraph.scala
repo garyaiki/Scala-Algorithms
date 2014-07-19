@@ -46,7 +46,7 @@ abstract class BaseEdgeWeightedGraph[A <: BaseEdge](val V: Int) {
     _adj(v)
   }
 
-  /** returns edges in graph */
+  /** abstract edges in graph */
   def edges():List[A]
 
   override def toString(): String = {
@@ -55,14 +55,10 @@ abstract class BaseEdgeWeightedGraph[A <: BaseEdge](val V: Int) {
     sb.append(s"$V $e $lf")
     def addLines(v: Int) {
       sb.append(s"$v : ")
-      for {
-        ed <- _adj(v)
-      } sb.append(s"$ed  ")
+      for( ed <- _adj(v)) sb.append(s"$ed  ")
       sb.append(lf)
     }
-    for {
-      v <- 0 until V
-    } addLines(v)
+    for( v <- 0 until V) addLines(v)
     sb.toString
   }
 }

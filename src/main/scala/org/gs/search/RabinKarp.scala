@@ -21,16 +21,13 @@ class RabinKarp(pat: String) {
   private val patHash = hash(pat, M)
 
   @tailrec
-  private def precomputeRM(i: Int, rm: Long): Long = {
+  private def precomputeRM(i: Int, rm: Long): Long =
     if (i == M) rm else precomputeRM(i + 1, (R * rm) % Q)
-  }
 
   private def hash(key: String, M: Int): Long = {
 
     @tailrec
-    def loop(h: Long, j: Int): Long = {
-      if (j < M) loop((R * h + key.charAt(j)) % Q, j + 1) else h
-    }
+    def loop(h: Long, j: Int): Long = if (j < M) loop((R * h + key.charAt(j)) % Q, j + 1) else h
 
     loop(0, 0)
   }

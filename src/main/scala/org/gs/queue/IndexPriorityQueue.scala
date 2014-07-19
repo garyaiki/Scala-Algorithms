@@ -28,10 +28,12 @@ abstract class IndexPriorityQueue[A: ClassTag](nMax: Int) {
   def isEmpty(): Boolean = n == 0
 
   /** Generic ordering for [[org.gs.queue.IndexMaxPQ]] */
-  protected def less(a: Int, b: Int)(implicit ord: Ordering[A]): Boolean = ord.lt(keys(pq(a)), keys(pq(b)))
+  protected def less(a: Int, b: Int)(implicit ord: Ordering[A]): Boolean =
+      ord.lt(keys(pq(a)), keys(pq(b)))
 
   /** Generic ordering for [[org.gs.queue.IndexMinPQ]] */
-  protected def greater(a: Int, b: Int)(implicit ord: Ordering[A]): Boolean = ord.gt(keys(pq(a)), keys(pq(b)))
+  protected def greater(a: Int, b: Int)(implicit ord: Ordering[A]): Boolean =
+      ord.gt(keys(pq(a)), keys(pq(b)))
 
   private def rangeGuard(x: Int): Boolean = {
     x match {
@@ -60,6 +62,7 @@ abstract class IndexPriorityQueue[A: ClassTag](nMax: Int) {
 
   /** move k above its parents while its value is larger */
   private def swim(k: Int, cmp: (Int, Int) => Boolean): Unit = {
+
     @tailrec
     def loop(i: Int, j: Int) {
       if (i > 1 && cmp(j, i)) {
@@ -72,6 +75,7 @@ abstract class IndexPriorityQueue[A: ClassTag](nMax: Int) {
 
   /** move k below the larger of its two children until its value is smaller */
   private def sink(k: Int, cmp: (Int, Int) => Boolean): Unit = {
+
     @tailrec
     def loop(k: Int): Unit = {
       def calcJ(): Int = {
@@ -217,6 +221,7 @@ abstract class IndexPriorityQueue[A: ClassTag](nMax: Int) {
 
   /** check parent in position has left child at k * 2, right child at k * 2 + 1 */
   def checkHeap(cmp: (Int, Int) => Boolean): Boolean = {
+    
     def loop(k: Int): Boolean = {
       if (k > n) true else {
         val left = 2 * k
