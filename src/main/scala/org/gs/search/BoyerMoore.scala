@@ -25,11 +25,9 @@ class BoyerMoore(pattern: Array[Char], R: Int = 256) {
     def loop(i: Int): Int = {
 
       @tailrec
-      def findSkip(j: Int): Int = {
-        if (j < 0) 0
-        else if (pattern(j) != text(i + j)) max(1, j - right(text(i + j)))
-        else findSkip(j - 1)
-      }
+      def findSkip(j: Int): Int = if (j < 0) 0
+      else if (pattern(j) != text(i + j)) max(1, j - right(text(i + j)))
+      else findSkip(j - 1)
 
       if (i <= N - M) {
         val skip = findSkip(M - 1)

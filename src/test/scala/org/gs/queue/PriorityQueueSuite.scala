@@ -11,14 +11,10 @@ import org.scalatest.junit.JUnitRunner
 trait QueueBuilder {
   val testChars = Array('P', 'H', 'I', 'O', 'E', 'G', 'A', 'R', 'T', 'N')
   val maxPQ = new MaxPQ(new ArrayBuffer[Char](20))
-  for {
-    c <- testChars
-  } maxPQ.insert(c)
+  testChars foreach(c => maxPQ.insert(c))
   
   val minPQ = new MinPQ(new ArrayBuffer[Char](20))
-  for {
-    c <- testChars
-  } minPQ.insert(c)
+  testChars foreach(c => minPQ.insert(c))
 }
 
 @RunWith(classOf[JUnitRunner])
@@ -74,5 +70,4 @@ class MaxPriorityQueueSuite extends FlatSpec {
     val r = pq.pop()
     assert(r === None)
   }
-
 }

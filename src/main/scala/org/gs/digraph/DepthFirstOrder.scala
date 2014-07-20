@@ -17,10 +17,7 @@ class DepthFirstOrder(g: Digraph ) extends BaseDepthFirstOrder(g.V) {
     preCounter += 1
     _pre(v) = preCounter
     preOrder.enqueue(v)
-    for {
-      w <- g.adj(v)
-      if (!marked(w))
-    } dfs(w)
+    g.adj(v).foreach(x => if (!marked(x)) dfs(x))
     postOrder.enqueue(v)
     postCounter += 1
     _post(v) = postCounter

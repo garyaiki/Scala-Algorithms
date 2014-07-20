@@ -15,10 +15,7 @@ abstract class BaseDirectedCycle[A: ClassTag](v: Int) {
   protected val onStack = Array.fill[Boolean](v)(false)
   protected val edgeTo = new Array[A](v)
   protected var _cycle: Option[List[A]] = None
-  for {
-    v <- 0 until v
-    if (!marked(v))
-  } dfs(v)
+  for (v <- 0 until v; if (!marked(v))) dfs(v)
 
   protected def dfs(v: Int): Unit
 

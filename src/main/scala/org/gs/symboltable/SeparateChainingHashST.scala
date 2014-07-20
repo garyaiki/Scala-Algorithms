@@ -45,7 +45,9 @@ class SeparateChainingHashST[A, B](initialSize: Int) {
     val i = hash(key)
     val chainList = st(i)
     val j = chainList.indexWhere(chainGet(_, key))
-    if (j != -1) st(i) = chainList.take(j) ++ chainList.takeRight(chainList.length - j - 1)
+    if (j != -1) {
+      st(i) = chainList.take(j) ++ chainList.takeRight(chainList.length - j - 1)
+    }
   }
 
   /** insert pair, resize if necessary */
@@ -65,10 +67,7 @@ class SeparateChainingHashST[A, B](initialSize: Int) {
 
   private def resize(chains: Int): Unit = {
     val tmp = new SeparateChainingHashST[A, B](chains)
-    for {
-      chain <- st
-      kv <- chain
-    } tmp.put(kv._1, kv._2)
+    for (chain <- st;kv <- chain) tmp.put(kv._1, kv._2)
     m = tmp.m
     st = tmp.st
   }
@@ -77,7 +76,7 @@ class SeparateChainingHashST[A, B](initialSize: Int) {
    * @return keys in a list
    */
   def keys(): List[A] = {
-    val q = scala.collection.mutable.Queue[A]()
+    var q = scala.collection.mutable.Queue[A]()
     for {
       chain <- st
       if (chain != null)

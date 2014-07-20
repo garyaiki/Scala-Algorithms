@@ -18,14 +18,11 @@ trait UnweightedEdgeBuilder extends BufferedSourceBuilder {
     val it = buffSource.getLines
     var v = 0
     var e = 0
-    for {
-      s <- it
-    } {
-      s match {
-        case edgePattern(a,b) => savedLines.append((a.toInt,b.toInt))
-        case intPattern() => if(v == 0) v = s.toInt else e = s.toInt
-      }
-    }
+    it foreach (s => s match {
+      case edgePattern(a, b) => savedLines.append((a.toInt, b.toInt))
+      case intPattern() => if (v == 0) v = s.toInt else e = s.toInt
+    })
+
     (v, e, savedLines)
   }
 

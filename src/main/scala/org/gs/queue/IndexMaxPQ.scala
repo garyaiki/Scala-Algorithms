@@ -20,7 +20,7 @@ class IndexMaxPQ[A: ClassTag](nMax: Int) extends IndexPriorityQueue[A](nMax) {
     * @param key generic element
     * @param cmp less
     */
-  def insert(i: Int, key: A)(implicit ord: Ordering[A]) { insert(i, key, less) }
+  def insert(i: Int, key: A)(implicit ord: Ordering[A]): Unit = insert(i, key, less)
 
   /** returns index associated with max key */
   def maxIndex(): Int = index()
@@ -37,7 +37,7 @@ class IndexMaxPQ[A: ClassTag](nMax: Int) extends IndexPriorityQueue[A](nMax) {
     * @param key value
     * @param cmp less
     */
-  def changeKey(i: Int, key: A)(implicit ord: Ordering[A]): Unit = { changeKey(i, key, less) }
+  def changeKey(i: Int, key: A)(implicit ord: Ordering[A]): Unit = changeKey(i, key, less)
 
   /** Decrease key at index to new value, because it is < current, it both swims
     *
@@ -45,7 +45,7 @@ class IndexMaxPQ[A: ClassTag](nMax: Int) extends IndexPriorityQueue[A](nMax) {
     * @param key value
     * @param cmp less
     */
-  def decreaseKey(i: Int, key: A)(implicit ord: Ordering[A]): Unit = { decreaseKey(i, key, less) }
+  def decreaseKey(i: Int, key: A)(implicit ord: Ordering[A]): Unit = decreaseKey(i, key, less)
 
   /** Increase key at index to new value, because it is > current, it sinks
     *
@@ -53,14 +53,14 @@ class IndexMaxPQ[A: ClassTag](nMax: Int) extends IndexPriorityQueue[A](nMax) {
     * @param key value
     * @param cmp less
     */
-  def increaseKey(i: Int, key: A)(implicit ord: Ordering[A]): Unit = { increaseKey(i, key, less) }
+  def increaseKey(i: Int, key: A)(implicit ord: Ordering[A]): Unit = increaseKey(i, key, less)
 
   /** Remove key at index
     *
     * @param i index
     * @param cmp less
     */
-  def delete(i: Int)(implicit ord: Ordering[A]): Unit = { delete(i, less) }
+  def delete(i: Int)(implicit ord: Ordering[A]): Unit = delete(i, less)
 
   /** check parent in position has left child at k * 2, right child at k * 2 + 1 */
   def isMinHeap()(implicit ord: Ordering[A]): Boolean = checkHeap(less)

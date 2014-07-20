@@ -31,15 +31,15 @@ class QuickX[A: ClassTag](implicit ord: A => Ordered[A]) {
   }
 
   /** Insertion sort is faster when partition or array has fewer than 10 elements
-   * Exchange 2 elements when the one on the left is greater than the one on the right
-   */
+    * Exchange 2 elements when the one on the left is greater than the one on the right
+    */
   def insertionSort(xs: Array[A]): Unit = {
     var i = 1
-    
+
     @tailrec
     def loopI(): Unit = {
       var j = i
-      
+
       @tailrec
       def loopJ(): Unit = {
         if (xs(j) >= xs(j - 1)) j = 0 else {
@@ -48,12 +48,12 @@ class QuickX[A: ClassTag](implicit ord: A => Ordered[A]) {
         }
         if (j > 0) loopJ
       }
-      
+
       i += 1
       loopJ
       if (i < xs.length) loopI
     }
-    
+
     loopI
   }
 
@@ -69,31 +69,34 @@ class QuickX[A: ClassTag](implicit ord: A => Ordered[A]) {
     }
 
     /** Scan from left of array until finding element greater than partition
-     *
-     * @param i partition
-     * @param xs array
-     * @return new i index
-     */
+      *
+      * stop incrementing when x >= lo
+      *
+      * @param i partition
+      * @param xs array
+      * @return new i index
+      */
     def scanLR(i: Int, xs: Array[A]): Int = {
-      /** stop incrementing when x >= lo */
+
       def stopInc(x: A): Boolean = x >= xs(lo)
 
-      /** start index */
       def from(): Int = if (lo < i) i else lo + 1
 
       xs.indexWhere(stopInc(_), from)
     }
 
     /** Scan from right of array until finding element greater than partition
-     *
-     * @param i partition
-     * @param xs array
-     * @return new j index
-     */
+      *
+      * stop decrementing when x <= lo
+      *
+      * @param i partition
+      * @param xs array
+      * @return new j index
+      */
     def scanRL(j: Int, xs: Array[A]): Int = {
-      /** stop decrementing when x <= lo */
+
       def stopDec(x: A) = (x <= xs(lo))
-      
+
       xs.lastIndexWhere(stopDec(_), j)
     }
 
@@ -112,22 +115,20 @@ class QuickX[A: ClassTag](implicit ord: A => Ordered[A]) {
     loop(lo + 1, hi, xs)
   }
 
-  private def sort(low: Int, high: Int, xs: Array[A]): Unit = {
-    if (low < high) {
-      if ((low + 10) > high) insertionSort(xs) else {
-        val j = partition(low, high: Int, xs)
-        sort(low, j - 1, xs)
-        sort(j + 1, high, xs)
-      }
+  private def sort(low: Int, high: Int, xs: Array[A]): Unit = if (low < high) {
+    if ((low + 10) > high) insertionSort(xs) else {
+      val j = partition(low, high: Int, xs)
+      sort(low, j - 1, xs)
+      sort(j + 1, high, xs)
     }
   }
 
   /** Quicksort recursively partition and sort partions
-   *
-   * @param a generic array
-   * @param shuffle optionally shuffle for performance
-   * @return sorted array
-   */
+    *
+    * @param a generic array
+    * @param shuffle optionally shuffle for performance
+    * @return sorted array
+    */
   def sort(a: Array[A], shuffle: Boolean = true): Array[A] = {
     val unsorted = if (shuffle) shuffleArrayBuffer(a) else a
 

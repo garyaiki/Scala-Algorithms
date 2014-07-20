@@ -27,11 +27,10 @@ class EdgeWeightedDigraph(v: Int) extends BaseEdgeWeightedGraph[DirectedEdge](v)
 
   /** returns all edges in digraph */
   def edges(): List[DirectedEdge] = {
-    val list = ListBuffer[DirectedEdge]()
-    for {
+    val list = for {
       vV <- 0 until v
       e <- adj(vV)
-    } list.+=(e)
+    } yield e
     list.toList
   }
 

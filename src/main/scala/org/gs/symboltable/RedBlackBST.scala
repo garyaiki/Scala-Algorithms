@@ -30,7 +30,10 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
 
   private def isRed(x: Node[A, B]): Boolean = if ((x == null) || (x.red == false)) false else true
 
-  /** if h.right is red rotate left so h becomes the left child and h.right becomes the parent */
+  /** Make h.right the new root of subtree
+    *
+    * if h.right is red rotate left so h becomes the left child and h.right becomes the parent
+    */
   def rotateLeft(h: Node[A, B]): Node[A, B] = {
     assert(h != null && isRed(h.right), "error: black or null passed to rotateLeft")
     val x = h.right // x is new root of subtree
@@ -43,7 +46,10 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
     x
   }
 
-  /** if h.left is red rotate right so h becomes the right child and h.left becomes the parent */
+  /** Make h.left the new root of subtree
+    *
+    * if h.left is red rotate right so h becomes the right child and h.left becomes the parent
+    */
   def rotateRight(h: Node[A, B]): Node[A, B] = {
     assert(h != null && isRed(h.left), "error: black or null passed to rotateRight")
     val x = h.left // x is new root of subtree
@@ -67,7 +73,10 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
     h.right.red = !h.right.red
   }
 
-  /** insert key value into tree, overwrite if key already there */
+  /** insert key value into tree
+    *
+    * overwrite if key already there
+    */
   def put(key: A, value: B): Unit = {
 
     def loop(x: Node[A, B])(implicit ord: Ordering[A]): Node[A, B] = {
@@ -94,16 +103,16 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
   def get(key: A)(implicit ord: Ordering[A]): Option[B] = {
 
     @tailrec
-    def loop(x: Node[A, B])(implicit ord: Ordering[A]): Option[B] = {
-      if (x == null) None else {
-        val cmp = ord.compare(key, x.key)
-        if (cmp == 0) Some(x.value)
-        else {
-          var childNode = null.asInstanceOf[Node[A, B]]
-          if (cmp < 0) childNode = x.left
-          else childNode = x.right
-          loop(childNode)
+    def loop(x: Node[A, B])(implicit ord: Ordering[A]): Option[B] = if (x == null) None
+    else {
+      val cmp = ord.compare(key, x.key)
+      if (cmp == 0) Some(x.value)
+      else {
+        val childNode = cmp match {
+          case n if (n < 0) => x.left
+          case _ => x.right
         }
+        loop(childNode)
       }
     }
     loop(root)
@@ -112,23 +121,33 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
   /** delete the key */
   def delete(key: A): Unit = {
 
-    if (!isRed(root.left) && !isRed(root.right)) root.red = true
+    if (!isRed(root.left) && !isRed(root.right)) {
+      root.red = true
+    }
 
     def loop(x: Node[A, B], key: A): Node[A, B] = {
       var h = x
       if (ord.compare(key, x.key) < 0) {
-        if (!isRed(x.left) && !isRed(x.left.left)) h = moveRedLeft(x)
+        if (!isRed(x.left) && !isRed(x.left.left)) {
+          h = moveRedLeft(x)
+        }
         h.left = loop(h.left, key)
       } else {
-        if (isRed(h.left)) h = rotateRight(x)
+        if (isRed(h.left)) {
+          h = rotateRight(x)
+        }
         if ((ord.compare(key, h.key) == 0) && (h.right == null)) return null else {
-          if (!isRed(h.right) && !isRed(h.right.left)) h = moveRedRight(h)
+          if (!isRed(h.right) && !isRed(h.right.left)) {
+            h = moveRedRight(h)
+          }
           if (ord.compare(key, h.key) == 0) {
             val y = min(h.right)
             h.key = y.key
             h.value = y.value
             h.right = deleteMin(h.right)
-          } else h.right = loop(h.right, key)
+          } else {
+            h.right = loop(h.right, key)
+          }
         }
       }
       balance(h)
@@ -159,9 +178,15 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
     assert(h != null, "null passed to balance")
 
     var x = h
-    if (isRed(x.right)) x = rotateLeft(h)
-    if (isRed(x.left) && isRed(x.left.left)) x = rotateRight(x)
-    if (isRed(x.left) && isRed(x.right)) flipColors(x)
+    if (isRed(x.right)) {
+      x = rotateLeft(h)
+    }
+    if (isRed(x.left) && isRed(x.left.left)) {
+      x = rotateRight(x)
+    }
+    if (isRed(x.left) && isRed(x.right)) {
+      flipColors(x)
+    }
     x.count = 1 + size(x.left) + size(x.right)
     x
   }
@@ -170,8 +195,9 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
     var hm = h
 
     if (hm.left == null) null.asInstanceOf[Node[A, B]] else {
-      if (!isRed(hm.left) && !isRed(hm.left.left)) hm = moveRedLeft(hm)
-      
+      if (!isRed(hm.left) && !isRed(hm.left.left)) {
+        hm = moveRedLeft(hm)
+      }
       hm.left = deleteMin(hm.left)
       balance(hm)
     }
@@ -179,9 +205,13 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
 
   /** delete minimum key */
   def deleteMin(): Unit = {
-    if (!isRed(root.left) && !isRed(root.right)) root.red = true
+    if (!isRed(root.left) && !isRed(root.right)) {
+      root.red = true
+    }
     root = deleteMin(root)
-    if (!isEmpty) root.red = false
+    if (!isEmpty) {
+      root.red = false
+    }
   }
 
   /** delete maximum key */
@@ -189,19 +219,26 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
     def deleteMax(h: Node[A, B]): Node[A, B] = {
       var hm = h
 
-      if (isRed(hm.left)) hm = rotateRight(h)
+      if (isRed(hm.left)) {
+        hm = rotateRight(h)
+      }
       if (hm.right == null) hm = null.asInstanceOf[Node[A, B]] else {
-        if (!isRed(hm.right) && !isRed(hm.right.left)) hm = moveRedRight(hm)
-
+        if (!isRed(hm.right) && !isRed(hm.right.left)) {
+          hm = moveRedRight(hm)
+        }
         hm.right = deleteMax(hm.right)
         hm = balance(hm)
       }
       hm
     }
 
-    if (!isRed(root.left) && !isRed(root.right)) root.red = true
+    if (!isRed(root.left) && !isRed(root.right)) {
+      root.red = true
+    }
     root = deleteMax(root)
-    if (!isEmpty) root.red = false
+    if (!isEmpty) {
+      root.red = false
+    }
   }
 
   private def size(x: Node[A, B]): Int = if (x == null) 0 else x.count
@@ -210,17 +247,15 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
   def size(): Int = size(root)
 
   /** number of keys in lo..hi */
-  def size(lo: A, hi: A): Int =
+  def size(lo: A, hi: A): Int = {
     if (ord.compare(lo, hi) > 0) 0 else if (contains(hi)) rank(hi) - rank(lo) + 1 else
       rank(hi) - rank(lo)
+  }
 
   /** is key present */
-  def contains(key: A): Boolean = {
-    val option = get(key)
-    option match {
-      case None => false
-      case Some(x) => if (x == null) false else true
-    }
+  def contains(key: A): Boolean = get(key) match {
+    case None => false
+    case Some(x) => if (x == null) false else true
   }
 
   /** are any keys in tree */
@@ -282,12 +317,13 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
   /** returns number of keys less than key */
   def rank(key: A): Int = {
 
-    def loop(x: Node[A, B])(implicit ord: Ordering[A]): Int = {
-      if (x == null) 0 else {
-        val cmp = ord.compare(key, x.key)
-        if (cmp == 0) size(x.left) else {
-          if (cmp < 0) loop(x.left) else 1 + size(x.left) + loop(x.right)
-        }
+    def loop(x: Node[A, B])(implicit ord: Ordering[A]): Int = if (x == null) 0
+    else {
+      val cmp = ord.compare(key, x.key)
+      if (cmp == 0) size(x.left)
+      else {
+        if (cmp < 0) loop(x.left)
+        else 1 + size(x.left) + loop(x.right)
       }
     }
     loop(root)
@@ -298,25 +334,33 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
 
     def select(x: Node[A, B], k: Int): Node[A, B] = {
       val t = size(x.left)
-      if (t > k) select(x.left, k) else
-        if (t < k) select(x.right, k - t - 1) else x
+      if (t > k) select(x.left, k)
+      else if (t < k) select(x.right, k - t - 1) else x
     }
     val node = select(root, rank)
     if (node == null) None else Some(node.key)
   }
 
   import scala.collection.mutable.Queue
+  /** returns all keys */
   def keys(): List[A] = {
     val q = Queue[A]()
     val lo = min
     val hi = max
+
     def loop(x: Node[A, B]) {
       if (x != null) {
         val cmpLo = ord.compare(lo, x.key)
-        if (cmpLo < 0) loop(x.left)
+        if (cmpLo < 0) {
+          loop(x.left)
+        }
         val cmpHi = ord.compare(hi, x.key)
-        if (cmpLo <= 0 && cmpHi >= 0) q.enqueue(x.key)
-        if (cmpHi > 0) loop(x.right)
+        if (cmpLo <= 0 && cmpHi >= 0) {
+          q.enqueue(x.key)
+        }
+        if (cmpHi > 0) {
+          loop(x.right)
+        }
       }
     }
     loop(root)
@@ -324,11 +368,10 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
   }
 
   /** debugging code  */
-  /**
-   * print nodes left to right
-   * @param full all node arguments if true just key if false
-   * @return tree nodes as string
-   */
+  /** print nodes left to right
+    * @param full all node arguments if true just key if false
+    * @return tree nodes as string
+    */
   def inorderTreeWalk(full: Boolean = false): String = {
     val sb = new StringBuilder
 
@@ -350,12 +393,23 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
     val sb = new StringBuilder()
     val q = new Queue[Node[A, B]]()
     q.enqueue(root)
-    while (q.size > 0) {
-      val n = q.dequeue
-      sb.append(f" ${n.key} ${n.red}, ${n.count} \n")
-      if (n.left != null) q.enqueue(n.left)
-      if (n.right != null) q.enqueue(n.right)
+
+    @tailrec
+    def loop(): Unit = {
+      if (!q.isEmpty) {
+        val n = q.dequeue
+        sb.append(f" ${n.key} ${n.red}, ${n.count} \n")
+        if (n.left != null) {
+          q.enqueue(n.left)
+        }
+        if (n.right != null) {
+          q.enqueue(n.right)
+        }
+        loop
+      }
     }
+
+    loop
     sb.toString
   }
 
@@ -364,12 +418,13 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
 
   /** does this satisfy requirements for balanced search tree */
   def isBST(): Boolean = {
-    
+
     def loop(x: Node[A, B], min: A, max: A): Boolean = {
       if (x == null) true else {
-        if (min != null && ord.compare(x.key, min) <= 0) false else
-          if (max != null && ord.compare(x.key, max) >= 0) false else
-            loop(x.left, min, x.key) && loop(x.right, x.key, max)
+        if (min != null && ord.compare(x.key, min) <= 0) false
+        else if (max != null && ord.compare(x.key, max) >= 0) false else {
+          loop(x.left, min, x.key) && loop(x.right, x.key, max)
+        }
       }
     }
     loop(root, null.asInstanceOf[A], null.asInstanceOf[A])
@@ -377,34 +432,53 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
 
   /** are field sizes correct */
   def isSizeConsistent(): Boolean = {
-    
-    def loop(x: Node[A, B]): Boolean = {
-      if (x == null) true else if (x.count != size(x.left) + size(x.right) + 1) false else
-        loop(x.left) && loop(x.right)
+
+    def loop(x: Node[A, B]): Boolean = if (x == null) true
+    else if (x.count != size(x.left) + size(x.right) + 1) false
+    else {
+      loop(x.left) && loop(x.right)
     }
+
     loop(root)
   }
 
   def isRankConsistent(): Boolean = {
 
     def checkRank: Boolean = {
-      for (i <- 0 until size) {
-        select(i) match {
-          case None =>
-          case Some(x) => if (rank(x) != i) return false
+
+      @tailrec
+      def loop(i: Int): Boolean = {
+        if (i == size) true
+        else {
+          val goodRank = select(i) match {
+            case None => true
+            case Some(x) if (rank(x) != i) => false
+            case Some(x) => true
+          }
+          if (goodRank) loop(i + 1)
+          else false
         }
       }
-      true
+
+      loop(0)
     }
 
     def checkKeys: Boolean = {
-      for (i <- keys) {
-        select(rank(i)) match {
-          case None =>
-          case Some(x) => if (ord.compare(i, x) != 0) return false
+      
+      @tailrec
+      def loop(keys: List[A]): Boolean = keys match {
+        case Nil => true
+        case x :: xs => {
+          val goodKey = select(rank(x)) match {
+            case None => true
+            case Some(k) if (ord.compare(x, k) != 0) => false
+            case Some(k) => true
+          }
+          if (goodKey) loop(xs) else false
         }
       }
-      true
+      
+      loop(keys)
     }
     checkRank && checkKeys
   }
@@ -412,32 +486,39 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
   /** are red and black links correct */
   def is23(): Boolean = {
 
-    def loop(x: Node[A, B]): Boolean = {
-      if (x == null) true else {
-        if (isRed(x.right)) false else if (x != root && isRed(x) && isRed(x.left)) false else
-          loop(x.left) && loop(x.right)
-      }
+    def loop(x: Node[A, B]): Boolean = if (x == null) true
+      else {
+        if (isRed(x.right)) false
+        else
+          if (x != root && isRed(x) && isRed(x.left)) false
+          else loop(x.left) && loop(x.right)
     }
+    
     loop(root)
   }
 
   /** do all paths from root have same number of black links */
   def isBalanced(): Boolean = {
-    var black = 0
 
+    @tailrec
+    def loopRB(n: Node[A,B], black: Int): Int = {
+      if (n == null) black
+      else {
+        if (!isRed(n)) loopRB(n.left, black + 1)
+        else loopRB(n.left, black)
+      }
+    }
+    
+    val black = loopRB(root, 0)
+    
     def loop(x: Node[A, B], black: Int): Boolean = {
       var blackVar = black
       if (x == null) black == 0 else {
-        if (!isRed(x)) blackVar = black - 1
-        loop(x.left, blackVar) && loop(x.right, blackVar)
+        if (!isRed(x)) loop(x.left, black - 1) && loop(x.right, black - 1)
+        else loop(x.left, black) && loop(x.right, black)
       }
     }
 
-    var n = root
-    while (n != null) {
-      if (!isRed(n)) black += 1
-      n = n.left
-    }
     loop(root, black)
   }
 }

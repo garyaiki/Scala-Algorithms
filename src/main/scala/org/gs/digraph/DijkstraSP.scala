@@ -36,7 +36,7 @@ class DijkstraSP(g: EdgeWeightedDigraph, s: Int) {
     def loop() {
       if (!pq.isEmpty) {
         val v = pq.delMin
-        for (e <- g.adj(v)) relax(e)
+        g.adj(v) foreach(e => relax(e))
         loop
       }
     }
@@ -56,11 +56,9 @@ class DijkstraSP(g: EdgeWeightedDigraph, s: Int) {
     if (!hasPathTo(v)) None else {
 
       @tailrec
-      def loop(e: DirectedEdge, path: List[DirectedEdge] ): List[DirectedEdge] = {
-        if(e != null) {
-          loop(edgeTo(e.from), e :: path)
-        } else path
-      }
+      def loop(e: DirectedEdge, path: List[DirectedEdge] ): List[DirectedEdge] = if(e != null)
+          loop(edgeTo(e.from), e :: path) 
+        else path
 
       val path = loop(edgeTo(v), List[DirectedEdge]())
       Some(path)

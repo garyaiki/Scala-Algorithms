@@ -21,10 +21,7 @@ class Digraph(v: Int) extends BaseGraph(v) with DigraphMarker {
   /** returns a reverse order copy */
   def reverse(): Digraph = {
     val r = new Digraph(v)
-    for {
-      newV <- 0 until v
-      w <- adj(newV)
-    } r.addEdge(w, newV)
+    for (newV <- 0 until v; w <- adj(newV)) r.addEdge(w, newV)
     r
   }
 }

@@ -11,7 +11,7 @@ import scala.annotation.tailrec
   * enqueue all its unmarked adjacencies and mark them
   *
   * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
-  * 
+  *
   * @constructor creates a new BreadthFirstPaths with a graph and source vertex
   * @param g [[org.gs.graph.Graph]]
   * @param s source vertex
@@ -29,15 +29,12 @@ class BreadthFirstPaths(g: Graph, s: Int) {
     def loop(q: Queue[Int]): Unit = {
       if (!q.isEmpty) {
         val v = q.dequeue
-        for {
-          w <- g.adj(v)
-          if (!marked(w))
-        } {
+        g.adj(v) foreach (w => if (!marked(w)) {
           edgeTo(w) = v
           _distTo(w) = _distTo(v) + 1
           marked(w) = true
           q.enqueue(w)
-        }
+        })
         loop(q)
       }
     }
@@ -56,11 +53,10 @@ class BreadthFirstPaths(g: Graph, s: Int) {
   def pathTo(v: Int): Option[List[Int]] = {
     if (!hasPathTo(v)) None else {
       @tailrec
-      def loop(x: Int, xs: List[Int]): List[Int] = {
-        if (distTo(x) != 0) {
-          loop(edgeTo(x), x :: xs)
-        } else x :: xs
-      }
+      def loop(x: Int, xs: List[Int]): List[Int] = if (distTo(x) != 0)
+        loop(edgeTo(x), x :: xs)
+        else x :: xs
+
       Some(loop(v, List[Int]()))
     }
   }

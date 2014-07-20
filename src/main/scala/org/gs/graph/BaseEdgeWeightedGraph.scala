@@ -20,16 +20,9 @@ abstract class BaseEdgeWeightedGraph[A <: BaseEdge](val V: Int) {
   protected def buildADJ[U <: BaseEdgeWeightedGraph[A]](g: U): Unit = {
     e = g.e
 
-    for {
-      v <- 0 until g.V
-      reverse = List[A]()
-    } {
-      for {
-        e <- g.adj(v)
-      } e :: reverse
-      for {
-        er <- reverse
-      } _adj(v) = er :: _adj(v)
+    for (v <- 0 until g.V; reverse = List[A]()) {
+      g.adj(v) foreach(e => e :: reverse)
+      reverse foreach(er => _adj(v) = er :: _adj(v))
     }
   }
 
@@ -53,9 +46,10 @@ abstract class BaseEdgeWeightedGraph[A <: BaseEdge](val V: Int) {
     val lf = sys.props("line.separator")
     val sb = new StringBuilder()
     sb.append(s"$V $e $lf")
+    
     def addLines(v: Int) {
       sb.append(s"$v : ")
-      for( ed <- _adj(v)) sb.append(s"$ed  ")
+      _adj(v) foreach(ed => sb.append(s"$ed  "))
       sb.append(lf)
     }
     for( v <- 0 until V) addLines(v)

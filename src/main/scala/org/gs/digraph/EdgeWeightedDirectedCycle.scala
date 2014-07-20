@@ -41,14 +41,12 @@ class EdgeWeightedDirectedCycle(g: EdgeWeightedDigraph)
             _cycle = Some(List[DirectedEdge]())
             
             @tailrec
-            def loop(x: DirectedEdge): Unit = {
+            def loop(x: DirectedEdge): Unit =
               if (x.from != w) {
                 _cycle = Some(x :: _cycle.get)
                 loop(edgeTo(x.from))
-              } else {
-                _cycle = Some(x :: _cycle.get)
-              }
-            }
+              } else _cycle = Some(x :: _cycle.get)
+
             loop(e)
             _cycle
           }

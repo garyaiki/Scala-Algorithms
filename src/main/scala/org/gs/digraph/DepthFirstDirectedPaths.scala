@@ -18,13 +18,10 @@ class DepthFirstDirectedPaths(g: Digraph, s: Int) {
 
   private def dfs(v: Int) {
     marked(v) = true
-    for {
-      w <- g.adj(v)
-      if (!marked(w))
-    } {
-      edgeTo(w) = v
-      dfs(w)
-    }
+    g.adj(v).foreach(w => if (!marked(w)) {
+        edgeTo(w) = v
+        dfs(w)
+      })
   }
   dfs(s)
 
@@ -36,12 +33,11 @@ class DepthFirstDirectedPaths(g: Digraph, s: Int) {
     var pathStack = List[Int]()
     
     @tailrec
-    def loop(x: Int): Int = {
-      if (x == s) x else {
+    def loop(x: Int): Int = if (x == s) x else {
         pathStack = x :: pathStack
         loop(edgeTo(x))
       }
-    }
+
     loop(v) :: pathStack
   }
 }

@@ -8,7 +8,7 @@ import scala.annotation.tailrec
 /** Search text for matches to a pattern
   *
   * MonteCarlo only, doesn't do Las Vegas per-character check
-  * 
+  *
   * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   * @constructor creates a new RabinKarp
   * @param pattern to match
@@ -33,7 +33,7 @@ class RabinKarp(pat: String) {
   }
 
   /** Search for exact match
-    * 
+    *
     * @param text to search
     * @return offset to start of match or text length for no match
     */
@@ -41,17 +41,15 @@ class RabinKarp(pat: String) {
     require(txt.length >= M, s"text length:${txt.length} shorter than pattern length:$M")
     val N = txt.length
     var txtHash = hash(txt, M)
-    if(patHash == txtHash) 0 else {
+    if (patHash == txtHash) 0 else {
 
       @tailrec
-      def loop(i: Int): Int = {
-        if(i < N) {
-          txtHash = (txtHash + Q - RM * txt.charAt(i - M) % Q) % Q
-          txtHash = (txtHash * R + txt.charAt(i)) % Q
-          val offset = i - M + 1
-          if(patHash == txtHash) offset else loop(i + 1)
-        } else N
-      }
+      def loop(i: Int): Int = if (i < N) {
+        txtHash = (txtHash + Q - RM * txt.charAt(i - M) % Q) % Q
+        txtHash = (txtHash * R + txt.charAt(i)) % Q
+        val offset = i - M + 1
+        if (patHash == txtHash) offset else loop(i + 1)
+      } else N
 
       loop(M)
     }

@@ -17,7 +17,7 @@ object Quick3String {
   private val Cutoff = 15
 
   /** Sort, randomize array before sorting for efficiency
-    * 
+    *
     * Insertion sort is faster when partition or array has fewer elements than the Cutoff(15)
     * Exchange 2 elements when the one on the left is greater than the one on the right
     *
@@ -42,11 +42,9 @@ object Quick3String {
       def loopI(i: Int): Unit = {
 
         @tailrec /** if j and j -1 out of order exchange then traverse elements descending */
-        def loopJ(j: Int): Unit = {
-          if (j > lo && less(s(j), s(j - 1))) {
-            exch(j, j - 1)
-            loopJ(j - 1)
-          }
+        def loopJ(j: Int): Unit = if (j > lo && less(s(j), s(j - 1))) {
+          exch(j, j - 1)
+          loopJ(j - 1)
         }
 
         if (i <= hi) {
@@ -71,13 +69,12 @@ object Quick3String {
       val x = min(v.length, w.length)
 
       @tailrec /** compare i character of v and w */
-      def loop(i: Int): Boolean = {
-        if (i < x) {
-          if (v.charAt(i) < w.charAt(i)) true
-          else if (v.charAt(i) > w.charAt(i)) false
-          else loop(i + 1)
-        } else v.length < w.length
-      }
+      def loop(i: Int): Boolean = if (i < x) {
+        if (v.charAt(i) < w.charAt(i)) true
+        else if (v.charAt(i) > w.charAt(i)) false
+        else loop(i + 1)
+      } else v.length < w.length
+
       loop(d)
     }
 
@@ -91,18 +88,16 @@ object Quick3String {
       val v = charAt(s(lo))
 
       @tailrec /** sort within partition */
-      def loop(lt: Int, gt: Int, i: Int): (Int, Int, Int) = {
-        if (i <= gt) {
-          val t = charAt(s(i))
-          if (t < v) {
-            exch(lt, i)
-            loop(lt + 1, gt, i + 1)
-          } else if (t > v) {
-            exch(i, gt)
-            loop(lt, gt - 1, i)
-          } else loop(lt, gt, i + 1)
-        } else (lt, gt, i)
-      }
+      def loop(lt: Int, gt: Int, i: Int): (Int, Int, Int) = if (i <= gt) {
+        val t = charAt(s(i))
+        if (t < v) {
+          exch(lt, i)
+          loop(lt + 1, gt, i + 1)
+        } else if (t > v) {
+          exch(i, gt)
+          loop(lt, gt - 1, i)
+        } else loop(lt, gt, i + 1)
+      } else (lt, gt, i)
 
       val tuple = loop(lo, hi, lo + 1)
       sort(s, lo, tuple._1, d)

@@ -13,7 +13,7 @@ import scala.annotation.tailrec
   * @param s a single source vertex
   */
 class BreadthFirstDirectedPaths(g: Digraph, s: Int) {
-  private val marked = Array.fill[Boolean](g.V)(false)
+  private val marked = new Array[Boolean](g.V)
   private val edgeTo = new Array[Int](g.V)
   private val _distTo = Array.fill[Int](g.V)(Int.MaxValue)
 
@@ -23,22 +23,20 @@ class BreadthFirstDirectedPaths(g: Digraph, s: Int) {
     _distTo(s) = 0
     q.enqueue(s)
 
+    @tailrec
     def loopQ(): Unit = {
       if (!q.isEmpty) {
         val v = q.dequeue
-        for {
-          w <- g.adj(v)
-          if (!marked(w))
-        } {
-          edgeTo(w) = v
-          _distTo(w) = _distTo(v) + 1
-          marked(w) = true
-          q.enqueue(w)
-        }
+        g.adj(v) foreach(w => if (!marked(w)) {
+            edgeTo(w) = v
+            _distTo(w) = _distTo(v) + 1
+            marked(w) = true
+            q.enqueue(w)
+          })
         loopQ
       }
     }
-    
+
     loopQ
   }
   bfs(s)
@@ -52,11 +50,9 @@ class BreadthFirstDirectedPaths(g: Digraph, s: Int) {
   /** returns the path from s to v */
   def pathTo(v: Int): List[Int] = {
     @tailrec
-    def loop(x: Int, xs: List[Int]): List[Int] = {
-      if (_distTo(x) == 0) x :: xs else {
-        loop(edgeTo(x), x :: xs)
-      }
-    }
+    def loop(x: Int, xs: List[Int]): List[Int] = if (_distTo(x) == 0) x :: xs 
+        else loop(edgeTo(x), x :: xs)
+
     loop(v, List[Int]())
   }
 }

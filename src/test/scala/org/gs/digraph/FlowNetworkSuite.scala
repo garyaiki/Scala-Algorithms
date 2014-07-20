@@ -25,6 +25,5 @@ class FlowNetworkSuite extends FlatSpec {
     
     for (ed <- tuple._3) g.addEdge(ed)
     assert(g.edges.toSet.size === e)
-
   }
 }

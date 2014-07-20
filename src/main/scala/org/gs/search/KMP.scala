@@ -17,10 +17,7 @@ class KMP(pattern: Array[Char], R: Int = 256) {
   dfa(pattern(0))(0) = 1
   private var X = 0
   
-  for{
-    j <- 1 until M
-    c <- 0 until R
-  } {
+  for (j <- 1 until M; c <- 0 until R) {
     dfa(c)(j) = dfa(c)(X)
     dfa(pattern(j))(j) = j + 1
     X = dfa(pattern(j))(X)

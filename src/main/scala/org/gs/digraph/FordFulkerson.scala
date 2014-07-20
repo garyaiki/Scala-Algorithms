@@ -78,7 +78,7 @@ class FordFulkerson(g: FlowNetwork, s: Int, t: Int) {
     def loopQ(q: Queue[Int]): Unit = {
       if (!q.isEmpty) {
         val v = q.dequeue
-        for (e <- g.adj(v)) {
+        def tryPath(e: FlowEdge): Unit = {
           val w = e.other(v)
           if (e.residualCapacityTo(w) > 0) {
             if (!marked(w)) {
@@ -88,6 +88,8 @@ class FordFulkerson(g: FlowNetwork, s: Int, t: Int) {
             }
           }
         }
+        g.adj(v) foreach(tryPath)
+
         loopQ(q)
       }
     }

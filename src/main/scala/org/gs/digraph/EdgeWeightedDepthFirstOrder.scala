@@ -15,10 +15,7 @@ class EdgeWeightedDepthFirstOrder(g: EdgeWeightedDigraph) extends BaseDepthFirst
     preCounter += 1
     _pre(v) = preCounter
     preOrder.enqueue(v)
-    for {
-      e <- g.adj(v)
-      if (!marked(e.to))
-    } dfs(e.to)
+    g.adj(v) foreach(e => if (!marked(e.to)) dfs(e.to))
     postOrder.enqueue(v)
     postCounter += 1
     _post(v) = postCounter

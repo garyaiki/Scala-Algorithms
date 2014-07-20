@@ -6,9 +6,9 @@ import scala.collection.mutable.Queue
 
 /** Common code for finding pre-order, post-order, & reverse post-order in digraphs
   *
-  * 
+  *
   * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
-  * 
+  *
   * @constructor called by subclass with number of vertices
   * @param v number of vertices in digraph
   *
@@ -22,10 +22,7 @@ abstract class BaseDepthFirstOrder(v: Int) {
   protected var preCounter = 0
   protected var postCounter = 0
   protected val marked = Array.fill[Boolean](v)(false)
-  for {
-    i <- 0 until v
-    if (!marked(i))
-  } dfs(i)
+  for (i <- 0 until v; if (!marked(i))) dfs(i)
 
   /** @param v vertex for depth first search to find pre-order & post-order */
   protected def dfs(v: Int): Unit
@@ -44,8 +41,10 @@ abstract class BaseDepthFirstOrder(v: Int) {
 
   /** returns vertices in reverse post-order, which is a topological order, of vertex v */
   def reversePost(): List[Int] = {
-    var reverse = List[Int]()
-    for( v <- postOrder) reverse = v :: reverse
-    reverse
+/*@TODO    var reverse = List[Int]()
+    for (v <- postOrder) reverse = v :: reverse
+    reverse */
+    val reverse = postOrder.reverse
+    reverse.toList
   }
 }

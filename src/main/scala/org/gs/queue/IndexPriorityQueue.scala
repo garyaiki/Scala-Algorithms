@@ -35,11 +35,9 @@ abstract class IndexPriorityQueue[A: ClassTag](nMax: Int) {
   protected def greater(a: Int, b: Int)(implicit ord: Ordering[A]): Boolean =
       ord.gt(keys(pq(a)), keys(pq(b)))
 
-  private def rangeGuard(x: Int): Boolean = {
-    x match {
+  private def rangeGuard(x: Int): Boolean = x match {
       case x if 0 to nMax contains x => true
       case _ => false
-    }
   }
 
   /** does q(i) exist? */
@@ -205,13 +203,9 @@ abstract class IndexPriorityQueue[A: ClassTag](nMax: Int) {
   override def toString(): String = {
     val sb = new StringBuilder()
     val size = pq.size
-    for {
-      i <- 0 until size
-      if (i != 0)
-    } {
+    for (i <- 1 until size) {
       val key = keys(pq(i))
-      if (key != null)
-        sb.append(s" $key")
+      if (key != null) sb.append(s" $key")
     }
     sb.toString.trim()
   }
@@ -226,9 +220,8 @@ abstract class IndexPriorityQueue[A: ClassTag](nMax: Int) {
       if (k > n) true else {
         val left = 2 * k
         val right = 2 * k + 1
-        if ((left <= n && cmp(k, left)) || (right <= n && cmp(k, right))) false else {
-          loop(left) && loop(right)
-        }
+        if ((left <= n && cmp(k, left)) || (right <= n && cmp(k, right))) false
+        else loop(left) && loop(right)
       }
     }
     loop(1)

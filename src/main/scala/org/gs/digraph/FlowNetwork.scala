@@ -49,11 +49,7 @@ class FlowNetwork(val v: Int) {
     
     def addLines(v: Int) {
       sb.append(s"$v : ")
-      for {
-        e <- adj(v)
-        if(e.to != v)
-      } sb.append(s"$e  ")
-      sb.append(lf)
+      adj(v) foreach(e => if(e.to != v) sb.append(s"$e  "))
     }
     
     for( vV <- 0 until v) addLines(vV)

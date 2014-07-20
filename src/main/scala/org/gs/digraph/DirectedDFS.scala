@@ -35,16 +35,10 @@ class DirectedDFS(g: Digraph, sources: Int*) {
   private def dfs(v: Int): Unit = {
     _count += 1
     marked(v) = true
-    for {
-      w <- g.adj(v)
-      if (!marked(w))
-    } dfs(w)
+    g.adj(v) foreach(w => if (!marked(w)) dfs(w))
   }
-  
-  for{
-    v <- sources
-    if(!marked(v))
-  } dfs(v)
+
+  sources.foreach(v => if(!marked(v)) dfs(v))
 
   /** returns if there is a path from any source to v */
   def isMarked(v: Int): Boolean = marked(v)

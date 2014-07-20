@@ -36,7 +36,7 @@ abstract class BaseGraph(val V: Int) {
     sb.append(s"$V ${e} $lf")
     def addLines(v: Int) {
       sb.append(s"$v : ")
-      for( e <- adj(v)) sb.append(s"$e  ")
+      adj(v) foreach(e => sb.append(s"$e  "))
       sb.append(lf)
     }
     for( v <- 0 until V) addLines(v)

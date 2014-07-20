@@ -44,8 +44,7 @@ class EdgeWeightedGraph(v: Int) extends BaseEdgeWeightedGraph[Edge](v) {
           selfLoops += 1
         }
       }
-      
-      for( ed <- adj(v)) addEdges(ed)
+      adj(v) foreach(ed => addEdges(ed))
     }
     
     for( vV <- 0 until v) addEdgesAndSelfLoops(vV)

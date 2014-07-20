@@ -15,7 +15,7 @@ class FlowEdge(v: Int, w: Int, val capacity: Double) extends BaseDirectedEdge {
   def this(v: Int, w: Int, capacity: Double, flow: Double) {
     this(v, w, capacity)
     require(_flow >= 0 && flow <= capacity,
-                          s"flow:${_flow} must not be negative and can't exceed capacity:$capacity")
+        s"flow:${_flow} must not be negative and can't exceed capacity:$capacity")
     _flow = flow
   }
 
@@ -47,6 +47,6 @@ class FlowEdge(v: Int, w: Int, val capacity: Double) extends BaseDirectedEdge {
       case _ => throw new IllegalArgumentException(s"Illegal endpoint vertex:${vertex}")
     }
     assert(_flow >= 0 && flow <= capacity,
-                          s"flow:${_flow} must not be negative and can't exceed capacity:$capacity")
+        s"flow:${_flow} must not be negative and can't exceed capacity:$capacity")
   }
 }

@@ -17,17 +17,13 @@ class KosarajuSharirSCC(g: Digraph) {
   private val _id = new Array[Int](g.V)
 
   @tailrec
-  private def searchUnmarked(count: Int, rp: List[Int]): Int = {
-    rp match {
-      case v :: xs => {
-        if (!marked(v)) {
+  private def searchUnmarked(count: Int, rp: List[Int]): Int = rp match {
+      case v :: xs => if (!marked(v)) {
           dfs(v, count)
           searchUnmarked(count + 1, xs)
         } else searchUnmarked(count, xs)
-      }
       case Nil => count
     }
-  }
   
   /** returns number of strong components */
   val count = searchUnmarked(0, depthFirstOrder.reversePost)
@@ -35,10 +31,7 @@ class KosarajuSharirSCC(g: Digraph) {
   private def dfs(v: Int, count: Int): Unit = {
     marked(v) = true
     _id(v) = count
-    for {
-      w <- g.adj(v)
-      if (!marked(w))
-    } dfs(w, count)
+    g.adj(v) foreach(w => if (!marked(w)) dfs(w, count))
   }
 
   /** returns if  v and  w are strongly connected */

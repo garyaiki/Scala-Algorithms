@@ -93,23 +93,18 @@ abstract class PriorityQueue[A](pq: ArrayBuffer[A]) {
    * Remove max or min element
    * @param cmp less for [[org.gs.queue.MaxPQ]] greater for [[org.gs.queue.MinPQ]]
    */
-  def pop(cmp: (Int, Int) => Boolean): Option[A] = {
-    if (isEmpty) None else {
+  def pop(cmp: (Int, Int) => Boolean): Option[A] = if (isEmpty) None else {
       exchange(1, n)
       val top = pq.remove(n)
       n = n - 1
       sink(1, cmp)
       Some(top)
-    }
   }
 
   /** returns string of keys */
   def toString(keys: Seq[A]): String = {
     val sb = new StringBuilder()
-    for {
-      s <- keys
-      if (s != null)
-    } sb.append(s" $s")
+    keys foreach(s => if (s != null) sb.append(s" $s"))
     sb.toString
   }
 
@@ -121,9 +116,8 @@ abstract class PriorityQueue[A](pq: ArrayBuffer[A]) {
       if (k > n) true else {
         val left = 2 * k
         val right = 2 * k + 1
-        if ((left <= n && cmp(k, left)) || (right <= n && cmp(k, right))) false else {
-          loop(left) && loop(right)
-        }
+        if ((left <= n && cmp(k, left)) || (right <= n && cmp(k, right))) false
+        else loop(left) && loop(right)
       }
     }
     loop(1)

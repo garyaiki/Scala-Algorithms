@@ -19,7 +19,7 @@ class IndexMinPQ[A: ClassTag](nMax: Int) extends IndexPriorityQueue[A](nMax) {
     * @param key generic element
     * @param cmp greater
     */
-  def insert(i: Int, key: A)(implicit ord: Ordering[A]): Unit = { insert(i, key, greater) }
+  def insert(i: Int, key: A)(implicit ord: Ordering[A]): Unit = insert(i, key, greater)
 
   /** returns index associated with min key */
   def minIndex(): Int = index()
@@ -36,7 +36,7 @@ class IndexMinPQ[A: ClassTag](nMax: Int) extends IndexPriorityQueue[A](nMax) {
     * @param key value
     * @param cmp greater
     */
-  def changeKey(i: Int, key: A)(implicit ord: Ordering[A]): Unit = { changeKey(i, key, greater) }
+  def changeKey(i: Int, key: A)(implicit ord: Ordering[A]): Unit = changeKey(i, key, greater)
 
   /** Decrease key at index to new value, because it is < current, it both swims
     *
@@ -44,7 +44,7 @@ class IndexMinPQ[A: ClassTag](nMax: Int) extends IndexPriorityQueue[A](nMax) {
     * @param key value
     * @param cmp greater
     */
-  def decreaseKey(i: Int, key: A)(implicit ord: Ordering[A]): Unit = { decreaseKey(i, key, greater) }
+  def decreaseKey(i: Int, key: A)(implicit ord: Ordering[A]): Unit = decreaseKey(i, key, greater)
 
   /** Increase key at index to new value, because it is > current, it sinks
     *
@@ -52,14 +52,14 @@ class IndexMinPQ[A: ClassTag](nMax: Int) extends IndexPriorityQueue[A](nMax) {
     * @param key value
     * @param cmp greater
     */
-  def increaseKey(i: Int, key: A)(implicit ord: Ordering[A]): Unit = { increaseKey(i, key, greater) }
+  def increaseKey(i: Int, key: A)(implicit ord: Ordering[A]): Unit = increaseKey(i, key, greater)
 
   /** Remove key at index
     *
     * @param i index
     * @param cmp greater
     */
-  def delete(i: Int)(implicit ord: Ordering[A]): Unit = { delete(i, greater) }
+  def delete(i: Int)(implicit ord: Ordering[A]): Unit = delete(i, greater)
 
   /** check parent in position has left child at k * 2, right child at k * 2 + 1 */
   def isMinHeap()(implicit ord: Ordering[A]): Boolean = checkHeap(greater)

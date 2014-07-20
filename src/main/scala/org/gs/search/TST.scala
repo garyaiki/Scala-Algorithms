@@ -36,7 +36,7 @@ class TST[A] {
         val c = key.charAt(d)
         if (c < x.c) get(x.left, key, d)
         else if (c > x.c) get(x.right, key, d)
-        else if (d < key.length -1) get(x.mid, key, d + 1)
+        else if (d < key.length - 1) get(x.mid, key, d + 1)
         else Some(x)
       }
     }
@@ -53,11 +53,9 @@ class TST[A] {
   }
 
   /** returns if key in symbol table */
-  def contains(key: String): Boolean = {
-    get(key) match {
-      case None => false
-      case Some(x) => true
-    }
+  def contains(key: String): Boolean = get(key) match {
+    case None => false
+    case Some(x) => true
   }
 
   /** Put a key value in symbol table
@@ -85,22 +83,21 @@ class TST[A] {
 
   /** returns longest prefix of s in symbol table */
   def longestPrefixOf(s: String): Option[String] = {
-    
-    def loop(length: Int, x: Option[Node], i: Int): Int = {
-      x match {
-        case None => length
-        case Some(y) => if (s == null || s.isEmpty) length else {
-          val c = s.charAt(i)
-          if (c < y.c) loop(length, y.left, i)
-          else if (c > y.c) loop(length, y.right, i)
-          else 
-            y.value match {
-              case None => loop(i + 1, y.mid, i + 1)
-              case Some(v) => loop(length, y.mid, i + 1)
+
+    def loop(length: Int, x: Option[Node], i: Int): Int = x match {
+      case None => length
+      case Some(y) => if (s == null || s.isEmpty) length else {
+        val c = s.charAt(i)
+        if (c < y.c) loop(length, y.left, i)
+        else if (c > y.c) loop(length, y.right, i)
+        else
+          y.value match {
+            case None => loop(i + 1, y.mid, i + 1)
+            case Some(v) => loop(length, y.mid, i + 1)
           }
-        }
       }
     }
+
     if (s == null || s.isEmpty) None else {
       val len = loop(0, root, 0)
       if (len == 0) None else Some(s.substring(0, len))
@@ -115,21 +112,20 @@ class TST[A] {
   }
 
   private def collect(x: Option[Node], prefix: String, q: Queue[String]): Unit = {
-    
-    def loop(x: Option[Node], prefix: String): Unit =
-      x match {
-        case None =>
-        case Some(y) => {
-          loop(y.left, prefix)
-          y.value match {
-            case Some(v) => q.enqueue(prefix + y.c)
-            case None =>
-          }
-          loop(y.mid, prefix + y.c)
-          loop(y.right, prefix)
+
+    def loop(x: Option[Node], prefix: String): Unit = x match {
+      case None =>
+      case Some(y) => {
+        loop(y.left, prefix)
+        y.value match {
+          case Some(v) => q.enqueue(prefix + y.c)
+          case None =>
         }
+        loop(y.mid, prefix + y.c)
+        loop(y.right, prefix)
       }
-    
+    }
+
     loop(x, prefix)
   }
 
@@ -151,24 +147,23 @@ class TST[A] {
     }
   }
 
-  /** returns all keys matching a wildcard pattern */ 
+  /** returns all keys matching a wildcard pattern */
   def wildcardMatch(pat: String): List[String] = {
     val q = new Queue[String]
-    
-    def collect(x: Option[Node], prefix: String, i: Int): Unit = {
-      x match {
-        case None =>
-        case Some(y) => {
-          val c = pat.charAt(i)
-          if(c == '.' || c < y.c) collect(y.left, prefix, i)
-          if(c == '.' || c == y.c) {
-            if(i == pat.length - 1 && y.value == None) q.enqueue(prefix + y.c)
-            if(i < pat.length - 1) collect(y.mid, prefix + y.c, i + 1)
-          }
-          if(c == '.' || c > y.c) collect(y.right, prefix, i)
+
+    def collect(x: Option[Node], prefix: String, i: Int): Unit = x match {
+      case None =>
+      case Some(y) => {
+        val c = pat.charAt(i)
+        if (c == '.' || c < y.c) collect(y.left, prefix, i)
+        if (c == '.' || c == y.c) {
+          if (i == pat.length - 1 && y.value == None) q.enqueue(prefix + y.c)
+          if (i < pat.length - 1) collect(y.mid, prefix + y.c, i + 1)
         }
+        if (c == '.' || c > y.c) collect(y.right, prefix, i)
       }
     }
+    
     collect(root, "", 0)
     q.toList
   }

@@ -18,13 +18,11 @@ class DirectedCycle(g: Digraph) extends BaseDirectedCycle[Int](g.V) {
     onStack(v) = true
     marked(v) = true
 
-    def recurOnNewVertex(w: Int): Boolean = {
-      if (!marked(w)) {
+    def recurOnNewVertex(w: Int): Boolean = if (!marked(w)) {
         edgeTo(w) = v
         dfs(w)
         true
       } else false
-    }
 
     def traceBack(w: Int): Boolean = {
       if (onStack(w)) {
