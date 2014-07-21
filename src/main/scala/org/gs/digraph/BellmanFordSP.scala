@@ -37,10 +37,10 @@ class BellmanFordSP(g: EdgeWeightedDigraph, s: Int) {
       val v = queue.dequeue
       onQueue(v) = false
       relax(v)
-      loop
+      loop()
     }
   }
-  loop
+  loop()
 
   /** returns if it has a negative cycle */
   def hasNegativeCycle(): Boolean = cycle != null
@@ -50,7 +50,7 @@ class BellmanFordSP(g: EdgeWeightedDigraph, s: Int) {
 
   private def findNegativeCycle(): Unit = {
     val spt = new EdgeWeightedDigraph(edgeTo.length)
-    edgeTo foreach(v => if (v != null) spt.addEdge(v))
+    edgeTo foreach (v => if (v != null) spt addEdge v )
 
     val finder = new EdgeWeightedDirectedCycle(spt)
     finder.cycle match {
@@ -60,9 +60,9 @@ class BellmanFordSP(g: EdgeWeightedDigraph, s: Int) {
   }
 
   private def relax(v: Int): Unit = {
-    for ( e <- g.adj(v) ) {
+    for (e <- g.adj(v)) {
       val w = e.to
-      if (_distTo(w) > _distTo(v) + e.weight) {
+      if (_distTo(w)  > _distTo(v) + e.weight) {
         _distTo(w) = _distTo(v) + e.weight
         edgeTo(w) = e
         if (!onQueue(w)) {
@@ -70,7 +70,7 @@ class BellmanFordSP(g: EdgeWeightedDigraph, s: Int) {
           onQueue(w) = true
         }
       }
-      if (cost % g.V == 0) findNegativeCycle
+      if (cost % g.V == 0) findNegativeCycle()
       cost += 1
     }
   }

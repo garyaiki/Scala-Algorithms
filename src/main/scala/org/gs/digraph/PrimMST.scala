@@ -46,10 +46,10 @@ class PrimMST(g: EdgeWeightedGraph) {
     @tailrec
     def loop(): Unit = if (!pq.isEmpty) {
       scan(pq.delMin)
-      loop
+      loop()
     }
 
-    loop
+    loop()
   }
 
   /** returns sum of edge weights in a MST */
@@ -58,7 +58,7 @@ class PrimMST(g: EdgeWeightedGraph) {
   /** returns edges of a MST */
   def edges(): List[Edge] = {
     val mst = new Queue[Edge]()
-    edgeTo foreach(e => if (e != null) mst.enqueue(e))
+    edgeTo foreach (e => if (e != null) mst.enqueue(e))
     mst.toList
   }
 }

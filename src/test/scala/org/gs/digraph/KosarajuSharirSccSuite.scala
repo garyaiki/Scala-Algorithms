@@ -33,9 +33,9 @@ class KosarajuSharirSCCSuite extends FlatSpec {
     val scc = new KosarajuSharirSCC(tinyDG)
     val m = scc.count
     val components = new Array[Queue[Int]](m)
-    for( i <- 0 until m) components(i) = new Queue[Int]()
+    for(i <- 0 until m) components(i) = new Queue[Int]()
 
-    for( v <- 0 until tinyDG.V) components(scc.id(v)).enqueue(v)
+    for(v <- 0 until tinyDG.V) components(scc.id(v)).enqueue(v)
     
     assert(components(0).corresponds(List(1))(equals))
     assert(components(1).corresponds(List(0, 2, 3, 4, 5))(equals))
@@ -61,15 +61,15 @@ class KosarajuSharirSCCSuite extends FlatSpec {
     val vEpairs = managedResource.loan(readFileToTuple)
     val savedLines = vEpairs._3
     val g = new Digraph(vEpairs._1)
-    for( t <- savedLines) g.addEdge(t._1, t._2)
+    for(t <- savedLines) g.addEdge(t._1, t._2)
     
     val scc = new KosarajuSharirSCC(g)
     val m = scc.count
     assert(m === 10, s"ssc.count:${scc.count} not equal 10")
     val components = new Array[Queue[Int]](m)
-    for( i <- 0 until m) components(i) = new Queue[Int]()
+    for(i <- 0 until m) components(i) = new Queue[Int]()
 
-    for( v <- 0 until g.V) components(scc.id(v)).enqueue(v)
+    for(v <- 0 until g.V) components(scc.id(v)).enqueue(v)
 
     assert(components(0).corresponds(List(21))(equals))
     assert(components(1).corresponds(List(2, 5, 6, 8, 9, 11, 12, 13, 15, 16, 18, 19, 22, 23, 25, 26,

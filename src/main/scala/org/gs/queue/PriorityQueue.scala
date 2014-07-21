@@ -69,6 +69,7 @@ abstract class PriorityQueue[A](pq: ArrayBuffer[A]) {
         val j1 = j + 1
         if ((j1 <= n) && cmp(j, j1)) j1 else j
       }
+      
       val j = calcJ
       if (j <= n && cmp(k, j)) {
         exchange(k, j)

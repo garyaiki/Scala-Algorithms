@@ -52,6 +52,7 @@ class BreadthFirstPaths(g: Graph, s: Int) {
   /** returns a list of vertices in the shortest path from the source vertex to v */
   def pathTo(v: Int): Option[List[Int]] = {
     if (!hasPathTo(v)) None else {
+
       @tailrec
       def loop(x: Int, xs: List[Int]): List[Int] = if (distTo(x) != 0)
         loop(edgeTo(x), x :: xs)

@@ -33,11 +33,11 @@ class BreadthFirstDirectedPaths(g: Digraph, s: Int) {
             marked(w) = true
             q.enqueue(w)
           })
-        loopQ
+        loopQ()
       }
     }
 
-    loopQ
+    loopQ()
   }
   bfs(s)
 

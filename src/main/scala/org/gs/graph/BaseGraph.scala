@@ -25,6 +25,7 @@ abstract class BaseGraph(val V: Int) {
         case _ => false
       }
     }
+
     require(rangeGuard(v) && rangeGuard(w), s"aV:$v and otherV:$w must be in 0-$V")
     e += 1
     adj(v) = w :: adj(v)
@@ -33,13 +34,15 @@ abstract class BaseGraph(val V: Int) {
   override def toString(): String = {
     val lf = sys.props("line.separator")
     val sb = new StringBuilder()
-    sb.append(s"$V ${e} $lf")
+    sb append (s"$V ${e} $lf")
+
     def addLines(v: Int) {
-      sb.append(s"$v : ")
-      adj(v) foreach(e => sb.append(s"$e  "))
-      sb.append(lf)
+      sb append (s"$v : ")
+      adj(v) foreach(e => sb append (s"$e  "))
+      sb append (lf)
     }
-    for( v <- 0 until V) addLines(v)
+
+    for(v <- 0 until V) addLines(v)
     sb.toString
   }
 }

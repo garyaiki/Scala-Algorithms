@@ -46,15 +46,15 @@ class QuickX[A: ClassTag](implicit ord: A => Ordered[A]) {
           exchange(j, j - 1, xs)
           j -= 1
         }
-        if (j > 0) loopJ
+        if (j > 0) loopJ()
       }
 
       i += 1
-      loopJ
-      if (i < xs.length) loopI
+      loopJ()
+      if (i < xs.length) loopI()
     }
 
-    loopI
+    loopI()
   }
 
   private def partition(lo: Int, hi: Int, xs: Array[A]): Int = {
@@ -82,7 +82,7 @@ class QuickX[A: ClassTag](implicit ord: A => Ordered[A]) {
 
       def from(): Int = if (lo < i) i else lo + 1
 
-      xs.indexWhere(stopInc(_), from)
+      xs indexWhere (stopInc(_), from)
     }
 
     /** Scan from right of array until finding element greater than partition
@@ -97,7 +97,7 @@ class QuickX[A: ClassTag](implicit ord: A => Ordered[A]) {
 
       def stopDec(x: A) = (x <= xs(lo))
 
-      xs.lastIndexWhere(stopDec(_), j)
+      xs lastIndexWhere (stopDec(_), j)
     }
 
     @tailrec /** scan both partition, put i, j in order, loop */

@@ -44,44 +44,40 @@ class SeparateChainingHashST[A, B](initialSize: Int) {
   def delete(key: A): Unit = {
     val i = hash(key)
     val chainList = st(i)
-    val j = chainList.indexWhere(chainGet(_, key))
+    val j = chainList indexWhere (chainGet(_, key))
     if (j != -1) {
       st(i) = chainList.take(j) ++ chainList.takeRight(chainList.length - j - 1)
     }
   }
 
   /** insert pair, resize if necessary */
-  def put(key: A, value: B): Unit = {
-    if (value == null) delete(key) else {
-      if (n >= 10 * m) resize(2 * m)
-      val i = hash(key)
-      if (st(i) == null) {
-        st(i) = List((key, value))
-        n += 1
-      } else {
-        st(i) = (key, value) :: st(i)
-        if (!st(i).contains(key)) n += 1
-      }
+  def put(key: A, value: B): Unit = if (value == null) delete(key)
+  else {
+    if (n >= 10 * m) resize(2 * m)
+    val i = hash(key)
+    if (st(i) == null) {
+      st(i) = List((key, value))
+      n += 1
+    } else {
+      st(i) = (key, value) :: st(i)
+      if (!st(i).contains(key)) n += 1
     }
   }
 
   private def resize(chains: Int): Unit = {
     val tmp = new SeparateChainingHashST[A, B](chains)
-    for (chain <- st;kv <- chain) tmp.put(kv._1, kv._2)
+    for (chain <- st; kv <- chain) tmp.put(kv._1, kv._2)
     m = tmp.m
     st = tmp.st
   }
 
-  /**
-   * @return keys in a list
-   */
+  /** returns keys */
   def keys(): List[A] = {
-    var q = scala.collection.mutable.Queue[A]()
-    for {
+    val ks = for {
       chain <- st
       if (chain != null)
       kv <- chain
-    } q.enqueue(kv._1)
-    q.toList
+    } yield kv._1
+    ks.toList
   }
 }

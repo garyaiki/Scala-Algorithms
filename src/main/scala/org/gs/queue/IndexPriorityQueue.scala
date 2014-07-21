@@ -205,7 +205,7 @@ abstract class IndexPriorityQueue[A: ClassTag](nMax: Int) {
     val size = pq.size
     for (i <- 1 until size) {
       val key = keys(pq(i))
-      if (key != null) sb.append(s" $key")
+      if (key != null) sb append(s" $key")
     }
     sb.toString.trim()
   }

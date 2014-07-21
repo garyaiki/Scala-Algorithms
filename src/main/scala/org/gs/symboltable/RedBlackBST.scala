@@ -378,12 +378,12 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
     def loop(x: Node[A, B]) {
       if (x != null) {
         loop(x.left)
-        if (full) sb.append(s" key:${x.key} value:${x.value} count:${x.count} red:${x.red}")
-        else sb.append(s" ${x.key}")
+        if (full) sb append (s" key:${x.key} value:${x.value} count:${x.count} red:${x.red}")
+        else sb append (s" ${x.key}")
         loop(x.right)
       }
     }
-    sb.append(s" root ${root.key} ")
+    sb append (s" root ${root.key} ")
     loop(root)
     sb.toString
   }
@@ -398,18 +398,18 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
     def loop(): Unit = {
       if (!q.isEmpty) {
         val n = q.dequeue
-        sb.append(f" ${n.key} ${n.red}, ${n.count} \n")
+        sb append (f" ${n.key} ${n.red}, ${n.count} \n")
         if (n.left != null) {
           q.enqueue(n.left)
         }
         if (n.right != null) {
           q.enqueue(n.right)
         }
-        loop
+        loop()
       }
     }
 
-    loop
+    loop()
     sb.toString
   }
 

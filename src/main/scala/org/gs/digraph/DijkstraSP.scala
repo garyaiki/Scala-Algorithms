@@ -17,7 +17,7 @@ class DijkstraSP(g: EdgeWeightedDigraph, s: Int) {
   _distTo(s) = 0.0
   private[digraph] val edgeTo = new Array[DirectedEdge](g.V)
   private val pq = new IndexMinPQ[Double](g.V)
-  relaxVertices
+  relaxVertices()
 
   private def relaxVertices() {
 
@@ -36,13 +36,13 @@ class DijkstraSP(g: EdgeWeightedDigraph, s: Int) {
     def loop() {
       if (!pq.isEmpty) {
         val v = pq.delMin
-        g.adj(v) foreach(e => relax(e))
-        loop
+        g.adj(v) foreach (e => relax(e))
+        loop()
       }
     }
 
     pq.insert(s, _distTo(s))
-    loop
+    loop()
   }
 
   /** returns length of shortest path from source to v */

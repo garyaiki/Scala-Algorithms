@@ -38,16 +38,16 @@ class EdgeWeightedGraph(v: Int) extends BaseEdgeWeightedGraph[Edge](v) {
       var selfLoops = 0
       
       def addEdges(edg: Edge) {
-        if(edg.other(v) > v) list.prepend(edg)
+        if(edg.other(v) > v) list prepend (edg)
         else if (edg.other(v) == v) {
-          if (selfLoops % 2 == 0) list.prepend(edg)
+          if (selfLoops % 2 == 0) list prepend (edg)
           selfLoops += 1
         }
       }
-      adj(v) foreach(ed => addEdges(ed))
+      adj(v) foreach (ed => addEdges(ed))
     }
     
-    for( vV <- 0 until v) addEdgesAndSelfLoops(vV)
+    for(vV <- 0 until v) addEdgesAndSelfLoops(vV)
     list.toList
   }
 }

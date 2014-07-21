@@ -21,8 +21,8 @@ abstract class BaseEdgeWeightedGraph[A <: BaseEdge](val V: Int) {
     e = g.e
 
     for (v <- 0 until g.V; reverse = List[A]()) {
-      g.adj(v) foreach(e => e :: reverse)
-      reverse foreach(er => _adj(v) = er :: _adj(v))
+      g.adj(v) foreach (e => e :: reverse)
+      reverse foreach (er => _adj(v) = er :: _adj(v))
     }
   }
 
@@ -40,19 +40,20 @@ abstract class BaseEdgeWeightedGraph[A <: BaseEdge](val V: Int) {
   }
 
   /** abstract edges in graph */
-  def edges():List[A]
+  def edges(): List[A]
 
   override def toString(): String = {
     val lf = sys.props("line.separator")
     val sb = new StringBuilder()
-    sb.append(s"$V $e $lf")
+    sb append (s"$V $e $lf")
     
     def addLines(v: Int) {
-      sb.append(s"$v : ")
-      _adj(v) foreach(ed => sb.append(s"$ed  "))
-      sb.append(lf)
+      sb append (s"$v : ")
+      _adj(v) foreach (ed => sb append (s"$ed  "))
+      sb append (lf)
     }
-    for( v <- 0 until V) addLines(v)
+
+    for(v <- 0 until V) addLines(v)
     sb.toString
   }
 }

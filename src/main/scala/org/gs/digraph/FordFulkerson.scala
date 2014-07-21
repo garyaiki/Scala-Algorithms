@@ -88,7 +88,7 @@ class FordFulkerson(g: FlowNetwork, s: Int, t: Int) {
             }
           }
         }
-        g.adj(v) foreach(tryPath)
+        g.adj(v) foreach (tryPath)
 
         loopQ(q)
       }
@@ -99,7 +99,8 @@ class FordFulkerson(g: FlowNetwork, s: Int, t: Int) {
   }
 
   @tailrec
-  private def onAugmentedPath(prevPath: Option[Array[FlowEdge]]): (Option[Array[FlowEdge]], Array[Boolean]) = {
+  private def onAugmentedPath(prevPath: Option[Array[FlowEdge]]):
+      (Option[Array[FlowEdge]], Array[Boolean]) = {
 
     hasAugmentingPath match {
       case (None, marked) => (Some(prevPath.get), marked)

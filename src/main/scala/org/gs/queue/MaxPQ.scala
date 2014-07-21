@@ -25,7 +25,7 @@ class MaxPQ[A](pq: ArrayBuffer[A]) extends PriorityQueue(pq) {
   def isMaxHeap()(implicit ord: Ordering[A]): Boolean = checkHeap(less)
 
   /** return keys in decending sorted order */
-  def keys()(implicit ord: Ordering[A]): Seq[A] = pq.sorted(Ordering[A].reverse)
+  def keys()(implicit ord: Ordering[A]): Seq[A] = pq sorted(Ordering[A].reverse)
 
   /** return keys as string */
   def toString()(implicit ord: Ordering[A]): String = toString(keys)

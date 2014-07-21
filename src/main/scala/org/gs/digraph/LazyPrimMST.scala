@@ -22,7 +22,7 @@ class LazyPrimMST(g: EdgeWeightedGraph) {
   private val mst = new Queue[Edge]()
   private val marked = Array.fill[Boolean](g.V)(false)
   private val pq = new MinPQ[Edge](new ArrayBuffer((g.e) * 2))
-  for ( v <- 0 until g.V; if (!marked(v))) prim(v)
+  for (v <- 0 until g.V; if (!marked(v))) prim(v)
 
   /** returns sum of edge weights in a MST */
   def weight(): Double = _weight
@@ -33,7 +33,7 @@ class LazyPrimMST(g: EdgeWeightedGraph) {
   private def scan(v: Int) {
     require(!marked(v), s"v:$v is already marked")
     marked(v) = true
-    g.adj(v) foreach(ed => if (!marked(ed.other(v))) pq.insert(ed))
+    g.adj(v) foreach (ed => if (!marked(ed.other(v))) pq.insert(ed))
   }
 
   private def prim(s: Int): Unit = {

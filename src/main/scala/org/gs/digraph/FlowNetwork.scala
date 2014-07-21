@@ -45,14 +45,14 @@ class FlowNetwork(val v: Int) {
   override def toString(): String = {
     val lf = sys.props("line.separator")
     val sb = new StringBuilder()
-    sb.append(s"$v ${_e} $lf")
+    sb append (s"$v ${_e} $lf")
     
     def addLines(v: Int) {
       sb.append(s"$v : ")
-      adj(v) foreach(e => if(e.to != v) sb.append(s"$e  "))
+      adj(v) foreach (e => if(e.to != v) sb append (s"$e  "))
     }
     
-    for( vV <- 0 until v) addLines(vV)
+    for(vV <- 0 until v) addLines(vV)
     sb.toString
   }
 }

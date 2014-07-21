@@ -50,7 +50,7 @@ class EdgeWeightedDirectedCycle(g: EdgeWeightedDigraph)
             loop(e)
             _cycle
           }
-          val c = traceBack
+          val c = traceBack()
         }
       }
     }

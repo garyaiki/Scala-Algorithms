@@ -41,7 +41,7 @@ object Merge {
     if (n == 0) xs
     else {
       val (ys, zs) = xs splitAt n
-      merge(msort(ys), msort(zs), Nil).reverse
+      merge (msort(ys), msort(zs), Nil).reverse
     }
   }
 }

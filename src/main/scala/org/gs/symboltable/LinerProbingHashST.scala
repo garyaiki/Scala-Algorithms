@@ -73,7 +73,7 @@ class LinearProbingHashST[A, B](initialSize: Int) {
 
       def halveSizeIfEigthFull(): Unit = if (n > 0 && n <= m / 8) resize(m / 2)
 
-      halveSizeIfEigthFull
+      halveSizeIfEigthFull()
     }
   }
 
@@ -85,7 +85,7 @@ class LinearProbingHashST[A, B](initialSize: Int) {
     if (value == null) delete(key) else {
       def doubleSizeIfHalfFull(): Unit = if (n >= m / 2) resize(m * 2)
 
-      doubleSizeIfHalfFull
+      doubleSizeIfHalfFull()
 
       @tailrec
       def loop(j: Int): Unit = if (st(j) != null) {

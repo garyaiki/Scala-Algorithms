@@ -15,7 +15,7 @@ class GraphSuite extends FlatSpec {
     val savedLines = managedResource.loan(readFileToArray)
     val g = new Graph(savedLines(0))
     val twoInts = savedLines.drop(2).grouped(2)
-    for( t <- twoInts) g.addEdge(t(0), t(1))
+    for(t <- twoInts) g.addEdge(t(0), t(1))
     assert(g.adj(2).diff(Array[Int](141, 110, 108, 86, 79, 51, 42, 18, 14)) === Array())
   }
 }

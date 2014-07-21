@@ -24,11 +24,11 @@ class Huffman {
       for {
         i <- 0 until R
         if (freq(i) > 0)
-      } pq.insert(Node(i.toChar, freq(i), null, null))
+      } pq insert (Node(i.toChar, freq(i), null, null))
 
       if (pq.size == 1) {
-        if (freq('\0') == 0) pq.insert(Node('\0', 0, null, null))
-        else pq.insert(Node('\1', 0, null, null))
+        if (freq('\0') == 0) pq insert (Node('\0', 0, null, null))
+        else pq insert (Node('\1', 0, null, null))
       }
 
       @tailrec
@@ -36,11 +36,11 @@ class Huffman {
         if (pq.size > 1) {
           val left = pq.pop.get
           val right = pq.pop.get
-          pq.insert(Node('\0', left.freq + right.freq, left, right))
-          mergeSmallestTrees
+          pq insert (Node('\0', left.freq + right.freq, left, right))
+          mergeSmallestTrees()
         }
       }
-      mergeSmallestTrees
+      mergeSmallestTrees()
       pq.pop.get
     }
 
@@ -69,7 +69,7 @@ class Huffman {
       i <- 0 until input.length
     } {
       val code = st(input(i))
-      for(j <- 0 until code.length) print(code.charAt(j))
+      for(j <- 0 until code.length) print (code.charAt(j))
     }
   }
 
@@ -102,7 +102,7 @@ class Node private (val ch: Char, val freq: Int, val left: Node, val right: Node
     (left == null && right == null)
   }
 
-  def compare(that: Node): Int = freq.compareTo(that.freq)
+  def compare(that: Node): Int = freq compareTo (that.freq)
 
   def canEqual(other: Any): Boolean = other.isInstanceOf[Node]
 

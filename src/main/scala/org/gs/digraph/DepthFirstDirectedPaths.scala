@@ -18,7 +18,7 @@ class DepthFirstDirectedPaths(g: Digraph, s: Int) {
 
   private def dfs(v: Int) {
     marked(v) = true
-    g.adj(v).foreach(w => if (!marked(w)) {
+    g.adj(v) foreach (w => if (!marked(w)) {
         edgeTo(w) = v
         dfs(w)
       })

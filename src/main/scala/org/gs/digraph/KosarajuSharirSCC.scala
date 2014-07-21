@@ -31,7 +31,7 @@ class KosarajuSharirSCC(g: Digraph) {
   private def dfs(v: Int, count: Int): Unit = {
     marked(v) = true
     _id(v) = count
-    g.adj(v) foreach(w => if (!marked(w)) dfs(w, count))
+    g.adj(v) foreach (w => if (!marked(w)) dfs(w, count))
   }
 
   /** returns if  v and  w are strongly connected */

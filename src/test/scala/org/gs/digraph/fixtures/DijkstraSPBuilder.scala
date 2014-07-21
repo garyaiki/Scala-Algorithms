@@ -18,13 +18,13 @@ trait TinyEdgeWeightedArrayBuilder {
     (6, 2, 0.40), (3, 6, 0.52), (6, 0, 0.58), (6, 4, 0.93))
   val size = tinyEWDData.size
   val tinyEdgeArray = {
-    for( e <- tinyEWDData) yield new DirectedEdge(e._1, e._2, e._3)
+    for(e <- tinyEWDData) yield new DirectedEdge(e._1, e._2, e._3)
   }
 }
 
 trait TinyEdgeWeightedDigraphBuilder extends TinyEdgeWeightedArrayBuilder {
   val g = new EdgeWeightedDigraph(size)
-  for( ed <- tinyEdgeArray) g.addEdge(ed)
+  for(ed <- tinyEdgeArray) g.addEdge(ed)
 }
 trait DijkstraSPBuilder extends TinyEdgeWeightedDigraphBuilder {
 

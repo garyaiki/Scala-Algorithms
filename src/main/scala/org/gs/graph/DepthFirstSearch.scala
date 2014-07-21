@@ -22,7 +22,7 @@ class DepthFirstSearch(g: Graph, s: Int) {
   private def dfs(v: Int): Unit = {
     _count += 1
     marked(v) = true
-    g.adj(v) foreach(w => if (!marked(w)) dfs(w))
+    g.adj(v) foreach (w => if (!marked(w)) dfs(w))
   }
   dfs(s)
 }
