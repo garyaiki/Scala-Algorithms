@@ -36,7 +36,7 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
     */
   def rotateLeft(h: Node[A, B]): Node[A, B] = {
     assert(h != null && isRed(h.right), "error: black or null passed to rotateLeft")
-    val x = h.right // x is new root of subtree
+    val x = h.right
     h.right = x.left
     x.left = h
     x.red = x.left.red
@@ -52,7 +52,7 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
     */
   def rotateRight(h: Node[A, B]): Node[A, B] = {
     assert(h != null && isRed(h.left), "error: black or null passed to rotateRight")
-    val x = h.left // x is new root of subtree
+    val x = h.left
     h.left = x.right
     x.right = h
     x.red = x.right.red
@@ -111,14 +111,10 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
     @tailrec
     def loop(x: Node[A, B])(implicit ord: Ordering[A]): Option[B] = if (x == null) None
     else {
-      val cmp = ord.compare(key, x.key)
-      if (cmp == 0) Some(x.value)
-      else {
-        val childNode = cmp match {
-          case n if (n < 0) => x.left
-          case _ => x.right
-        }
-        loop(childNode)
+      ord.compare(key, x.key) match {
+        case 0 => Some(x.value)
+        case n if (n < 0) => loop(x.left)
+        case _ => loop(x.right)
       }
     }
     loop(root)
