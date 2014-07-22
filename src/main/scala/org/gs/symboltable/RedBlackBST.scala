@@ -87,20 +87,17 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
           case _ => x.right = loop(x.right)
         }
         x.count += 1
-        var h = x
-        if (isRed(x.right) && !isRed(x.left)) {
-          h = rotateLeft(x)
-        } else {
-          if (isRed(h.left) && isRed(h.left.left)) {
-            h = rotateRight(h)
+        if (isRed(x.right) && !isRed(x.left)) rotateLeft(x)
+        else {
+          val j = if (isRed(x.left) && isRed(x.left.left)) rotateRight(x) else x
+          if (isRed(j.left) && isRed(j.right)) {
+            flipColors(j)
           }
-          if (isRed(h.left) && isRed(h.right)) {
-            flipColors(h)
-          }
+          j
         }
-        h
       }
     }
+
     root = loop(root)
     root.red = false
   }
@@ -128,41 +125,43 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
     }
 
     def loop(x: Node[A, B], key: A): Node[A, B] = {
-      var h = x
-      ord.compare(key, x.key) match {
+
+      val h = ord.compare(key, x.key) match {
         case n if (n < 0) => {
-          if (!isRed(x.left) && !isRed(x.left.left)) {
-            h = moveRedLeft(x)
-          }
-          h.left = loop(h.left, key)
+          val j = if (!isRed(x.left) && !isRed(x.left.left)) moveRedLeft(x) else x
+
+          j.left = loop(j.left, key)
+          j
         }
         case _ => {
-          if (isRed(h.left)) {
-            h = rotateRight(x)
-          }
-          ord.compare(key, h.key) match {
-            case 0 if (h.right == null) => return null
+          val j = if (isRed(x.left)) rotateRight(x) else x
+
+          ord.compare(key, j.key) match {
+            case 0 if (j.right == null) => return null
             case _ => {
-              if (!isRed(h.right) && !isRed(h.right.left)) {
-                h = moveRedRight(h)
-              }
-              if (ord.compare(key, h.key) == 0) {
-                val y = min(h.right)
-                h.key = y.key
-                h.value = y.value
-                h.right = deleteMin(h.right)
+              val k = if (!isRed(j.right) && !isRed(j.right.left)) moveRedRight(j) else j
+
+              if (ord.compare(key, k.key) == 0) {
+                val y = min(k.right)
+                k.key = y.key
+                k.value = y.value
+                k.right = deleteMin(k.right)
               } else {
-                h.right = loop(h.right, key)
+                k.right = loop(k.right, key)
               }
+              k
             }
           }
+
         }
       }
       balance(h)
     }
 
     root = loop(root, key)
-    if (!isEmpty) root.red = false
+    if (!isEmpty) {
+      root.red = false
+    }
   }
 
   private def moveRedRight(h: Node[A, B]): Node[A, B] = {
@@ -186,29 +185,20 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
   private def balance(h: Node[A, B]): Node[A, B] = {
     assert(h != null, "null passed to balance")
 
-    var x = h
-    if (isRed(x.right)) {
-      x = rotateLeft(h)
+    val x = if (isRed(h.right)) rotateLeft(h) else h
+    val y = if (isRed(x.left) && isRed(x.left.left)) rotateRight(x) else x
+    if (isRed(y.left) && isRed(y.right)) {
+      flipColors(y)
     }
-    if (isRed(x.left) && isRed(x.left.left)) {
-      x = rotateRight(x)
-    }
-    if (isRed(x.left) && isRed(x.right)) {
-      flipColors(x)
-    }
-    x.count = 1 + size(x.left) + size(x.right)
-    x
+    y.count = 1 + size(y.left) + size(y.right)
+    y
   }
 
   private def deleteMin(h: Node[A, B]): Node[A, B] = {
-    var hm = h
-
-    if (hm.left == null) null.asInstanceOf[Node[A, B]] else {
-      if (!isRed(hm.left) && !isRed(hm.left.left)) {
-        hm = moveRedLeft(hm)
-      }
-      hm.left = deleteMin(hm.left)
-      balance(hm)
+    if (h.left == null) null else {
+      val j = if (!isRed(h.left) && !isRed(h.left.left)) moveRedLeft(h) else h
+      j.left = deleteMin(j.left)
+      balance(j)
     }
   }
 
