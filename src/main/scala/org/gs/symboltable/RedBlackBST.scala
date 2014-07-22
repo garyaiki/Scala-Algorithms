@@ -129,31 +129,38 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
 
     def loop(x: Node[A, B], key: A): Node[A, B] = {
       var h = x
-      if (ord.compare(key, x.key) < 0) {
-        if (!isRed(x.left) && !isRed(x.left.left)) {
-          h = moveRedLeft(x)
-        }
-        h.left = loop(h.left, key)
-      } else {
-        if (isRed(h.left)) {
-          h = rotateRight(x)
-        }
-        if ((ord.compare(key, h.key) == 0) && (h.right == null)) return null else {
-          if (!isRed(h.right) && !isRed(h.right.left)) {
-            h = moveRedRight(h)
+      ord.compare(key, x.key) match {
+        case n if (n < 0) => {
+          if (!isRed(x.left) && !isRed(x.left.left)) {
+            h = moveRedLeft(x)
           }
-          if (ord.compare(key, h.key) == 0) {
-            val y = min(h.right)
-            h.key = y.key
-            h.value = y.value
-            h.right = deleteMin(h.right)
-          } else {
-            h.right = loop(h.right, key)
+          h.left = loop(h.left, key)
+        }
+        case _ => {
+          if (isRed(h.left)) {
+            h = rotateRight(x)
+          }
+          ord.compare(key, h.key) match {
+            case 0 if (h.right == null) => return null
+            case _ => {
+              if (!isRed(h.right) && !isRed(h.right.left)) {
+                h = moveRedRight(h)
+              }
+              if (ord.compare(key, h.key) == 0) {
+                val y = min(h.right)
+                h.key = y.key
+                h.value = y.value
+                h.right = deleteMin(h.right)
+              } else {
+                h.right = loop(h.right, key)
+              }
+            }
           }
         }
       }
       balance(h)
     }
+
     root = loop(root, key)
     if (!isEmpty) root.red = false
   }
@@ -250,8 +257,11 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
 
   /** number of keys in lo..hi */
   def size(lo: A, hi: A): Int = {
-    if (ord.compare(lo, hi) > 0) 0 else if (contains(hi)) rank(hi) - rank(lo) + 1 else
+    if (ord.compare(lo, hi) > 0) 0
+    else if (contains(hi)) rank(hi) - rank(lo) + 1
+    else {
       rank(hi) - rank(lo)
+    }
   }
 
   /** is key present */
@@ -263,6 +273,7 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
   /** are any keys in tree */
   def isEmpty(): Boolean = if (root == null) true else false
 
+  @tailrec
   private def min(x: Node[A, B]): Node[A, B] = {
     assert(x != null, "null passed to min")
     if (x.left == null) x else min(x.left)
@@ -274,6 +285,7 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
   /** returns largest key */
   def max(): A = {
 
+    @tailrec
     def max(x: Node[A, B]): Node[A, B] = {
       assert(x != null, "null passed to max")
       if (x.right == null) x else max(x.right)
@@ -285,11 +297,11 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
   def floor(key: A): A = {
 
     def loop(x: Node[A, B])(implicit ord: Ordering[A]): Node[A, B] = {
-      if (x == null) null.asInstanceOf[Node[A, B]] else {
-        val cmp = ord.compare(key, x.key)
-        if (cmp == 0) x else {
-          if (cmp < 0) loop(x.left)
-          else {
+      if (x == null) null else {
+        ord.compare(key, x.key) match {
+          case 0 => x
+          case n if (n < 0) => loop(x.left)
+          case _ => {
             val t = loop(x.right)
             if (t != null) t else x // t in right tree, x is subroot
           }
