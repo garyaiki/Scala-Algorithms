@@ -24,13 +24,13 @@ class BellmanFordSP(g: EdgeWeightedDigraph, s: Int) {
   private val queue = new Queue[Int]()
   private var cost = 0
   private var cycle = null.asInstanceOf[List[DirectedEdge]]
-  
+
   private def getEdgeTo(v: Int): DirectedEdge = edgeTo(v)
-  
+
   _distTo(s) = 0.0
   queue.enqueue(s)
   onQueue(s) = true
-  
+
   @tailrec
   private def loop(): Unit = {
     if (!queue.isEmpty && !hasNegativeCycle) {

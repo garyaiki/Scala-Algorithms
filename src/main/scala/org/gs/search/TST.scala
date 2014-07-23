@@ -163,7 +163,7 @@ class TST[A] {
         if (c == '.' || c > y.c) collect(y.right, prefix, i)
       }
     }
-    
+
     collect(root, "", 0)
     q.toList
   }

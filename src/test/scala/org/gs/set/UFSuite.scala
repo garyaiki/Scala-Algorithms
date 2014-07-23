@@ -20,7 +20,7 @@ class UFSuite extends FlatSpec {
   
   behavior of "a UF"
 
-  it should "find 2 components" in new UnionFindBuilder {
+  it should "find components in tiny data" in new UnionFindBuilder {
     for {
       t <- tinyUFdata
       if(!tinyUF.connected(t._1, t._2))
@@ -28,7 +28,7 @@ class UFSuite extends FlatSpec {
     assert(tinyUF.count === 2)
   }
   // -Xms256m -Xmx512m
-  it should "find 6 components in largeUF" in new IntArrayBuilder {
+  it should "find components in largeUF data" in new IntArrayBuilder {
     val managedResource = readURI("http://algs4.cs.princeton.edu/15uf/largeUF.txt")
     val savedLines = managedResource.loan(readFileToArray)
     val n = savedLines(0)

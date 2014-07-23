@@ -9,7 +9,7 @@ package org.gs.sort
   */
 object LSD {
 
-  /** sort strings with the same width 
+  /** sort strings with the same width
     *
     * @param a string array
     * @param w string width

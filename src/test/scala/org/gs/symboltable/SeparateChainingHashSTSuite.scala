@@ -35,14 +35,14 @@ class SeparateChainingHashSTSuite extends FlatSpec with BeforeAndAfter with Priv
     assert(ost.get('K') === Some(23))
   }
 
-  it should "get invalid key" in {
+  it should "confirm a key isn't in the table" in {
     val ost = new SeparateChainingHashST[Char, Int](50)
     val item = testInput(0)
     val value = ost.get('K')
     assert(value === None)
   }
 
-  it should "isEmpty" in {
+  it should "when table isEmpty and when it isn't" in {
     val ost = new SeparateChainingHashST[Char, Int](50)
     assert(ost.isEmpty === true)
     val item = testInput(0)
@@ -50,20 +50,20 @@ class SeparateChainingHashSTSuite extends FlatSpec with BeforeAndAfter with Priv
     assert(ost.isEmpty === false)
   }
 
-  it should "contains" in {
+  it should "confirm whan a key is contained in the table" in {
     val ost = new SeparateChainingHashST[Char, Int](50)
     for (item <- testInput) ost.put(item._1, item._2)
     assert(ost.contains('S') === true)
     assert(ost.contains('z') === false)
   }
 
-  it should "size" in {
+  it should "find the table's size" in {
     val ost = new SeparateChainingHashST[Char, Int](50)
     for (item <- testInput) ost.put(item._1, item._2)
     assert(ost.size === testInput.length)
   }
 
-  it should "keys" in {
+  it should "find all keys" in {
     val ost = new SeparateChainingHashST[Char, Int](50)
     for (item <- testInput) ost.put(item._1, item._2)
     val keys = ost.keys()
@@ -71,7 +71,7 @@ class SeparateChainingHashSTSuite extends FlatSpec with BeforeAndAfter with Priv
     assert(keys.mkString === "ACEIKLMOPQRSTUX")
   }
 
-  it should "delete" in {
+  it should "delete a key" in {
     val ost = new SeparateChainingHashST[Char, Int](50)
     for (item <- testInput) ost.put(item._1, item._2)
     ost.delete('Q')
@@ -80,7 +80,7 @@ class SeparateChainingHashSTSuite extends FlatSpec with BeforeAndAfter with Priv
     assert(keys.mkString === "ACEIKLMOPRSTUX")
   }
 
-  it should "resize" in {
+  it should "resize table when needed" in {
     val ost = new SeparateChainingHashST[Char, Int](testInput.length / 10)
     assert(ost.size === 0)
     for (item <- testInput) ost.put(item._1, item._2)

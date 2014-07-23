@@ -25,7 +25,7 @@ class FordFulkerson(g: FlowNetwork, s: Int, t: Int) {
 
   private def excess(v: Int) = {
 
-    def excessFlow(z: Double, e: FlowEdge): Double = (if (v == e.from) -e.flow else +e.flow) + z
+    def excessFlow(z: Double, e: FlowEdge): Double = (if (v == e.from) -e.flow else e.flow) + z
 
     g.adj(v).foldLeft(0.0)(excessFlow(_, _))
   }

@@ -37,14 +37,14 @@ class LinearProbingHashSTSuite extends FlatSpec with BeforeAndAfter with Private
     assert(ost.get('K') === Some(23))
   }
 
-  it should "get invalid key" in {
+  it should "confirm when a key is not in the table" in {
     val ost = new LinearProbingHashST[Char, Int](50)
     val item = testInput(0)
     val value = ost.get('K')
     assert(value === None)
   }
 
-  it should "isEmpty" in {
+  it should "confirm when the table is empty and when it isn't" in {
     val ost = new LinearProbingHashST[Char, Int](50)
     assert(ost.isEmpty === true)
     val item = testInput(0)
@@ -52,20 +52,20 @@ class LinearProbingHashSTSuite extends FlatSpec with BeforeAndAfter with Private
     assert(ost.isEmpty === false)
   }
 
-  it should "contains" in {
+  it should "find keys the table contains" in {
     val ost = new LinearProbingHashST[Char, Int](50)
     for (item <- testInput) ost.put(item._1, item._2)
     assert(ost.contains('S') === true)
     assert(ost.contains('z') === false)
   }
 
-  it should "size" in {
+  it should "find the size of the table" in {
     val ost = new LinearProbingHashST[Char, Int](50)
     for (item <- testInput) ost.put(item._1, item._2)
     assert(ost.size === testInput.length)
   }
 
-  it should "keys" in {
+  it should "find all keys" in {
     val ost = new LinearProbingHashST[Char, Int](50)
     for (item <- testInput) ost.put(item._1, item._2)
     val keys = ost.keys()
@@ -73,7 +73,7 @@ class LinearProbingHashSTSuite extends FlatSpec with BeforeAndAfter with Private
     assert(keys.mkString === "ACEIKLMOPQRSTUX")
   }
 
-  it should "delete" in {
+  it should "delete a key" in {
     val ost = new LinearProbingHashST[Char, Int](50)
     for (item <- testInput) ost.put(item._1, item._2)
     ost.delete('Q')
@@ -82,7 +82,7 @@ class LinearProbingHashSTSuite extends FlatSpec with BeforeAndAfter with Private
     assert(keys.mkString === "ACEIKLMOPRSTUX")
   }
 
-  it should "resize" in {
+  it should "resize table when needed" in {
     val ost = new LinearProbingHashST[Char, Int](testInput.length)
     assert(ost.size === 0)
 

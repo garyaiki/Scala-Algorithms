@@ -87,8 +87,7 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
           case _ => x.right = loop(x.right)
         }
         x.count += 1
-        if (isRed(x.right) && !isRed(x.left)) rotateLeft(x)
-        else {
+        if (isRed(x.right) && !isRed(x.left)) rotateLeft(x) else {
           val j = if (isRed(x.left) && isRed(x.left.left)) rotateRight(x) else x
           if (isRed(j.left) && isRed(j.right)) {
             flipColors(j)
@@ -106,8 +105,7 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
   def get(key: A)(implicit ord: Ordering[A]): Option[B] = {
 
     @tailrec
-    def loop(x: Node[A, B])(implicit ord: Ordering[A]): Option[B] = if (x == null) None
-    else {
+    def loop(x: Node[A, B])(implicit ord: Ordering[A]): Option[B] = if (x == null) None else {
       ord.compare(key, x.key) match {
         case 0 => Some(x.value)
         case n if (n < 0) => loop(x.left)
@@ -215,7 +213,7 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
 
   /** delete maximum key */
   def deleteMax(): Unit = {
-    
+
     def deleteMax(h: Node[A, B]): Node[A, B] = {
       val j = if (isRed(h.left)) rotateRight(h) else h
       if (j.right == null) null.asInstanceOf[Node[A, B]] else {
@@ -241,9 +239,8 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
 
   /** number of keys in lo..hi */
   def size(lo: A, hi: A): Int = {
-    if (ord.compare(lo, hi) > 0) 0
-    else if (contains(hi)) rank(hi) - rank(lo) + 1
-    else {
+    if (ord.compare(lo, hi) > 0) 0 else
+      if (contains(hi)) rank(hi) - rank(lo) + 1 else {
       rank(hi) - rank(lo)
     }
   }

@@ -14,7 +14,7 @@ import org.scalatest.junit.JUnitRunner
 class EdgeWeightedDirectedCycleSuite extends FlatSpec {
 
   behavior of "a EdgeWeightedDirectedCycle"
-  it should "confirm an edge weighted digraph does not have a cycle" in new DirectedEdgeBuilder {
+  it should "confirm when it does not have a cycle" in new DirectedEdgeBuilder {
 
     val managedResource = readURI("http://algs4.cs.princeton.edu/44sp/tinyEWDAG.txt")
     val tuple = managedResource.loan(readFileToTuple)
@@ -26,7 +26,7 @@ class EdgeWeightedDirectedCycleSuite extends FlatSpec {
     assert(a.hasCycle === false)
   }
   
-  it should "confirm an edge weighted digraph has a cycle" in new DirectedEdgeBuilder {
+  it should "confirm when it has a cycle" in new DirectedEdgeBuilder {
 
     val managedResource = readURI("http://algs4.cs.princeton.edu/44sp/tinyEWDn.txt")
     val tuple = managedResource.loan(readFileToTuple)
@@ -49,7 +49,7 @@ class EdgeWeightedDirectedCycleSuite extends FlatSpec {
     assert(a.hasCycle === true)
   }
 
-  it should "confirm an edge weighted digraph has a negative cycle" in new DirectedEdgeBuilder {
+  it should "confirm when it has a negative cycle" in new DirectedEdgeBuilder {
 
     val managedResource = readURI("http://algs4.cs.princeton.edu/44sp/tinyEWDnc.txt")
     val tuple = managedResource.loan(readFileToTuple)

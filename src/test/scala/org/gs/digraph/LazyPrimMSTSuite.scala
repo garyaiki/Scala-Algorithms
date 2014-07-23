@@ -50,7 +50,7 @@ class LazyPrimMSTSuite extends FlatSpec {
     assert(hasCycle === false)
   }
 
-  it should "be a spanning forest" in new LazyPrimMSTBuilder {
+  it should "find a spanning forest" in new LazyPrimMSTBuilder {
     val edges = primMST.edges
     val hasCycle = buildUF(primMST.edges)
 

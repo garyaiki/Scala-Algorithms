@@ -34,7 +34,7 @@ def apply[T](xs: T*): Queue[T] = new QueueImpl[T](xs.toList, Nil)
     val leading: List[T],
     val trailing: List[T]) extends Queue[T] {
 
-    def mirror = if (leading.isEmpty) new QueueImpl(trailing.reverse, Nil) else this
+    private def mirror = if (leading.isEmpty) new QueueImpl(trailing.reverse, Nil) else this
 
     def head: T = mirror.leading.head
 
@@ -43,7 +43,7 @@ def apply[T](xs: T*): Queue[T] = new QueueImpl[T](xs.toList, Nil)
       new QueueImpl(q.leading.tail, q.trailing)
     }
 
-    def enqueue(x: T) = new QueueImpl(leading, x :: trailing)
+    def enqueue(x: T): Queue[T] = new QueueImpl(leading, x :: trailing)
     
     def isEmpty(): Boolean = leading.isEmpty && trailing.isEmpty
   }

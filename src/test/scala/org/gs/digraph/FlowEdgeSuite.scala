@@ -15,15 +15,15 @@ import org.scalatest.junit.JUnitRunner
 class FlowEdgeSuite extends FlatSpec {
   behavior of "a FlowEdge"
   
-  it should "create a valid FlowEdge from the primary constructor" in {
-    val e = new FlowEdge(12,23,3.14)
+  it should "create a valid FlowEdge with default flow value" in {
+    val e = new FlowEdge(12, 23, 3.14)
     assert(e.from === 12)
     assert(e.to === 23)
     assert(e.capacity === 3.14 +- 0.01)
   }
     
-  it should "create a valid FlowEdge from the secondary constructor" in {
-    val e = new FlowEdge(12,23,3.14, 2.0)
+  it should "create a valid FlowEdge with specified flow value" in {
+    val e = new FlowEdge(12, 23, 3.14, 2.0)
     assert(e.from === 12)
     assert(e.to === 23)
     assert(e.capacity === 3.14 +- 0.01)

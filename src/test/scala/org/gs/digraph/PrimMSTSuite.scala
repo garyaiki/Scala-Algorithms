@@ -23,18 +23,18 @@ class PrimMSTSuite extends FlatSpec {
 
   behavior of "a PrimMST"
 
-  it should "build" in new GraphBuilder {
+  it should "build from an EdgeWeightedGraph" in new GraphBuilder {
     val primMST = new PrimMST(g)
   }
 
-  it should "calulate total edge weight of tinyEWG MST" in new EdgeWeightedGraphBuilder {
+  it should "calulate total weight of edges in tinyEWG MST" in new EdgeWeightedGraphBuilder {
     val g = buildGraph("http://algs4.cs.princeton.edu/43mst/tinyEWG.txt")
     val mst = new PrimMST(g)
     val weight = mst.weight
     assert(weight === 1.81 +- 0.000005)
   }
 
-  it should "match expected edges in a MST" in new PrimMSTBuilder {
+  it should "find expected edges in a MST" in new PrimMSTBuilder {
     val edges = primMST.edges.toArray
     val diff = edges.diff(tinyMSTArray)
     assert(edges.diff(tinyMSTArray).size === 0)
@@ -45,7 +45,7 @@ class PrimMSTSuite extends FlatSpec {
     assert(hasCycle === false)
   }
 
-  it should "be a spanning forest" in new PrimMSTBuilder {
+  it should "find wnen it has a spanning forest" in new PrimMSTBuilder {
     val edges = primMST.edges
     val hasCycle = buildUF(primMST.edges)
     @tailrec

@@ -6,7 +6,7 @@ package org.gs.digraph
 
 import org.gs.graph.BaseEdge
 /** Differentiate directed edge vertices from vertices in undirected edge
-  *  
+  *
   * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   *
   */

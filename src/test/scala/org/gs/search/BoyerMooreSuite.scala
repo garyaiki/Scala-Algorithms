@@ -16,7 +16,7 @@ class BoyerMooreSuite extends FlatSpec {
 
   val text = "abacadabrabracabracadabrabrabracad".toCharArray
 
-  it should "find a pattern in the text" in {
+  it should "find a pattern when it's in the text" in {
     val pattern = "abracadabra".toCharArray
     val bm = new BoyerMoore(pattern)
     val offset = bm.search(text)
@@ -32,7 +32,7 @@ class BoyerMooreSuite extends FlatSpec {
   }
   
   
-  it should "find a pattern at the end of the text" in {
+  it should "find a pattern when it's at the end of the text" in {
     val pattern = "rabrabracad".toCharArray
     val bm = new BoyerMoore(pattern)
     val offset = bm.search(text)
@@ -40,7 +40,7 @@ class BoyerMooreSuite extends FlatSpec {
     assert(offset === text.length - pattern.length, s"wrong offset:$offset")
   }
     
-  it should "find a pattern at the start of the text" in {
+  it should "find a pattern when it's at the start of the text" in {
     val pattern = "abacad".toCharArray
     val bm = new BoyerMoore(pattern)
     val offset = bm.search(text)

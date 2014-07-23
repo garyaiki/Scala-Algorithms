@@ -14,7 +14,7 @@ import org.scalatest.junit.JUnitRunner
 class KMPSuite extends FlatSpec {
   behavior of "a KMP"
 
-  it should "search for the pattern in the text using the KMP algorithm" in {
+  it should "find the offset in the text where a  pattern is found" in {
     val pattern = "abracadabra".toCharArray
     val kmp = new KMP(pattern)
     val text = "abacadabrabracabracadabrabrabracad".toCharArray

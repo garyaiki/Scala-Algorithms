@@ -14,7 +14,7 @@ import scala.collection.mutable.ArrayBuffer
 @RunWith(classOf[JUnitRunner])
 class QueueSuite extends FlatSpec {
   behavior of "a Queue"
-  it should "enqueue and dequeue" in {
+  it should "enqueue and dequeue characters in LIFO order" in {
     val q = Queue('P', 'Q', 'E')
     val q1 = q enqueue 'Z'
     assert(q.head === 'P')

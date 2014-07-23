@@ -47,17 +47,21 @@ class RedBlackBSTSuite extends FlatSpec with BeforeAndAfter with PrivateMethodTe
     ost.put(item._1, item._2)
     assert(ost.get('R') === Some(84))
     assert(ost.get('K') === Some(23))
-
+    assert(ost.isBST, "Not in Symmetric order")
+    assert(ost.isSizeConsistent, "Subtree counts not consistent")
+    assert(ost.isRankConsistent, "Ranks not consistent")
+    assert(ost.is23, "Not a 2-3 tree")
+    assert(ost.isBalanced, "Not balanced")
   }
 
-  it should "get invalid key" in {
+  it should "confirm when a key isn't present" in {
     val ost = new RedBlackBST[Char, Int]()(Ordering.Char)
     val item = testInput(0)
     val value = ost.get('K')
     assert(value === None)
   }
 
-  it should "isEmpty" in {
+  it should "confirm when a kv is in the tree isEmpty returns false" in {
     val ost = new RedBlackBST[Char, Int]()(Ordering.Char)
     assert(ost.isEmpty === true)
     val item = testInput(0)
@@ -65,56 +69,7 @@ class RedBlackBSTSuite extends FlatSpec with BeforeAndAfter with PrivateMethodTe
     assert(ost.isEmpty === false)
   }
 
-  it should "debug put contains" in {
-    val ost = new RedBlackBST[Char, Int]()(Ordering.Char)
-    var item = testInput(0)
-    ost.put(item._1, item._2)
-    item = testInput(1)
-    ost.put(item._1, item._2)
-    item = testInput(2) //!! crash
-    ost.put(item._1, item._2)
-    item = testInput(3)
-    ost.put(item._1, item._2)
-    item = testInput(4)
-    ost.put(item._1, item._2)
-    item = testInput(5)
-    ost.put(item._1, item._2)
-    item = testInput(6)
-    ost.put(item._1, item._2)
-    item = testInput(7)
-    ost.put(item._1, item._2)
-    item = testInput(8)
-    ost.put(item._1, item._2)
-    item = testInput(9)
-    ost.put(item._1, item._2)
-    item = testInput(10)
-    ost.put(item._1, item._2)
-    item = testInput(11)
-    ost.put(item._1, item._2)
-    item = testInput(12)
-    ost.put(item._1, item._2)
-    item = testInput(13)
-    ost.put(item._1, item._2)
-    item = testInput(14)
-    ost.put(item._1, item._2)
-    item = testInput(15)
-    ost.put(item._1, item._2)
-    item = testInput(16)
-    ost.put(item._1, item._2)
-    item = testInput(17)
-    ost.put(item._1, item._2)
-    item = testInput(18)
-    ost.put(item._1, item._2)
-    assert(ost.contains('S') === true)
-    assert(ost.contains('z') === false)
-    assert(ost.isBST, "Not in Symmetric order")
-    assert(ost.isSizeConsistent, "Subtree counts not consistent")
-    assert(ost.isRankConsistent, "Ranks not consistent")
-    assert(ost.is23, "Not a 2-3 tree")
-    assert(ost.isBalanced, "Not balanced")
-  }
-
-  it should "contains" in {
+  it should "validate after a series of puts" in {
     val ost = new RedBlackBST[Char, Int]()(Ordering.Char)
     for (item <- testInput) ost.put(item._1, item._2)
     assert(ost.contains('S') === true)
@@ -123,30 +78,29 @@ class RedBlackBSTSuite extends FlatSpec with BeforeAndAfter with PrivateMethodTe
     assert(ost.isSizeConsistent, "Subtree counts not consistent")
     assert(ost.isRankConsistent, "Ranks not consistent")
     assert(ost.is23, "Not a 2-3 tree")
-    val str = ost.inorderTreeWalk()
     assert(ost.isBalanced, "Not balanced")
   }
 
-  it should "size" in {
+  it should "confirm correct number of entries" in {
     val ost = new RedBlackBST[Char, Int]()(Ordering.Char)
     for (item <- testInput) ost.put(item._1, item._2)
     assert(ost.size === testInput.length)
   }
 
-  it should "size inclusive range" in {
+  it should "confirm correct number of entries in an inclusive range from low to high" in {
     val ost = new RedBlackBST[Char, Int]()(Ordering.Char)
     for (item <- testInput) ost.put(item._1, item._2)
     assert(ost.size('A', 'U') === testInput.length - 1)
   }
-  
-  it should "floor" in {
+
+  it should "find a key's floor, the largest key less than or equal to a given key" in {
     val ost = new RedBlackBST[Char, Int]()(Ordering.Char)
     for (item <- testInput) ost.put(item._1, item._2)
     assert(ost.floor('S') === 'S')
     assert(ost.floor('Z') === 'X')
   }
 
-  it should "ceiling" in {
+  it should "find a key's ceiling, the smallest key greater than or equal to a given key" in {
     val ost = new RedBlackBST[Char, Int]()(Ordering.Char)
     for (item <- testInput) ost.put(item._1, item._2)
     assert(ost.ceiling('S') === 'S')
@@ -154,7 +108,7 @@ class RedBlackBSTSuite extends FlatSpec with BeforeAndAfter with PrivateMethodTe
     assert(ost.ceiling('D') === 'E')
   }
 
-  it should "select" in {
+  it should "select the key of a given rank" in {
     val ost = new RedBlackBST[Char, Int]()(Ordering.Char)
     for (item <- testInput) ost.put(item._1, item._2)
     var k = ost.select(0)
@@ -166,14 +120,15 @@ class RedBlackBSTSuite extends FlatSpec with BeforeAndAfter with PrivateMethodTe
     k = ost.select(ost.size - 1)
     assert(k === Some('X'))
   }
-  it should "rank" in {
+  
+  it should "find the rank of a key, the number keys less than the key" in {
     val ost = new RedBlackBST[Char, Int]()(Ordering.Char)
     for (item <- testInput) ost.put(item._1, item._2)
     assert(ost.rank('S') === 15)
     assert(ost.rank('Z') === ost.size())
   }
 
-  it should "keys" in {
+  it should "find all the keys" in {
     val ost = new RedBlackBST[Char, Int]()(Ordering.Char)
     for (item <- testInput) ost.put(item._1, item._2)
     val keys = ost.keys()
@@ -181,19 +136,19 @@ class RedBlackBSTSuite extends FlatSpec with BeforeAndAfter with PrivateMethodTe
     assert(str === "ABCEHIJKLMNOPQRSTUX")
   }
 
-  it should "min" in {
+  it should "find the min, smallest key" in {
     val ost = new RedBlackBST[Char, Int]()(Ordering.Char)
     for (item <- testInput) ost.put(item._1, item._2)
     assert(ost.min === 'A')
   }
 
-  it should "max" in {
+  it should "find the max, largest key" in {
     val ost = new RedBlackBST[Char, Int]()(Ordering.Char)
     for (item <- testInput) ost.put(item._1, item._2)
     assert(ost.max === 'X')
   }
 
-  it should "delete" in {
+  it should "delete the given key" in {
     val ost = new RedBlackBST[Char, Int]()(Ordering.Char)
     for (item <- testInput) ost.put(item._1, item._2)
     assert(ost.contains('S') === true)
@@ -206,7 +161,7 @@ class RedBlackBSTSuite extends FlatSpec with BeforeAndAfter with PrivateMethodTe
     assert(ost.isBalanced, "Not balanced")
   }
 
-  it should "deleteMin" in {
+  it should "delete the minimum key" in {
     val ost = new RedBlackBST[Char, Int]()(Ordering.Char)
     for (item <- testInput) ost.put(item._1, item._2)
     assert(ost.get('M') === Some(63))
@@ -222,25 +177,21 @@ class RedBlackBSTSuite extends FlatSpec with BeforeAndAfter with PrivateMethodTe
     val str = keys.mkString
     assert(str === "BCEHIJKLMNOPQRSTUX")
   }
-  it should "deleteMax" in {
+  
+  it should "delete the maximum key" in {
     val ost = new RedBlackBST[Char, Int]()(Ordering.Char)
     for (item <- testInput) ost.put(item._1, item._2)
     ost.deleteMax
     assert(ost.get('X') === None)
-    var keys = ost.keys()
-    var str = keys.mkString
-    assert(str === "ABCEHIJKLMNOPQRSTU")
+    assert(ost.keys().mkString === "ABCEHIJKLMNOPQRSTU")
     ost.deleteMax
     assert(ost.get('U') === None)
-    keys = ost.keys()
-    str = keys.mkString
-    assert(str === "ABCEHIJKLMNOPQRST")
+    assert(ost.keys().mkString === "ABCEHIJKLMNOPQRST")
     assert(ost.isBST, "Not in Symmetric order")
     assert(ost.isSizeConsistent, "Subtree counts not consistent")
     assert(ost.isRankConsistent, "Ranks not consistent")
-      //  assert(ost.is23, "Not a 2-3 tree")
+    //  assert(ost.is23, "Not a 2-3 tree")
     assert(ost.isBalanced, "Not balanced")
-
   }
 
 }

@@ -32,7 +32,7 @@ class SymbolGraphSuite extends FlatSpec {
     assert(wLAX.diff(List("LAS", "PHX")) === List())
   }
 
-  it should "find movies as keys and their actors as adjacencies" in {
+  it should "find movies and their actors as keys and adjacencies" in {
     val d = movies.d
     val keys = d.keys
     val g = d.g
@@ -44,7 +44,7 @@ class SymbolGraphSuite extends FlatSpec {
     assert(wTinMen.contains("Munchel, Lois Raymond"))
   }
 
-  it should "find actors as keys and their movies as adjacencies" in {
+  it should "find actors and their movies as keys and adjacencies" in {
     val d = movies.d
     val keys = d.keys
     val g = d.g

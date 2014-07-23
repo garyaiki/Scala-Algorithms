@@ -10,7 +10,7 @@ import org.gs.graph.fixtures.GraphBuilder
 class DepthFirstSearchSuite extends FlatSpec {
 
   behavior of "a DepthFirstSearch"
-  it should "count verticies connected to an edge" in new GraphBuilder {
+  it should "count verticies adjacent to an edge" in new GraphBuilder {
     val from0 = new DepthFirstSearch(tinyG, 0)
     assert(from0.count === 7)
     val from1 = new DepthFirstSearch(tinyG, 1)
@@ -21,7 +21,7 @@ class DepthFirstSearchSuite extends FlatSpec {
     assert(from9.count === 4)
   }
 
-  it should "show if there's a path from source to target" in new GraphBuilder {
+  it should "find when there's a path from source to target" in new GraphBuilder {
     val from0 = new DepthFirstSearch(tinyG, 0)
     for (j <- 0 to 6) {
       assert(from0.marked(j), s"0 - j:$j")

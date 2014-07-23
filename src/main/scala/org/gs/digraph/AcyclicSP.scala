@@ -19,7 +19,7 @@ class AcyclicSP(g: EdgeWeightedDigraph, s: Int) {
   _distTo(s) = 0.0
   private val edgeTo = Array.fill[Option[DirectedEdge]](g.V)(None)
   private val topological = new Topological(g)
-  
+
   topological.order match {
     case None => throw new IllegalArgumentException(s"EdgeWeightedDigraph:$g is not acyclic")
     case Some(x) => for {
@@ -47,7 +47,7 @@ class AcyclicSP(g: EdgeWeightedDigraph, s: Int) {
   def pathTo(v: Int): Option[Seq[DirectedEdge]] = {
     if (!hasPathTo(v)) None else {
       val path = new ListBuffer[DirectedEdge]()
-      
+
       @tailrec
       def loop(e: DirectedEdge) {
         e +=: path

@@ -12,7 +12,7 @@ import org.scalatest.junit.JUnitRunner
   */
 @RunWith(classOf[JUnitRunner])
 class AcyclicSPSuite extends FlatSpec {
-  it should "match expected paths" in new DirectedEdgeBuilder {    
+  it should "find paths in an EdgeWeightedDigraph" in new DirectedEdgeBuilder {    
     def expectedPaths() = {
       val paths = new Array[List[DirectedEdge]](tuple._1)
       paths(0) = List(tuple._3(0), tuple._3(4))

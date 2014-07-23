@@ -19,19 +19,19 @@ import org.gs.digraph.fixtures.EdgeWeightedDigraphBuilder
 class DijkstraSPSuite extends FlatSpec {
 
   behavior of "a DijkstraSP"
-  it should "build" in new TinyEdgeWeightedDigraphBuilder {
+  it should "build from an EdgeWeightedDigraph" in new TinyEdgeWeightedDigraphBuilder {
     val dsp = new DijkstraSP(g, 0)
     assert(dsp !== null)
   }
 
-  it should "have consistent distTo and edgeTo for the source vertex" in new DijkstraSPBuilder {
+  it should "have a consistent distTo and edgeTo for the source vertex" in new DijkstraSPBuilder {
     val distTo = dsp0.distTo(s0)
     val edgeTo = dsp0.edgeTo(s0)
     val consistent = if (distTo != 0.0 || edgeTo != null) false else true
     assert(consistent)
   }
 
-  it should "have consistent distTo and edgeTo for all verticies" in new DijkstraSPBuilder {
+  it should "have consistent distTos and edgeTos for all verticies" in new DijkstraSPBuilder {
     @tailrec
     def loop(i: Int): Boolean = {
       if (i < g.V) {
@@ -85,7 +85,7 @@ class DijkstraSPSuite extends FlatSpec {
     assert(valid)
   }
 
-  it should "have shortest paths from 0 to all vertices" in new DijkstraSPBuilder {
+  it should "find shortest paths from 0 to all vertices" in new DijkstraSPBuilder {
     val equals = (_: DirectedEdge) == (_: DirectedEdge)
     for {
       v <- 0 until g.V

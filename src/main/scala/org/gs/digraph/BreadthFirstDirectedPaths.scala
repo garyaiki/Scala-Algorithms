@@ -50,7 +50,7 @@ class BreadthFirstDirectedPaths(g: Digraph, s: Int) {
   /** returns the path from s to v */
   def pathTo(v: Int): List[Int] = {
     @tailrec
-    def loop(x: Int, xs: List[Int]): List[Int] = if (_distTo(x) == 0) x :: xs 
+    def loop(x: Int, xs: List[Int]): List[Int] = if (_distTo(x) == 0) x :: xs
         else loop(edgeTo(x), x :: xs)
 
     loop(v, List[Int]())
