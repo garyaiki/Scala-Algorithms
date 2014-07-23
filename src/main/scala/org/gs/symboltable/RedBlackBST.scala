@@ -215,20 +215,14 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
 
   /** delete maximum key */
   def deleteMax(): Unit = {
+    
     def deleteMax(h: Node[A, B]): Node[A, B] = {
-      var hm = h
-
-      if (isRed(hm.left)) {
-        hm = rotateRight(h)
+      val j = if (isRed(h.left)) rotateRight(h) else h
+      if (j.right == null) null.asInstanceOf[Node[A, B]] else {
+        val m = if (!isRed(j.right) && !isRed(j.right.left)) moveRedRight(j) else j
+        m.right = deleteMax(m.right)
+        balance(m)
       }
-      if (hm.right == null) hm = null.asInstanceOf[Node[A, B]] else {
-        if (!isRed(hm.right) && !isRed(hm.right.left)) {
-          hm = moveRedRight(hm)
-        }
-        hm.right = deleteMax(hm.right)
-        hm = balance(hm)
-      }
-      hm
     }
 
     if (!isRed(root.left) && !isRed(root.right)) {
@@ -349,8 +343,8 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
   /** returns all keys */
   def keys(): List[A] = {
     val q = Queue[A]()
-    val lo = min
-    val hi = max
+    val lo = min()
+    val hi = max()
 
     def loop(x: Node[A, B]) {
       if (x != null) {
@@ -438,9 +432,9 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
   def isSizeConsistent(): Boolean = {
 
     def loop(x: Node[A, B]): Boolean = if (x == null) true
-    else if (x.count != size(x.left) + size(x.right) + 1) false
-    else {
-      loop(x.left) && loop(x.right)
+      else if (x.count != size(x.left) + size(x.right) + 1) false
+      else {
+        loop(x.left) && loop(x.right)
     }
 
     loop(root)
@@ -515,7 +509,6 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
     val black = loopRB(root, 0)
 
     def loop(x: Node[A, B], black: Int): Boolean = {
-      var blackVar = black
       if (x == null) black == 0 else {
         if (!isRed(x)) loop(x.left, black - 1) && loop(x.right, black - 1)
         else loop(x.left, black) && loop(x.right, black)
