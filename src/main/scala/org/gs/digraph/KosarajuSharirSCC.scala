@@ -4,10 +4,10 @@ package org.gs.digraph
 
 import scala.annotation.tailrec
 
-/** 
-  *  
+/**
+  *
   * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
-  * 
+  *
   * @constructor creates a new KosarajuSharirSCC with a digraph
   * @param g digraph
   */
@@ -24,7 +24,7 @@ class KosarajuSharirSCC(g: Digraph) {
         } else searchUnmarked(count, xs)
       case Nil => count
     }
-  
+
   /** returns number of strong components */
   val count = searchUnmarked(0, depthFirstOrder.reversePost)
 

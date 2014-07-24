@@ -19,7 +19,7 @@ class FordFulkerson(g: FlowNetwork, s: Int, t: Int) {
       case _ => false
     }
   }
-  
+
   require(rangeGuard(s) && rangeGuard(t), s"source verticies s:$s or t:$t not in 0..${g.v} ")
   require(s != t, s"source s:$s equals target t:$t")
 

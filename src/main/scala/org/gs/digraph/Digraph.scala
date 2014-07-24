@@ -4,15 +4,15 @@ package org.gs.digraph
 
 import org.gs.graph.BaseGraph
 
-/** [[org.gs.digraph.EdgeWeightedDigraph]], [[org.gs.digraph.Topological]] use this to tell a 
+/** [[org.gs.digraph.EdgeWeightedDigraph]], [[org.gs.digraph.Topological]] use this to tell a
  *  [[org.gs.graph.Graph]] from a [[org.gs.digraph.Digraph]]
  */
-trait DigraphMarker 
+trait DigraphMarker
 
-/** Directed Graph 
+/** Directed Graph
   *
   * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
-  * 
+  *
   * @constructor creates a new Digraph with a number of vertices
   * @param V number of vertices
   */

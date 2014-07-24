@@ -1,6 +1,4 @@
-/*
-  * 
-  * @see http://algs4.cs.princeton.edu/24pq/IndexMinPQ.java.html
+/** @see http://algs4.cs.princeton.edu/24pq/IndexMinPQ.java.html
   * @see http://algs4.cs.princeton.edu/24pq/IndexMaxPQ.java.html
   */
 package org.gs.queue
@@ -16,8 +14,9 @@ import scala.reflect.ClassTag
   * @constructor called by subclass
   * @tparam A keys are generic, ClassTag retains its type at runtime
   * @param nMax maximum number of elements
+  * @param ord implicit ordering
   */
-abstract class IndexPriorityQueue[A: ClassTag](nMax: Int) {
+abstract class IndexPriorityQueue[A: ClassTag](nMax: Int)(implicit ord: Ordering[A]) {
   require(nMax >= 0, s"nMax:$nMax can't be negative")
   private var n = 0
   private val keys = new Array[A](nMax + 1)
@@ -28,11 +27,11 @@ abstract class IndexPriorityQueue[A: ClassTag](nMax: Int) {
   def isEmpty(): Boolean = n == 0
 
   /** Generic ordering for [[org.gs.queue.IndexMaxPQ]] */
-  protected def less(a: Int, b: Int)(implicit ord: Ordering[A]): Boolean =
+  protected def less(a: Int, b: Int): Boolean =
       ord.lt(keys(pq(a)), keys(pq(b)))
 
   /** Generic ordering for [[org.gs.queue.IndexMinPQ]] */
-  protected def greater(a: Int, b: Int)(implicit ord: Ordering[A]): Boolean =
+  protected def greater(a: Int, b: Int): Boolean =
       ord.gt(keys(pq(a)), keys(pq(b)))
 
   private def rangeGuard(x: Int): Boolean = x match {
@@ -91,7 +90,7 @@ abstract class IndexPriorityQueue[A: ClassTag](nMax: Int) {
   }
 
   /** Add key to end of array then swim up to ordered position
-    * 
+    *
     * @param i index where key will be inserted if not already there
     * @param key generic element
     * @param cmp less for [[org.gs.queue.IndexMaxPQ]] greater for [[org.gs.queue.IndexMinPQ]]
@@ -155,9 +154,8 @@ abstract class IndexPriorityQueue[A: ClassTag](nMax: Int) {
     *
     * @param i index
     * @param key value
-    * @param cmp less for [[org.gs.queue.IndexMaxPQ]] greater for [[org.gs.queue.IndexMinPQ]]
     */
-  protected def decreaseKey(i: Int, key: A, cmp: (Int, Int) => Boolean)(implicit ord: Ordering[A]): Unit = {
+  protected def decreaseKey(i: Int, key: A, cmp: (Int, Int) => Boolean): Unit = {
     require(rangeGuard(i), s"i:$i not in 0 - nMax:$nMax")
     require(contains(i), s"index:$i is not in the priority queue")
     require(ord.compare(keys(i), key) > 0,
@@ -172,7 +170,7 @@ abstract class IndexPriorityQueue[A: ClassTag](nMax: Int) {
     * @param key value
     * @param cmp less for [[org.gs.queue.IndexMaxPQ]] greater for [[org.gs.queue.IndexMinPQ]]
     */
-  protected def increaseKey(i: Int, key: A, cmp: (Int, Int) => Boolean)(implicit ord: Ordering[A]): Unit = {
+  protected def increaseKey(i: Int, key: A, cmp: (Int, Int) => Boolean): Unit = {
     val r = ord.compare(keys(i), key)
     require(rangeGuard(i), s"i:$i not in 0 - nMax:$nMax")
     require(contains(i), s"index:$i is not in the priority queue")
@@ -215,7 +213,7 @@ abstract class IndexPriorityQueue[A: ClassTag](nMax: Int) {
 
   /** check parent in position has left child at k * 2, right child at k * 2 + 1 */
   def checkHeap(cmp: (Int, Int) => Boolean): Boolean = {
-    
+
     def loop(k: Int): Boolean = {
       if (k > n) true else {
         val left = 2 * k

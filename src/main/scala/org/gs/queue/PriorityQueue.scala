@@ -1,6 +1,4 @@
-/*
-  * Common code for MaxPQ, MinPQ
-  * @see http://algs4.cs.princeton.edu/24pq/MaxPQ.java.html
+/** @see http://algs4.cs.princeton.edu/24pq/MaxPQ.java.html
   * @see http://algs4.cs.princeton.edu/24pq/MinPQ.java.html
   */
 package org.gs.queue
@@ -9,9 +7,9 @@ import collection.mutable.ArrayBuffer
 import math.Ordering
 import scala.annotation.tailrec
 
-/**
-  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+/** Common code for MaxPQ, MinPQ
   *
+  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   * @tparam A keys are generic and ordered
   * @param pq queue, appends keys
   */
@@ -24,7 +22,7 @@ abstract class PriorityQueue[A](pq: ArrayBuffer[A]) {
     case i if i == 0 => 0
     case j if j > 0 => j - 1
   }
-  
+
   private var n = 0
 
   private[queue] def getNumberInQ() = n // only used to check Q
@@ -69,7 +67,7 @@ abstract class PriorityQueue[A](pq: ArrayBuffer[A]) {
         val j1 = j + 1
         if ((j1 <= n) && cmp(j, j1)) j1 else j
       }
-      
+
       val j = calcJ
       if (j <= n && cmp(k, j)) {
         exchange(k, j)

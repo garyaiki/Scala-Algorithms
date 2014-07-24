@@ -36,7 +36,7 @@ class EdgeWeightedGraph(v: Int) extends BaseEdgeWeightedGraph[Edge](v) {
     val list = ListBuffer[Edge]()
     def addEdgesAndSelfLoops(v: Int) {
       var selfLoops = 0
-      
+
       def addEdges(edg: Edge) {
         if(edg.other(v) > v) list prepend (edg)
         else if (edg.other(v) == v) {
@@ -46,7 +46,7 @@ class EdgeWeightedGraph(v: Int) extends BaseEdgeWeightedGraph[Edge](v) {
       }
       adj(v) foreach (ed => addEdges(ed))
     }
-    
+
     for(vV <- 0 until v) addEdgesAndSelfLoops(vV)
     list.toList
   }

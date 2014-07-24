@@ -18,14 +18,14 @@ class FlowNetwork(val v: Int) {
   def addEdge(e: FlowEdge): Unit = {
     val _v = e.from
     val w = e.to
-    
+
     def rangeGuard(x: Int): Boolean = {
       x match {
         case x if 0 until v contains x => true
         case _ => false
       }
     }
-    
+
     require(rangeGuard(_v) && rangeGuard(w), s"verticies v:${_v} w:$w not in 0..$v ")
 
     _adj(_v) = e :: _adj(_v)
@@ -46,12 +46,12 @@ class FlowNetwork(val v: Int) {
     val lf = sys.props("line.separator")
     val sb = new StringBuilder()
     sb append (s"$v ${_e} $lf")
-    
+
     def addLines(v: Int) {
       sb.append(s"$v : ")
       adj(v) foreach (e => if(e.to != v) sb append (s"$e  "))
     }
-    
+
     for(vV <- 0 until v) addLines(vV)
     sb.toString
   }

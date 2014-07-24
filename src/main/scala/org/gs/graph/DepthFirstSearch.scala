@@ -3,7 +3,7 @@
 package org.gs.graph
 
 /** Depth first search of a graph
-  * 
+  *
   * Mark a vertex as visited then, recursively visit its adjacent vertices that haven't been marked
   *
   * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
@@ -18,7 +18,7 @@ class DepthFirstSearch(g: Graph, s: Int) {
 
    /** returns number of vertices connected to s */
   def count(): Int = _count
-  
+
   private def dfs(v: Int): Unit = {
     _count += 1
     marked(v) = true

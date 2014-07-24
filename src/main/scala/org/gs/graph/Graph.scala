@@ -11,7 +11,7 @@ package org.gs.graph
   */
 class Graph(v: Int) extends BaseGraph(v) {
 
-  /** add edge between vertices v and other then add v to other's adjacency list */ 
+  /** add edge between vertices v and other then add v to other's adjacency list */
   override def addEdge(v: Int, other: Int): Unit = {
     super.addEdge(v, other)
     adj(other) = v :: adj(other)

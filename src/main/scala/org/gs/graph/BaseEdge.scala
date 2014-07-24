@@ -4,9 +4,9 @@
 package org.gs.graph
 
 /** Common code for edge, directed edge
-  *  
+  *
   * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
-  * 
+  *
   * @constructor called by subclass with both vertices and a weight
   * @param v edge of vertex
   * @param w edge of vertex

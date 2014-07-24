@@ -5,7 +5,7 @@ package org.gs.digraph
 /** Compute a minimal spanning tree in an edge weighted graph
   *
   * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
-  * 
+  *
   * @constructor creates a new LazyPrimMST with an EdgeWeightedGraph
   * @param g [[org.gs.graph.EdgeWeightedGraph]]
   */
@@ -38,7 +38,7 @@ class LazyPrimMST(g: EdgeWeightedGraph) {
 
   private def prim(s: Int): Unit = {
     scan(s)
-    
+
     @tailrec
     def loop(): Unit = {
 
@@ -55,7 +55,7 @@ class LazyPrimMST(g: EdgeWeightedGraph) {
           if (!wM) scan(w)
         }
       }
-      
+
       if (!pq.isEmpty) {
         val edge = pq.pop
         edge match {
@@ -72,7 +72,7 @@ class LazyPrimMST(g: EdgeWeightedGraph) {
   def checkIsMinSpanningForest(): Boolean = {
     var cutOptimiality = true
     val uf = new UF(g.V)
-    
+
     def mstEdges(e: Edge) {
       for (f <- mst) {
         val x = f.either
@@ -82,13 +82,13 @@ class LazyPrimMST(g: EdgeWeightedGraph) {
     }
 
     def minWeightInCrossingCut(e: Edge): Boolean = {
-      
+
       def cutCheck(f: Edge): Boolean = {
         val x = f.either
         val y = f.other(x)
         if (!uf.connected(x, y) && f.weight < e.weight) false else true
       }
-      
+
       @tailrec
       def loopE(es: Seq[Edge]): Boolean = {
         es match {
@@ -103,15 +103,15 @@ class LazyPrimMST(g: EdgeWeightedGraph) {
       loopE(es)
     }
     val es = edges
-    
+
     @tailrec
     def loopMW(es: Seq[Edge]): Boolean = {
-      
+
       def doEdge(e: Edge): Boolean = {
         mstEdges(e)
         if (!minWeightInCrossingCut(e)) false else true
       }
-      
+
       es match {
           case last +: Seq() => doEdge(last)
           case head +: tail => {

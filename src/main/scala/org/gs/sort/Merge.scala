@@ -26,7 +26,7 @@ object Merge {
   def msort[A](xs: List[A])(implicit ord: Ordering[A]): List[A] = {
 
     /** returns if a less than b */
-    def less(a: A, b: A)(implicit ord: Ordering[A]): Boolean = ord.lt(a, b)
+    def less(a: A, b: A): Boolean = ord.lt(a, b)
 
     @tailrec /** prepend smaller element to accumulator then return it when one half is empty */
     def merge(xs: List[A], ys: List[A], acc: List[A]): List[A] = (xs, ys) match {

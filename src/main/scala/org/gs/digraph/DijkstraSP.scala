@@ -6,7 +6,7 @@ import scala.annotation.tailrec
 import org.gs.queue.IndexMinPQ
 
 /** Solves for shortest path from a source where edge weights are non-negative
-  *  
+  *
   * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   *
   * @constructor creates a new DijkstraSP with an edge weighted digraph and source vertex
@@ -57,7 +57,7 @@ class DijkstraSP(g: EdgeWeightedDigraph, s: Int) {
 
       @tailrec
       def loop(e: DirectedEdge, path: List[DirectedEdge] ): List[DirectedEdge] = if(e != null)
-          loop(edgeTo(e.from), e :: path) 
+          loop(edgeTo(e.from), e :: path)
         else path
 
       val path = loop(edgeTo(v), List[DirectedEdge]())

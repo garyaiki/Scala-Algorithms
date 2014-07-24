@@ -44,7 +44,7 @@ def apply[T](xs: T*): Queue[T] = new QueueImpl[T](xs.toList, Nil)
     }
 
     def enqueue(x: T): Queue[T] = new QueueImpl(leading, x :: trailing)
-    
+
     def isEmpty(): Boolean = leading.isEmpty && trailing.isEmpty
   }
 }

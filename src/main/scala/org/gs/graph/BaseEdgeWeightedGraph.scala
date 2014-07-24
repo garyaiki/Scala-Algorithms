@@ -5,9 +5,9 @@ package org.gs.graph
 import scala.collection.mutable.ListBuffer
 
 /** Common code for edge weighted graphs
-  *  
+  *
   * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
-  * 
+  *
   * @constructor called by subclass with number of vertices
   * @tparam A [[org.gs.graph.BaseEdge]] :> [[org.gs.graph.Edge]],[[org.gs.digraph.DirectedEdge]]
   * @param vertices in [[org.gs.graph.EdgeWeightedGraph]] or [[org.gs.digraph.EdgeWeightedDigraph]]
@@ -46,7 +46,7 @@ abstract class BaseEdgeWeightedGraph[A <: BaseEdge](val V: Int) {
     val lf = sys.props("line.separator")
     val sb = new StringBuilder()
     sb append (s"$V $e $lf")
-    
+
     def addLines(v: Int) {
       sb append (s"$v : ")
       _adj(v) foreach (ed => sb append (s"$ed  "))

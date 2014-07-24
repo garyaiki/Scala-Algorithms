@@ -79,7 +79,7 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
     */
   def put(key: A, value: B): Unit = {
 
-    def loop(x: Node[A, B])(implicit ord: Ordering[A]): Node[A, B] = {
+    def loop(x: Node[A, B]): Node[A, B] = {
       if (x == null) new Node(key, value) else {
         ord.compare(key, x.key) match {
           case 0 => x.value = value
@@ -102,10 +102,10 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
   }
 
   /** get value for key if present */
-  def get(key: A)(implicit ord: Ordering[A]): Option[B] = {
+  def get(key: A): Option[B] = {
 
     @tailrec
-    def loop(x: Node[A, B])(implicit ord: Ordering[A]): Option[B] = if (x == null) None else {
+    def loop(x: Node[A, B]): Option[B] = if (x == null) None else {
       ord.compare(key, x.key) match {
         case 0 => Some(x.value)
         case n if (n < 0) => loop(x.left)
@@ -277,7 +277,7 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
   /** returns largest key less than or equal to key */
   def floor(key: A): A = {
 
-    def loop(x: Node[A, B])(implicit ord: Ordering[A]): Node[A, B] = {
+    def loop(x: Node[A, B]): Node[A, B] = {
       if (x == null) null else {
         ord.compare(key, x.key) match {
           case 0 => x
@@ -295,7 +295,7 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
   /** returns smallest key greater than or equal to key */
   def ceiling(key: A): A = {
 
-    def loop(x: Node[A, B])(implicit ord: Ordering[A]): Node[A, B] = {
+    def loop(x: Node[A, B]): Node[A, B] = {
       if (x == null) null.asInstanceOf[Node[A, B]] else {
         val cmp = ord.compare(key, x.key)
         if (cmp == 0) x else {
@@ -312,7 +312,7 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
   /** returns number of keys less than key */
   def rank(key: A): Int = {
 
-    def loop(x: Node[A, B])(implicit ord: Ordering[A]): Int = if (x == null) 0
+    def loop(x: Node[A, B]): Int = if (x == null) 0
     else {
       val cmp = ord.compare(key, x.key)
       if (cmp == 0) size(x.left)

@@ -3,23 +3,23 @@
 package org.gs.digraph
 
 /** Find reachable vertices from single or multiple source vertices
-  * 
+  *
   * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
-  * 
+  *
   * @constructor creates a new DirectedDFS with a digraph and any number of source vertices
   * @param g [[org.gs.digraph.Digraph]]
   * @param sources a variable number of vertices
-  * 
+  *
   * One source vertex
   * {{{
   * val from1 = new DirectedDFS(tinyDG, 1)
   * }}}
-  * 
+  *
   * Two source vertices
   * {{{
   * val from1And2 = new DirectedDFS(tinyDG, 1, 2)
   * }}}
-  * 
+  *
   * Two source vertices in a collection
   * {{{
   * val from1And2 = new DirectedDFS(tinyDG, Array[Int](1, 2): _*)
@@ -31,7 +31,7 @@ class DirectedDFS(g: Digraph, sources: Int*) {
 
   /** returns number of vertices reachable from s */
   def count(): Int = _count
-  
+
   private def dfs(v: Int): Unit = {
     _count += 1
     marked(v) = true
