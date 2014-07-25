@@ -19,11 +19,9 @@ class FlowNetwork(val v: Int) {
     val _v = e.from
     val w = e.to
 
-    def rangeGuard(x: Int): Boolean = {
-      x match {
+    def rangeGuard(x: Int): Boolean = x match {
         case x if 0 until v contains x => true
         case _ => false
-      }
     }
 
     require(rangeGuard(_v) && rangeGuard(w), s"verticies v:${_v} w:$w not in 0..$v ")
@@ -48,11 +46,11 @@ class FlowNetwork(val v: Int) {
     sb append (s"$v ${_e} $lf")
 
     def addLines(v: Int) {
-      sb.append(s"$v : ")
+      sb append (s"$v : ")
       adj(v) foreach (e => if(e.to != v) sb append (s"$e  "))
     }
 
     for(vV <- 0 until v) addLines(vV)
-    sb.toString
+    sb.toString()
   }
 }

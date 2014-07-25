@@ -278,15 +278,13 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
   def floor(key: A): A = {
 
     def loop(x: Node[A, B]): Node[A, B] = {
-      if (x == null) null else {
-        ord.compare(key, x.key) match {
+      if (x == null) null else ord.compare(key, x.key) match {
           case 0 => x
           case n if (n < 0) => loop(x.left)
           case _ => {
             val t = loop(x.right)
             if (t != null) t else x // t in right tree, x is subroot
           }
-        }
       }
     }
     loop(root).key
@@ -295,8 +293,7 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
   /** returns smallest key greater than or equal to key */
   def ceiling(key: A): A = {
 
-    def loop(x: Node[A, B]): Node[A, B] = {
-      if (x == null) null.asInstanceOf[Node[A, B]] else {
+    def loop(x: Node[A, B]): Node[A, B] = if (x == null) null.asInstanceOf[Node[A, B]] else {
         val cmp = ord.compare(key, x.key)
         if (cmp == 0) x else {
           if (cmp < 0) {
@@ -304,7 +301,6 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
             if (t != null) t else x
           } else loop(x.right)
         }
-      }
     }
     loop(root).key
   }
@@ -380,7 +376,7 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
     }
     sb append (s" root ${root.key} ")
     loop(root)
-    sb.toString
+    sb.toString()
   }
 
   /** returns string of nodes from top down by level */
@@ -405,7 +401,7 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
     }
 
     loop()
-    sb.toString
+    sb.toString()
   }
 
   /** returns all node args left to right as string */
@@ -443,15 +439,13 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
 
       @tailrec
       def loop(i: Int): Boolean = {
-        if (i == size) true
-        else {
+        if (i == size) true else {
           val goodRank = select(i) match {
             case None => true
             case Some(x) if (rank(x) != i) => false
             case Some(x) => true
           }
-          if (goodRank) loop(i + 1)
-          else false
+          if (goodRank) loop(i + 1) else false
         }
       }
 

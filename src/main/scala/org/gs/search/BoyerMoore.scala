@@ -12,13 +12,12 @@ import scala.math.max
   */
 class BoyerMoore(pattern: Array[Char], R: Int = 256) {
   private val M = pattern.length
-  private val right = Array.fill[Int](R)(-1)
+  private val right = new Array[Int](R)
 
-  for (j <- 0 until pattern.length) right(pattern(j)) = j
+  pattern foreach (j => right(j) = j)
 
   /** returns text offset of match, text length for no match */
   def search(text: Array[Char]): Int = {
-    val M = pattern.length
     val N = text.length
 
     @tailrec

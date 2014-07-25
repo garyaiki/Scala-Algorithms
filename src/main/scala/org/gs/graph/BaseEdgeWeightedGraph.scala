@@ -26,11 +26,9 @@ abstract class BaseEdgeWeightedGraph[A <: BaseEdge](val V: Int) {
     }
   }
 
-  protected def rangeGuard(x: Int): Boolean = {
-    x match {
+  protected def rangeGuard(x: Int): Boolean = x match {
       case x if 0 until V contains x => true
       case _ => false
-    }
   }
 
   /** returns edges incident on  v */
@@ -54,6 +52,6 @@ abstract class BaseEdgeWeightedGraph[A <: BaseEdge](val V: Int) {
     }
 
     for(v <- 0 until V) addLines(v)
-    sb.toString
+    sb.toString()
   }
 }

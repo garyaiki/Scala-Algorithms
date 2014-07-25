@@ -68,7 +68,7 @@ abstract class PriorityQueue[A](pq: ArrayBuffer[A]) {
         if ((j1 <= n) && cmp(j, j1)) j1 else j
       }
 
-      val j = calcJ
+      val j = calcJ()
       if (j <= n && cmp(k, j)) {
         exchange(k, j)
         loop(j)
@@ -103,15 +103,15 @@ abstract class PriorityQueue[A](pq: ArrayBuffer[A]) {
   /** returns string of keys */
   def toString(keys: Seq[A]): String = {
     val sb = new StringBuilder()
-    keys foreach(s => if (s != null) sb.append(s" $s"))
-    sb.toString
+    keys foreach (s => if (s != null) sb append (s" $s"))
+    sb.toString()
   }
 
   /** check parent in position has left child at k * 2, right child at k * 2 + 1 */
   def checkHeap(cmp: (Int, Int) => Boolean): Boolean = {
 
     def loop(k: Int): Boolean = {
-      val n = getNumberInQ
+      val n = getNumberInQ()
       if (k > n) true else {
         val left = 2 * k
         val right = 2 * k + 1

@@ -44,7 +44,9 @@ class DirectedCycle(g: Digraph) extends BaseDirectedCycle[Int](g.V) {
     @tailrec
     def loopW(w: Int, xs: List[Int]): Unit = {
       if (!hasCycle) {
-        if (!recurOnNewVertex(w)) traceBack(w)
+        if (!recurOnNewVertex(w)) {
+          traceBack(w)
+        }
         xs match {
           case x :: xs => loopW(x, xs)
           case Nil =>

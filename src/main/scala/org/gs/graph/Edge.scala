@@ -28,9 +28,9 @@ class Edge(v: Int, w: Int, weight: Double) extends BaseEdge(v, w, weight) with O
   /** returns true if  other is an Edge */
   def canEqual(other: Any): Boolean = other.isInstanceOf[Edge]
 
-  override def hashCode(): Int = 41 * (41 + v) + w + weight.hashCode
+  override def hashCode(): Int = 41 * (41 + v) + w + weight.hashCode()
 
   override def equals(that: Any): Boolean = that match {
-    case that: Edge => (that canEqual this) && this.hashCode == that.hashCode
+    case that: Edge => (that canEqual this) && this.hashCode == that.hashCode()
   }
 }

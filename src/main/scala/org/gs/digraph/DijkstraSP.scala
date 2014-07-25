@@ -12,7 +12,7 @@ import org.gs.queue.IndexMinPQ
   * @constructor creates a new DijkstraSP with an edge weighted digraph and source vertex
   */
 class DijkstraSP(g: EdgeWeightedDigraph, s: Int) {
-  require(g.edges.forall(_.weight >= 0))
+  require(g.edges forall (_.weight >= 0))
   private[digraph] val _distTo = Array.fill[Double](g.V)(Double.PositiveInfinity)
   _distTo(s) = 0.0
   private[digraph] val edgeTo = new Array[DirectedEdge](g.V)

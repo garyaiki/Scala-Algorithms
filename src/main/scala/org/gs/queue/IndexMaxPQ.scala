@@ -27,7 +27,7 @@ class IndexMaxPQ[A: ClassTag](nMax: Int)(implicit ord: Ordering[A])
   def maxIndex(): Int = index()
 
   /** returns max key */
-  def maxKey(): A = topKey
+  def maxKey(): A = topKey()
 
   /** returns max key and removes it from queue */
   def delMax(): Int = delTop(less)
@@ -67,5 +67,5 @@ class IndexMaxPQ[A: ClassTag](nMax: Int)(implicit ord: Ordering[A])
   def isMinHeap(): Boolean = checkHeap(less)
 
   /** returns keys in order */
-  def keys(): Seq[A] = getKeys
+  def keys(): Seq[A] = getKeys()
 }

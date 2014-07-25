@@ -130,9 +130,9 @@ class QuickX[A: ClassTag](implicit ord: A => Ordered[A]) {
     * @return sorted array
     */
   def sort(a: Array[A], shuffle: Boolean = true): Array[A] = {
-    val unsorted = if (shuffle) shuffleArrayBuffer(a) else a
+    val myArray = if (shuffle) shuffleArrayBuffer(a) else a
 
-    sort(0, unsorted.length - 1, unsorted)
-    unsorted
+    sort(0, myArray.length - 1, myArray)
+    myArray
   }
 }

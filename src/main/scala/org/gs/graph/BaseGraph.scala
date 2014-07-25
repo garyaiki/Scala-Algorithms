@@ -19,11 +19,9 @@ abstract class BaseGraph(val V: Int) {
   /** add edge between vertices v and w */
   def addEdge(v: Int, w: Int): Unit = {
 
-    def rangeGuard(x: Int): Boolean = {
-      x match {
+    def rangeGuard(x: Int): Boolean = x match {
         case x if 0 until V contains x => true
         case _ => false
-      }
     }
 
     require(rangeGuard(v) && rangeGuard(w), s"aV:$v and otherV:$w must be in 0-$V")
@@ -43,6 +41,6 @@ abstract class BaseGraph(val V: Int) {
     }
 
     for(v <- 0 until V) addLines(v)
-    sb.toString
+    sb.toString()
   }
 }

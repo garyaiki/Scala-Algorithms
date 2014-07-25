@@ -40,6 +40,7 @@ class BellmanFordSP(g: EdgeWeightedDigraph, s: Int) {
       loop()
     }
   }
+
   loop()
 
   /** returns if it has a negative cycle */
@@ -52,14 +53,14 @@ class BellmanFordSP(g: EdgeWeightedDigraph, s: Int) {
     val spt = new EdgeWeightedDigraph(edgeTo.length)
     edgeTo foreach (v => if (v != null) spt addEdge v )
 
-    val finder = new EdgeWeightedDirectedCycle(spt)
-    finder.cycle match {
+    new EdgeWeightedDirectedCycle(spt).cycle match {
       case Some(x) => cycle = x
       case _ =>
     }
   }
 
   private def relax(v: Int): Unit = {
+    
     for (e <- g.adj(v)) {
       val w = e.to
       if (_distTo(w)  > _distTo(v) + e.weight) {
@@ -77,7 +78,7 @@ class BellmanFordSP(g: EdgeWeightedDigraph, s: Int) {
 
   /** returns length of shortest path from source to v */
   def distTo(v: Int): Double = {
-    require(!hasNegativeCycle, s"negative cycle from $s to $v")
+    require(!hasNegativeCycle(), s"negative cycle from $s to $v")
     _distTo(v)
   }
 
@@ -86,7 +87,7 @@ class BellmanFordSP(g: EdgeWeightedDigraph, s: Int) {
 
   /** returns path from source to v if it exists */
   def pathTo(v: Int): Option[List[DirectedEdge]] = {
-    require(!hasNegativeCycle, s"negative cycle from $s to $v")
+    require(!hasNegativeCycle(), s"negative cycle from $s to $v")
     if (!hasPathTo(v)) None else {
       val path = new ListBuffer[DirectedEdge]()
 

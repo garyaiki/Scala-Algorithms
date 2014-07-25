@@ -18,14 +18,12 @@ class EdgeWeightedDirectedCycle(g: EdgeWeightedDigraph)
     marked(v) = true
 
     @tailrec
-    def loopEdges(es: List[DirectedEdge]): Unit = {
-      es match {
+    def loopEdges(es: List[DirectedEdge]): Unit = es match {
         case e :: xs => {
           search(e)
           loopEdges(xs)
         }
         case _ =>
-      }
     }
 
     def search(e: DirectedEdge): Unit = {

@@ -57,15 +57,14 @@ class LazyPrimMST(g: EdgeWeightedGraph) {
       }
 
       if (!pq.isEmpty) {
-        val edge = pq.pop
-        edge match {
+        pq.pop match {
           case Some(e) => doEdge(e)
           case None => throw new NoSuchElementException("Priority queue underflow")
         }
-        loop
+        loop()
       }
     }
-    loop
+    loop()
   }
 
   /** Validate */
@@ -74,19 +73,13 @@ class LazyPrimMST(g: EdgeWeightedGraph) {
     val uf = new UF(g.V)
 
     def mstEdges(e: Edge) {
-      for (f <- mst) {
-        val x = f.either
-        val y = f.other(x)
-        if (f != e) uf.union(x, y)
-      }
+      mst foreach (f => if (f != e) uf.union(f.either, f.other(f.either)))
     }
 
     def minWeightInCrossingCut(e: Edge): Boolean = {
 
       def cutCheck(f: Edge): Boolean = {
-        val x = f.either
-        val y = f.other(x)
-        if (!uf.connected(x, y) && f.weight < e.weight) false else true
+        if (!uf.connected(f.either, f.other(f.either)) && f.weight < e.weight) false else true
       }
 
       @tailrec
@@ -99,8 +92,7 @@ class LazyPrimMST(g: EdgeWeightedGraph) {
         }
       }
 
-      val es = g.edges
-      loopE(es)
+      loopE(g.edges)
     }
     val es = edges
 

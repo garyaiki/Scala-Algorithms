@@ -13,11 +13,9 @@ import scala.collection.mutable.ArrayBuffer
 class FordFulkerson(g: FlowNetwork, s: Int, t: Int) {
   private val Epsilon = 1e-11
 
-  private def rangeGuard(x: Int): Boolean = {
-    x match {
+  private def rangeGuard(x: Int): Boolean = x match {
       case x if 0 until g.v contains x => true
       case _ => false
-    }
   }
 
   require(rangeGuard(s) && rangeGuard(t), s"source verticies s:$s or t:$t not in 0..${g.v} ")
@@ -43,11 +41,9 @@ class FordFulkerson(g: FlowNetwork, s: Int, t: Int) {
         val es = g.adj(v)
 
         @tailrec
-        def checkEdgeCapacityConstraints(es: List[FlowEdge]): Boolean = {
-          es match {
+        def checkEdgeCapacityConstraints(es: List[FlowEdge]): Boolean = es match {
             case x :: xs => if (capacityGuard(x)) checkEdgeCapacityConstraints(xs) else false
             case Nil => true
-          }
         }
 
         if (checkEdgeCapacityConstraints(es)) checkCapacityConstraints(v + 1) else false
@@ -65,7 +61,7 @@ class FordFulkerson(g: FlowNetwork, s: Int, t: Int) {
         if ((v != s && v != t) && (abs(excess(v)) > Epsilon)) false else loopVNetFlow(v + 1)
       } else true
 
-    checkCapacityConstraints(0) && lessThanSourceExcess && lessThanSinkExcess && loopVNetFlow(0)
+    checkCapacityConstraints(0) && lessThanSourceExcess() && lessThanSinkExcess() && loopVNetFlow(0)
   }
   assert(isFeasible, "initial flow is infeasible")
 
@@ -102,26 +98,24 @@ class FordFulkerson(g: FlowNetwork, s: Int, t: Int) {
   private def onAugmentedPath(prevPath: Option[Array[FlowEdge]]):
       (Option[Array[FlowEdge]], Array[Boolean]) = {
 
-    hasAugmentingPath match {
+    hasAugmentingPath() match {
       case (None, marked) => (Some(prevPath.get), marked)
       case (Some(edgeTo), marked) => {
+
         @tailrec
-        def bottleneckCapacity(v: Int, bottle: Double): Double = {
-          if (v != s) {
+        def bottleneckCapacity(v: Int, bottle: Double): Double = if (v != s) {
             val minBottle = min(bottle, edgeTo(v).residualCapacityTo(v))
             val nextV = edgeTo(v).other(v)
             bottleneckCapacity(nextV, minBottle)
           } else bottle
-        }
+
         val bottle = bottleneckCapacity(t, Double.PositiveInfinity)
 
         @tailrec
-        def augmentFlow(v: Int): Unit = {
-          if (v != s) {
+        def augmentFlow(v: Int): Unit = if (v != s) {
             edgeTo(v).addResidualFlowTo(v, bottle)
             val nextV = edgeTo(v).other(v)
             augmentFlow(nextV)
-          }
         }
         augmentFlow(t)
 
@@ -145,12 +139,12 @@ class FordFulkerson(g: FlowNetwork, s: Int, t: Int) {
   override def toString(): String = {
     val sb = new StringBuilder("edgeTo: ")
     edgeTo match {
-      case None => sb.append("None ")
-      case Some(x) => sb.append(x.mkString(","))
+      case None => sb append ("None ")
+      case Some(x) => sb append (x.mkString(","))
     }
-    sb.append(s" value:${_value}")
-    sb.append(s" marked:${marked.mkString(",")}")
-    sb.toString
+    sb append (s" value:${_value}")
+    sb append (s" marked:${marked.mkString(",")}")
+    sb.toString()
   }
 }
 
@@ -159,9 +153,7 @@ object FordFulkerson {
   def apply(g: FlowNetwork, s: Int, t: Int): Option[FordFulkerson] = {
     val ff = new FordFulkerson(g, s, t)
 
-    def check(): Boolean = {
-      if (ff.isFeasible && ff.inCut(s) && !ff.inCut(t)) {
-
+    def check(): Boolean = if (ff.isFeasible && ff.inCut(s) && !ff.inCut(t)) {
         val mincutValues = for {
           v <- 0 until g.v
           e <- g.adj(v)
@@ -171,7 +163,7 @@ object FordFulkerson {
         val mincutvalue = mincutValues.foldLeft(0.0)(_ + _)
         if (abs(mincutvalue - ff.value) > ff.Epsilon) false else true
       } else false
-    }
-    if (check) Some(ff) else None
+
+    if (check()) Some(ff) else None
   }
 }

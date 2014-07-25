@@ -29,8 +29,7 @@ class SeparateChainingHashST[A, B](initialSize: Int) {
   def get(key: A): Option[B] = {
     val i = hash(key)
     if (st(i) == null) None else {
-      val r = st(i).find(chainGet(_, key))
-      r match {
+      st(i).find(chainGet(_, key)) match {
         case None => None
         case Some(x) => Some(x._2)
       }

@@ -100,7 +100,7 @@ class LinearProbingHashST[A, B](initialSize: Int) {
 
   private def resize(capacity: Int) {
     val tmp = new LinearProbingHashST[A, B](capacity)
-    st foreach(kv => if (kv != null) tmp.put(kv._1, kv._2))
+    st foreach (kv => if (kv != null) tmp.put(kv._1, kv._2))
     st = tmp.st
     m = capacity
   }
@@ -109,7 +109,7 @@ class LinearProbingHashST[A, B](initialSize: Int) {
   /** returns keys */
   def keys(): List[A] = {
     val q = Queue[A]()
-    st foreach(kv => if (kv != null) q.enqueue(kv._1))
+    st foreach (kv => if (kv != null) q.enqueue(kv._1))
     q.toList
   }
 
@@ -118,7 +118,7 @@ class LinearProbingHashST[A, B](initialSize: Int) {
 
   def allKeysCanBeFound(): Boolean = {
     val q = Queue[A]()
-    st foreach(kv => if (get(kv._1) == null) q.enqueue(kv._1))
+    st foreach (kv => if (get(kv._1) == null) q.enqueue(kv._1))
     if (q.length > 0) false else true
   }
 }

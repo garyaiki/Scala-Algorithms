@@ -87,7 +87,7 @@ object Huffman {
   }
   //@TODO
   def expand(): Unit = {
-    val root = readTrie
+    val root = readTrie()
   }
 }
 
@@ -110,6 +110,7 @@ class Node private (val ch: Char, val freq: Int, val left: Node, val right: Node
 
   override def equals(that: Any): Boolean = that match {
     case that: Node => (that canEqual this) && this.hashCode == that.hashCode
+    case _ => throw new IllegalArgumentException(that.getClass.getName())
   }
 
 }
