@@ -1,11 +1,146 @@
-Scala-Algorithms
-===============
+# Scala-Algorithms
 
-I wanted to see what some of Robert Sedgewick's Algorithms written in Java would look like and how 
-they perform in Scala. 
+Translations of around 50 algorithms Robert Sedgewick elaborated on in his Coursera courses [Algorithms, Part I](https://www.coursera.org/course/algs4partI) and [Algorithms, Part II](https://www.coursera.org/course/algs4partII).
 
-This is mainly a learning exercise but I hope will provide useful examples eventually.
+Java code written by Robert Sedgewick and Kevin Wayne is available at [Java Algorithms and Clients](http://algs4.cs.princeton.edu/code/) my Scala translations have the same filenames but with `.scala` extenstions.
+
+## Viewing an algorithmn in Scala and Java 
+
+Choose the package for a type of algorithmn under <https://github.com/garyaiki/Scala-Algorithms/tree/master/src/main/scala/org/gs> then open the Scala source, for example <https://github.com/garyaiki/Scala-Algorithms/blob/master/src/main/scala/org/gs/digraph/AcyclicSP.scala> on the first line is a link to Sedgewick and Wayne's code
+
+`/** @see` <http://algs4.cs.princeton.edu/44sp/AcyclicSP.java.html>
+
+then you can open their URL and compare them side by side.
+
+### Scala idioms in the translations
+
+The primary constructor is the class definition
+
+```
+class AcyclicSP(g: EdgeWeightedDigraph, s: Int) {...
+```
+
+Arrays and collections can be initalized when declared
+
+```
+private val _distTo = Array.fill[Double](g.V)(Double.PositiveInfinity)
+```
+
+Functions can be nested and variables in surrounding functions are in the scope of nested ones. `Option` is preferred to `null`. Tail recursion is preferred to `while` loops and `for` loops that call `break` or `continue` or `return`. Pattern matching is preferred to complicated `if else` conditions and where `Option` values are extracted.
+
+```
+/** nested tail recursive function that pattern matches Optional edges */
+      @tailrec
+      def loop(e: DirectedEdge) {
+        e +=: path
+        edgeTo(e.from) match {
+          case None =>
+          case Some(x) => loop(x)
+        }
+      }
+```
+
+ Arrays can be generic, `scala.reflect.ClassTag` recovers type information at runtime. Ordering and comparison can also be generic and this can be accomplished implicitly
  
-I start out with the closest thing that works, very imperative and using nulls the same as in 
-Java. I intend to make it more functional and test how that affects performance. I hope it will
-reveal where tradeoffs are between imperative and functional techniques.
+ ```
+ class IndexMinPQ`[A: ClassTag](nMax: Int)`(implicit ord:  Ordering[A]) extends IndexPriorityQueue`[A](nMax) {
+  ```
+
+# Scala and SBT setup
+
+This uses Scala 2.10.3 <http://www.scala-lang.org/download/2.10.3.html> 
+
+then add paths
+
+```
+export SCALA_HOME="/Users/.../scala-2.10.3"
+export SBT_HOME="/Users/.../sbt"
+export PATH=...:$SCALA_HOME/bin::$SBT_HOME/bin
+```
+
+To confirm Scala is installed correctly you can launch it in a Terminal window in any directory
+
+```
+Last login: Fri Jul 25 08:25:16 on console
+...:~ ...$ scala
+Welcome to Scala version 2.10.3 (Java HotSpot(TM) 64-Bit Server VM, Java 1.6.0_65).
+Type in expressions to have them evaluated.
+Type :help for more information.
+
+scala> 
+```
+
+Quit Scala
+ 
+`scala> :q` 
+
+Then navigate to the downloaded project and start SBT giving it extra memory so it can run tests on large datafiles.
+
+```
+...:Scala-Algorithms ...$ sbt -mem 2048
+Loading .../sbt/bin/sbt-launch-lib.bash
+[info] Loading project definition from .../git/scala-algorthms/Scala-Algorithms/project
+[info] Set current project to Scala-Algorithms (in build file:.../git/scala-algorthms/Scala-Algorithms/)
+> 
+```
+
+# Scaladoc
+
+from the sbt prompt run scaladoc
+```
+> doc
+[info] Main Scala API documentation to .../git/scala-algorthms/Scala-Algorithms/target/scala-2.10/api...
+model contains 74 documentable templates
+[info] Main Scala API documentation successful.
+[success] Total time: 8 s, completed Jul 25, 2014 2:26:57 PM
+> 
+```
+
+then open 
+`.../git/scala-algorthms/Scala-Algorithms/target/scala-2.10/api/index.html`
+
+Comments are terse because that's how Scala rolls :smiley: and because this is a translation, the public api is almost the same as the better commented Java originals. So look there and in [Algorithms, 4th Edition](http://algs4.cs.princeton.edu/home/) to understan what the code is meant to do. Scaladocs show some the api differences to Java.
+
+#ScalaTest
+
+There are _a lot_ of tests, this was a great help in keeping the code working as I refactored. [ScalaTest](http://www.scalatest.org) comes in several styles. I choose [FlatSpec](http://www.scalatest.org/user_guide/selecting_a_style) it creates [BDD](http://dannorth.net/introducing-bdd/) test reports that non-codes can understand and, unlike other BDD frameworks I've tried, they are as easy to write as JUnit tests. Finding descriptive test names is the only extra work.
+
+from the sbt prompt run scalatest
+```
+> test
+[info] Compiling 55 Scala sources to .../git/scala-algorthms/Scala-Algorithms/target/scala-2.10/classes...
+[info] Compiling 56 Scala sources to .../git/scala-algorthms/Scala-Algorithms/target/scala-2.10/test-classes...
+```
+when tests complete there is a long report on each test. Passes are green failures are red and ignored is orange
+```
+[info] <span style="color:green">PrimMSTSuite:</span>
+[info] <span style="color:green">a PrimMST</span>
+[info] <span style="color:green">- should build from an EdgeWeightedGraph</span>
+[info] <span style="color:green">- should calulate total weight of edges in tinyEWG MST</span>
+[info] <span style="color:green">- should find expected edges in a MST</span>
+[info] <span style="color:green">- should be acyclic</span>
+[info] <span style="color:green">- should find wnen it has a spanning forest</span>
+[info] <span style="color:green">- should validate a minimal spanning forest</span>
+[info] <span style="color:green">- should calulate total edge weight of mediumEWG MST</span>
+[info] <span style="color:green">- should calulate total edge weight of largeEWG MST</span>
+[info] SymbolGraphSuite:</span>
+[info] a SymbolGraph</span>
+[info] <span style="color:green">- should find vertices as keys and routes</span>
+[info] <span style="color:green">- should find movies and their actors as keys and adjacencies</span>
+[info] <span style="color:green">- should find actors and their movies as keys and adjacencies</span>
+[info] ScalaTest
+[info] Run completed in 1 minute, 26 seconds.
+[info] Total number of tests run: 164
+[info] Suites: completed 42, aborted 0
+[info] Tests: succeeded 164, failed 0, canceled 0, ignored 1, pending 0
+[info] All tests passed.
+[info] Passed: Total 164, Failed 0, Errors 0, Passed 164, Ignored 1
+[success] Total time: 87 s, completed Jul 25, 2014 3:17:07 PM
+> 
+```
+Many tests get data files from the book's website. Downloading these files takes most of the time and can vary. A few tests are run on megabyte datafiles and these take most of the cpu time. The large test for LazyPrimMST is marked ignore because it takes triple the time of all other tests combined. Change `ignore` to `it` 
+in `.../git/scala-algorthms/Scala-Algorithms/src/test/scala/org/gs/digraph/LazyPrimMSTSuite.scala`
+to run it. Its slowness shows that you should use PrimMST instead.
+
+Test files are in `.../git/scala-algorthms/Scala-Algorithms/src/test/scala/org/gs/` and add `Suite` to the name of the class under test.
+
