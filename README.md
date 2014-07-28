@@ -90,7 +90,7 @@ model contains 74 documentable templates
 then open 
 `.../git/scala-algorthms/Scala-Algorithms/target/scala-2.10/api/index.html`
 
-Comments are terse partly because Scaladoc is, by convention, more concise than Javadoc and because this is a translation where the public api is almost the same and is better commented in the linked Java. And in [Algorithms, 4th Edition](http://algs4.cs.princeton.edu/home/) to thoroughly explains each algorithm. Scaladocs show api differences to Java.
+Comments are terse partly because Scaladoc is, by convention, more concise than Javadoc and because this is a translation where the public api is almost the same and is better commented in the linked Java. [Algorithms, 4th Edition](http://algs4.cs.princeton.edu/home/) thoroughly explains each algorithm. Scaladocs show api differences to Java.
 
 ##ScalaTest
 
