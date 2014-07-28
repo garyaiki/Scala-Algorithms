@@ -37,6 +37,6 @@ class QueueSuite extends FlatSpec {
       if(!xs.isEmpty) dequeueAll(xs.tail, buff += xs.head) else buff.toArray
     }
     val lifo = dequeueAll(q, new ArrayBuffer[String]())
-    assert(lifo === strings, s"$lifo not equal ${strings.mkString(",")}")
+    assert(lifo === strings, s"$lifo not equal ${strings mkString ","}")
   }
 }

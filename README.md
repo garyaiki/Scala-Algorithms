@@ -1,33 +1,32 @@
 # Scala-Algorithms
 
-Translations of around 50 algorithms Robert Sedgewick elaborated on in his Coursera courses [Algorithms, Part I](https://www.coursera.org/course/algs4partI) and [Algorithms, Part II](https://www.coursera.org/course/algs4partII).
+Translations from Java to Scala of around 50 algorithms from Robert Sedgewick and Kevin Wayne's book _Algorithms_. Nearly all of those Robert Sedgewick explained in video lectures in his Coursera courses [Algorithms, Part I](https://www.coursera.org/course/algs4partI) and [Algorithms, Part II](https://www.coursera.org/course/algs4partII) are here.
 
-Java code written by Robert Sedgewick and Kevin Wayne is available at [Java Algorithms and Clients](http://algs4.cs.princeton.edu/code/) my Scala translations have the same filenames but with `.scala` extenstions.
+## Background
 
-## Viewing an algorithmn in Scala and Java 
+The Algorithms courses began soon after Martin Ordersky's courses [Functional Programming Principles in Scala](https://class.coursera.org/progfun-003) and [Principles of Reactive Programming](https://class.coursera.org/reactive-001) ended. In between I read [Concepts, Techniques, and Models](http://www.info.ucl.ac.be/~pvr/book.html) by Peter Van Roy which clarified when to choose a programming paradigm. Since Scala combines Object Oriented and Functional Programming paradigms, this gave yearned for insight into writing Scala.
 
-Choose the package for a type of algorithmn under <https://github.com/garyaiki/Scala-Algorithms/tree/master/src/main/scala/org/gs> then open the Scala source, for example <https://github.com/garyaiki/Scala-Algorithms/blob/master/src/main/scala/org/gs/digraph/AcyclicSP.scala> on the first line is a link to Sedgewick and Wayne's code
+When "Algorithms I" began, I asked the course forums if there were Scala versions but there was no reply. I thought writing them would build my repertoire in both Scala and algorithms. While learning Scala, I've found examples that were either deceptively close to Java or impenetrably concise. I've tried to write this code to be useful idiomatic Scala but not baffling to Java programmers.
 
-`/** @see` <http://algs4.cs.princeton.edu/44sp/AcyclicSP.java.html>
+## Viewing algorithms in either language on the web
 
-then you can open their URL and compare them side by side.
+Java code written by Robert Sedgewick and Kevin Wayne is at [Java Algorithms and Clients](http://algs4.cs.princeton.edu/code/), Scala translations have the same filenames but with `.scala` extenstions. I also followed the api but adjusted them to Scala idioms.
 
-### Scala idioms in the translations
+Choose the package for a type of algorithmn under [src/main/scala/org/gs/](https://github.com/garyaiki/Scala-Algorithms/tree/master/src/main/scala/org/gs) then open the Scala source, for example [AcyclicSP](https://github.com/garyaiki/Scala-Algorithms/blob/master/src/main/scala/org/gs/digraph/AcyclicSP.scala), on the first line is a link to Sedgewick and Wayne's code `/** @see` <http://algs4.cs.princeton.edu/44sp/AcyclicSP.java.html> then you can open their URL and compare them side by side.
 
-The primary constructor is the class definition
+## Common Scala idioms
 
+The class definition is also the primary constructor
 ```
 class AcyclicSP(g: EdgeWeightedDigraph, s: Int) {...
 ```
 
 Arrays and collections can be initalized when declared
-
 ```
 private val _distTo = Array.fill[Double](g.V)(Double.PositiveInfinity)
 ```
 
-Functions can be nested and variables in surrounding functions are in the scope of nested ones. `Option` is preferred to `null`. Tail recursion is preferred to `while` loops and `for` loops that call `break` or `continue` or `return`. Pattern matching is preferred to complicated `if else` conditions and where `Option` values are extracted.
-
+Functions can be nested and variables defined in the outer scope are available. `Option` is preferred to `null`. Tail recursion is preferred to `while` loops and `for` loops that call `break` or `continue` or `return`. Pattern matching is preferred to complicated `if else` conditions and where `Option` values are extracted.
 ```
 /** nested tail recursive function that pattern matches Optional edges */
       @tailrec
@@ -40,18 +39,15 @@ Functions can be nested and variables in surrounding functions are in the scope 
       }
 ```
 
- Arrays can be generic, `scala.reflect.ClassTag` recovers type information at runtime. Ordering and comparison can also be generic and this can be accomplished implicitly
- 
+Arrays can be generic, `scala.reflect.ClassTag` recovers type information at runtime. Ordering and comparison can also be generic and this can be accomplished implicitly 
  ```
- class IndexMinPQ`[A: ClassTag](nMax: Int)`(implicit ord:  Ordering[A]) extends IndexPriorityQueue`[A](nMax) {
+ class IndexMinPQ[A: ClassTag](nMax: Int)(implicit ord:  Ordering[A]) extends IndexPriorityQueue[A](nMax) {
   ```
+Immutable variables are preferred to mutable. Class variables declared as `.var` are turned into `.val` or they are made private or protected. Public getter methods, usually, return `List`, which is recursive, instead of `Iterator`, which is imperative
 
-# Scala and SBT setup
+## Scala and SBT setup
 
-This uses Scala 2.10.3 <http://www.scala-lang.org/download/2.10.3.html> 
-
-then add paths
-
+This uses Scala 2.10.3 [download](http://www.scala-lang.org/download/2.10.3.html), then add paths
 ```
 export SCALA_HOME="/Users/.../scala-2.10.3"
 export SBT_HOME="/Users/.../sbt"
@@ -70,11 +66,7 @@ Type :help for more information.
 scala> 
 ```
 
-Quit Scala
- 
-`scala> :q` 
-
-Then navigate to the downloaded project and start SBT giving it extra memory so it can run tests on large datafiles.
+Quit Scala `scala> :q` Then navigate to the downloaded project and start SBT giving it extra memory so it can run tests on large datafiles.
 
 ```
 ...:Scala-Algorithms ...$ sbt -mem 2048
@@ -83,8 +75,7 @@ Loading .../sbt/bin/sbt-launch-lib.bash
 [info] Set current project to Scala-Algorithms (in build file:.../git/scala-algorthms/Scala-Algorithms/)
 > 
 ```
-
-# Scaladoc
+## Scaladoc
 
 from the sbt prompt run scaladoc
 ```
@@ -99,11 +90,11 @@ model contains 74 documentable templates
 then open 
 `.../git/scala-algorthms/Scala-Algorithms/target/scala-2.10/api/index.html`
 
-Comments are terse because that's how Scala rolls :smiley: and because this is a translation, the public api is almost the same as the better commented Java originals. So look there and in [Algorithms, 4th Edition](http://algs4.cs.princeton.edu/home/) to understan what the code is meant to do. Scaladocs show some the api differences to Java.
+Comments are terse partly because Scaladoc is, by convention, more concise than Javadoc and because this is a translation where the public api is almost the same and is better commented in the linked Java. And in [Algorithms, 4th Edition](http://algs4.cs.princeton.edu/home/) to thoroughly explains each algorithm. Scaladocs show api differences to Java.
 
-#ScalaTest
+##ScalaTest
 
-There are _a lot_ of tests, this was a great help in keeping the code working as I refactored. [ScalaTest](http://www.scalatest.org) comes in several styles. I choose [FlatSpec](http://www.scalatest.org/user_guide/selecting_a_style) it creates [BDD](http://dannorth.net/introducing-bdd/) test reports that non-codes can understand and, unlike other BDD frameworks I've tried, they are as easy to write as JUnit tests. Finding descriptive test names is the only extra work.
+There are _a lot_ of tests, this was a great help in keeping the code working as I refactored. [ScalaTest](http://www.scalatest.org) comes in several styles. I choose [FlatSpec](http://www.scalatest.org/user_guide/selecting_a_style) it creates [BDD](http://dannorth.net/introducing-bdd/) test reports that show non-coders what parts of a specification are working, unlike other BDD frameworks I've tried, these are almost as easy to write as JUnit tests. Finding descriptive test names is the only extra work.
 
 from the sbt prompt run scalatest
 ```
@@ -111,23 +102,24 @@ from the sbt prompt run scalatest
 [info] Compiling 55 Scala sources to .../git/scala-algorthms/Scala-Algorithms/target/scala-2.10/classes...
 [info] Compiling 56 Scala sources to .../git/scala-algorthms/Scala-Algorithms/target/scala-2.10/test-classes...
 ```
-when tests complete there is a long report on each test. Passes are green failures are red and ignored is orange
+when tests complete there is a long report on each test. Passes are green failures are red and ignored is orange (Github doesn't apply CSS in markdown, so no green in the Readme)
 ```
-[info] <span style="color:green">PrimMSTSuite:</span>
-[info] <span style="color:green">a PrimMST</span>
-[info] <span style="color:green">- should build from an EdgeWeightedGraph</span>
-[info] <span style="color:green">- should calulate total weight of edges in tinyEWG MST</span>
-[info] <span style="color:green">- should find expected edges in a MST</span>
-[info] <span style="color:green">- should be acyclic</span>
-[info] <span style="color:green">- should find wnen it has a spanning forest</span>
-[info] <span style="color:green">- should validate a minimal spanning forest</span>
-[info] <span style="color:green">- should calulate total edge weight of mediumEWG MST</span>
-[info] <span style="color:green">- should calulate total edge weight of largeEWG MST</span>
-[info] SymbolGraphSuite:</span>
-[info] a SymbolGraph</span>
-[info] <span style="color:green">- should find vertices as keys and routes</span>
-[info] <span style="color:green">- should find movies and their actors as keys and adjacencies</span>
-[info] <span style="color:green">- should find actors and their movies as keys and adjacencies</span>
+...
+[info] PrimMSTSuite:
+[info] a PrimMST
+[info] - should build from an EdgeWeightedGraph
+[info] - should calulate total weight of edges in tinyEWG MST
+[info] - should find expected edges in a MST
+[info] - should be acyclic
+[info] - should find wnen it has a spanning forest
+[info] - should validate a minimal spanning forest
+[info] - should calulate total edge weight of mediumEWG MST
+[info] - should calulate total edge weight of largeEWG MST
+[info] SymbolGraphSuite:
+[info] a SymbolGraph
+[info] - should find vertices as keys and routes
+[info] - should find movies and their actors as keys and adjacencies
+[info] - should find actors and their movies as keys and adjacencies
 [info] ScalaTest
 [info] Run completed in 1 minute, 26 seconds.
 [info] Total number of tests run: 164
@@ -138,9 +130,9 @@ when tests complete there is a long report on each test. Passes are green failur
 [success] Total time: 87 s, completed Jul 25, 2014 3:17:07 PM
 > 
 ```
-Many tests get data files from the book's website. Downloading these files takes most of the time and can vary. A few tests are run on megabyte datafiles and these take most of the cpu time. The large test for LazyPrimMST is marked ignore because it takes triple the time of all other tests combined. Change `ignore` to `it` 
+Many tests get data files from the book's website. Downloading these files takes most of the time. A few tests are run on megabyte datafiles and these take most of the cpu time. The large datafile test for LazyPrimMST is marked ignore because it takes triple the time of all other tests combined. Change `ignore` to `it` 
 in `.../git/scala-algorthms/Scala-Algorithms/src/test/scala/org/gs/digraph/LazyPrimMSTSuite.scala`
-to run it. Its slowness shows that you should use PrimMST instead.
+to run it. Its slowness should be taken as advice to use PrimMST instead.
 
-Test files are in `.../git/scala-algorthms/Scala-Algorithms/src/test/scala/org/gs/` and add `Suite` to the name of the class under test.
+Test files are in [src/test/scala/org/gs/](https://github.com/garyaiki/Scala-Algorithms/tree/master/src/test/scala/org/gs) and append "Suite" to the name of the class under test.
 

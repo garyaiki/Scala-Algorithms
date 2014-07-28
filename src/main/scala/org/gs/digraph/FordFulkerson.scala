@@ -140,10 +140,10 @@ class FordFulkerson(g: FlowNetwork, s: Int, t: Int) {
     val sb = new StringBuilder("edgeTo: ")
     edgeTo match {
       case None => sb append ("None ")
-      case Some(x) => sb append (x.mkString(","))
+      case Some(x) => sb append (x mkString ",")
     }
     sb append (s" value:${_value}")
-    sb append (s" marked:${marked.mkString(",")}")
+    sb append (s" marked:${marked mkString ","}")
     sb.toString()
   }
 }
