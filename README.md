@@ -1,16 +1,16 @@
 # Scala-Algorithms
 
-Translations from Java to Scala of around 50 algorithms from Robert Sedgewick and Kevin Wayne's book _Algorithms_. Nearly all of those Robert Sedgewick explained in video lectures in his Coursera courses [Algorithms, Part I](https://www.coursera.org/course/algs4partI) and [Algorithms, Part II](https://www.coursera.org/course/algs4partII) are here.
+Translations from Java to Scala of around 50 algorithms from Robert Sedgewick and Kevin Wayne's book _Algorithms_. Nearly all of those explained in Robert Sedgewick's video lectures in his Coursera courses [Algorithms, Part I](https://www.coursera.org/course/algs4partI) and [Algorithms, Part II](https://www.coursera.org/course/algs4partII) are here.
 
 ## Background
 
-The Algorithms courses began soon after Martin Ordersky's courses: [Functional Programming Principles in Scala](https://class.coursera.org/progfun-003) and [Principles of Reactive Programming](https://class.coursera.org/reactive-001) ended. In between I read [Concepts, Techniques, and Models](http://www.info.ucl.ac.be/~pvr/book.html) by Peter Van Roy which clarified when to choose a programming paradigm. Since Scala combines Object Oriented and Functional Programming paradigms, this gave yearned for insight into writing Scala.
+The Algorithms courses began soon after Martin Ordersky's courses [Functional Programming Principles in Scala](https://class.coursera.org/progfun-003) and [Principles of Reactive Programming](https://class.coursera.org/reactive-001) ended. In between I read [Concepts, Techniques, and Models](http://www.info.ucl.ac.be/~pvr/book.html) by Peter Van Roy which clarified when to choose a programming paradigm. Since Scala combines Object Oriented and Functional Programming paradigms, this gave yearned for insight into writing Scala.
 
 When "Algorithms I" began, I asked the course forums if there were Scala versions but there was no reply. I thought writing them would build my repertoire in both Scala and algorithms. While learning Scala, I've found examples that were either deceptively close to Java or impenetrably concise. I've tried to write this code to be useful idiomatic Scala but not baffling to Java programmers.
 
 ## Viewing algorithms in either language on the web
 
-Java code written by Robert Sedgewick and Kevin Wayne is at [Java Algorithms and Clients](http://algs4.cs.princeton.edu/code/), Scala translations have the same class names but with `.scala` extenstions. I also followed the api but adjusted them to Scala idioms.
+Java code written by Robert Sedgewick and Kevin Wayne is at [Java Algorithms and Clients](http://algs4.cs.princeton.edu/code/), Scala translations have the same class names but with `.scala` extenstions. I also followed the api but adjusted it to Scala idioms.
 
 Choose the package for a type of algorithmn under [src/main/scala/org/gs/](https://github.com/garyaiki/Scala-Algorithms/tree/master/src/main/scala/org/gs) then open the Scala source, for example [AcyclicSP](https://github.com/garyaiki/Scala-Algorithms/blob/master/src/main/scala/org/gs/digraph/AcyclicSP.scala), on the first line is a link to Sedgewick and Wayne's code `/** @see` <http://algs4.cs.princeton.edu/44sp/AcyclicSP.java.html> then you can open their URL and compare them side by side.
 
@@ -43,7 +43,7 @@ Arrays can be generic, `scala.reflect.ClassTag` recovers type information at run
  ```
  class IndexMinPQ[A: ClassTag](nMax: Int)(implicit ord:  Ordering[A]) extends IndexPriorityQueue[A](nMax) {
   ```
-Immutable variables are preferred to mutable. Class variables declared as `.var` are turned into `.val` or they are made private or protected. Public getter methods, usually, return `List`, which is recursive, instead of `Iterator`, which is imperative
+Immutable variables are preferred to mutable. Mutable class variables, declared as `.var`, are turned into `.val` or they are made private or protected. Public getter methods, usually, return `List`, which is recursive, instead of `Iterator`, which is imperative
 
 ## Scala and SBT setup
 
