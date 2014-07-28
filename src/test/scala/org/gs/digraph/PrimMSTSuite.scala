@@ -45,7 +45,7 @@ class PrimMSTSuite extends FlatSpec {
     assert(hasCycle === false)
   }
 
-  it should "find wnen it has a spanning forest" in new PrimMSTBuilder {
+  it should "find when it has a spanning forest" in new PrimMSTBuilder {
     val edges = primMST.edges
     val hasCycle = buildUF(primMST.edges)
     @tailrec
