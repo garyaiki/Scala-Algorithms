@@ -34,6 +34,7 @@ class EdgeWeightedGraph(v: Int) extends BaseEdgeWeightedGraph[Edge](v) {
   /** returns edges in graph */
   def edges(): List[Edge] = {
     val list = ListBuffer[Edge]()
+
     def addEdgesAndSelfLoops(v: Int) {
       var selfLoops = 0
 

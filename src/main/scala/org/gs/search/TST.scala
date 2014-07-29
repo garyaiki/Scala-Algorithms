@@ -14,7 +14,7 @@ import scala.collection.mutable.Queue
   * @tparam A generic value type
   */
 class TST[A] {
-  private var N = 0
+  private var n = 0
   private var root: Option[Node] = None
 
   private class Node(val c: Char) {
@@ -25,7 +25,7 @@ class TST[A] {
   }
 
   /** returns number of key value paire */
-  def size(): Int = N
+  def size(): Int = n
 
   @tailrec
   private def get(x: Option[Node], key: String, d: Int): Option[Node] = {
@@ -64,7 +64,7 @@ class TST[A] {
     * @param value
     */
   def put(s: String, value: A): Unit = {
-    if (!contains(s)) N += 1
+    if (!contains(s)) n += 1
 
     def put(x: Option[Node], d: Int): Option[Node] = {
       val c = s.charAt(d)

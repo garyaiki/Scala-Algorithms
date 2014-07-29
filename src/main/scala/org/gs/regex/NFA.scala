@@ -17,36 +17,40 @@ import scala.annotation.tailrec
   */
 class NFA(regexp: String) {
   private val M = regexp.length
-  private var ops = List[Int]()
   private val G = new Digraph(M + 1)
 
-  for (i <- 0 until M) {
-    var lp = i
-    if (regexp.charAt(i) == '(' || regexp.charAt(i) == '|') ops = i :: ops
-    else if (regexp.charAt(i) == ')') {
-      val or = ops.head
-      ops = ops.tail
+  private def loop(i: Int, ops: List[Int]): Unit = {
+    if (i < M) {
+      var lp = i
+      val ops1 = if (regexp.charAt(i) == '(' || regexp.charAt(i) == '|') i :: ops
+      else if (regexp.charAt(i) == ')') {
+        val or = ops.head
+        var ops2 = ops.tail
 
-      if (regexp.charAt(or) == '|') {
-        lp = ops.head
-        ops = ops.tail
-        G.addEdge(lp, or + 1)
-        G.addEdge(or, i)
-      } else if (regexp.charAt(or) == '(') lp = or else
-        assert(regexp.charAt(or) == '|' || regexp.charAt(or) == '(',
-          s"expected '|' or '(' found:${regexp.charAt(or)}")
-    }
+        if (regexp.charAt(or) == '|') {
+          lp = ops2.head
+          ops2 = ops2.tail
+          G.addEdge(lp, or + 1)
+          G.addEdge(or, i)
+        } else if (regexp.charAt(or) == '(') lp = or else
+          assert(regexp.charAt(or) == '|' || regexp.charAt(or) == '(',
+            s"expected '|' or '(' found:${regexp.charAt(or)}")
+        ops2
+      } else ops
 
-    if (i < M - 1 && regexp.charAt(i + 1) == '*') {
-      G.addEdge(lp, i + 1)
-      G.addEdge(i + 1, lp)
-    }
+      if (i < M - 1 && regexp.charAt(i + 1) == '*') {
+        G.addEdge(lp, i + 1)
+        G.addEdge(i + 1, lp)
+      }
 
-    if (regexp.charAt(i) == '(' || regexp.charAt(i) == '*' || regexp.charAt(i) == ')') {
-      G.addEdge(i, i + 1)
+      if (regexp.charAt(i) == '(' || regexp.charAt(i) == '*' || regexp.charAt(i) == ')') {
+        G.addEdge(i, i + 1)
+      }
+      loop(i + 1, ops1)
     }
+    
   }
-
+  loop(0, List[Int]())
   /** returns if the text has a match for the pattern */
   def recognizes(txt: String): Boolean = {
     val dfs = new DirectedDFS(G, 0)

@@ -30,14 +30,10 @@ class DepthFirstDirectedPaths(g: Digraph, s: Int) {
 
   /** returns the path from s to v */
   def pathTo(v: Int): List[Int] = {
-    var pathStack = List[Int]()
 
     @tailrec
-    def loop(x: Int): Int = if (x == s) x else {
-        pathStack = x :: pathStack
-        loop(edgeTo(x))
-      }
+    def loop(x: Int, xs: List[Int]): List[Int] = if (x == s) x :: xs else loop(edgeTo(x), x :: xs)
 
-    loop(v) :: pathStack
+    loop(v, List[Int]())
   }
 }

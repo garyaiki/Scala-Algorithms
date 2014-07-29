@@ -69,7 +69,6 @@ class LazyPrimMST(g: EdgeWeightedGraph) {
 
   /** Validate */
   def checkIsMinSpanningForest(): Boolean = {
-    var cutOptimiality = true
     val uf = new UF(g.V)
 
     def mstEdges(e: Edge) {
