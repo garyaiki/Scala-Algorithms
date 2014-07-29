@@ -10,20 +10,6 @@ package org.gs.digraph
   * @param g [[org.gs.digraph.Digraph]]
   * @param sources a variable number of vertices
   *
-  * One source vertex
-  * {{{
-  * val from1 = new DirectedDFS(tinyDG, 1)
-  * }}}
-  *
-  * Two source vertices
-  * {{{
-  * val from1And2 = new DirectedDFS(tinyDG, 1, 2)
-  * }}}
-  *
-  * Two source vertices in a collection
-  * {{{
-  * val from1And2 = new DirectedDFS(tinyDG, Array[Int](1, 2): _*)
-  * }}}
   */
 class DirectedDFS(g: Digraph, sources: Int*) {
   val marked = new Array[Boolean](g.V)

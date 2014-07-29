@@ -63,7 +63,7 @@ class BellmanFordSuite extends FlatSpec {
     val a = buildBellmanFordSP(g, tuple._3)
     val getEdgeTo = PrivateMethod[DirectedEdge]('getEdgeTo)
 
-    var nc = a.negativeCycle match {
+    val nc = a.negativeCycle match {
       case None => fail(s"negative cycle from source vertex:$s not found")
       case Some(x) => x
     }

@@ -72,7 +72,7 @@ Type :help for more information.
 scala> 
 ```
 
-Quit Scala `scala> :q` Then navigate to the downloaded project and start SBT giving it extra memory so it can run tests on large datafiles.
+Quit Scala `scala> :q` Then navigate to the downloaded project and start SBT **giving it extra memory** so it can run tests on large datafiles.
 
 ```
 ...:Scala-Algorithms ...$ sbt -mem 2048
@@ -82,6 +82,10 @@ Loading .../sbt/bin/sbt-launch-lib.bash
 > 
 ```
 ## Scaladoc
+
+Basic usage is shown on package pages.
+
+Comments are terse partly because Scaladoc is by convention more concise than Javadoc and because this is a translation where the public api is almost the same and is better commented in the linked Java. [Algorithms, 4th Edition](http://algs4.cs.princeton.edu/home/) thoroughly explains each algorithm. Scaladocs show api differences to Java.
 
 from the sbt prompt run scaladoc
 ```
@@ -96,9 +100,10 @@ model contains 74 documentable templates
 then open 
 `.../git/scala-algorthms/Scala-Algorithms/target/scala-2.10/api/index.html`
 
-Comments are terse partly because Scaladoc is by convention more concise than Javadoc and because this is a translation where the public api is almost the same and is better commented in the linked Java. [Algorithms, 4th Edition](http://algs4.cs.princeton.edu/home/) thoroughly explains each algorithm. Scaladocs show api differences to Java.
 
 ##ScalaTest
+
+Usage examples in a test context are found in the ScalaTests.
 
 There are _a lot_ of tests, this was a great help in keeping the code working as I refactored. [ScalaTest](http://www.scalatest.org) comes in several styles. I chose [FlatSpec](http://www.scalatest.org/user_guide/selecting_a_style) it creates [BDD](http://dannorth.net/introducing-bdd/) test reports that show non-coders what parts of a specification are working, unlike other BDD frameworks I've tried, these are almost as easy to write as JUnit tests. Finding descriptive test names is the only extra work.
 
