@@ -34,11 +34,11 @@ def apply[T](xs: T*): Queue[T] = new QueueImpl[T](xs.toList, Nil)
     val leading: List[T],
     val trailing: List[T]) extends Queue[T] {
 
-    private def mirror = if (leading.isEmpty) new QueueImpl(trailing.reverse, Nil) else this
+    private def mirror() = if (leading.isEmpty) new QueueImpl(trailing.reverse, Nil) else this
 
-    def head: T = mirror.leading.head
+    def head(): T = mirror.leading.head
 
-    def tail: QueueImpl[T] = {
+    def tail(): QueueImpl[T] = {
       val q = mirror
       new QueueImpl(q.leading.tail, q.trailing)
     }

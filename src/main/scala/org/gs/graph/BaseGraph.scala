@@ -13,8 +13,10 @@ package org.gs.graph
   * @param V number of vertices
   */
 abstract class BaseGraph(val V: Int) {
-  private var e = 0
+  private var _e = 0
   protected[gs] val adj = Array.fill[List[Int]](V)(List[Int]())
+  
+  def e(): Int = _e
 
   /** add edge between vertices v and w */
   def addEdge(v: Int, w: Int): Unit = {
@@ -25,14 +27,14 @@ abstract class BaseGraph(val V: Int) {
     }
 
     require(rangeGuard(v) && rangeGuard(w), s"aV:$v and otherV:$w must be in 0-$V")
-    e += 1
+    _e += 1
     adj(v) = w :: adj(v)
   }
 
   override def toString(): String = {
     val lf = sys.props("line.separator")
     val sb = new StringBuilder()
-    sb append (s"$V ${e} $lf")
+    sb append (s"$V ${_e} $lf")
 
     def addLines(v: Int) {
       sb append (s"$v : ")

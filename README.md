@@ -1,24 +1,22 @@
 # Scala-Algorithms
 
-Translations from Java to Scala of around 50 algorithms from Robert Sedgewick and Kevin Wayne's book _Algorithms_. Nearly all the ones explained in Robert Sedgewick's video lectures in his Coursera courses [Algorithms, Part I](https://www.coursera.org/course/algs4partI) and [Algorithms, Part II](https://www.coursera.org/course/algs4partII) are here.
+Java to Scala translations of around 50 algorithms from Robert Sedgewick and Kevin Wayne's website for their book _Algorithms_. I chose those Robert Sedgewick elaborated on in his video lectures in Coursera courses [Algorithms, Part I](https://www.coursera.org/course/algs4partI) and [Algorithms, Part II](https://www.coursera.org/course/algs4partII).
 
 ## Background
 
-The algorithms courses began soon after Martin Ordersky's courses [Functional Programming Principles in Scala](https://class.coursera.org/progfun-003) and [Principles of Reactive Programming](https://class.coursera.org/reactive-001) ended.
-
-When _Algorithms I_ began, I asked their forums about Scala versions but there was no reply. I thought writing them would build my repertoire in both Scala and algorithms and also fill a gap in available Scala examples.
+These courses began soon after Martin Ordersky's courses [Functional Programming Principles in Scala](https://class.coursera.org/progfun-003) and [Principles of Reactive Programming](https://class.coursera.org/reactive-001) ended. On the _Algorithms I_ forums, I asked if there were Scala versions but there was no reply. I thought writing them myself would build a repertoire in both Scala and algorithms and also be useful to other Scala programmers.
 
 ## Rule of least expressiveness
 
-Scala combines Object Oriented and Functional Programming which doubles the size of the toolbox but demands choices other languages make for you. [Concepts, Techniques, and Models](http://www.info.ucl.ac.be/~pvr/book.html) by Peter Van Roy gives this advice _... each component should be programmed in its "natural model". Using a less expressive model would give a more complex program and using a more expressive model would not give a simpler program but would make reasoning about it harder._ I left in vars, nulls, and side effects when getting rid of them would obscure, .
+Scala combines Object Oriented and Functional Programming which gives you a much bigger toolbox but this demands choices other languages make for you. Peter Van Roy in [Concepts, Techniques, and Models](http://www.info.ucl.ac.be/~pvr/book.html) gives this advice: _each component should be programmed in its "natural model". Using a less expressive model would give a more complex program and using a more expressive model would not give a simpler program but would make reasoning about it harder._ So instead of trying to turn all tricky imperative code into pure functions, I left in vars, nulls, and side effects when getting rid of them would overcomplicate.
 
-I've found lots of Scala examples that were either deceptively like Java or impenetrably concise. I've tried to write code that's useful idiomatic Scala without baffling Java programmers.
+I've found lots of Scala examples that were either deceptively like Java or impenetrably concise. I tried to write useful idiomatic Scala without baffling Java programmers.
 
-## Viewing algorithms in either language on the web
+## Viewing algorithms in Java and Scala side by side
 
-Java code written by Robert Sedgewick and Kevin Wayne is at [Java Algorithms and Clients](http://algs4.cs.princeton.edu/code/), Scala translations have the same class names but with `.scala` extenstions. I also followed the api with adjustments to Scala idioms.
+Java code written by Robert Sedgewick and Kevin Wayne is at [Java Algorithms and Clients](http://algs4.cs.princeton.edu/code/), Scala translations have the same class names but with `.scala` extensions. I followed their api so most methods have the same name. I adjusted their signatures to follow Scala idioms.
 
-Choose the package for a type of algorithmn under [src/main/scala/org/gs/](https://github.com/garyaiki/Scala-Algorithms/tree/master/src/main/scala/org/gs) then open the Scala source, for example [AcyclicSP](https://github.com/garyaiki/Scala-Algorithms/blob/master/src/main/scala/org/gs/digraph/AcyclicSP.scala), on the first line is a link to Sedgewick and Wayne's code `/** @see` <http://algs4.cs.princeton.edu/44sp/AcyclicSP.java.html> then you can open and compare side by side.
+In this project, choose a package under [src/main/scala/org/gs/](https://github.com/garyaiki/Scala-Algorithms/tree/master/src/main/scala/org/gs) then open a source file, for example [AcyclicSP](https://github.com/garyaiki/Scala-Algorithms/blob/master/src/main/scala/org/gs/digraph/AcyclicSP.scala), on the first line is a link to Sedgewick and Wayne's code `/** @see` <http://algs4.cs.princeton.edu/44sp/AcyclicSP.java.html>
 
 ## Common Scala idioms
 
@@ -85,9 +83,9 @@ Loading .../sbt/bin/sbt-launch-lib.bash
 
 Basic usage is shown on package pages.
 
-Comments are terse partly because Scaladoc is by convention more concise than Javadoc and because this is a translation where the public api is almost the same and is better commented in the linked Java. [Algorithms, 4th Edition](http://algs4.cs.princeton.edu/home/) thoroughly explains each algorithm. Scaladocs show api differences to Java.
+Comments are terse partly because Scaladoc is by convention more compact than Javadoc and because this is a translation of well commented Java code. Scaladocs do show api differences to Java. [Algorithms, 4th Edition](http://algs4.cs.princeton.edu/home/) describes each algorithm.
 
-from the sbt prompt run scaladoc
+To generate scaladoc, from the sbt prompt:
 ```
 > doc
 [info] Main Scala API documentation to .../git/scala-algorthms/Scala-Algorithms/target/scala-2.10/api...
@@ -103,11 +101,11 @@ then open
 
 ##ScalaTest
 
-Usage examples in a test context are found in the ScalaTests.
+Usage examples are found in the ScalaTests.
 
-There are _a lot_ of tests, this was a great help in keeping the code working as I refactored. [ScalaTest](http://www.scalatest.org) comes in several styles. I chose [FlatSpec](http://www.scalatest.org/user_guide/selecting_a_style) it creates [BDD](http://dannorth.net/introducing-bdd/) test reports that show non-coders what parts of a specification are working, unlike other BDD frameworks I've tried, these are almost as easy to write as JUnit tests. Finding descriptive test names is the only extra work.
+There are _a lot_ of tests, this was a great help in keeping the code working as I refactored. [ScalaTest](http://www.scalatest.org) comes in several styles. I chose [FlatSpec](http://www.scalatest.org/user_guide/selecting_a_style), it creates [BDD](http://dannorth.net/introducing-bdd/) test reports that show non-coders what parts of a specification are working, unlike other BDD frameworks I've tried, these are almost as easy to write as JUnit tests. Finding descriptive test names is the only extra work.
 
-from the sbt prompt run scalatest
+To run tests, from the sbt prompt run scalatest
 ```
 > test
 [info] Compiling 55 Scala sources to .../git/scala-algorthms/Scala-Algorithms/target/scala-2.10/classes...
@@ -141,9 +139,20 @@ when tests complete there is a long BDD style report. Passes are green failures 
 [success] Total time: 87 s, completed Jul 25, 2014 3:17:07 PM
 > 
 ```
-Many tests read data files from the book's website. Downloading them takes most of the test's time. A few tests are run on megabyte datafiles and these take most of the cpu time. The large datafile test for LazyPrimMST is marked ignore because it takes triple the time of all other tests combined. Change `ignore` to `it` 
+To validate against test data and expected results on the book's website, many tests read data files from it. Downloading them takes most of the test's time. A few tests are run on megabyte datafiles and these take most of the cpu time. The large datafile test for LazyPrimMST is ignored because it takes triple the time of all other tests combined. Change `ignore` to `it` 
 in `.../git/scala-algorthms/Scala-Algorithms/src/test/scala/org/gs/digraph/LazyPrimMSTSuite.scala`
 to run it. Its slowness should be taken as advice to use PrimMST instead.
 
 Test files are in [src/test/scala/org/gs/](https://github.com/garyaiki/Scala-Algorithms/tree/master/src/test/scala/org/gs) and append "Suite" to the name of the class under test.
+
+##License and Copyright
+Java code is Copyright © 2002–2014 Robert Sedgewick and Kevin Wayne. All rights reserved. It is has a GPLv3 license <http://algs4.cs.princeton.edu/faq/> Translation of software from one language to another falls under the copyright and license of the original authors. It adds a copyright for the translation which is subordinate to the original.
+
+##Disclaimer Notice:
+
+Gary Struthers (Translator)
+
+IN NO EVENT SHALL TRANSLATOR BE LIABLE TO ANY PARTY FOR DIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES, INCLUDING LOST PROFITS, ARISING OUT OF THE USE OF THIS SOFTWARE AND ITS DOCUMENTATION, EVEN IF TRANSLATOR HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+TRANSLATOR SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE SOFTWARE AND ACCOMPANYING DOCUMENTATION, IF ANY, PROVIDED HEREUNDER IS PROVIDED "AS IS". TRANSLATOR HAS NO OBLIGATION TO PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 

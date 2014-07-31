@@ -6,7 +6,6 @@ package org.gs
   * {{{
   * val g = new Digraph(numberOfVertices)
   * g.addEdge(v, w)
-  * val adjacentVertices = g.adj
   * }}}
   * {{{
   * val from1 = new DirectedDFS(g, 1) // DirectedDFS accepts variable number of source vertices
