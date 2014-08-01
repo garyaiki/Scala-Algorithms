@@ -1,4 +1,5 @@
 /** @see http://algs4.cs.princeton.edu/33balanced/RedBlackBST.java.html
+  *
   */
 package org.gs.symboltable
 
@@ -507,7 +508,6 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
         else loop(x.left, black) && loop(x.right, black)
       }
     }
-
     loop(root, black)
   }
 }
