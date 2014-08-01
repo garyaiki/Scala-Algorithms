@@ -9,6 +9,7 @@ import scala.annotation.tailrec
 import scala.reflect.ClassTag
 
 /** Common code for IndexMinPQ, IndexMaxPQ
+  *
   * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   *
   * @constructor called by subclass

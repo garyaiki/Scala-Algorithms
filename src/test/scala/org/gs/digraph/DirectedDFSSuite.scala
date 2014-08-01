@@ -8,12 +8,12 @@ import scala.collection.mutable.Queue
 import org.scalatest.junit.JUnitRunner
 import org.gs.digraph.fixtures.SymbolDigraphBuilder
 import org.gs.digraph.fixtures.DigraphBuilder
+
 /** @author Gary Struthers
   *
   */
 @RunWith(classOf[JUnitRunner])
 class DirectedDFSSuite extends FlatSpec {
-
   
   behavior of "a DirectedDFS"
   it should "mark reachable verticies" in new DigraphBuilder {
@@ -36,8 +36,7 @@ class DirectedDFSSuite extends FlatSpec {
     val from1And2 = new DirectedDFS(tinyDG, 1, 2)
     assert(from1And2.count === 6)
   }
-  
-  
+
   it should "count reachable verticies from an array arg of source vertices" in new DigraphBuilder {
     val from1And2 = new DirectedDFS(tinyDG, Array[Int](1, 2): _*)
     assert(from1And2.count === 6)

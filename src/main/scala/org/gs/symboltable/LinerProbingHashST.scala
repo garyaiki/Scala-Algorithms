@@ -10,7 +10,7 @@ import scala.annotation.tailrec
   *
   * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   * @tparam A generic key type
-  * @param <B> generic value type
+  * @tparam B generic value type
   * @param initialSize of array
   */
 class LinearProbingHashST[A, B](initialSize: Int) {

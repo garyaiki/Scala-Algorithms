@@ -1,6 +1,7 @@
 /** @see http://algs4.cs.princeton.edu/43mst/Edge.java.html
   */
 package org.gs.graph
+
 /** Weighted Edge for graphs
   *
   * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.

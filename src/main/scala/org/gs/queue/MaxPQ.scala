@@ -7,6 +7,7 @@ package org.gs.queue
 import scala.collection.mutable.ArrayBuffer
 
 /** For max value on Q extends [[PriorityQueue]]
+  *
   * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   *
   * @tparam A keys are generic

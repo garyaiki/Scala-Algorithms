@@ -6,6 +6,7 @@ package org.gs.digraph
 /** Find topological order of a digraph
   *
   * The reverse post-order of a directed acyclic graph (DAG) is its topological order
+  *
   * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   *
   * @constructor creates a new Topological with either a Digraph or EdgeWeightedDigraph

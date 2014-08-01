@@ -7,6 +7,7 @@ import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import org.gs.digraph.fixtures.DigraphBuilder
 import org.gs.digraph.fixtures.UnweightedDigraphBuilder
+
 /** @author Gary Struthers
   *
   */

@@ -25,4 +25,4 @@ class TopologicalSuite extends FlatSpec {
       case None => fail("no topological order")
     }
   }
-} 
+}

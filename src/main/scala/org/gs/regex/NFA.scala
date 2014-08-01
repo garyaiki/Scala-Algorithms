@@ -10,7 +10,7 @@ import scala.annotation.tailrec
 
 /** Regex - Non Deterministic Finite Automata
   *
-  * Doesn't several regex operators
+  * Incomplete api, doesn't have all regex operators
   *
   * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   * @constructor creates a new NFA with a regex pattern
@@ -51,6 +51,7 @@ class NFA(regexp: String) {
     
   }
   loop(0, List[Int]())
+
   /** returns if the text has a match for the pattern */
   def recognizes(txt: String): Boolean = {
     val dfs = new DirectedDFS(G, 0)

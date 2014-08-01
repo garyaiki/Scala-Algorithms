@@ -13,6 +13,7 @@ trait DijkstraAllPairsSPBuilder extends TinyEdgeWeightedDigraphBuilder {
   val verticesLength = g.V
   val allPairsSP = new DijkstraAllPairsSP(g)
 }
+
 /** @author Gary Struthers
   *
   */

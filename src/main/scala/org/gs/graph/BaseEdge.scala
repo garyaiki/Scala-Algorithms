@@ -1,5 +1,5 @@
 /** @see http://algs4.cs.princeton.edu/43mst/Edge.java.html
-  *  @see http://algs4.cs.princeton.edu/44sp/DirectedEdge.java.html
+  * @see http://algs4.cs.princeton.edu/44sp/DirectedEdge.java.html
   */
 package org.gs.graph
 

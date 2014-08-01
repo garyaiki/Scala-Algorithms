@@ -1,9 +1,7 @@
 /** @see http://algs4.cs.princeton.edu/43mst/tinyEWG.txt
   */
 package org.gs.digraph
-/** @author Gary Struthers
-  *
-  */
+
 import org.scalatest.FlatSpec
 import org.junit.runner.RunWith
 import org.gs.graph.Edge
@@ -11,6 +9,9 @@ import org.gs.graph.EdgeWeightedGraph
 import org.gs.digraph.fixtures.GraphBuilder
 import org.scalatest.junit.JUnitRunner
 
+/** @author Gary Struthers
+  *
+  */
 @RunWith(classOf[JUnitRunner])
 class MinSpanningTreeSuite extends FlatSpec {
 
@@ -40,7 +41,7 @@ class MinSpanningTreeSuite extends FlatSpec {
   it should "make a copy of itself" in new GraphBuilder {
     val gc = new EdgeWeightedGraph(g)
     assert(gc.V === 8, s"${gc.V} is the wrong number of vertices")
-//    assert(gc.e === 32, s"${gc.e} is the wrong number of edges")
+    assert(gc.e === 32, s"${gc.e} is the wrong number of edges")
   }
 
   it should "have adjacencies for each vertex with all edges with that vertex" in new GraphBuilder {

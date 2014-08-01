@@ -4,6 +4,7 @@ package org.gs.digraph
 
 import scala.collection.mutable.ListBuffer
 import org.gs.graph.BaseEdgeWeightedGraph
+
 /** Digraph with edges having direction and weight
   *
   * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.

@@ -12,7 +12,7 @@ import scala.reflect.ClassTag
 trait IndexQueueBuilder {
 
   val testStrings =
-    Array[String](null, "it", "was", "the", "best", "of", "times", "it", "was", "the", "worst")
+      Array[String](null, "it", "was", "the", "best", "of", "times", "it", "was", "the", "worst")
   val testSize = testStrings.size
   val minPQ = new IndexMinPQ[String](testSize)
   for {
@@ -27,6 +27,7 @@ trait IndexQueueBuilder {
   
   val maxSorted = Vector("worst", "was", "times", "the", "was", "the", "it", "best", "of", "it")
 }
+
 @RunWith(classOf[JUnitRunner])
 class IndexMaxPriorityQueueSuite extends FlatSpec {
   behavior of "a IndexMinPQ"

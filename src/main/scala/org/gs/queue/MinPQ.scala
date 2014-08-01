@@ -6,6 +6,7 @@ package org.gs.queue
 
 import scala.collection.mutable.ArrayBuffer
 /** For min value on Q extends [[PriorityQueue]]
+  *
   * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   *
   * @tparam A keys are generic and ordered using [[PriorityQueue.greater]]

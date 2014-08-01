@@ -3,6 +3,7 @@
 package org.gs.graph
 
 import scala.collection.mutable.ListBuffer
+
 /** Graph where edges have real values as weights.
   *
   * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.

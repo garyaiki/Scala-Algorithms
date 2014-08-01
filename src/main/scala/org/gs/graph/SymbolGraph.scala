@@ -4,7 +4,6 @@ package org.gs.graph
 
 import scala.collection.immutable.TreeMap
 
-
 /** Graph where vertex names are strings
   *
   * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.

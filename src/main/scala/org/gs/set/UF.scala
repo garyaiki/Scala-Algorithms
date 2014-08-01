@@ -5,11 +5,9 @@ package org.gs.set
 import scala.annotation.tailrec
 
 /** Partition points into connected components
+  *
   * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   * @param n number of sites
-  * count is the number of components
-  * id(i) is the parent of i
-  * rank is the rank of the subtree rooted at i
   */
 class UF(n: Int) {
   require(n >= 0)

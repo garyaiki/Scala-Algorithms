@@ -8,7 +8,6 @@ import scala.util.control.Breaks._
 import org.scalatest.junit.JUnitRunner
 import org.gs.digraph.fixtures.TinyEdgeWeightedDigraphBuilder
 
-
 /** @author Gary Struthers
   *
   */

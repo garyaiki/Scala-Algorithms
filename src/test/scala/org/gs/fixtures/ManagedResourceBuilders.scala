@@ -17,11 +17,11 @@ trait ManagedResource[T] {
 
 trait BufferedSourceBuilder {
   def readURI(uri: String) = new ManagedResource[BufferedSource] {
-    /**
-     * BufferedSource can only be iterated once
-     * @param f
-     * @return
-     */
+    /** BufferedSource can only be iterated once
+      *
+      * @param f
+      * @return
+      */
     def loan[U](f: BufferedSource => U): U = {
       val bufferdSource = Source.fromURL(uri)
       try {

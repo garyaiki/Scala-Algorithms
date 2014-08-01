@@ -1,11 +1,7 @@
-/**
-  * @see http://algs4.cs.princeton.edu/43mst/tinyEWG.txt
+/** @see http://algs4.cs.princeton.edu/43mst/tinyEWG.txt
   */
 package org.gs.digraph
-/**
-  * @author Gary Struthers
-  *
-  */
+
 import org.scalautils._
 import org.scalautils.Tolerance._
 import org.scalatest.FlatSpec
@@ -20,6 +16,9 @@ import org.gs.digraph.fixtures.DirectedEdgeBuilder
 import org.gs.graph.fixtures.EdgeBuilder
 import org.gs.digraph.fixtures.EdgeWeightedGraphBuilder
 
+/** @author Gary Struthers
+  *
+  */
 @RunWith(classOf[JUnitRunner])
 class LazyPrimMSTSuite extends FlatSpec {
 

@@ -77,8 +77,8 @@ abstract class PriorityQueue[A](pq: ArrayBuffer[A]) {
     loop(k)
   }
 
-  /**
-   * Add key to end of array then swim up to ordered position
+  /** Add key to end of array then swim up to ordered position
+   *
    * @param key generic element
    * @param cmp less for [[org.gs.queue.MaxPQ]] greater for [[org.gs.queue.MinPQ]]
    */
@@ -88,8 +88,8 @@ abstract class PriorityQueue[A](pq: ArrayBuffer[A]) {
     swim(n, cmp)
   }
 
-  /**
-   * Remove max or min element
+  /** Remove max or min element
+   *
    * @param cmp less for [[org.gs.queue.MaxPQ]] greater for [[org.gs.queue.MinPQ]]
    */
   def pop(cmp: (Int, Int) => Boolean): Option[A] = if (isEmpty) None else {

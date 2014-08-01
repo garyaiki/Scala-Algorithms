@@ -11,6 +11,7 @@ import org.gs.digraph.fixtures.DigraphBuilder
 import org.gs.fixtures.IntArrayBuilder
 import org.gs.digraph.fixtures.DirectedEdgeBuilder
 import org.gs.digraph.fixtures.UnweightedDigraphBuilder
+
 /** @author Gary Struthers
   *
   */

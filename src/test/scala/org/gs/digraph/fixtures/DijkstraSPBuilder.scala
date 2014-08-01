@@ -9,8 +9,8 @@ import scala.reflect.ClassTag
 import scala.collection.mutable.ArraySeq
 
 /** @author Gary Struthers
-  * 
-*/
+  *
+  */
 
 trait TinyEdgeWeightedArrayBuilder {
   val tinyEWDData = Array((4, 5, 0.35), (5, 4, 0.35), (4, 7, 0.37), (5, 7, 0.28), (7, 5, 0.28),

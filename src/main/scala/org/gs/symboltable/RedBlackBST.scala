@@ -6,8 +6,9 @@ import math.Ordering
 import scala.annotation.tailrec
 
 /** Red Black Node
-  * @param key generic
-  * @param value generic
+  *
+  * @tparam A generic key
+  * @tparam B generic value
   * @param count number of subtrees
   * @param red true if link to parent is red false if black
   */
@@ -21,7 +22,7 @@ sealed class Node[A, B](var key: A, var value: B, var count: Int = 1, var red: B
   * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   *
   * @tparam A generic key type
-  * @param <U> generic value type
+  * @tparam B generic value type
   * @param ord implicit Ordering
   */
 class RedBlackBST[A, B](implicit ord: Ordering[A]) {
@@ -34,7 +35,7 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
     *
     * if h.right is red rotate left so h becomes the left child and h.right becomes the parent
     */
-  def rotateLeft(h: Node[A, B]): Node[A, B] = {
+  private def rotateLeft(h: Node[A, B]): Node[A, B] = {
     assert(h != null && isRed(h.right), "error: black or null passed to rotateLeft")
     val x = h.right
     h.right = x.left
@@ -50,7 +51,7 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
     *
     * if h.left is red rotate right so h becomes the right child and h.left becomes the parent
     */
-  def rotateRight(h: Node[A, B]): Node[A, B] = {
+  private def rotateRight(h: Node[A, B]): Node[A, B] = {
     assert(h != null && isRed(h.left), "error: black or null passed to rotateRight")
     val x = h.left
     h.left = x.right
@@ -63,7 +64,7 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
   }
 
   /** if both children are red make them black and h red */
-  def flipColors(h: Node[A, B]): Unit = {
+  private def flipColors(h: Node[A, B]): Unit = {
     assert(h != null && h.left != null && h.right != null, "null node passed to flip colors")
     assert(!isRed(h) && isRed(h.left) && isRed(h.right) ||
       isRed(h) && !isRed(h.left) && !isRed(h.right),
@@ -359,6 +360,7 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
   }
 
   /** debugging code  */
+
   /** print nodes left to right
     * @param full all node arguments if true just key if false
     * @return tree nodes as string

@@ -3,10 +3,11 @@
 package org.gs.symboltable
 
 /** Hash keys to array index allow for collisions with a list at each index
+  *
   * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   *
   * @tparam A generic key type, its hash code is used
-  * @param <B> generic value type
+  * @tparam B generic value type
   * @param initialSize of array
   */
 class SeparateChainingHashST[A, B](initialSize: Int) {

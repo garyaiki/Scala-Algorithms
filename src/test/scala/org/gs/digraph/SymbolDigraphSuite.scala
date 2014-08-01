@@ -5,6 +5,7 @@ import org.scalatest.FlatSpec
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import org.gs.digraph.fixtures.SymbolDigraphBuilder
+
 /** @author Gary Struthers
   *
   */
@@ -29,4 +30,4 @@ class SymbolDigraphSuite extends FlatSpec {
     val wLAX = for (w <- g.adj(8)) yield keys(w)
     assert(wLAX.diff(List("LAS", "PHX")) === List())
   }
-} 
+}

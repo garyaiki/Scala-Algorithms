@@ -6,6 +6,7 @@ import scala.math.{ abs, min }
 import scala.collection.mutable.Queue
 import scala.annotation.tailrec
 import scala.collection.mutable.ArrayBuffer
+
 /** @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   *
   * @constructor creates a new FordFulkerson with a FlowNetwork, source and target vertices

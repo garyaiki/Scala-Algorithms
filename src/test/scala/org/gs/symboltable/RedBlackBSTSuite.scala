@@ -1,6 +1,5 @@
 package org.gs.symboltable
-/*
-  * @see http://algs4.cs.princeton.edu/33balanced/tinyST.txt
+/** @see http://algs4.cs.princeton.edu/33balanced/tinyST.txt
   * @see http://algs4.cs.princeton.edu/33balanced/RedBlackBST.java.html
   */
 import org.scalatest.FlatSpec
@@ -10,8 +9,8 @@ import org.scalatest.BeforeAndAfter
 import scala.collection.mutable.ArrayBuffer
 import org.scalatest.PrivateMethodTester
 import math.Ordering
-/*
-  * @author Gary Struthers
+
+/** @author Gary Struthers
   */
 @RunWith(classOf[JUnitRunner])
 class RedBlackBSTSuite extends FlatSpec with BeforeAndAfter with PrivateMethodTester {

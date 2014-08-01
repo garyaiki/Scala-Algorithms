@@ -32,6 +32,8 @@ class QuickX[A: ClassTag](implicit ord: A => Ordered[A]) {
 
   /** Insertion sort is faster when partition or array has fewer than 10 elements
     * Exchange 2 elements when the one on the left is greater than the one on the right
+    * 
+    * @param generic array to sort
     */
   def insertionSort(xs: Array[A]): Unit = {
     var i = 1

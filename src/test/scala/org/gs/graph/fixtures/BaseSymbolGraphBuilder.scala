@@ -13,10 +13,10 @@ import org.gs.fixtures.BufferedSourceBuilder
   */
 trait BaseSymbolGraphBuilder {
   
-  def buildGraph[T <: BaseGraph](
+  def buildGraph[A <: BaseGraph](
       savedLines: Array[String],
       st: TreeMap[String, Int],
-      g: T, delimiter: String) = {
+      g: A, delimiter: String) = {
     for {
       a <- savedLines
     } {

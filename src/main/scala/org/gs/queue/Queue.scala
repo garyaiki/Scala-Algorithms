@@ -8,42 +8,44 @@ package org.gs.queue
 /** Immutable interface for hidden Queue implementation
   * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   *
-  * @param <T>
+  * @tparam <A> elements are generic
   */
-trait Queue[T] {
-  def head: T
-  def tail: Queue[T]
-  def enqueue(x: T): Queue[T]
+trait Queue[A] {
+  def head: A
+  def tail: Queue[A]
+  def enqueue(x: A): Queue[A]
   def isEmpty(): Boolean
 }
 
 object Queue {
 
-/** @param xs a variable number of objects of type T
+/** @param xs a variable number of objects of type A
   * @return an initialized Queue companion object
   * @see QueueSuite for usage
   */
-def apply[T](xs: T*): Queue[T] = new QueueImpl[T](xs.toList, Nil)
-  /*
-   * To Enqueue in constant time prepend to the trailing list
+def apply[A](xs: A*): Queue[A] = new QueueImpl[A](xs.toList, Nil)
+  /** To Enqueue in constant time prepend to the trailing list
+   *
    * To Dequeue in constant time take the head of the leading list. If leading is empty, reverse
    * trailing and assign it to head. The cost of reversing is amortized. After taking head, tail is
    * the remaining Queue
+   *
+   * @tparam <A> elements are generic
    */
-  private class QueueImpl[T] (
-    val leading: List[T],
-    val trailing: List[T]) extends Queue[T] {
+  private class QueueImpl[A] (
+    val leading: List[A],
+    val trailing: List[A]) extends Queue[A] {
 
     private def mirror() = if (leading.isEmpty) new QueueImpl(trailing.reverse, Nil) else this
 
-    def head(): T = mirror.leading.head
+    def head(): A = mirror.leading.head
 
-    def tail(): QueueImpl[T] = {
+    def tail(): QueueImpl[A] = {
       val q = mirror
       new QueueImpl(q.leading.tail, q.trailing)
     }
 
-    def enqueue(x: T): Queue[T] = new QueueImpl(leading, x :: trailing)
+    def enqueue(x: A): Queue[A] = new QueueImpl(leading, x :: trailing)
 
     def isEmpty(): Boolean = leading.isEmpty && trailing.isEmpty
   }

@@ -1,6 +1,5 @@
 package org.gs.queue
-/*
-  * @see http://algs4.cs.princeton.edu/13stacks/tobe.txt
+/** @see http://algs4.cs.princeton.edu/13stacks/tobe.txt
   */
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner

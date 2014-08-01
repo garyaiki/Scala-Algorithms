@@ -13,11 +13,13 @@ import org.gs.digraph.FlowEdge
 trait FlowEdgeBuilder extends BufferedSourceBuilder {
   val intPattern = """^\d+$""".r
   val edgePattern = """^(\d+)\s+(\d+)\s+(-?\d+[.]\d+)$""".r
+
   def readFileToTuple(buffSource: BufferedSource): (Int, Int, ArrayBuffer[FlowEdge]) = {
     val savedLines = new ArrayBuffer[FlowEdge]()
     val it = buffSource.getLines
     var v = 0
     var e = 0
+
     for {
       s <- it
     } {
