@@ -6,4 +6,5 @@
 *.sc
 /.worksheet
 /.classpath
+/.project
 /.gitignore
