@@ -5,3 +5,5 @@
 /project/project/target
 *.sc
 /.worksheet
+/.classpath
+/.gitignore
