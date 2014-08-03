@@ -4,19 +4,19 @@ Java to Scala translations of around 50 algorithms from Robert Sedgewick and Kev
 
 ## Background
 
-These courses began soon after Martin Ordersky's courses [Functional Programming Principles in Scala](https://class.coursera.org/progfun-003) and [Principles of Reactive Programming](https://class.coursera.org/reactive-001) ended. On the _Algorithms I_ forums, I asked if there were Scala versions but there was no reply. I thought writing them myself would build a repertoire in both Scala and algorithms and also be useful to other Scala programmers.
+The courses started soon after Martin Ordersky's courses [Functional Programming Principles in Scala](https://class.coursera.org/progfun-003) and [Principles of Reactive Programming](https://class.coursera.org/reactive-001) ended. On the _Algorithms I_ forums, I asked if there were Scala versions but there was no reply. I thought writing them myself would build a repertoire in Scala and algorithms and be useful to other Scala programmers.
 
 ## Rule of least expressiveness
 
-Scala combines Object Oriented and Functional Programming which gives you a much bigger toolbox but this demands choices other languages make for you. Peter Van Roy in [Concepts, Techniques, and Models](http://www.info.ucl.ac.be/~pvr/book.html) gives this advice: _each component should be programmed in its "natural model". Using a less expressive model would give a more complex program and using a more expressive model would not give a simpler program but would make reasoning about it harder._ So instead of trying to turn all tricky imperative code into pure functions, I left in vars, nulls, and side effects when getting rid of them would overcomplicate.
+Scala combines Object Oriented and Functional Programming which gives you a bigger toolbox but makes you make choices other languages make for you. Peter Van Roy in [Concepts, Techniques, and Models](http://www.info.ucl.ac.be/~pvr/book.html) says: _each component should be programmed in its "natural model". Using a less expressive model would give a more complex program and using a more expressive model would not give a simpler program but would make reasoning about it harder._ So instead of trying to turn all tricky imperative code into pure functions, I left in vars, nulls, and side effects when getting rid of them would break or obscure equivalence to the originals.
 
-I've found lots of Scala examples that were either deceptively like Java or impenetrably concise. I tried to write useful idiomatic Scala without baffling Java programmers.
+Too many Scala examples are either deceptively Java-like or cryptically concise. I tried to write useful idiomatic Scala without vexing Java programmers.
 
-## Viewing algorithms in Java and Scala side by side
+## Algorithms in Scala and Java side by side
 
-Java code written by Robert Sedgewick and Kevin Wayne is at [Java Algorithms and Clients](http://algs4.cs.princeton.edu/code/), Scala translations have the same class names but with `.scala` extensions. I followed their api so most methods have the same name. I adjusted their signatures to follow Scala idioms.
+Java code written by Robert Sedgewick and Kevin Wayne is at [Java Algorithms and Clients](http://algs4.cs.princeton.edu/code/), Scala translations have the same class names but with `.scala` extensions. I followed their api so most methods have the same name but I made adjustments to follow Scala idioms.
 
-In this project, choose a package under [src/main/scala/org/gs/](https://github.com/garyaiki/Scala-Algorithms/tree/master/src/main/scala/org/gs) then open a source file, for example [AcyclicSP](https://github.com/garyaiki/Scala-Algorithms/blob/master/src/main/scala/org/gs/digraph/AcyclicSP.scala), on the first line is a link to Sedgewick and Wayne's code `/** @see` <http://algs4.cs.princeton.edu/44sp/AcyclicSP.java.html>
+Scala code is in [src/main/scala/org/gs/](https://github.com/garyaiki/Scala-Algorithms/tree/master/src/main/scala/org/gs) choose a package then open a source file, for example [AcyclicSP](https://github.com/garyaiki/Scala-Algorithms/blob/master/src/main/scala/org/gs/digraph/AcyclicSP.scala), on the first line is a link to Sedgewick and Wayne's code `/** @see` <http://algs4.cs.princeton.edu/44sp/AcyclicSP.java.html>
 
 ## Common Scala idioms
 
@@ -30,7 +30,7 @@ Arrays and collections can be initalized when declared
 private val _distTo = Array.fill[Double](g.V)(Double.PositiveInfinity)
 ```
 
-Functions can be nested and variables defined in the outer scope are available. `Option` is preferred to `null`. Tail recursion is preferred to `while` loops and `for` loops that call `break` or `continue` or `return`. Pattern matching is preferred to complicated `if else` conditions and where `Option` values are extracted.
+Functions can be nested and can use variables defined in outer scopes. `Option` is preferred to `null`. Tail recursion is preferred to `while` loops and `for` loops that call `break` or `continue` or `return`. Pattern matching is preferred to complicated `if else` conditions and where `Option` values are extracted.
 ```
 /** nested tail recursive function that pattern matches Optional edges */
       @tailrec
@@ -47,7 +47,7 @@ Arrays can be generic, `scala.reflect.ClassTag` recovers type information at run
  ```
  class IndexMinPQ[A: ClassTag](nMax: Int)(implicit ord: Ordering[A]) extends IndexPriorityQueue[A](nMax) {
   ```
-Immutable variables are preferred to mutable. Mutable class variables, declared as `.var`, are usually turned into `.val` or made private or protected. Public getter methods, usually, return `List`, which is recursive, rather than `Iterator`, which is imperative
+Immutable variables are preferred to mutable. Mutable class variables, declared as `.var`, are usually turned into `.val` or made private or protected. Public methods that return a collection, usually, return `List`, which is recursive, rather than `Iterator`, which is imperative
 
 ## Scala and SBT setup
 
@@ -58,7 +58,7 @@ export SBT_HOME="/Users/.../sbt"
 export PATH=...:$SCALA_HOME/bin::$SBT_HOME/bin
 ```
 
-To confirm Scala is installed correctly you can launch it in a Terminal window in any directory
+You don't need to launch Scala separately but to see if it is installed correctly you can launch it in a Terminal window in any directory.
 
 ```
 Last login: Fri Jul 25 08:25:16 on console
@@ -79,25 +79,6 @@ Loading .../sbt/bin/sbt-launch-lib.bash
 [info] Set current project to Scala-Algorithms (in build file:.../git/scala-algorthms/Scala-Algorithms/)
 > 
 ```
-## Scaladoc
-
-Basic usage is shown on package pages.
-
-Comments are terse partly because Scaladoc is by convention more compact than Javadoc and because this is a translation of well commented Java code. Scaladocs do show api differences to Java. [Algorithms, 4th Edition](http://algs4.cs.princeton.edu/home/) describes each algorithm.
-
-To generate scaladoc, from the sbt prompt:
-```
-> doc
-[info] Main Scala API documentation to .../git/scala-algorthms/Scala-Algorithms/target/scala-2.10/api...
-model contains 74 documentable templates
-[info] Main Scala API documentation successful.
-[success] Total time: 8 s, completed Jul 25, 2014 2:26:57 PM
-> 
-```
-
-then open 
-`.../git/scala-algorthms/Scala-Algorithms/target/scala-2.10/api/index.html`
-
 
 ##ScalaTest
 
@@ -105,7 +86,7 @@ Usage examples are found in the ScalaTests.
 
 There are _a lot_ of tests, this was a great help in keeping the code working as I refactored. [ScalaTest](http://www.scalatest.org) comes in several styles. I chose [FlatSpec](http://www.scalatest.org/user_guide/selecting_a_style), it creates [BDD](http://dannorth.net/introducing-bdd/) test reports that show non-coders what parts of a specification are working, unlike other BDD frameworks I've tried, these are almost as easy to write as JUnit tests. Finding descriptive test names is the only extra work.
 
-To run tests, from the sbt prompt run scalatest
+To run tests, from the sbt prompt
 ```
 > test
 [info] Compiling 55 Scala sources to .../git/scala-algorthms/Scala-Algorithms/target/scala-2.10/classes...
@@ -145,14 +126,27 @@ to run it. Its slowness should be taken as advice to use PrimMST instead.
 
 Test files are in [src/test/scala/org/gs/](https://github.com/garyaiki/Scala-Algorithms/tree/master/src/test/scala/org/gs) and append "Suite" to the name of the class under test.
 
+## Scaladoc
+
+
+To generate scaladoc, from the sbt prompt:
+```
+> doc
+[info] Main Scala API documentation to .../git/scala-algorthms/Scala-Algorithms/target/scala-2.10/api...
+model contains 74 documentable templates
+[info] Main Scala API documentation successful.
+[success] Total time: 8 s, completed Jul 25, 2014 2:26:57 PM
+> 
+```
+
+then open 
+`.../git/scala-algorthms/Scala-Algorithms/target/scala-2.10/api/index.html`
+
+Basic usage is shown on package pages.
+
+Comments are terse partly because Scaladoc is by convention more compact than Javadoc and because this is a translation of well commented Java code. Scaladocs do show api differences to Java. [Algorithms, 4th Edition](http://algs4.cs.princeton.edu/home/) describes each algorithm.
+
 ##License and Copyright
 Java code is Copyright © 2002–2014 Robert Sedgewick and Kevin Wayne. All rights reserved. It is has a GPLv3 license <http://algs4.cs.princeton.edu/faq/> Translation of software from one language to another falls under the copyright and license of the original authors. It adds a copyright for the translation which is subordinate to the original.
 
-##Disclaimer Notice:
-
-Gary Struthers (Translator)
-
-IN NO EVENT SHALL TRANSLATOR BE LIABLE TO ANY PARTY FOR DIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES, INCLUDING LOST PROFITS, ARISING OUT OF THE USE OF THIS SOFTWARE AND ITS DOCUMENTATION, EVEN IF TRANSLATOR HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
-TRANSLATOR SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE SOFTWARE AND ACCOMPANYING DOCUMENTATION, IF ANY, PROVIDED HEREUNDER IS PROVIDED "AS IS". TRANSLATOR HAS NO OBLIGATION TO PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
