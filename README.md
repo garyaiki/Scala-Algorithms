@@ -146,7 +146,11 @@ Basic usage is shown on package pages.
 
 Comments are terse partly because Scaladoc is by convention more compact than Javadoc and because this is a translation of well commented Java code. Scaladocs do show api differences to Java. [Algorithms, 4th Edition](http://algs4.cs.princeton.edu/home/) describes each algorithm.
 
-##License and Copyright
+###License and Copyright
 Java code is Copyright © 2002–2014 Robert Sedgewick and Kevin Wayne. All rights reserved. It is has a GPLv3 license <http://algs4.cs.princeton.edu/faq/> Translation of software from one language to another falls under the copyright and license of the original authors. It adds a copyright for the translation which is subordinate to the original.
 
+Scala translation Copyright © 2014 Gary Struthers. All rights reserved.
+
+###Disclaimer of Warranties.
+Gary Struthers disclaims to the fullest extent authorized by law any and all other warranties, whether express or implied, including, without limitation, any implied warranties of merchantability or fitness for a particular purpose.
 
