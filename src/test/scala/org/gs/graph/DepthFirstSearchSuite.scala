@@ -12,13 +12,13 @@ class DepthFirstSearchSuite extends FlatSpec {
   behavior of "a DepthFirstSearch"
   it should "count verticies adjacent to an edge" in new GraphBuilder {
     val from0 = new DepthFirstSearch(tinyG, 0)
-    assert(from0.count() === 7)
+    assert(from0.count === 7)
     val from1 = new DepthFirstSearch(tinyG, 1)
-    assert(from1.count() === 7)
+    assert(from1.count === 7)
     val from7 = new DepthFirstSearch(tinyG, 7)
-    assert(from7.count() === 2)
+    assert(from7.count === 2)
     val from9 = new DepthFirstSearch(tinyG, 9)
-    assert(from9.count() === 4)
+    assert(from9.count === 4)
   }
 
   it should "find when there's a path from source to target" in new GraphBuilder {

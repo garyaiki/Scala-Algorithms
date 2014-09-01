@@ -124,13 +124,13 @@ class RedBlackBSTSuite extends FlatSpec with BeforeAndAfter with PrivateMethodTe
     val ost = new RedBlackBST[Char, Int]()(Ordering.Char)
     for (item <- testInput) ost.put(item._1, item._2)
     assert(ost.rank('S') === 15)
-    assert(ost.rank('Z') === ost.size())
+    assert(ost.rank('Z') === ost.size)
   }
 
   it should "find all the keys" in {
     val ost = new RedBlackBST[Char, Int]()(Ordering.Char)
     for (item <- testInput) ost.put(item._1, item._2)
-    val keys = ost.keys()
+    val keys = ost.keys
     val str = keys.mkString
     assert(str === "ABCEHIJKLMNOPQRSTUX")
   }
@@ -172,7 +172,7 @@ class RedBlackBSTSuite extends FlatSpec with BeforeAndAfter with PrivateMethodTe
     assert(ost.isBalanced, "Not balanced")
     assert(ost.get('A') === None)
     assert(ost.get('P') === Some(3))
-    val keys = ost.keys()
+    val keys = ost.keys
     val str = keys.mkString
     assert(str === "BCEHIJKLMNOPQRSTUX")
   }
@@ -182,10 +182,10 @@ class RedBlackBSTSuite extends FlatSpec with BeforeAndAfter with PrivateMethodTe
     for (item <- testInput) ost.put(item._1, item._2)
     ost.deleteMax
     assert(ost.get('X') === None)
-    assert(ost.keys().mkString === "ABCEHIJKLMNOPQRSTU")
+    assert(ost.keys.mkString === "ABCEHIJKLMNOPQRSTU")
     ost.deleteMax
     assert(ost.get('U') === None)
-    assert(ost.keys().mkString === "ABCEHIJKLMNOPQRST")
+    assert(ost.keys.mkString === "ABCEHIJKLMNOPQRST")
     assert(ost.isBST, "Not in Symmetric order")
     assert(ost.isSizeConsistent, "Subtree counts not consistent")
     assert(ost.isRankConsistent, "Ranks not consistent")

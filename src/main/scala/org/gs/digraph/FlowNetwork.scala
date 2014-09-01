@@ -51,6 +51,6 @@ class FlowNetwork(val v: Int) {
     }
 
     for(vV <- 0 until v) addLines(vV)
-    sb.toString()
+    sb.toString
   }
 }

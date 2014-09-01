@@ -67,7 +67,7 @@ class LinearProbingHashSTSuite extends FlatSpec with BeforeAndAfter with Private
   it should "find all keys" in {
     val ost = new LinearProbingHashST[Char, Int](50)
     for (item <- testInput) ost.put(item._1, item._2)
-    val keys = ost.keys()
+    val keys = ost.keys
     keys.mkString
     assert(keys.mkString === "ACEIKLMOPQRSTUX")
   }
@@ -76,7 +76,7 @@ class LinearProbingHashSTSuite extends FlatSpec with BeforeAndAfter with Private
     val ost = new LinearProbingHashST[Char, Int](50)
     for (item <- testInput) ost.put(item._1, item._2)
     ost.delete('Q')
-    val keys = ost.keys()
+    val keys = ost.keys
     keys.mkString
     assert(keys.mkString === "ACEIKLMOPRSTUX")
   }

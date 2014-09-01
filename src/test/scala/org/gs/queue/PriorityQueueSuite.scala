@@ -24,11 +24,11 @@ class MaxPriorityQueueSuite extends FlatSpec {
   it should "return correct item and resize q" in {
     val pq = new MaxPQ(new ArrayBuffer[Char](0))
     pq.insert('P')
-    assert(pq.pop() === Some('P'))
+    assert(pq.pop === Some('P'))
   }
 
   it should "return item with maximum value" in new QueueBuilder {
-    assert(maxPQ.pop() === Some('T'))
+    assert(maxPQ.pop === Some('T'))
   }
 
   it should "have a max heap" in new QueueBuilder {
@@ -41,7 +41,7 @@ class MaxPriorityQueueSuite extends FlatSpec {
 
   it should "return None when empty" in new QueueBuilder {
     val pq = new MaxPQ(new ArrayBuffer[Char](10))
-    val r = pq.pop()
+    val r = pq.pop
     assert(r === None)
   }
  
@@ -50,11 +50,11 @@ class MaxPriorityQueueSuite extends FlatSpec {
   it should "return correct item and resize q" in {
     val pq = new MinPQ(new ArrayBuffer[Char](0))
     pq.insert('P')
-    assert(pq.pop() === Some('P'))
+    assert(pq.pop === Some('P'))
   }
 
   it should "return the min value " in new QueueBuilder {
-    assert(minPQ.pop() === Some('A'))
+    assert(minPQ.pop === Some('A'))
   }
 
   it should "have a min heap" in new QueueBuilder {
@@ -67,7 +67,7 @@ class MaxPriorityQueueSuite extends FlatSpec {
 
   it should "return None when empty" in new QueueBuilder {
     val pq = new MinPQ(new ArrayBuffer[Char](10))
-    val r = pq.pop()
+    val r = pq.pop
     assert(r === None)
   }
 }

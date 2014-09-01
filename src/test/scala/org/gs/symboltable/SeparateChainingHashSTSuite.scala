@@ -66,7 +66,7 @@ class SeparateChainingHashSTSuite extends FlatSpec with BeforeAndAfter with Priv
   it should "find all keys" in {
     val ost = new SeparateChainingHashST[Char, Int](50)
     for (item <- testInput) ost.put(item._1, item._2)
-    val keys = ost.keys()
+    val keys = ost.keys
     keys.mkString
     assert(keys.mkString === "ACEIKLMOPQRSTUX")
   }
@@ -75,7 +75,7 @@ class SeparateChainingHashSTSuite extends FlatSpec with BeforeAndAfter with Priv
     val ost = new SeparateChainingHashST[Char, Int](50)
     for (item <- testInput) ost.put(item._1, item._2)
     ost.delete('Q')
-    val keys = ost.keys()
+    val keys = ost.keys
     keys.mkString
     assert(keys.mkString === "ACEIKLMOPRSTUX")
   }

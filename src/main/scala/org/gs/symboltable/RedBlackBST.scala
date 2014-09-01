@@ -338,8 +338,8 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
   /** returns all keys */
   def keys(): List[A] = {
     val q = Queue[A]()
-    val lo = min()
-    val hi = max()
+    val lo = min
+    val hi = max
 
     def loop(x: Node[A, B]) {
       if (x != null) {
@@ -379,7 +379,7 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
     }
     sb append (s" root ${root.key} ")
     loop(root)
-    sb.toString()
+    sb.toString
   }
 
   /** returns string of nodes from top down by level */
@@ -404,7 +404,7 @@ class RedBlackBST[A, B](implicit ord: Ordering[A]) {
     }
 
     loop()
-    sb.toString()
+    sb.toString
   }
 
   /** returns all node args left to right as string */

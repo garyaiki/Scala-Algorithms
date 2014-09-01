@@ -62,7 +62,7 @@ class FordFulkerson(g: FlowNetwork, s: Int, t: Int) {
         if ((v != s && v != t) && (abs(excess(v)) > Epsilon)) false else loopVNetFlow(v + 1)
       } else true
 
-    checkCapacityConstraints(0) && lessThanSourceExcess() && lessThanSinkExcess() && loopVNetFlow(0)
+    checkCapacityConstraints(0) && lessThanSourceExcess && lessThanSinkExcess && loopVNetFlow(0)
   }
   assert(isFeasible, "initial flow is infeasible")
 
@@ -145,7 +145,7 @@ class FordFulkerson(g: FlowNetwork, s: Int, t: Int) {
     }
     sb append (s" value:${_value}")
     sb append (s" marked:${marked mkString ","}")
-    sb.toString()
+    sb.toString
   }
 }
 
@@ -165,6 +165,6 @@ object FordFulkerson {
         if (abs(mincutvalue - ff.value) > ff.Epsilon) false else true
       } else false
 
-    if (check()) Some(ff) else None
+    if (check) Some(ff) else None
   }
 }

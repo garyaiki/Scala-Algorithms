@@ -7,7 +7,7 @@ package org.gs.digraph
   * @constructor creates a new FlowEdge with start and end vertices and capacity
   */
 class FlowEdge(v: Int, w: Int, val capacity: Double) extends BaseDirectedEdge {
-  require(v >= 0 && w >= 0 && capacity >= 0 && !capacity.isNaN(),
+  require(v >= 0 && w >= 0 && capacity >= 0 && !capacity.isNaN,
     "s invalid arg(s) v:$v w:$w capacity$capacity")
   private var _flow = 0.0
 
@@ -40,7 +40,7 @@ class FlowEdge(v: Int, w: Int, val capacity: Double) extends BaseDirectedEdge {
   }
 
   def addResidualFlowTo(vertex: Int, delta: Double): Unit = {
-    require(!delta.isNaN(), "s invalid arg(s) vertex:$vertex delta:$delta")
+    require(!delta.isNaN, "s invalid arg(s) vertex:$vertex delta:$delta")
     vertex match {
       case `v` => _flow -= delta
       case `w` => _flow += delta

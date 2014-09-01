@@ -9,7 +9,7 @@ package org.gs
   * }}}
   * {{{
   * val from0 = new DepthFirstSearch(g, 0)
-  * val verticiesAdjacentTo0 = from0.count()
+  * val verticiesAdjacentTo0 = from0.count
   * val isPath0To6 = from0.marked(6)
   * }}}
   * {{{

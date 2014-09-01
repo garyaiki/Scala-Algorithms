@@ -23,10 +23,10 @@ class IndexMinPQ[A: ClassTag](nMax: Int)(implicit ord: Ordering[A])
   def insert(i: Int, key: A): Unit = insert(i, key, greater)
 
   /** returns index associated with min key */
-  def minIndex(): Int = index()
+  def minIndex(): Int = index
 
   /** returns min key */
-  def minKey(): A = topKey()
+  def minKey(): A = topKey
 
   /** returns min key and removes it from queue */
   def delMin(): Int = delTop(greater)
@@ -66,5 +66,5 @@ class IndexMinPQ[A: ClassTag](nMax: Int)(implicit ord: Ordering[A])
   def isMinHeap(): Boolean = checkHeap(greater)
 
   /** returns keys in order */
-  def keys(): Seq[A] = getKeys()
+  def keys(): Seq[A] = getKeys
 }

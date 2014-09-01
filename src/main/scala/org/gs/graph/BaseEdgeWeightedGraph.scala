@@ -52,6 +52,6 @@ abstract class BaseEdgeWeightedGraph[A <: BaseEdge](val V: Int) {
     }
 
     for(v <- 0 until V) addLines(v)
-    sb.toString()
+    sb.toString
   }
 }

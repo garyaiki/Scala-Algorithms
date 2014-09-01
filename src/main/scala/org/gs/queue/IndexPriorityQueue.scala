@@ -206,7 +206,7 @@ abstract class IndexPriorityQueue[A: ClassTag](nMax: Int)(implicit ord: Ordering
       val key = keys(pq(i))
       if (key != null) sb append(s" $key")
     }
-    sb.toString.trim()
+    sb.toString.trim
   }
 
   /** returns keys */
