@@ -2,10 +2,10 @@
   */
 package org.gs.graph.fixtures
 
-import org.gs.fixtures.BufferedSourceBuilder
-import scala.io.BufferedSource
-import scala.collection.mutable.ArrayBuffer
 import org.gs.digraph.DirectedEdge
+import org.gs.fixtures.BufferedSourceBuilder
+import scala.collection.mutable.ArrayBuffer
+import scala.io.BufferedSource
 
 /** @author Gary Struthers
   *

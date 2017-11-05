@@ -2,11 +2,10 @@
   */
 package org.gs.fixtures
 
-import scala.io.Source
-import scala.collection.immutable.TreeMap
 import org.gs.digraph.Digraph
-import scala.io.BufferedSource
+import scala.collection.immutable.TreeMap
 import scala.collection.mutable.ArrayBuffer
+import scala.io.{BufferedSource, Source}
 
 /** @author Gary Struthers
   *
@@ -79,7 +78,7 @@ trait WordArrayBuilder extends BufferedSourceBuilder {
 
   def readFileToArray(buffSource: BufferedSource): Array[String] = {
     val savedLines = new ArrayBuffer[String]()
-    val it = buffSource.getLines
+    val it = buffSource.getLines//.drop(1) // drop DOCTYPE top line
     val words = for {
       a <- it
       i <- a.split("\\s+")

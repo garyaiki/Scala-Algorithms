@@ -1,17 +1,14 @@
 package org.gs.digraph
-/** @see http://algs4.cs.princeton.edu/44sp/DirectedCycle.java.html
-  * @see http://algs4.cs.princeton.edu/44sp/tinyDG.txt
-  * @see http://algs4.cs.princeton.edu/42directed/tinyDAG.txt
+/** @see https://algs4.cs.princeton.edu/44sp/DirectedCycle.java.html
+  * @see https://algs4.cs.princeton.edu/44sp/tinyDG.txt
+  * @see https://algs4.cs.princeton.edu/42directed/tinyDAG.txt
   */
 import org.scalatest.FlatSpec
-import org.junit.runner.RunWith
-import org.scalatest.junit.JUnitRunner
 import org.gs.digraph.fixtures.DigraphBuilder
 
 /** @author Gary Struthers
   *
   */
-@RunWith(classOf[JUnitRunner])
 class DirectedCycleSuite extends FlatSpec {
 
   behavior of "a DirectedCycle"

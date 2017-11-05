@@ -4,15 +4,12 @@
 package org.gs.digraph
 
 import org.gs.digraph.fixtures.DirectedEdgeBuilder
-import org.junit.runner.RunWith
 import org.scalatest.FlatSpec
-import org.scalatest.junit.JUnitRunner
 import org.gs.digraph.fixtures.FlowEdgeBuilder
 
 /** @author Gary Struthers
   *
   */
-@RunWith(classOf[JUnitRunner])
 class FlowNetworkSuite extends FlatSpec {
   behavior of "a FlowNetwork"
   

@@ -1,12 +1,9 @@
 package org.gs.graph
-/** @see http://algs4.cs.princeton.edu/41undirected/tinyG.txt
+/** @see https://algs4.cs.princeton.edu/41undirected/tinyG.txt
   */
-import org.scalatest.FlatSpec
-import org.junit.runner.RunWith
-import org.scalatest.junit.JUnitRunner
 import org.gs.graph.fixtures.GraphBuilder
+import org.scalatest.FlatSpec
 
-@RunWith(classOf[JUnitRunner])
 class DepthFirstSearchSuite extends FlatSpec {
 
   behavior of "a DepthFirstSearch"

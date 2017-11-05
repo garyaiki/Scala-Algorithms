@@ -1,10 +1,9 @@
 package org.gs.digraph.fixtures
 
-import org.gs.digraph.EdgeWeightedDigraph
-import org.gs.digraph.Digraph
-import scala.io.BufferedSource
-import scala.collection.mutable.ArrayBuffer
+import org.gs.digraph.{Digraph, EdgeWeightedDigraph}
 import org.gs.fixtures.BufferedSourceBuilder
+import scala.collection.mutable.ArrayBuffer
+import scala.io.BufferedSource
 
 class UnweightedDigraphBuilder(fileURL: String) extends DigraphBuilder {
   val managedResource = readURI(fileURL)

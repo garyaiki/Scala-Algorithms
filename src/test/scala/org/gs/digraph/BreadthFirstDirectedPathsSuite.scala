@@ -1,17 +1,16 @@
 package org.gs.digraph
-/** @see http://algs4.cs.princeton.edu/44sp/tinyDG.txt
+
+/** @see https://algs4.cs.princeton.edu/44sp/tinyDG.txt
   */
 import org.scalatest.FlatSpec
-import org.junit.runner.RunWith
-import org.scalatest.junit.JUnitRunner
 import org.gs.digraph.fixtures.DigraphBuilder
 import org.gs.digraph.fixtures.UnweightedDigraphBuilder
+
 /** @author Gary Struthers
   *
   */
-@RunWith(classOf[JUnitRunner])
 class BreadthFirstDirectedPathsSuite extends FlatSpec {
-  val builder = new UnweightedDigraphBuilder("http://algs4.cs.princeton.edu/42directed/tinyDG.txt")
+  val builder = new UnweightedDigraphBuilder("https://algs4.cs.princeton.edu/42directed/tinyDG.txt")
   val tinyDG = builder.g
   val equals = (_: Int) == (_: Int)
   

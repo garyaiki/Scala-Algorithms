@@ -5,19 +5,14 @@ package org.gs.digraph
 /** @author Gary Struthers
   *
   */
-import org.scalatest.FlatSpec
-import org.scalautils._
-import org.scalautils.Tolerance._
-import org.junit.runner.RunWith
-import org.gs.set.UF
-import org.gs.graph.Edge
-import org.gs.graph.EdgeWeightedGraph
-import org.gs.digraph.fixtures.{ GraphBuilder, PrimMSTBuilder }
-import org.scalatest.junit.JUnitRunner
-import scala.annotation.tailrec
-import org.gs.digraph.fixtures.EdgeWeightedGraphBuilder
 
-@RunWith(classOf[JUnitRunner])
+import org.gs.graph.{Edge, EdgeWeightedGraph}
+import org.gs.digraph.fixtures.{EdgeWeightedGraphBuilder, GraphBuilder, PrimMSTBuilder}
+import org.gs.set.UF
+import org.scalatest.FlatSpec
+import org.scalatest.Matchers._
+import scala.annotation.tailrec
+
 class PrimMSTSuite extends FlatSpec {
 
   behavior of "a PrimMST"
@@ -27,7 +22,7 @@ class PrimMSTSuite extends FlatSpec {
   }
 
   it should "calulate total weight of edges in tinyEWG MST" in new EdgeWeightedGraphBuilder {
-    val g = buildGraph("http://algs4.cs.princeton.edu/43mst/tinyEWG.txt")
+    val g = buildGraph("https://algs4.cs.princeton.edu/43mst/tinyEWG.txt")
     val mst = new PrimMST(g)
     val weight = mst.weight
     assert(weight === 1.81 +- 0.000005)
@@ -107,14 +102,14 @@ class PrimMSTSuite extends FlatSpec {
   }
     
   it should "calulate total edge weight of mediumEWG MST" in new EdgeWeightedGraphBuilder {
-    val g = buildGraph("http://algs4.cs.princeton.edu/43mst/mediumEWG.txt")
+    val g = buildGraph("https://algs4.cs.princeton.edu/43mst/mediumEWG.txt")
     val mst = new PrimMST(g)
     val weight = mst.weight
     assert(weight === 10.46351 +- 0.000005)
   }
   
   it should "calulate total edge weight of largeEWG MST" in new EdgeWeightedGraphBuilder {
-    val g = buildGraph("http://algs4.cs.princeton.edu/43mst/largeEWG.txt")
+    val g = buildGraph("https://algs4.cs.princeton.edu/43mst/largeEWG.txt")
     val mst = new PrimMST(g)
     val weight = mst.weight
     assert(weight === 647.66307 +- 0.000005)

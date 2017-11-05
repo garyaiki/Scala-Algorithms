@@ -1,4 +1,4 @@
-/** @see http://algs4.cs.princeton.edu/44sp/DirectedEdge.java.html
+/** @see https://algs4.cs.princeton.edu/44sp/DirectedEdge.java.html
   */
 package org.gs.digraph
 

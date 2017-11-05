@@ -1,13 +1,8 @@
 package org.gs.symboltable
 
-import org.scalatest.FlatSpec
-import org.junit.runner.RunWith
-import org.scalatest.junit.JUnitRunner
-import org.scalatest.BeforeAndAfter
+import org.scalatest.{BeforeAndAfter, FlatSpec, PrivateMethodTester}
 import scala.collection.mutable.ArrayBuffer
-import org.scalatest.PrivateMethodTester
 
-@RunWith(classOf[JUnitRunner])
 class SeparateChainingHashSTSuite extends FlatSpec with BeforeAndAfter with PrivateMethodTester {
   var testInput: ArrayBuffer[(Char, Int)] = _
   var lo = 0

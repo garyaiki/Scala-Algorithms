@@ -1,17 +1,15 @@
 package org.gs.graph
-/** @see http://algs4.cs.princeton.edu/41undirected/mediumG.txt
-  */
-import org.scalatest.FlatSpec
-import org.junit.runner.RunWith
-import org.scalatest.junit.JUnitRunner
-import org.gs.fixtures.IntArrayBuilder
 
-@RunWith(classOf[JUnitRunner])
+/** @see https://algs4.cs.princeton.edu/41undirected/mediumG.txt
+  */
+import org.gs.fixtures.IntArrayBuilder
+import org.scalatest.FlatSpec
+
 class GraphSuite extends FlatSpec {
 
   behavior of "a Graph"
   it should "build graph from mediumG.txt and find adjacent vertices" in new IntArrayBuilder {
-    val managedResource = readURI("http://algs4.cs.princeton.edu/41undirected/mediumG.txt")
+    val managedResource = readURI("https://algs4.cs.princeton.edu/41undirected/mediumG.txt")
     val savedLines = managedResource.loan(readFileToArray)
     val g = new Graph(savedLines(0))
     val twoInts = savedLines.drop(2).grouped(2)

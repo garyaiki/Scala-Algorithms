@@ -1,16 +1,13 @@
-/** ScalaTest, JUnit tests for Knuth, Morris, Pratt
-  * @see http://algs4.cs.princeton.edu/53substring/KMP.java.html
+/** ScalaTest for Knuth, Morris, Pratt
+  * @see https://algs4.cs.princeton.edu/53substring/KMP.java.html
   */
 package org.gs.search
 
-import org.junit.runner.RunWith
 import org.scalatest.FlatSpec
-import org.scalatest.junit.JUnitRunner
 
 /** @author Gary Struthers
   *
   */
-@RunWith(classOf[JUnitRunner])
 class KMPSuite extends FlatSpec {
   behavior of "a KMP"
 

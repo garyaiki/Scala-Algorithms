@@ -1,25 +1,18 @@
-/** @see http://algs4.cs.princeton.edu/43mst/tinyEWG.txt
+/** @see https://algs4.cs.princeton.edu/43mst/tinyEWG.txt
   */
 package org.gs.digraph
 
-import org.scalautils._
-import org.scalautils.Tolerance._
-import org.scalatest.FlatSpec
-import org.junit.runner.RunWith
 import org.gs.set.UF
-import org.gs.graph.Edge
-import org.gs.graph.EdgeWeightedGraph
-import org.gs.digraph.fixtures.{ GraphBuilder, MSTBuilder, PrimMSTBuilder }
-import org.scalatest.junit.JUnitRunner
-import scala.annotation.tailrec
-import org.gs.digraph.fixtures.DirectedEdgeBuilder
+import org.gs.digraph.fixtures.{DirectedEdgeBuilder, EdgeWeightedGraphBuilder, GraphBuilder, MSTBuilder, PrimMSTBuilder }
+import org.gs.graph.{Edge, EdgeWeightedGraph}
 import org.gs.graph.fixtures.EdgeBuilder
-import org.gs.digraph.fixtures.EdgeWeightedGraphBuilder
+import org.scalatest.FlatSpec
+import org.scalatest.Matchers._
+import scala.annotation.tailrec
 
 /** @author Gary Struthers
   *
   */
-@RunWith(classOf[JUnitRunner])
 class LazyPrimMSTSuite extends FlatSpec {
 
   trait LazyPrimMSTBuilder extends MSTBuilder {
@@ -32,7 +25,7 @@ class LazyPrimMSTSuite extends FlatSpec {
   }
 
   it should "calulate total edge weight of tinyEWG MST" in new EdgeWeightedGraphBuilder {
-    val g = buildGraph("http://algs4.cs.princeton.edu/43mst/tinyEWG.txt")
+    val g = buildGraph("https://algs4.cs.princeton.edu/43mst/tinyEWG.txt")
     val mst = new LazyPrimMST(g)
     val weight = mst.weight
     assert(weight === 1.81)
@@ -72,15 +65,14 @@ class LazyPrimMSTSuite extends FlatSpec {
   }
   
   it should "calulate total edge weight of mediumEWG MST" in new EdgeWeightedGraphBuilder {
-    val g = buildGraph("http://algs4.cs.princeton.edu/43mst/mediumEWG.txt")
+    val g = buildGraph("https://algs4.cs.princeton.edu/43mst/mediumEWG.txt")
     val mst = new LazyPrimMST(g)
     val weight = mst.weight
     assert(weight === 10.46351 +- 0.000005)
   }
   
-  // -Xmx1g test passes but it takes 5 minutes to complete
-  ignore should "calulate total edge weight of largeEWG MST" in new EdgeWeightedGraphBuilder {
-    val g = buildGraph("http://algs4.cs.princeton.edu/43mst/largeEWG.txt")
+  it should "calulate total edge weight of largeEWG MST" in new EdgeWeightedGraphBuilder {
+    val g = buildGraph("https://algs4.cs.princeton.edu/43mst/largeEWG.txt")
     val mst = new LazyPrimMST(g)
     val weight = mst.weight
     assert(weight === 647.66307 +- 0.000005)

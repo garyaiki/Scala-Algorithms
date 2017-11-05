@@ -1,18 +1,15 @@
 package org.gs.digraph
-/** @see http://algs4.cs.princeton.edu/44sp/tinyDG.txt
-  * @see http://algs4.cs.princeton.edu/42directed/tinyDAG.txt
+
+/** @see https://algs4.cs.princeton.edu/44sp/tinyDG.txt
+  * @see https://algs4.cs.princeton.edu/42directed/tinyDAG.txt
   */
 import org.scalatest.FlatSpec
-import org.junit.runner.RunWith
 import scala.collection.mutable.Queue
-import org.scalatest.junit.JUnitRunner
-import org.gs.digraph.fixtures.SymbolDigraphBuilder
-import org.gs.digraph.fixtures.DigraphBuilder
+import org.gs.digraph.fixtures.{DigraphBuilder, SymbolDigraphBuilder}
 
 /** @author Gary Struthers
   *
   */
-@RunWith(classOf[JUnitRunner])
 class DirectedDFSSuite extends FlatSpec {
   
   behavior of "a DirectedDFS"
@@ -41,4 +38,4 @@ class DirectedDFSSuite extends FlatSpec {
     val from1And2 = new DirectedDFS(tinyDG, Array[Int](1, 2): _*)
     assert(from1And2.count === 6)
   }
-} 
+}

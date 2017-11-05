@@ -1,23 +1,19 @@
-/** ScalaTest, JUnit tests for FLowNetwork
-  * @see http://algs4.cs.princeton.edu/64maxflow/tinyFN.txt
+/** ScalaTestfor FLowNetwork
+  * @see https://algs4.cs.princeton.edu/64maxflow/tinyFN.txt
   */
 package org.gs.digraph
 
-import org.gs.digraph.fixtures.DirectedEdgeBuilder
-import org.junit.runner.RunWith
+import org.gs.digraph.fixtures.{DirectedEdgeBuilder, FlowEdgeBuilder}
 import org.scalatest.FlatSpec
-import org.scalatest.junit.JUnitRunner
-import org.gs.digraph.fixtures.FlowEdgeBuilder
 
 /** @author Gary Struthers
   *
   */
-@RunWith(classOf[JUnitRunner])
 class FordFulkersonSuite extends FlatSpec {
   behavior of "a FordFulkerson"
 
   it should "find the max flow and st cut" in new FlowEdgeBuilder {
-    val managedResource = readURI("http://algs4.cs.princeton.edu/64maxflow/tinyFN.txt")
+    val managedResource = readURI("https://algs4.cs.princeton.edu/64maxflow/tinyFN.txt")
     val tuple = managedResource.loan(readFileToTuple)
     val g = new FlowNetwork(tuple._1)
 

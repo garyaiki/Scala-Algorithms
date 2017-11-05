@@ -1,12 +1,12 @@
 package org.gs.graph
-/** @see http://algs4.cs.princeton.edu/41undirected/tinyCG.txt
-  * @see http://algs4.cs.princeton.edu/41undirected/largeG.txt
+
+/** @see https://algs4.cs.princeton.edu/41undirected/tinyCG.txt
+  * @see https://algs4.cs.princeton.edu/41undirected/largeG.txt
   */
-import org.scalatest.FlatSpec
-import org.junit.runner.RunWith
-import org.scalatest.junit.JUnitRunner
 import org.gs.fixtures.IntArrayBuilder
 import org.gs.graph.fixtures.UnweightedEdgeBuilder
+import org.scalatest.FlatSpec
+
 /** [[http://doc.scalatest.org/2.2.0/#org.scalatest.FlatSpec ScalaTest]] for
   * [[org.gs.graph.BreadthFirstPaths]]
   * @author Gary Struthers
@@ -20,9 +20,8 @@ class UnweightedGraphBuilder(fileURL: String) extends UnweightedEdgeBuilder {
   val graph = _graph
 }
 
-@RunWith(classOf[JUnitRunner])
 class BreadthFirstPathsSuite extends FlatSpec {
-  val builder = new UnweightedGraphBuilder("http://algs4.cs.princeton.edu/41undirected/tinyCG.txt")
+  val builder = new UnweightedGraphBuilder("https://algs4.cs.princeton.edu/41undirected/tinyCG.txt")
   val tinyCG = builder.graph
 
   trait ConnectedGraphBuilder {
@@ -30,7 +29,6 @@ class BreadthFirstPathsSuite extends FlatSpec {
       (0, 2))
     val tinyCG = new Graph(tinyCGdata.size)
     for (i <- tinyCGdata) tinyCG.addEdge(i._1, i._2)
-
   }
 
   behavior of "a BreadthFirstPaths"
@@ -87,7 +85,7 @@ class BreadthFirstPathsSuite extends FlatSpec {
 
   // -Xms1g -Xmx2g
   it should "find distances from source to target vertices in largeG.txt" in {
-    val gb = new UnweightedGraphBuilder("http://algs4.cs.princeton.edu/41undirected/largeG.txt")
+    val gb = new UnweightedGraphBuilder("https://algs4.cs.princeton.edu/41undirected/largeG.txt")
     val largeG = gb.graph
     val from0 = new BreadthFirstPaths(largeG, 0)
     assert(from0.distTo(0) === 0, s"source:0 v:1 distTo:${from0.distTo(1)}")

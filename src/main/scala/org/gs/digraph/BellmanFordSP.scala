@@ -1,4 +1,4 @@
-/** @see http://algs4.cs.princeton.edu/44sp/BellmanFordSP.java.html
+/** @see https://algs4.cs.princeton.edu/44sp/BellmanFordSP.java.html
   */
 package org.gs.digraph
 

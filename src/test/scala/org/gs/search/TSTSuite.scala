@@ -1,22 +1,19 @@
-/** ScalaTest, JUnit tests for Ternary Search Trie
-  * @see http://algs4.cs.princeton.edu/52trie/TST.java.html
+/** ScalaTest for Ternary Search Trie
+  * @see https://algs4.cs.princeton.edu/52trie/TST.java.html
   */
 package org.gs.search
 
-import org.junit.runner.RunWith
-import org.scalatest.FlatSpec
-import org.scalatest.junit.JUnitRunner
 import org.gs.fixtures.WordArrayBuilder
+import org.scalatest.FlatSpec
 
 /** @author Gary Struthers
   *
   */
-@RunWith(classOf[JUnitRunner])
 class TSTSuite extends FlatSpec {
   behavior of "a TST"
 
   it should "sort fixed length strings and return their stored values" in new WordArrayBuilder {
-    val managedResource = readURI("http://algs4.cs.princeton.edu/52trie/shellsST.txt")
+    val managedResource = readURI("https://algs4.cs.princeton.edu/52trie/shellsST.txt")
     val strings = managedResource.loan(readFileToArray).toArray
     val tst = new TST[Int]()
     strings.zipWithIndex.foreach(x => tst.put(x._1, x._2))

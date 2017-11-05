@@ -2,11 +2,9 @@
   */
 package org.gs.digraph.fixtures
 
-import org.gs.digraph.EdgeWeightedDigraph
-import org.gs.digraph.DijkstraSP
-import org.gs.digraph.DirectedEdge
-import scala.reflect.ClassTag
+import org.gs.digraph.{DijkstraSP, DirectedEdge, EdgeWeightedDigraph}
 import scala.collection.mutable.ArraySeq
+import scala.reflect.ClassTag
 
 /** @author Gary Struthers
   *
@@ -26,6 +24,7 @@ trait TinyEdgeWeightedDigraphBuilder extends TinyEdgeWeightedArrayBuilder {
   val g = new EdgeWeightedDigraph(size)
   for(ed <- tinyEdgeArray) g.addEdge(ed)
 }
+
 trait DijkstraSPBuilder extends TinyEdgeWeightedDigraphBuilder {
 
   val s0 = 0

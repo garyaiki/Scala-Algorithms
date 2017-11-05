@@ -1,12 +1,10 @@
 package org.gs.graph.fixtures
-/** @see http://algs4.cs.princeton.edu/41undirected/SymbolGraph.java.html
+/** @see https://algs4.cs.princeton.edu/41undirected/SymbolGraph.java.html
   */
 import scala.collection.immutable.TreeMap
 
-import org.gs.fixtures.StringArrayBuilder
-import org.gs.fixtures.SymbolTableBuilder
-import org.gs.graph.SymbolGraph
-import org.gs.graph.Graph
+import org.gs.fixtures.{StringArrayBuilder,SymbolTableBuilder}
+import org.gs.graph.{Graph, SymbolGraph}
 
 /** @author Gary Struthers
   */

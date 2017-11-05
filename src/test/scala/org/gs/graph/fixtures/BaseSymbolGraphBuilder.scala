@@ -2,11 +2,10 @@
   */
 package org.gs.graph.fixtures
 
-import org.gs.fixtures.SymbolTableBuilder
-import scala.io.BufferedSource
-import scala.collection.immutable.TreeMap
+import org.gs.fixtures.{BufferedSourceBuilder, SymbolTableBuilder}
 import org.gs.graph.BaseGraph
-import org.gs.fixtures.BufferedSourceBuilder
+import scala.collection.immutable.TreeMap
+import scala.io.BufferedSource
 
 /** @author Gary Struthers
   *
@@ -17,9 +16,7 @@ trait BaseSymbolGraphBuilder {
       savedLines: Array[String],
       st: TreeMap[String, Int],
       g: A, delimiter: String) = {
-    for {
-      a <- savedLines
-    } {
+    for( a <- savedLines) {
       val s: Array[String] = a.split(delimiter)
       val v = st.get(s(0))
       v match {

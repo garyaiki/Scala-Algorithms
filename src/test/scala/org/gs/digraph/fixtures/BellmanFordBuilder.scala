@@ -2,12 +2,9 @@
   */
 package org.gs.digraph.fixtures
 
-import org.gs.digraph.BellmanFordSP
+import org.gs.digraph.{BellmanFordSP, DirectedEdge, EdgeWeightedDigraph}
 import org.scalatest.PrivateMethodTester.PrivateMethod
-import org.gs.digraph.EdgeWeightedDigraph
-import org.gs.digraph.DirectedEdge
 import scala.collection.mutable.ArrayBuffer
-import scalaz.std.tuple
 
 /** @author Gary Struthers
   *
@@ -41,5 +38,4 @@ trait BellmanFordBuilder extends DirectedEdgeBuilder {
   }
   
   def expectedTinyEWDncPaths(edges: ArrayBuffer[DirectedEdge]) = List(edges(0), edges(1))
- 
 }

@@ -3,15 +3,11 @@
 package org.gs.digraph
 
 import org.scalatest.FlatSpec
-import org.junit.runner.RunWith
-import org.scalautils._
-import org.scalautils.Tolerance._
-import org.scalatest.junit.JUnitRunner
+import org.scalatest.Matchers._
 
 /** @author Gary Struthers
   *
   */
-@RunWith(classOf[JUnitRunner])
 class FlowEdgeSuite extends FlatSpec {
   behavior of "a FlowEdge"
   
@@ -29,5 +25,4 @@ class FlowEdgeSuite extends FlatSpec {
     assert(e.capacity === 3.14 +- 0.01)
     assert(e.flow === 2.0 +- 0.01)
   }
-
 }

@@ -1,16 +1,13 @@
 /** ScalaTest, JUnit tests for Boyer Moore
-  * @see http://algs4.cs.princeton.edu/53substring/RabinKarp.java.html
+  * @see https://algs4.cs.princeton.edu/53substring/RabinKarp.java.html
   */
 package org.gs.search
 
-import org.junit.runner.RunWith
 import org.scalatest.FlatSpec
-import org.scalatest.junit.JUnitRunner
 
 /** @author Gary Struthers
   *
   */
-@RunWith(classOf[JUnitRunner])
 class RabinKarpSuite extends FlatSpec {
   behavior of "a RabinKarp"
 
@@ -30,7 +27,6 @@ class RabinKarpSuite extends FlatSpec {
     val offset = bm.search(text)
     assert(offset === text.length, "false pattern found")
   }
-  
   
   it should "find existing pattern at the end of the text" in {
     val pattern = "rabrabracad"

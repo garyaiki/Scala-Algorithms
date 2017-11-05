@@ -1,4 +1,4 @@
-/** @see http://algs4.cs.princeton.edu/44sp/EdgeWeightedDirectedCycle.java.html
+/** @see https://algs4.cs.princeton.edu/44sp/EdgeWeightedDirectedCycle.java.html
   */
 package org.gs.digraph
 

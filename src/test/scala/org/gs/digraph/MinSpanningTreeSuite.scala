@@ -1,18 +1,15 @@
-/** @see http://algs4.cs.princeton.edu/43mst/tinyEWG.txt
+/** @see https://algs4.cs.princeton.edu/43mst/tinyEWG.txt
   */
 package org.gs.digraph
 
 import org.scalatest.FlatSpec
-import org.junit.runner.RunWith
-import org.gs.graph.Edge
-import org.gs.graph.EdgeWeightedGraph
+import org.gs.graph.{Edge, EdgeWeightedGraph}
 import org.gs.digraph.fixtures.GraphBuilder
 import org.scalatest.junit.JUnitRunner
 
 /** @author Gary Struthers
   *
   */
-@RunWith(classOf[JUnitRunner])
 class MinSpanningTreeSuite extends FlatSpec {
 
   behavior of "an Edge"

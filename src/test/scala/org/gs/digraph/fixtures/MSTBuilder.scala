@@ -2,13 +2,11 @@
   */
 package org.gs.digraph.fixtures
 
-import org.gs.set.UF
-import org.gs.graph.Edge
-import org.gs.graph.EdgeWeightedGraph
-import org.gs.digraph.PrimMST
-import scala.annotation.tailrec
+import org.gs.digraph.{EdgeWeightedDigraph, PrimMST}
+import org.gs.graph.{Edge, EdgeWeightedGraph}
 import org.gs.graph.fixtures.EdgeBuilder
-import org.gs.digraph.EdgeWeightedDigraph
+import org.gs.set.UF
+import scala.annotation.tailrec
 
 /** @author Gary Struthers
   *

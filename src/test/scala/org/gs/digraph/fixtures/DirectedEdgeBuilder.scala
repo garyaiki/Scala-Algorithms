@@ -3,9 +3,9 @@
 package org.gs.digraph.fixtures
 
 import org.gs.fixtures.BufferedSourceBuilder
-import scala.io.BufferedSource
-import scala.collection.mutable.ArrayBuffer
 import org.gs.digraph.DirectedEdge
+import scala.collection.mutable.ArrayBuffer
+import scala.io.BufferedSource
 
 /** @author Gary Struthers
   *
@@ -16,19 +16,14 @@ trait DirectedEdgeBuilder extends BufferedSourceBuilder {
 
   def readFileToTuple(buffSource: BufferedSource): (Int, Int, ArrayBuffer[DirectedEdge]) = {
     val savedLines = new ArrayBuffer[DirectedEdge]()
-    val it = buffSource.getLines
     var v = 0
     var e = 0
 
-    for {
-      s <- it
-    } {
-      s match {
+    for( s <- buffSource.getLines) s match {
         case edgePattern(a,b,c) => savedLines.append(new DirectedEdge(a.toInt,b.toInt, c.toDouble))
         case intPattern() => if(v == 0) v = s.toInt else e = s.toInt
         case _ => println(s"DirectedEdgeBuilder error s:${s.toString}")
       }
-    }
     (v, e, savedLines)
   }
 

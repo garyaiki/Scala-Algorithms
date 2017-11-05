@@ -1,21 +1,18 @@
 package org.gs.digraph
 /** ScalaTest, JUnit for Topological
-  * @see http://algs4.cs.princeton.edu/42directed/jobs.txt
+  * @see https://algs4.cs.princeton.edu/42directed/jobs.txt
   */
 import org.scalatest.FlatSpec
-import org.junit.runner.RunWith
-import org.scalatest.junit.JUnitRunner
-import org.gs.digraph.fixtures.DigraphBuilder
-import org.gs.digraph.fixtures.SymbolDigraphBuilder
+import org.gs.digraph.fixtures.{DigraphBuilder, SymbolDigraphBuilder}
+
 /** @author Gary Struthers
   *
   */
-@RunWith(classOf[JUnitRunner])
 class TopologicalSuite extends FlatSpec {
 
   behavior of "a Topological"
   it should "find topological order of jobs in a digraph " in new SymbolDigraphBuilder {
-    val d = buildSymbolGraph("http://algs4.cs.princeton.edu/42directed/jobs.txt", "/")
+    val d = buildSymbolGraph("https://algs4.cs.princeton.edu/42directed/jobs.txt", "/")
     val t = new Topological(d.g)
     val equals = (_: Int) == (_: Int)
     t.order match {

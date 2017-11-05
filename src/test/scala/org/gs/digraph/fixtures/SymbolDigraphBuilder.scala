@@ -1,22 +1,17 @@
-/** @see http://algs4.cs.princeton.edu/42directed/SymbolDigraph.java.html
+/** @see https://algs4.cs.princeton.edu/42directed/SymbolDigraph.java.html
   */
 package org.gs.digraph.fixtures
 
-import scala.io.Source
-import scala.collection.immutable.TreeMap
 import org.gs.digraph.Digraph
-import scala.io.BufferedSource
-import org.gs.fixtures.SymbolTableBuilder
-import org.gs.graph.fixtures.BaseSymbolGraphBuilder
+import org.gs.fixtures.{StringArrayBuilder, SymbolTableBuilder}
 import org.gs.graph.SymbolGraph
-import org.gs.fixtures.StringArrayBuilder
+import org.gs.graph.fixtures.BaseSymbolGraphBuilder
+import scala.collection.immutable.TreeMap
+import scala.io.{BufferedSource, Source}
 
 /** @author Gary Struthers
   */
-trait SymbolDigraphBuilder 
-    extends StringArrayBuilder
-    with SymbolTableBuilder
-    with BaseSymbolGraphBuilder {
+trait SymbolDigraphBuilder extends StringArrayBuilder with SymbolTableBuilder with BaseSymbolGraphBuilder {
   
   def buildSymbolGraph(uri: String, delimiter: String): SymbolGraph[Digraph] = {
     val savedLines = buildFromManagedResource(uri)

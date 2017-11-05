@@ -1,21 +1,19 @@
 package org.gs.digraph
-/** @see http://algs4.cs.princeton.edu/44sp/tinyDG.txt
+
+/** @see https://algs4.cs.princeton.edu/44sp/tinyDG.txt
   * @see http://algs4.cs.princeton.edu/42directed/tinyDAG.txt
   */
 import org.scalatest.FlatSpec
-import org.junit.runner.RunWith
-import org.scalatest.junit.JUnitRunner
 import org.gs.digraph.fixtures.DigraphBuilder
 import org.gs.digraph.fixtures.UnweightedDigraphBuilder
 
 /** @author Gary Struthers
   *
   */
-@RunWith(classOf[JUnitRunner])
 class DigraphSuite extends FlatSpec {
-  val builder = new UnweightedDigraphBuilder("http://algs4.cs.princeton.edu/42directed/tinyDG.txt")
+  val builder = new UnweightedDigraphBuilder("https://algs4.cs.princeton.edu/42directed/tinyDG.txt")
   val tinyDG = builder.g
-  val dAGbuilder = new UnweightedDigraphBuilder("http://algs4.cs.princeton.edu/44sp/tinyDAG.txt")
+  val dAGbuilder = new UnweightedDigraphBuilder("https://algs4.cs.princeton.edu/44sp/tinyDAG.txt")
   val tinyDAG = dAGbuilder.g
   val equals = (_: Int) == (_: Int)
   
@@ -37,4 +35,4 @@ class DigraphSuite extends FlatSpec {
     assert(reversedDG.adj.flatten.corresponds(
         List(6, 2, 0, 4, 3, 4, 2, 11, 6, 5, 3, 0, 8, 7, 6, 12, 7, 6, 9, 9, 11, 10))(equals))
   }
-} 
+}

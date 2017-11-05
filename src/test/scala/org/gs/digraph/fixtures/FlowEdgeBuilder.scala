@@ -2,32 +2,29 @@
   */
 package org.gs.digraph.fixtures
 
+import org.gs.digraph.FlowEdge
 import org.gs.fixtures.BufferedSourceBuilder
 import scala.io.BufferedSource
 import scala.collection.mutable.ArrayBuffer
-import org.gs.digraph.FlowEdge
 
 /** @author Gary Struthers
   *
   */
 trait FlowEdgeBuilder extends BufferedSourceBuilder {
+  val docTypePattern = """<!DOCTYPE\[^>\[\]*(\[\[^\]\]*\])?>""".r
   val intPattern = """^\d+$""".r
   val edgePattern = """^(\d+)\s+(\d+)\s+(-?\d+[.]\d+)$""".r
 
   def readFileToTuple(buffSource: BufferedSource): (Int, Int, ArrayBuffer[FlowEdge]) = {
     val savedLines = new ArrayBuffer[FlowEdge]()
-    val it = buffSource.getLines
     var v = 0
     var e = 0
 
-    for {
-      s <- it
-    } {
-      s match {
+    for(s <- buffSource.getLines) s match {
         case edgePattern(a,b,c) => savedLines.append(new FlowEdge(a.toInt,b.toInt, c.toDouble))
         case intPattern() => if(v == 0) v = s.toInt else e = s.toInt
+        case docTypePattern =>
       }
-    }
     (v, e, savedLines)
   }
 

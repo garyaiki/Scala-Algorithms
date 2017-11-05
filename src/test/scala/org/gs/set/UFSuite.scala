@@ -1,17 +1,13 @@
-/** @see http://algs4.cs.princeton.edu/15uf/largeUF.txt
+/** @see https://algs4.cs.princeton.edu/15uf/largeUF.txt
   */
 package org.gs.set
 
+import org.gs.fixtures.{BufferedSourceBuilder, IntArrayBuilder}
 import org.scalatest.FlatSpec
-import org.junit.runner.RunWith
-import org.scalatest.junit.JUnitRunner
-import org.gs.fixtures.BufferedSourceBuilder
-import org.gs.fixtures.IntArrayBuilder
 
 /** @author Gary Struthers
   *
   */
-@RunWith(classOf[JUnitRunner])
 class UFSuite extends FlatSpec {
   trait UnionFindBuilder {
     val tinyUFdata = Array((4,3),(3,8),(6,5),(9,4),(2,1),(5,0),(7,2),(6,1))
@@ -29,7 +25,7 @@ class UFSuite extends FlatSpec {
   }
   // -Xms256m -Xmx512m
   it should "find components in largeUF data" in new IntArrayBuilder {
-    val managedResource = readURI("http://algs4.cs.princeton.edu/15uf/largeUF.txt")
+    val managedResource = readURI("https://algs4.cs.princeton.edu/15uf/largeUF.txt")
     val savedLines = managedResource.loan(readFileToArray)
     val n = savedLines(0)
     val uf = new UF(n)
