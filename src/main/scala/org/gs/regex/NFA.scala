@@ -1,4 +1,4 @@
-/** @see http://algs4.cs.princeton.edu/54regexp/NFA.java.html
+/** @see https://algs4.cs.princeton.edu/54regexp/NFA.java.html
   */
 package org.gs.regex
 
@@ -22,8 +22,7 @@ class NFA(regexp: String) {
   private def loop(i: Int, ops: List[Int]): Unit = {
     if (i < M) {
       var lp = i
-      val ops1 = if (regexp.charAt(i) == '(' || regexp.charAt(i) == '|') i :: ops
-      else if (regexp.charAt(i) == ')') {
+      val ops1 = if (regexp.charAt(i) == '(' || regexp.charAt(i) == '|') i :: ops else if (regexp.charAt(i) == ')') {
         val or = ops.head
         var ops2 = ops.tail
 
@@ -32,9 +31,8 @@ class NFA(regexp: String) {
           ops2 = ops2.tail
           G.addEdge(lp, or + 1)
           G.addEdge(or, i)
-        } else if (regexp.charAt(or) == '(') lp = or else
-          assert(regexp.charAt(or) == '|' || regexp.charAt(or) == '(',
-            s"expected '|' or '(' found:${regexp.charAt(or)}")
+        } else if (regexp.charAt(or) == '(') lp = or
+          else assert(regexp.charAt(or) == '|' || regexp.charAt(or) == '(', s"expected '|' or '(' found:${regexp.charAt(or)}")
         ops2
       } else ops
 
@@ -43,12 +41,11 @@ class NFA(regexp: String) {
         G.addEdge(i + 1, lp)
       }
 
-      if (regexp.charAt(i) == '(' || regexp.charAt(i) == '*' || regexp.charAt(i) == ')') {
-        G.addEdge(i, i + 1)
-      }
+      if (regexp.charAt(i) == '(' || regexp.charAt(i) == '*' || regexp.charAt(i) == ')') G.addEdge(i, i + 1)
+
       loop(i + 1, ops1)
     }
-    
+
   }
   loop(0, List[Int]())
 

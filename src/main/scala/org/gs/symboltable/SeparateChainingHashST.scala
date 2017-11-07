@@ -1,4 +1,4 @@
-/** @see http://algs4.cs.princeton.edu/34hash/SeparateChainingHashST.java.html
+/** @see https://algs4.cs.princeton.edu/34hash/SeparateChainingHashST.java.html
   */
 package org.gs.symboltable
 
@@ -45,9 +45,7 @@ class SeparateChainingHashST[A, B](initialSize: Int) {
     val i = hash(key)
     val chainList = st(i)
     val j = chainList indexWhere (chainGet(_, key))
-    if (j != -1) {
-      st(i) = chainList.take(j) ++ chainList.takeRight(chainList.length - j - 1)
-    }
+    if (j != -1) st(i) = chainList.take(j) ++ chainList.takeRight(chainList.length - j - 1)
   }
 
   /** insert pair, resize if necessary */

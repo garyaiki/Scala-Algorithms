@@ -1,4 +1,4 @@
-/** @see http://algs4.cs.princeton.edu/24pq/IndexMinPQ.java.html
+/** @see https://algs4.cs.princeton.edu/24pq/IndexMinPQ.java.html
   */
 package org.gs.queue
 import scala.reflect.ClassTag
@@ -12,8 +12,7 @@ import scala.reflect.ClassTag
   * @param nMax maximum number of elements
   * @param ord implicit ordering
   */
-class IndexMinPQ[A: ClassTag](nMax: Int)(implicit ord: Ordering[A])
-    extends IndexPriorityQueue[A](nMax) {
+class IndexMinPQ[A: ClassTag](nMax: Int)(implicit ord: Ordering[A]) extends IndexPriorityQueue[A](nMax) {
 
   /** Add key to end of array then swim up to ordered position
     *

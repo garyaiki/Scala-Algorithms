@@ -5,7 +5,7 @@ package org.gs.digraph
 import scala.annotation.tailrec
 
 /** Find any directed cycles in digraph using depth first search
-  * 
+  *
   * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   *
   * @constructor creates a new DirectedCycle with a digraph and number of vertices
@@ -27,7 +27,7 @@ class DirectedCycle(g: Digraph) extends BaseDirectedCycle[Int](g.V) {
     def traceBack(w: Int): Boolean = {
       if (onStack(w)) {
         _cycle = Some(List[Int]())
-        
+
         @tailrec
         def loop(x: Int): Unit = {
           if (x != w) {

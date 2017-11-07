@@ -1,4 +1,4 @@
-/** @see http://algs4.cs.princeton.edu/15uf/UF.java.html
+/** @see https://algs4.cs.princeton.edu/15uf/UF.java.html
   */
 package org.gs.set
 

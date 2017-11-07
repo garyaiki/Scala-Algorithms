@@ -1,4 +1,4 @@
-/** @see http://algs4.cs.princeton.edu/34hash/LinearProbingHashST.java.html
+/** @see https://algs4.cs.princeton.edu/34hash/LinearProbingHashST.java.html
   */
 package org.gs.symboltable
 

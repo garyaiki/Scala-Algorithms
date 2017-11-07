@@ -1,5 +1,5 @@
 /**
-  * @see http://algs4.cs.princeton.edu/24pq/MinPQ.java.html
+  * @see https://algs4.cs.princeton.edu/24pq/MinPQ.java.html
   *
 */
 package org.gs.queue
@@ -29,5 +29,4 @@ class MinPQ[A](pq: ArrayBuffer[A])(implicit ord: Ordering[A]) extends PriorityQu
 
   /** return keys as string */
   override def toString(): String = toString(keys)
-
 }

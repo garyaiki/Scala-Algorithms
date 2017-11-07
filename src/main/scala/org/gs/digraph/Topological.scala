@@ -1,5 +1,5 @@
 /*
-  * @see http://algs4.cs.princeton.edu/42directed/Topological.java.html
+  * @see https://algs4.cs.princeton.edu/42directed/Topological.java.html
   */
 package org.gs.digraph
 

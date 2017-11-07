@@ -1,4 +1,4 @@
-/** @see http://algs4.cs.princeton.edu/51radix/Quick3string.java.html
+/** @see https://algs4.cs.princeton.edu/51radix/Quick3string.java.html
   */
 package org.gs.sort
 

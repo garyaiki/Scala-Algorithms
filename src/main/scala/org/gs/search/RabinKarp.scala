@@ -1,9 +1,9 @@
-/** @see http://algs4.cs.princeton.edu/53substring/RabinKarp.java.html
+/** @see https://algs4.cs.princeton.edu/53substring/RabinKarp.java.html
   */
 package org.gs.search
 
-import scala.util.Random
 import scala.annotation.tailrec
+import scala.util.Random
 
 /** Search text for matches to a pattern
   *

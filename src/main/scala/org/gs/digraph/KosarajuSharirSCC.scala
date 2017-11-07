@@ -1,4 +1,4 @@
-/** @see http://algs4.cs.princeton.edu/42directed/KosarajuSharirSCC.java.html
+/** @see https://algs4.cs.princeton.edu/42directed/KosarajuSharirSCC.java.html
   */
 package org.gs.digraph
 
@@ -40,4 +40,3 @@ class KosarajuSharirSCC(g: Digraph) {
   /** returns component id of  v vertex */
   def id(v: Int): Int = _id(v)
 }
-

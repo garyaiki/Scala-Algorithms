@@ -2,13 +2,13 @@ package org.gs
 
 /** Algorithms for queues, priority queues, and index priority queues
   *
-  * ==Queues== 
+  * ==Queues==
   * {{{
   * val q = Queue('P', 'Q', 'E')
   * val headOfQ = q.head
   * val q1 = q enqueue 'Z'
   * }}}
-  * ==Priority Queues== 
+  * ==Priority Queues==
   * {{{
   * val minPQ = new MinPQ(new ArrayBuffer[Char](20))
   * minPQ.insert(c))
@@ -19,7 +19,7 @@ package org.gs
   * maxPQ.insert(c))
   * val max = maxPQ.pop
   * }}}
-  * ==Index Priority Queues== 
+  * ==Index Priority Queues==
   * {{{
   * val testSize = testStrings.size
   * val minPQ = new IndexMinPQ[String](testSize)
@@ -40,10 +40,8 @@ package org.gs
   * val minKeyValue = maxPQ.maxKey
   * val sortedKeys = maxPQ.keys
   * }}}
-  * @see http://algs4.cs.princeton.edu/13stacks/
-  * @see http://algs4.cs.princeton.edu/24pq/
+  * @see https://algs4.cs.princeton.edu/13stacks/
+  * @see https://algs4.cs.princeton.edu/24pq/
   */
 
-package object queue {
-
-}
+package object queue {}

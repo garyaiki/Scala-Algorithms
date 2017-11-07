@@ -14,6 +14,4 @@ package org.gs
   * @see http://algs4.cs.princeton.edu/15uf/
   */
 
-package object set {
-
-}
+package object set {}

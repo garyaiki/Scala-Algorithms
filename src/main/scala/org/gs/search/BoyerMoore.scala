@@ -1,4 +1,4 @@
-/** @see http://algs4.cs.princeton.edu/53substring/KMP.java.html
+/** @see https://algs4.cs.princeton.edu/53substring/KMP.java.html
   */
 package org.gs.search
 
@@ -25,8 +25,7 @@ class BoyerMoore(pattern: Array[Char], R: Int = 256) {
 
       @tailrec
       def findSkip(j: Int): Int = if (j < 0) 0
-      else if (pattern(j) != text(i + j)) max(1, j - right(text(i + j)))
-      else findSkip(j - 1)
+        else if (pattern(j) != text(i + j)) max(1, j - right(text(i + j))) else findSkip(j - 1)
 
       if (i <= N - M) {
         val skip = findSkip(M - 1)

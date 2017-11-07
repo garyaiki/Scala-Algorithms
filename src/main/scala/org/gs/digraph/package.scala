@@ -114,6 +114,4 @@ package org.gs
   */
 
 
-package object digraph {
-
-}
+package object digraph {}

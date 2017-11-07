@@ -2,9 +2,8 @@
   */
 package org.gs.digraph
 
-import scala.collection.mutable.Queue
+import scala.collection.mutable.{ListBuffer, Queue}
 import scala.annotation.tailrec
-import scala.collection.mutable.ListBuffer
 
 /** Solves for shortest path from a source where there are no negative cycles
   *
@@ -60,7 +59,6 @@ class BellmanFordSP(g: EdgeWeightedDigraph, s: Int) {
   }
 
   private def relax(v: Int): Unit = {
-    
     for (e <- g.adj(v)) {
       val w = e.to
       if (_distTo(w)  > _distTo(v) + e.weight) {

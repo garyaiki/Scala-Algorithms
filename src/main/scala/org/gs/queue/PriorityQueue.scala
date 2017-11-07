@@ -1,5 +1,5 @@
-/** @see http://algs4.cs.princeton.edu/24pq/MaxPQ.java.html
-  * @see http://algs4.cs.princeton.edu/24pq/MinPQ.java.html
+/** @see https://algs4.cs.princeton.edu/24pq/MaxPQ.java.html
+  * @see https://algs4.cs.princeton.edu/24pq/MinPQ.java.html
   */
 package org.gs.queue
 
@@ -14,9 +14,8 @@ import scala.annotation.tailrec
   * @param pq queue, appends keys
   */
 abstract class PriorityQueue[A](pq: ArrayBuffer[A]) {
-  if (pq.isEmpty) pq.append(null.asInstanceOf[A]) // don't use index 0
-  else pq(0) = null.asInstanceOf[A]
-
+  if (pq.isEmpty) pq.append(null.asInstanceOf[A]) else pq(0) = null.asInstanceOf[A] // don't use index 0
+  
   /** number of elements in Q */
   def size(): Int = pq.length match {
     case i if i == 0 => 0
@@ -115,8 +114,7 @@ abstract class PriorityQueue[A](pq: ArrayBuffer[A]) {
       if (k > n) true else {
         val left = 2 * k
         val right = 2 * k + 1
-        if ((left <= n && cmp(k, left)) || (right <= n && cmp(k, right))) false
-        else loop(left) && loop(right)
+        if ((left <= n && cmp(k, left)) || (right <= n && cmp(k, right))) false else loop(left) && loop(right)
       }
     }
     loop(1)

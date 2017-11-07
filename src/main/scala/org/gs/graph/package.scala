@@ -2,7 +2,7 @@ package org.gs
 
 /** Algorithms for undirected graphs
   *
-  * ==Graphs== 
+  * ==Graphs==
   * {{{
   * val g = new Graph(numberOfVertices)
   * g.addEdge(v, w)
@@ -20,6 +20,4 @@ package org.gs
   * @see http://algs4.cs.princeton.edu/41undirected/
   */
 
-package object graph {
-
-}
+package object graph {}

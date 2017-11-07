@@ -1,4 +1,4 @@
-/** @see http://algs4.cs.princeton.edu/53substring/KMP.java.html
+/** @see https://algs4.cs.princeton.edu/53substring/KMP.java.html
   */
 package org.gs.search
 
@@ -29,8 +29,7 @@ class KMP(pattern: Array[Char], R: Int = 256) {
     val N = text.length
 
     @tailrec
-    def loop(i: Int, j: Int): (Int, Int) =
-      if(i < N && j < M) loop(i + 1, dfa(text(i))(j)) else (i, j)
+    def loop(i: Int, j: Int): (Int, Int) = if(i < N && j < M) loop(i + 1, dfa(text(i))(j)) else (i, j)
 
     val tuple = loop(0, 0)
     if(tuple._2 == M) tuple._1 -M else N

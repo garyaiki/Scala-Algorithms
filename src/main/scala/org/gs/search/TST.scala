@@ -1,4 +1,4 @@
-/** @see http://algs4.cs.princeton.edu/52trie/TST.java.html
+/** @see https://algs4.cs.princeton.edu/52trie/TST.java.html
   */
 package org.gs.search
 

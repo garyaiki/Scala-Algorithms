@@ -1,9 +1,9 @@
 package org.gs.graph
-/** @see http://algs4.cs.princeton.edu/41undirected/BreadthFirstPaths.java.html
+
+/** @see https://algs4.cs.princeton.edu/41undirected/BreadthFirstPaths.java.html
   */
-import scala.collection.mutable.Queue
-import scala.collection.mutable.ListBuffer
 import scala.annotation.tailrec
+import scala.collection.mutable.{ListBuffer, Queue}
 
 /** Find shortest path from source vertex to v
   *
@@ -54,9 +54,7 @@ class BreadthFirstPaths(g: Graph, s: Int) {
     if (!hasPathTo(v)) None else {
 
       @tailrec
-      def loop(x: Int, xs: List[Int]): List[Int] = if (distTo(x) != 0)
-        loop(edgeTo(x), x :: xs)
-        else x :: xs
+      def loop(x: Int, xs: List[Int]): List[Int] = if (distTo(x) != 0) loop(edgeTo(x), x :: xs) else x :: xs
 
       Some(loop(v, List[Int]()))
     }

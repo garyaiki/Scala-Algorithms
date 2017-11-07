@@ -1,13 +1,13 @@
 package org.gs.digraph
 
-/** @see http://algs4.cs.princeton.edu/42directed/DepthFirstDirectedPaths.java.html
+/** @see https://algs4.cs.princeton.edu/42directed/DepthFirstDirectedPaths.java.html
   */
 import scala.annotation.tailrec
 
 /** Find paths from single source vertex
   *
   * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
-  * 
+  *
   * @constructor createa a new DepthFirstDirectedPaths with a digraph and a source vertex
   * @param g [[org.gs.digraph.Digraph]]
   * @param s a single source vertex

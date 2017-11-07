@@ -1,11 +1,10 @@
-/** @see http://algs4.cs.princeton.edu/64maxflow/FordFulkerson.java.html
+/** @see https://algs4.cs.princeton.edu/64maxflow/FordFulkerson.java.html
   */
 package org.gs.digraph
 
-import scala.math.{ abs, min }
-import scala.collection.mutable.Queue
 import scala.annotation.tailrec
-import scala.collection.mutable.ArrayBuffer
+import scala.collection.mutable.{ArrayBuffer, Queue}
+import scala.math.{abs, min}
 
 /** @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   *

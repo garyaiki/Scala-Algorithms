@@ -1,5 +1,5 @@
-/** @see http://algs4.cs.princeton.edu/24pq/IndexMinPQ.java.html
-  * @see http://algs4.cs.princeton.edu/24pq/IndexMaxPQ.java.html
+/** @see https://algs4.cs.princeton.edu/24pq/IndexMinPQ.java.html
+  * @see https://algs4.cs.princeton.edu/24pq/IndexMaxPQ.java.html
   */
 package org.gs.queue
 
@@ -28,16 +28,14 @@ abstract class IndexPriorityQueue[A: ClassTag](nMax: Int)(implicit ord: Ordering
   def isEmpty(): Boolean = n == 0
 
   /** Generic ordering for [[org.gs.queue.IndexMaxPQ]] */
-  protected def less(a: Int, b: Int): Boolean =
-      ord.lt(keys(pq(a)), keys(pq(b)))
+  protected def less(a: Int, b: Int): Boolean = ord.lt(keys(pq(a)), keys(pq(b)))
 
   /** Generic ordering for [[org.gs.queue.IndexMinPQ]] */
-  protected def greater(a: Int, b: Int): Boolean =
-      ord.gt(keys(pq(a)), keys(pq(b)))
+  protected def greater(a: Int, b: Int): Boolean = ord.gt(keys(pq(a)), keys(pq(b)))
 
   private def rangeGuard(x: Int): Boolean = x match {
-      case x if 0 to nMax contains x => true
-      case _ => false
+    case x if 0 to nMax contains x => true
+    case _ => false
   }
 
   /** does q(i) exist? */
@@ -159,8 +157,7 @@ abstract class IndexPriorityQueue[A: ClassTag](nMax: Int)(implicit ord: Ordering
   protected def decreaseKey(i: Int, key: A, cmp: (Int, Int) => Boolean): Unit = {
     require(rangeGuard(i), s"i:$i not in 0 - nMax:$nMax")
     require(contains(i), s"index:$i is not in the priority queue")
-    require(ord.compare(keys(i), key) > 0,
-      s"Calling decreaseKey() with i:$i, key:$key would not strictly decrease the key")
+    require(ord.compare(keys(i), key) > 0, s"Calling decreaseKey() with i:$i, key:$key would not strictly decrease the key")
     keys(i) = key
     swim(qp(i), cmp)
   }
@@ -175,8 +172,7 @@ abstract class IndexPriorityQueue[A: ClassTag](nMax: Int)(implicit ord: Ordering
     val r = ord.compare(keys(i), key)
     require(rangeGuard(i), s"i:$i not in 0 - nMax:$nMax")
     require(contains(i), s"index:$i is not in the priority queue")
-    require(r < 0,
-      s"Calling increaseKey() with i:$i, key:$key would not strictly increase the key")
+    require(r < 0, s"Calling increaseKey() with i:$i, key:$key would not strictly increase the key")
     keys(i) = key
     sink(qp(i), cmp)
   }
@@ -219,8 +215,7 @@ abstract class IndexPriorityQueue[A: ClassTag](nMax: Int)(implicit ord: Ordering
       if (k > n) true else {
         val left = 2 * k
         val right = 2 * k + 1
-        if ((left <= n && cmp(k, left)) || (right <= n && cmp(k, right))) false
-        else loop(left) && loop(right)
+        if ((left <= n && cmp(k, left)) || (right <= n && cmp(k, right))) false else loop(left) && loop(right)
       }
     }
     loop(1)

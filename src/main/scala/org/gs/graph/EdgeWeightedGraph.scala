@@ -1,4 +1,4 @@
-/** @see http://algs4.cs.princeton.edu/43mst/EdgeWeightedGraph.java.html
+/** @see https://algs4.cs.princeton.edu/43mst/EdgeWeightedGraph.java.html
   */
 package org.gs.graph
 
@@ -40,8 +40,7 @@ class EdgeWeightedGraph(v: Int) extends BaseEdgeWeightedGraph[Edge](v) {
       var selfLoops = 0
 
       def addEdges(edg: Edge) {
-        if(edg.other(v) > v) list prepend (edg)
-        else if (edg.other(v) == v) {
+        if(edg.other(v) > v) list prepend (edg) else if (edg.other(v) == v) {
           if (selfLoops % 2 == 0) list prepend (edg)
           selfLoops += 1
         }

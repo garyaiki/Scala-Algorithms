@@ -1,6 +1,6 @@
 /**
-  * @see http://algs4.cs.princeton.edu/41undirected/Graph.java.html
-  * @see http://algs4.cs.princeton.edu/42directed/Digraph.java.html
+  * @see https://algs4.cs.princeton.edu/41undirected/Graph.java.html
+  * @see https://algs4.cs.princeton.edu/42directed/Digraph.java.html
   *
   */
 package org.gs.graph
@@ -15,7 +15,7 @@ package org.gs.graph
 abstract class BaseGraph(val V: Int) {
   private var _e = 0
   protected[gs] val adj = Array.fill[List[Int]](V)(List[Int]())
-  
+
   def e(): Int = _e
 
   /** add edge between vertices v and w */

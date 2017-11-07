@@ -1,11 +1,10 @@
-/** @see http://algs4.cs.princeton.edu/43mst/PrimMST.java.html
+/** @see https://algs4.cs.princeton.edu/43mst/PrimMST.java.html
   */
 package org.gs.digraph
-import scala.collection.mutable.Queue
-import scala.annotation.tailrec
+import org.gs.graph.{Edge, EdgeWeightedGraph}
 import org.gs.queue.IndexMinPQ
-import org.gs.graph.Edge
-import org.gs.graph.EdgeWeightedGraph
+import scala.annotation.tailrec
+import scala.collection.mutable.Queue
 
 /** Compute a minimal spanning tree in an edge weighted graph
   *
@@ -31,8 +30,7 @@ class PrimMST(g: EdgeWeightedGraph) {
       if (e.weight < distTo(w)) {
         distTo(w) = e.weight
         edgeTo(w) = e
-        if (pq.contains(w)) pq.decreaseKey(w, distTo(w))
-        else pq.insert(w, distTo(w))
+        if (pq.contains(w)) pq.decreaseKey(w, distTo(w)) else pq.insert(w, distTo(w))
       }
     }
     g.adj(v) foreach (scanEdge)

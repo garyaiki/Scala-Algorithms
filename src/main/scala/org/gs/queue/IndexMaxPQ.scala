@@ -13,8 +13,7 @@ import scala.reflect.ClassTag
   * @param nMax maximum number of elements
   * @param ord implicit ordering
   */
-class IndexMaxPQ[A: ClassTag](nMax: Int)(implicit ord: Ordering[A])
-    extends IndexPriorityQueue[A](nMax) {
+class IndexMaxPQ[A: ClassTag](nMax: Int)(implicit ord: Ordering[A]) extends IndexPriorityQueue[A](nMax) {
 
   /** Add key to end of array then swim up to ordered position
     *

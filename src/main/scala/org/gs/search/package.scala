@@ -2,20 +2,20 @@ package org.gs
 
 /** Algorithms for Tries and Substring Search
   *
-  * ==Tries== 
+  * ==Tries==
   * {{{
   * val tst = new TST[Int]()
   * strings.zipWithIndex.foreach(x => tst.put(x._1, x._2))
   * tst.get(key) match {
   *   case None =>
   *   case Some(x) => println("value" + x)
-  * } 
+  * }
   * }}}
-  * ==Substring Search== 
+  * ==Substring Search==
   * {{{
   * val pattern = "abracadabra"
   * val bm = new RabinKarp(pattern)
-  * val offset = bm.search(text) 
+  * val offset = bm.search(text)
   * }}}
   * {{{
   * val pattern = "abracadabra".toCharArray
@@ -32,6 +32,4 @@ package org.gs
   * @see http://algs4.cs.princeton.edu/53substring/
   */
 
-package object search {
-
-}
+package object search {}
