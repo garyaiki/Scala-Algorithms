@@ -2,8 +2,8 @@
   */
 package org.gs.digraph
 
-import scala.collection.mutable.ListBuffer
 import scala.annotation.tailrec
+import scala.collection.mutable.ListBuffer
 
 /** Solves for shortest path from a source where edge weights can be positive, negative, or zero
   *
