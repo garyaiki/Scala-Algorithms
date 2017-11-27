@@ -2,19 +2,18 @@
   */
 package org.gs.digraph
 
-import scala.collection.mutable.{ListBuffer, Queue}
 import scala.annotation.tailrec
+import scala.collection.mutable.{ListBuffer, Queue}
 
 /** Solves for shortest path from a source where there are no negative cycles
   *
   * Edge weights can be positive, negative, or zero. It finds either a shortest path to every other
   * vertex or a negative cycle reachable from source
   *
-  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
-  *
   * @constructor creates a new BellmanFordSP with an edge weighted digraph and source vertex
-  * @param g acyclic digraph
+  * @param g acyclic digraph edges have direction and weight
   * @param s source vertex
+  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   */
 class BellmanFordSP(g: EdgeWeightedDigraph, s: Int) {
   private val _distTo = Array.fill[Double](g.V)(Double.PositiveInfinity)

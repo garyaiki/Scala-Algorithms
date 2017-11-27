@@ -4,12 +4,11 @@ package org.gs.digraph
 
 /** Find reachable vertices from single or multiple source vertices
   *
-  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
-  *
   * @constructor creates a new DirectedDFS with a digraph and any number of source vertices
-  * @param g [[org.gs.digraph.Digraph]]
+  * @param g Digraph
   * @param sources a variable number of vertices
   *
+  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   */
 class DirectedDFS(g: Digraph, sources: Int*) {
   val marked = new Array[Boolean](g.V)

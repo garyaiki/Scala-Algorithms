@@ -6,12 +6,9 @@ import scala.collection.mutable.Queue
 
 /** Common code for finding pre-order, post-order, & reverse post-order in digraphs
   *
-  *
-  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
-  *
   * @constructor called by subclass with number of vertices
   * @param v number of vertices in digraph
-  *
+  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   */
 abstract class BaseDepthFirstOrder(v: Int) {
 

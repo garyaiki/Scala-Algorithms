@@ -8,11 +8,11 @@ import scala.collection.mutable.ListBuffer
 /** Solves for shortest path from a source where edge weights can be positive, negative, or zero
   *
   * Uses [[org.gs.digraph.Topological]] order
-  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   *
   * @constructor creates a new AcyclicSP with a digraph and source vertex
-  * @param g acyclic digraph
+  * @param g acyclic digraph, edges have direction and weight
   * @param s source vertex
+  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   */
 class AcyclicSP(g: EdgeWeightedDigraph, s: Int) {
   private val _distTo = Array.fill[Double](g.V)(Double.PositiveInfinity)

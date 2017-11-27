@@ -7,11 +7,10 @@ import scala.collection.mutable.Queue
 
 /** Find shortest path from source vertex
   *
-  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
-  *
   * @constructor creates a new BreadthFirstDirectedPaths with a digraph and source vertex
-  * @param g [[org.gs.digraph.Digraph]]
+  * @param g Digraph
   * @param s a single source vertex
+  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   */
 class BreadthFirstDirectedPaths(g: Digraph, s: Int) {
   private val marked = new Array[Boolean](g.V)

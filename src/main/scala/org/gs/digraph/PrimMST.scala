@@ -10,10 +10,9 @@ import scala.collection.mutable.Queue
   *
   * Only the shortest edge connecting a vertex to the tree remains on queue
   *
-  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
-  *
   * @constructor creates a new PrimMST with an EdgeWeightedGraph
   * @param g [[org.gs.graph.EdgeWeightedGraph]]
+  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   */
 class PrimMST(g: EdgeWeightedGraph) {
   private val edgeTo = new Array[Edge](g.V)

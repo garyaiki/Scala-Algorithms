@@ -7,9 +7,10 @@ import scala.annotation.tailrec
 
 /** Solves for shortest path from a source where edge weights are non-negative
   *
-  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
-  *
   * @constructor creates a new DijkstraSP with an edge weighted digraph and source vertex
+  * @param g acyclic digraph, edges have direction and weight
+  * @param s source vertex
+  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   */
 class DijkstraSP(g: EdgeWeightedDigraph, s: Int) {
   require(g.edges forall (_.weight >= 0))

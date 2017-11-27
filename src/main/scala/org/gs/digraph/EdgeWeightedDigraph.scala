@@ -7,9 +7,10 @@ import org.gs.graph.BaseEdgeWeightedGraph
 
 /** Digraph with edges having direction and weight
   *
-  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   *
   * @constructor creates a new EdgeWeightedDigraph with a vertex count
+  * @param v number of vertices
+  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   */
 class EdgeWeightedDigraph(v: Int) extends BaseEdgeWeightedGraph[DirectedEdge](v) with DigraphMarker {
 

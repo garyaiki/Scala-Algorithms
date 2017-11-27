@@ -6,12 +6,11 @@ import scala.annotation.tailrec
 
 /** Find if an edge weighted digraph has a directed cycle, return it if it does
   *
-  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
-  *
   * @constructor creates a new EdgeWeightedDirectedCycle with an EdgeWeightedDigraph
+  * @param g acyclic digraph, edges have direction and weight
+  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   */
-class EdgeWeightedDirectedCycle(g: EdgeWeightedDigraph)
-    extends BaseDirectedCycle[DirectedEdge](g.V) {
+class EdgeWeightedDirectedCycle(g: EdgeWeightedDigraph) extends BaseDirectedCycle[DirectedEdge](g.V) {
 
   protected def dfs(v: Int): Unit = {
     onStack(v) = true

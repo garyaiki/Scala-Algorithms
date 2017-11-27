@@ -24,8 +24,7 @@ class EdgeWeightedGraph(v: Int) extends BaseEdgeWeightedGraph[Edge](v) {
   def addEdge(ed: Edge): Unit = {
     val either = ed.either
     val other = ed.other(either)
-    require(rangeGuard(either) && rangeGuard(other),
-      s"verticies either:$either w:$other not in 0..$v ")
+    require(rangeGuard(either) && rangeGuard(other), s"verticies either:$either w:$other not in 0..$v ")
 
     _adj(either) = ed :: _adj(either)
     _adj(other) = ed :: _adj(other)

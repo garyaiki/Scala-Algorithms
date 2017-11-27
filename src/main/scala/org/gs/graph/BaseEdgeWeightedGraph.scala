@@ -20,8 +20,12 @@ abstract class BaseEdgeWeightedGraph[A <: BaseEdge](val V: Int) {
   protected def buildADJ[U <: BaseEdgeWeightedGraph[A]](g: U): Unit = {
     e = g.e
 
-    for (v <- 0 until g.V; reverse = List[A]()) {
-      g.adj(v) foreach (e => e :: reverse)
+    for {
+      v <- 0 until g.V
+      reverse = List[A]()
+      e <- g.adj(v)
+    } {
+      e :: reverse
       reverse foreach (er => _adj(v) = er :: _adj(v))
     }
   }

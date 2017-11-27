@@ -11,10 +11,9 @@ trait DigraphMarker
 
 /** Directed Graph
   *
-  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
-  *
   * @constructor creates a new Digraph with a number of vertices
   * @param V number of vertices
+  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   */
 class Digraph(v: Int) extends BaseGraph(v) with DigraphMarker {
 

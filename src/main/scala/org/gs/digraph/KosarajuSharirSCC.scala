@@ -4,12 +4,11 @@ package org.gs.digraph
 
 import scala.annotation.tailrec
 
-/**
-  *
-  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+/** Compute strongly-connected components of a digraph
   *
   * @constructor creates a new KosarajuSharirSCC with a digraph
   * @param g digraph
+  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   */
 class KosarajuSharirSCC(g: Digraph) {
   private val depthFirstOrder = new DepthFirstOrder(g.reverse)

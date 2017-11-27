@@ -5,9 +5,9 @@ package org.gs.digraph
 
 /** Solves for all pairs shortest path from a source where edge weights are non-negative
   *
-  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
-  *
   * @constructor creates a new DijkstraAllPairsSP with an edge weighted digraph
+  * @param g acyclic digraph, edges have direction and weight
+  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   */
 class DijkstraAllPairsSP(g: EdgeWeightedDigraph) {
   private val all = for (v <- 0 until g.V) yield new DijkstraSP(g, v)

@@ -7,11 +7,10 @@ package org.gs.digraph
   *
   * The reverse post-order of a directed acyclic graph (DAG) is its topological order
   *
-  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
-  *
   * @constructor creates a new Topological with either a Digraph or EdgeWeightedDigraph
-  * @tparam A constrains g to classes that mixin [[org.gs.digraph.DigraphMarker]]
-  * @param g either a [[org.gs.digraph.Digraph]] or [[org.gs.digraph.EdgeWeightedDigraph]]
+  * @tparam A constrains g to classes that mixin DigraphMarker
+  * @param g either a Digraph or EdgeWeightedDigraph
+  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   */
 class Topological[A <: DigraphMarker](g: A) {
   val finder = g match {

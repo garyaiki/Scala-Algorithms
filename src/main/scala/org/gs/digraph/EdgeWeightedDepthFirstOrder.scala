@@ -1,12 +1,14 @@
-/** @see http://algs4.cs.princeton.edu/42directed/DepthFirstOrder.java.html
+/** @see https://algs4.cs.princeton.edu/42directed/DepthFirstOrder.java.html
   */
 package org.gs.digraph
 
 import scala.collection.mutable.Queue
 
-/** @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+/** Depth first order for an EdgeWeightedDigraph
   *
   * @constructor creates a new EdgeWeightedDepthFirstOrder with an EdgeWeightedDigraph, vertex count
+  * @param g acyclic digraph, edges have direction and weight
+  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   */
 class EdgeWeightedDepthFirstOrder(g: EdgeWeightedDigraph) extends BaseDepthFirstOrder(g.V){
 

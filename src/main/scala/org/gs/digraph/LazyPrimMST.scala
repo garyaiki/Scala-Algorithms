@@ -4,10 +4,9 @@ package org.gs.digraph
 
 /** Compute a minimal spanning tree in an edge weighted graph
   *
-  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
-  *
   * @constructor creates a new LazyPrimMST with an EdgeWeightedGraph
-  * @param g [[org.gs.graph.EdgeWeightedGraph]]
+  * @param g EdgeWeightedGraph
+  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   */
 import scala.collection.mutable.ArrayBuffer
 import scala.collection.mutable.Queue

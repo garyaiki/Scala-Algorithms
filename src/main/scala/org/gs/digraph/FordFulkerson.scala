@@ -6,9 +6,13 @@ import scala.annotation.tailrec
 import scala.collection.mutable.{ArrayBuffer, Queue}
 import scala.math.{abs, min}
 
-/** @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+/** Comput a maximum st-flow and minimum st-cut in a flow network.
   *
   * @constructor creates a new FordFulkerson with a FlowNetwork, source and target vertices
+  * @param g FlowNetwork
+  * @param s source vertex
+  * @param t sink vertex
+	* @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   */
 class FordFulkerson(g: FlowNetwork, s: Int, t: Int) {
   private val Epsilon = 1e-11
