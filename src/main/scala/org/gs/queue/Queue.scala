@@ -1,14 +1,14 @@
 package org.gs.queue
-/** This copies a example from Programming in Scala instead of translating from Algorthms
-  * I added an isEmpty method
-  * @see https://booksites.artima.com/programming_in_scala_2ed/examples/type-parameterization/Queues5.scala
-  * @see https://algs4.cs.princeton.edu/13stacks/Queue.java.html
-  */
 
 /** Immutable interface for hidden Queue implementation
-  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   *
-  * @tparam <A> elements are generic
+	* This copies a example from Programming in Scala instead of translating from Algorthms
+  * I added an isEmpty method
+  * @tparam A elements are generic
+  * @tparam A
+  * @see [[https://booksites.artima.com/programming_in_scala_2ed/examples/type-parameterization/Queues5.scala]]
+  * @see [[https://algs4.cs.princeton.edu/13stacks/Queue.java.html]]
+  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   */
 trait Queue[A] {
   def head: A
@@ -31,7 +31,7 @@ def apply[A](xs: A*): Queue[A] = new QueueImpl[A](xs.toList, Nil)
    * trailing and assign it to head. The cost of reversing is amortized. After taking head, tail is
    * the remaining Queue
    *
-   * @tparam <A> elements are generic
+   * @tparam A elements are generic
    */
   private class QueueImpl[A] (
     val leading: List[A],

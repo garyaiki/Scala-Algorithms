@@ -1,5 +1,3 @@
-/** @see https://algs4.cs.princeton.edu/44sp/EdgeWeightedDirectedCycle.java.html
-  */
 package org.gs.digraph
 
 import scala.annotation.tailrec
@@ -8,9 +6,10 @@ import scala.annotation.tailrec
   *
   * @constructor creates a new EdgeWeightedDirectedCycle with an EdgeWeightedDigraph
   * @param g acyclic digraph, edges have direction and weight
+  * @see [[https://algs4.cs.princeton.edu/44sp/EdgeWeightedDirectedCycle.java.html]]
   * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   */
-class EdgeWeightedDirectedCycle(g: EdgeWeightedDigraph) extends BaseDirectedCycle[DirectedEdge](g.V) {
+class EdgeWeightedDirectedCycle(g: EdgeWeightedDigraph) extends BaseDirectedCycle[DirectedEdge](g.numV) {
 
   protected def dfs(v: Int): Unit = {
     onStack(v) = true
@@ -18,11 +17,11 @@ class EdgeWeightedDirectedCycle(g: EdgeWeightedDigraph) extends BaseDirectedCycl
 
     @tailrec
     def loopEdges(es: List[DirectedEdge]): Unit = es match {
-        case e :: xs => {
-          search(e)
-          loopEdges(xs)
-        }
-        case _ =>
+      case e :: xs => {
+        search(e)
+        loopEdges(xs)
+      }
+      case _ =>
     }
 
     def search(e: DirectedEdge): Unit = {

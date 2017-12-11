@@ -1,5 +1,3 @@
-/** @see http://algs4.cs.princeton.edu/42directed/Digraph.java.html
-  */
 package org.gs.digraph
 
 import org.gs.graph.BaseGraph
@@ -12,7 +10,8 @@ trait DigraphMarker
 /** Directed Graph
   *
   * @constructor creates a new Digraph with a number of vertices
-  * @param V number of vertices
+  * @param v number of vertices
+  * @see [[https://algs4.cs.princeton.edu/42directed/Digraph.java.html]]
   * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   */
 class Digraph(v: Int) extends BaseGraph(v) with DigraphMarker {
@@ -20,7 +19,10 @@ class Digraph(v: Int) extends BaseGraph(v) with DigraphMarker {
   /** returns a reverse order copy */
   def reverse(): Digraph = {
     val r = new Digraph(v)
-    for (newV <- 0 until v; w <- adj(newV)) r.addEdge(w, newV)
+    for {
+      newV <- 0 until v
+      w <- adj(newV)
+    } r.addEdge(w, newV)
     r
   }
 }

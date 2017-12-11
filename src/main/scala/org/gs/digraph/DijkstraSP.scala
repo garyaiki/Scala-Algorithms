@@ -1,5 +1,3 @@
-/** @see https://algs4.cs.princeton.edu/44sp/DijkstraSP.java.html
-  */
 package org.gs.digraph
 
 import org.gs.queue.IndexMinPQ
@@ -10,14 +8,15 @@ import scala.annotation.tailrec
   * @constructor creates a new DijkstraSP with an edge weighted digraph and source vertex
   * @param g acyclic digraph, edges have direction and weight
   * @param s source vertex
+  * @see [[https://algs4.cs.princeton.edu/44sp/DijkstraSP.java.html]]
   * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   */
 class DijkstraSP(g: EdgeWeightedDigraph, s: Int) {
   require(g.edges forall (_.weight >= 0))
-  private[digraph] val _distTo = Array.fill[Double](g.V)(Double.PositiveInfinity)
+  private[digraph] val _distTo = Array.fill[Double](g.numV)(Double.PositiveInfinity)
   _distTo(s) = 0.0
-  private[digraph] val edgeTo = new Array[DirectedEdge](g.V)
-  private val pq = new IndexMinPQ[Double](g.V)
+  private[digraph] val edgeTo = new Array[DirectedEdge](g.numV)
+  private val pq = new IndexMinPQ[Double](g.numV)
   relaxVertices()
 
   private def relaxVertices() {

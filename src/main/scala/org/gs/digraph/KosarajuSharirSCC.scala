@@ -1,5 +1,3 @@
-/** @see https://algs4.cs.princeton.edu/42directed/KosarajuSharirSCC.java.html
-  */
 package org.gs.digraph
 
 import scala.annotation.tailrec
@@ -8,21 +6,22 @@ import scala.annotation.tailrec
   *
   * @constructor creates a new KosarajuSharirSCC with a digraph
   * @param g digraph
+  * @see [[https://algs4.cs.princeton.edu/42directed/KosarajuSharirSCC.java.html]]
   * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   */
 class KosarajuSharirSCC(g: Digraph) {
   private val depthFirstOrder = new DepthFirstOrder(g.reverse)
-  private val marked = Array.fill[Boolean](g.V)(false)
-  private val _id = new Array[Int](g.V)
+  private val marked = Array.fill[Boolean](g.numV)(false)
+  private val _id = new Array[Int](g.numV)
 
   @tailrec
   private def searchUnmarked(count: Int, rp: List[Int]): Int = rp match {
-      case v :: xs => if (!marked(v)) {
-          dfs(v, count)
-          searchUnmarked(count + 1, xs)
-        } else searchUnmarked(count, xs)
-      case Nil => count
-    }
+    case v :: xs => if (!marked(v)) {
+      dfs(v, count)
+      searchUnmarked(count + 1, xs)
+    } else searchUnmarked(count, xs)
+    case Nil => count
+  }
 
   /** returns number of strong components */
   val count = searchUnmarked(0, depthFirstOrder.reversePost)

@@ -1,13 +1,12 @@
-/** @see https://algs4.cs.princeton.edu/15uf/UF.java.html
-  */
 package org.gs.set
 
 import scala.annotation.tailrec
 
 /** Partition points into connected components
   *
-  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   * @param n number of sites
+  * @see [[https://algs4.cs.princeton.edu/15uf/UF.java.html]]
+  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   */
 class UF(n: Int) {
   require(n >= 0)
@@ -42,11 +41,13 @@ class UF(n: Int) {
     val i = find(p)
     val j = find(q)
     if (!(i == j)) {
-      if (rank(i) < rank(j)) id(i) = j
-      else if (rank(i) > rank(j)) id(j) = i
-      else {
-        id(j) = i
-        rank(i) = (rank(i) + 1).toByte
+      rank(i) match {
+        case byte if (byte < rank(j)) => id(i) = j
+        case byte if (byte > rank(j)) => id(j) = i
+        case byte => {
+          id(j) = i
+          rank(i) = (rank(i) + 1).toByte
+        }
       }
       _count -= 1
     }

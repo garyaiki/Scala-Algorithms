@@ -1,17 +1,14 @@
-/**
-  * @see https://algs4.cs.princeton.edu/24pq/MinPQ.java.html
-  *
-*/
 package org.gs.queue
 
 import scala.collection.mutable.ArrayBuffer
-/** For min value on Q extends [[PriorityQueue]]
-  *
-  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
+
+/** For min value on Q extends PriorityQueue
   *
   * @tparam A keys are generic and ordered using [[PriorityQueue.greater]]
   * @param pq priority queue array
-  *
+  * @param ord implicit Ordering
+  * @see [[https://algs4.cs.princeton.edu/24pq/MinPQ.java.html]]
+  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   */
 class MinPQ[A](pq: ArrayBuffer[A])(implicit ord: Ordering[A]) extends PriorityQueue(pq) {
 

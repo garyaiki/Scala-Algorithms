@@ -17,7 +17,6 @@ package org.gs
   * val isPath1To5 = from1.hasPathTo(5)
   * val distTo = from1.distTo(5)
   * }}}
-  * @see http://algs4.cs.princeton.edu/41undirected/
+  * @see [[https://algs4.cs.princeton.edu/41undirected/]]
   */
-
 package object graph {}

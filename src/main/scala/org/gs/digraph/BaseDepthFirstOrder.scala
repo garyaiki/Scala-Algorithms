@@ -1,5 +1,3 @@
-/** @see https://algs4.cs.princeton.edu/42directed/DepthFirstOrder.java.html
-  */
 package org.gs.digraph
 
 import scala.collection.mutable.Queue
@@ -8,6 +6,7 @@ import scala.collection.mutable.Queue
   *
   * @constructor called by subclass with number of vertices
   * @param v number of vertices in digraph
+  * @see [[https://algs4.cs.princeton.edu/42directed/DepthFirstOrder.java.html]]
   * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   */
 abstract class BaseDepthFirstOrder(v: Int) {
@@ -19,7 +18,10 @@ abstract class BaseDepthFirstOrder(v: Int) {
   protected var preCounter = 0
   protected var postCounter = 0
   protected val marked = Array.fill[Boolean](v)(false)
-  for (i <- 0 until v; if (!marked(i))) dfs(i)
+  for {
+    i <- 0 until v
+    if (!marked(i))
+  } dfs(i)
 
   /** @param v vertex for depth first search to find pre-order & post-order */
   protected def dfs(v: Int): Unit
@@ -37,8 +39,5 @@ abstract class BaseDepthFirstOrder(v: Int) {
   def post(): List[Int] = postOrder.toList
 
   /** returns vertices in reverse post-order, which is a topological order, of vertex v */
-  def reversePost(): List[Int] = {
-    val reverse = postOrder.reverse
-    reverse.toList
-  }
+  def reversePost(): List[Int] = postOrder.reverse.toList
 }

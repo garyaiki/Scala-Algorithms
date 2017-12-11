@@ -1,7 +1,5 @@
 package org.gs.digraph
 
-/** @see http://algs4.cs.princeton.edu/42directed/BreadthFirstDirectedPaths.java.html
-  */
 import scala.annotation.tailrec
 import scala.collection.mutable.Queue
 
@@ -10,12 +8,13 @@ import scala.collection.mutable.Queue
   * @constructor creates a new BreadthFirstDirectedPaths with a digraph and source vertex
   * @param g Digraph
   * @param s a single source vertex
+  * @see [[https://algs4.cs.princeton.edu/42directed/BreadthFirstDirectedPaths.java.html]]
   * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   */
 class BreadthFirstDirectedPaths(g: Digraph, s: Int) {
-  private val marked = new Array[Boolean](g.V)
-  private val edgeTo = new Array[Int](g.V)
-  private val _distTo = Array.fill[Int](g.V)(Int.MaxValue)
+  private val marked = new Array[Boolean](g.numV)
+  private val edgeTo = new Array[Int](g.numV)
+  private val _distTo = Array.fill[Int](g.numV)(Int.MaxValue)
 
   private def bfs(s: Int) {
     val q = new Queue[Int]()

@@ -1,7 +1,3 @@
-/** This is uses an example from Stack Overflow instead of translating from Algorthms
-  * @see http://stackoverflow.com/questions/2201472/merge-sort-from-programming-scala-causes-stack-overflow
-  * @see https://algs4.cs.princeton.edu/22mergesort/Merge.java.html
-  */
 package org.gs.sort
 
 import math.Ordering
@@ -9,10 +5,11 @@ import scala.annotation.tailrec
 
 /** Divide list in 2 then sort each half, recursively
   *
-  * implicitly uses math.Ordering
+  * This is uses an example from Stack Overflow instead of translating from Algorthms
   *
+  * @see [[http://stackoverflow.com/questions/2201472/merge-sort-from-programming-scala-causes-stack-overflow]]
+  * @see [[https://algs4.cs.princeton.edu/22mergesort/Merge.java.html]]
   * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
-  *
   */
 object Merge {
 

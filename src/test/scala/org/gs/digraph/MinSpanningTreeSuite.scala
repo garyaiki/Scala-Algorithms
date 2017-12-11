@@ -2,10 +2,9 @@
   */
 package org.gs.digraph
 
-import org.scalatest.FlatSpec
-import org.gs.graph.{Edge, EdgeWeightedGraph}
 import org.gs.digraph.fixtures.GraphBuilder
-import org.scalatest.junit.JUnitRunner
+import org.gs.graph.{Edge, EdgeWeightedGraph}
+import org.scalatest.FlatSpec
 
 /** @author Gary Struthers
   *
@@ -31,13 +30,13 @@ class MinSpanningTreeSuite extends FlatSpec {
   behavior of "an EdgeWeightedGraph"
 
   it should "construct edge weighted graph with given vertices and edges" in new GraphBuilder {
-    assert(g.V === 8, s"${g.V} is the wrong number of vertices")
+    assert(g.numV === 8, s"${g.numV} is the wrong number of vertices")
     assert(g.e === 32, s"${g.e} is the wrong number of edges")
   }
 
   it should "make a copy of itself" in new GraphBuilder {
     val gc = new EdgeWeightedGraph(g)
-    assert(gc.V === 8, s"${gc.V} is the wrong number of vertices")
+    assert(gc.numV === 8, s"${gc.numV} is the wrong number of vertices")
     assert(gc.e === 32, s"${gc.e} is the wrong number of edges")
   }
 
@@ -46,9 +45,8 @@ class MinSpanningTreeSuite extends FlatSpec {
       val s = e.toString.take(3)
       s.contains(adjIndex.toString)
     }
-    for {
-      i <- 0 until g.V
-    } assert(g.adj(i).forall(curriedVertexCheck(i)_), s" not all edges in adj $i contain $i")
+    for (i <- 0 until g.numV)
+      assert(g.adj(i).forall(curriedVertexCheck(i)_), s" not all edges in adj $i contain $i")
   }
 
   it should "return all edges" in new GraphBuilder {

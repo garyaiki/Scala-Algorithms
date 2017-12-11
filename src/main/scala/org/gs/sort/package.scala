@@ -20,9 +20,9 @@ package org.gs
   * val strings = managedResource.loan(readFileToArray).toArray
   * Quick3String.sort(strings)
   * }}}
-  * @see http://algs4.cs.princeton.edu/22mergesort/
-  * @see http://algs4.cs.princeton.edu/23quicksort/
-  * @see http://algs4.cs.princeton.edu/51radix/
+  * @see [[https://algs4.cs.princeton.edu/22mergesort/]]
+  * @see [[https://algs4.cs.princeton.edu/23quicksort/]]
+  * @see [[https://algs4.cs.princeton.edu/51radix/]]
   */
 
 package object sort {

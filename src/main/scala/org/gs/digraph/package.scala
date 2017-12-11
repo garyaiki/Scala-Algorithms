@@ -108,9 +108,9 @@ package org.gs
   * }
   * val weight = nc.foldLeft(0.0)(_ + _.weight)
   * }}}
-  * @see https://algs4.cs.princeton.edu/42directed/
-  * @see https://algs4.cs.princeton.edu/43mst/
-  * @see https://algs4.cs.princeton.edu/44sp/
+  * @see [[https://algs4.cs.princeton.edu/42directed/]]
+  * @see [[https://algs4.cs.princeton.edu/43mst/]]
+  * @see [[https://algs4.cs.princeton.edu/44sp/]]
   */
 
 

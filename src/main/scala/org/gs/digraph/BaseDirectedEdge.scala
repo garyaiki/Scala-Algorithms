@@ -1,12 +1,12 @@
-/** Common trait for DirectedEdge, FlowEdge
-  * @see https://algs4.cs.princeton.edu/44sp/DirectedEdge.java.html
-  * @see https://algs4.cs.princeton.edu/64maxflow/FlowEdge.java.html
-  */
 package org.gs.digraph
 
 import org.gs.graph.BaseEdge
-/** Differentiate directed edge vertices from vertices in undirected edge
+/** Common trait for DirectedEdge, FlowEdge
   *
+  * Differentiate directed edge vertices from vertices in undirected edge
+  *
+  * @see [[https://algs4.cs.princeton.edu/44sp/DirectedEdge.java.html]]
+  * @see [[https://algs4.cs.princeton.edu/64maxflow/FlowEdge.java.html]]
   * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   */
 trait BaseDirectedEdge{
@@ -16,5 +16,4 @@ trait BaseDirectedEdge{
 
   /** end vertex of directed edge */
   def to():Int
-
 }

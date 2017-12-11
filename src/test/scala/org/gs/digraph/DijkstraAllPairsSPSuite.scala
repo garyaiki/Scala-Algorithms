@@ -2,12 +2,12 @@
   */
 package org.gs.digraph
 
+import org.gs.digraph.fixtures.TinyEdgeWeightedDigraphBuilder
 import org.scalatest.FlatSpec
 import org.scalatest.Matchers._
-import org.gs.digraph.fixtures.TinyEdgeWeightedDigraphBuilder
 
 trait DijkstraAllPairsSPBuilder extends TinyEdgeWeightedDigraphBuilder {
-  val verticesLength = g.V
+  val verticesLength = g.numV
   val allPairsSP = new DijkstraAllPairsSP(g)
 }
 

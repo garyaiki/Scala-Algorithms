@@ -11,7 +11,7 @@ package org.gs
   * } tinyUF.union(t._1, t._2)
   * val numComponents = tinyUF.count
   * }}}
-  * @see http://algs4.cs.princeton.edu/15uf/
+  * @see [[https://algs4.cs.princeton.edu/15uf/]]
   */
 
 package object set {}

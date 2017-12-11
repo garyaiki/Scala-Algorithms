@@ -1,5 +1,3 @@
-/** @see https://algs4.cs.princeton.edu/64maxflow/FlowEdge.java.html
-  */
 package org.gs.digraph
 
 /** Edge with capacity and flow
@@ -8,6 +6,7 @@ package org.gs.digraph
   * @param v from vertex
   * @param w to vertex
   * @param capacity of edge
+  * @see [[https://algs4.cs.princeton.edu/64maxflow/FlowEdge.java.html]]
   * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   */
 class FlowEdge(v: Int, w: Int, val capacity: Double) extends BaseDirectedEdge {
@@ -51,6 +50,6 @@ class FlowEdge(v: Int, w: Int, val capacity: Double) extends BaseDirectedEdge {
       case _ => throw new IllegalArgumentException(s"Illegal endpoint vertex:${vertex}")
     }
     assert(_flow >= 0 && flow <= capacity,
-        s"flow:${_flow} must not be negative and can't exceed capacity:$capacity")
+      s"flow:${_flow} must not be negative and can't exceed capacity:$capacity")
   }
 }

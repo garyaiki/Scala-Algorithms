@@ -1,5 +1,3 @@
-/** @see https://algs4.cs.princeton.edu/53substring/RabinKarp.java.html
-  */
 package org.gs.search
 
 import scala.annotation.tailrec
@@ -9,9 +7,10 @@ import scala.util.Random
   *
   * MonteCarlo only, doesn't do Las Vegas per-character check
   *
-  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   * @constructor creates a new RabinKarp
-  * @param pattern to match
+  * @param pat pattern to match
+  * @see [[https://algs4.cs.princeton.edu/53substring/RabinKarp.java.html]]
+  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   */
 class RabinKarp(pat: String) {
   private val R = 256
@@ -21,11 +20,9 @@ class RabinKarp(pat: String) {
   private val patHash = hash(pat, M)
 
   @tailrec
-  private def precomputeRM(i: Int, rm: Long): Long =
-    if (i == M) rm else precomputeRM(i + 1, (R * rm) % Q)
+  private def precomputeRM(i: Int, rm: Long): Long = if (i == M) rm else precomputeRM(i + 1, (R * rm) % Q)
 
   private def hash(key: String, M: Int): Long = {
-
     @tailrec
     def loop(h: Long, j: Int): Long = if (j < M) loop((R * h + key.charAt(j)) % Q, j + 1) else h
 

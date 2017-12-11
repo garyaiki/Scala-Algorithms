@@ -1,4 +1,4 @@
-/** @see http://algs4.cs.princeton.edu/43mst/tinyEWG.txt
+/** @see https://algs4.cs.princeton.edu/43mst/tinyEWG.txt
   */
 package org.gs.digraph
 
@@ -6,8 +6,8 @@ package org.gs.digraph
   *
   */
 
-import org.gs.graph.{Edge, EdgeWeightedGraph}
 import org.gs.digraph.fixtures.{EdgeWeightedGraphBuilder, GraphBuilder, PrimMSTBuilder}
+import org.gs.graph.{Edge, EdgeWeightedGraph}
 import org.gs.set.UF
 import org.scalatest.FlatSpec
 import org.scalatest.Matchers._
@@ -60,15 +60,15 @@ class PrimMSTSuite extends FlatSpec {
   it should "validate a minimal spanning forest" in new PrimMSTBuilder {
     def checkIsMinSpanningForest(): Boolean = {
       var cutOptimiality = true
-      val uf = new UF(g.V)
+      val uf = new UF(g.numV)
       val mst = primMST.edges
 
       def mstEdges(e: Edge) {
-        for (f <- mst) {
-          val x = f.either
-          val y = f.other(x)
-          if (f != e) uf.union(x, y)
-        }
+        for {
+          f <- mst
+          x = f.either
+          y = f.other(x)
+        } if (f != e) uf.union(x, y)
       }
 
       def minWeightInCrossingCut(e: Edge): Boolean = {

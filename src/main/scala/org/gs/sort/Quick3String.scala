@@ -1,5 +1,3 @@
-/** @see https://algs4.cs.princeton.edu/51radix/Quick3string.java.html
-  */
 package org.gs.sort
 
 import scala.annotation.tailrec
@@ -10,8 +8,8 @@ import scala.util.Random
   *
   * optimizes Quicksort with Insertion sort for small partitions
   *
+  * @see [[https://algs4.cs.princeton.edu/51radix/Quick3string.java.html]]
   * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
-  *
   */
 object Quick3String {
   private val Cutoff = 15
@@ -70,9 +68,11 @@ object Quick3String {
 
       @tailrec /** compare i character of v and w */
       def loop(i: Int): Boolean = if (i < x) {
-        if (v.charAt(i) < w.charAt(i)) true
-        else if (v.charAt(i) > w.charAt(i)) false
-        else loop(i + 1)
+        v.charAt(i) match {
+          case charAtI if(charAtI < w.charAt(i)) => true
+          case charAtI if(charAtI > w.charAt(i)) => false
+          case _ => loop(i + 1)
+        }
       } else v.length < w.length
 
       loop(d)
@@ -89,14 +89,17 @@ object Quick3String {
 
       @tailrec /** sort within partition */
       def loop(lt: Int, gt: Int, i: Int): (Int, Int, Int) = if (i <= gt) {
-        val t = charAt(s(i))
-        if (t < v) {
-          exch(lt, i)
-          loop(lt + 1, gt, i + 1)
-        } else if (t > v) {
-          exch(i, gt)
-          loop(lt, gt - 1, i)
-        } else loop(lt, gt, i + 1)
+        charAt(s(i)) match {
+          case t if (t < v) => {
+            exch(lt, i)
+            loop(lt + 1, gt, i + 1)
+          }
+          case t if (t > v) => {
+            exch(i, gt)
+            loop(lt, gt - 1, i)
+          }
+          case _ => loop(lt, gt, i + 1)
+        }
       } else (lt, gt, i)
 
       val tuple = loop(lo, hi, lo + 1)

@@ -1,13 +1,11 @@
-/** @see https://algs4.cs.princeton.edu/41undirected/Graph.java.html
-  */
 package org.gs.graph
 
 /** Undirected graph
   *
-  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
-  *
   * @constructor creates a new Graph with vertex count
   * @param v number of vertices
+  * @see [[https://algs4.cs.princeton.edu/41undirected/Graph.java.html]]
+  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   */
 class Graph(v: Int) extends BaseGraph(v) {
 

@@ -40,8 +40,7 @@ package org.gs
   * val minKeyValue = maxPQ.maxKey
   * val sortedKeys = maxPQ.keys
   * }}}
-  * @see https://algs4.cs.princeton.edu/13stacks/
-  * @see https://algs4.cs.princeton.edu/24pq/
+  * @see [[https://algs4.cs.princeton.edu/13stacks/]]
+  * @see [[https://algs4.cs.princeton.edu/24pq/]]
   */
-
 package object queue {}

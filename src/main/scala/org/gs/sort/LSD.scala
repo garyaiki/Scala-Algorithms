@@ -1,11 +1,9 @@
-/** @see http://algs4.cs.princeton.edu/51radix/LSD.java.html
-  */
 package org.gs.sort
 
 /** Sort function sorts an array of strings with the same width
   *
+  * @see [[https://algs4.cs.princeton.edu/51radix/LSD.java.html]]
   * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
-  *
   */
 object LSD {
 

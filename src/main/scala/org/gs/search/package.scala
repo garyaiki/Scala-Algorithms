@@ -28,8 +28,8 @@ package org.gs
   * val bm = new BoyerMoore(pattern)
   * val offset = bm.search(text)
   * }}}
-  * @see http://algs4.cs.princeton.edu/52trie/
-  * @see http://algs4.cs.princeton.edu/53substring/
+  * @see [[https://algs4.cs.princeton.edu/52trie/]]
+  * @see [[https://algs4.cs.princeton.edu/53substring/]]
   */
 
 package object search {}

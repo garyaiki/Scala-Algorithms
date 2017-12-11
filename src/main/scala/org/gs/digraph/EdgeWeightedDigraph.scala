@@ -1,22 +1,20 @@
-/** @see https://algs4.cs.princeton.edu/44sp/EdgeWeightedDigraph.java.html
-  */
 package org.gs.digraph
 
-import scala.collection.mutable.ListBuffer
 import org.gs.graph.BaseEdgeWeightedGraph
+import scala.collection.mutable.ListBuffer
 
 /** Digraph with edges having direction and weight
   *
-  *
   * @constructor creates a new EdgeWeightedDigraph with a vertex count
   * @param v number of vertices
+  * @see [[https://algs4.cs.princeton.edu/44sp/EdgeWeightedDigraph.java.html]]
   * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   */
 class EdgeWeightedDigraph(v: Int) extends BaseEdgeWeightedGraph[DirectedEdge](v) with DigraphMarker {
 
   /** @constructor creates a deep copy of an EdgeWeightedDigraph */
   def this(g: EdgeWeightedDigraph) = {
-    this(g.V)
+    this(g.numV)
     buildADJ(g)
   }
 

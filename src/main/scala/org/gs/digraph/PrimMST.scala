@@ -1,6 +1,5 @@
-/** @see https://algs4.cs.princeton.edu/43mst/PrimMST.java.html
-  */
 package org.gs.digraph
+
 import org.gs.graph.{Edge, EdgeWeightedGraph}
 import org.gs.queue.IndexMinPQ
 import scala.annotation.tailrec
@@ -11,15 +10,19 @@ import scala.collection.mutable.Queue
   * Only the shortest edge connecting a vertex to the tree remains on queue
   *
   * @constructor creates a new PrimMST with an EdgeWeightedGraph
-  * @param g [[org.gs.graph.EdgeWeightedGraph]]
+  * @param g EdgeWeightedGraph
+  * @see [[https://algs4.cs.princeton.edu/43mst/PrimMST.java.html]]
   * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   */
 class PrimMST(g: EdgeWeightedGraph) {
-  private val edgeTo = new Array[Edge](g.V)
-  private val distTo = Array.fill[Double](g.V)(Double.MaxValue)
-  private val marked = Array.fill[Boolean](g.V)(false)
-  private val pq = new IndexMinPQ[Double](g.V)
-  for (v <- 0 until g.V; if (!marked(v))) prim(v)
+  private val edgeTo = new Array[Edge](g.numV)
+  private val distTo = Array.fill[Double](g.numV)(Double.MaxValue)
+  private val marked = Array.fill[Boolean](g.numV)(false)
+  private val pq = new IndexMinPQ[Double](g.numV)
+  for {
+    v <- 0 until g.numV
+    if (!marked(v))
+  } prim(v)
 
   private def scan(v: Int): Unit = {
     marked(v) = true

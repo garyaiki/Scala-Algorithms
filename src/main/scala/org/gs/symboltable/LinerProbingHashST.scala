@@ -1,5 +1,3 @@
-/** @see https://algs4.cs.princeton.edu/34hash/LinearProbingHashST.java.html
-  */
 package org.gs.symboltable
 
 import scala.annotation.tailrec
@@ -8,10 +6,11 @@ import scala.annotation.tailrec
   *
   * when there is a collision try succeeding indexes insert in empty one
   *
-  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   * @tparam A generic key type
   * @tparam B generic value type
   * @param initialSize of array
+  * @see [[https://algs4.cs.princeton.edu/34hash/LinearProbingHashST.java.html]]
+  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   */
 class LinearProbingHashST[A, B](initialSize: Int) {
   private var m = initialSize
@@ -35,8 +34,8 @@ class LinearProbingHashST[A, B](initialSize: Int) {
 
     @tailrec
     def loop(j: Int): Option[(A, B)] = if (st(j) == null) None
-    else if (key.equals(st(j)._1)) Some(st(j))
-    else loop((j + 1) % m)
+      else if (key.equals(st(j)._1)) Some(st(j))
+      else loop((j + 1) % m)
 
     loop(i) match {
       case None => None

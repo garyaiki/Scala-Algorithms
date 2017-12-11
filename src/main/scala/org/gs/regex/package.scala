@@ -7,7 +7,7 @@ package org.gs
   * val nfa = new NFA("(a|(bc)*d)*")
   * val matches = nfa.recognizes("abcbcbcdaaaabcbcdaaaddd")
   * }}}
-  * @see https://algs4.cs.princeton.edu/54regexp/
+  * @see [[https://algs4.cs.princeton.edu/54regexp/]]
   */
 
 package object regex {}

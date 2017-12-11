@@ -1,9 +1,10 @@
-package org.gs.digraph
-
 /** @see https://algs4.cs.princeton.edu/44sp/tinyDG.txt
   * @see https://algs4.cs.princeton.edu/42directed/mediumDG.txt
   */
-import org.gs.digraph.fixtures.{DigraphBuilder, DirectedEdgeBuilder, SymbolDigraphBuilder,UnweightedDigraphBuilder}
+package org.gs.digraph
+
+import org.gs.digraph.fixtures.{DigraphBuilder, DirectedEdgeBuilder, SymbolDigraphBuilder,
+  UnweightedDigraphBuilder}
 import org.gs.fixtures.IntArrayBuilder
 import org.scalatest.FlatSpec
 import scala.collection.mutable.Queue
@@ -31,7 +32,7 @@ class KosarajuSharirSCCSuite extends FlatSpec {
     val components = new Array[Queue[Int]](m)
     for(i <- 0 until m) components(i) = new Queue[Int]()
 
-    for(v <- 0 until tinyDG.V) components(scc.id(v)).enqueue(v)
+    for(v <- 0 until tinyDG.numV) components(scc.id(v)).enqueue(v)
     
     assert(components(0).corresponds(List(1))(equals))
     assert(components(1).corresponds(List(0, 2, 3, 4, 5))(equals))
@@ -65,7 +66,7 @@ class KosarajuSharirSCCSuite extends FlatSpec {
     val components = new Array[Queue[Int]](m)
     for(i <- 0 until m) components(i) = new Queue[Int]()
 
-    for(v <- 0 until g.V) components(scc.id(v)).enqueue(v)
+    for(v <- 0 until g.numV) components(scc.id(v)).enqueue(v)
 
     assert(components(0).corresponds(List(21))(equals))
     assert(components(1).corresponds(List(2, 5, 6, 8, 9, 11, 12, 13, 15, 16, 18, 19, 22, 23, 25, 26,

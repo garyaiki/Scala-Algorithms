@@ -7,9 +7,7 @@ import org.gs.fixtures.IntArrayBuilder
 import org.gs.graph.fixtures.UnweightedEdgeBuilder
 import org.scalatest.FlatSpec
 
-/** [[http://doc.scalatest.org/2.2.0/#org.scalatest.FlatSpec ScalaTest]] for
-  * [[org.gs.graph.BreadthFirstPaths]]
-  * @author Gary Struthers
+/** @author Gary Struthers
   */
 class UnweightedGraphBuilder(fileURL: String) extends UnweightedEdgeBuilder {
   private val managedResource = readURI(fileURL)
@@ -25,15 +23,14 @@ class BreadthFirstPathsSuite extends FlatSpec {
   val tinyCG = builder.graph
 
   trait ConnectedGraphBuilder {
-    val tinyCGdata = Array[(Int, Int)]((0, 5), (2, 4), (2, 3), (1, 2), (0, 1), (3, 4), (3, 5),
-      (0, 2))
+    val tinyCGdata = Array[(Int, Int)]((0, 5), (2, 4), (2, 3), (1, 2), (0, 1), (3, 4), (3, 5), (0, 2))
     val tinyCG = new Graph(tinyCGdata.size)
     for (i <- tinyCGdata) tinyCG.addEdge(i._1, i._2)
   }
 
   behavior of "a BreadthFirstPaths"
   it should "have zero distance from a vertex to itself" in {
-    for (i <- 0 until tinyCG.V) {
+    for (i <- 0 until tinyCG.numV) {
       val g = new BreadthFirstPaths(tinyCG, i)
       assert(g.distTo(i) === 0, s"i:$i distTo itself:${g.distTo(i)}")
     }
@@ -41,16 +38,14 @@ class BreadthFirstPathsSuite extends FlatSpec {
 
   it should "find if source has path to target vertices" in {
     val from0 = new BreadthFirstPaths(tinyCG, 0)
-    for (j <- 1 to 5) {
-      assert(from0.hasPathTo(j), s"0 - j:$j")
-    }
+    for (j <- 1 to 5) assert(from0.hasPathTo(j), s"0 - j:$j")
   }
 
   it should "have each edge v-w dist[w] <= dist[v] + 1 where v reachable from s" in {
-    for (i <- 0 until tinyCG.V) {
+    for (i <- 0 until tinyCG.numV) {
       val g = new BreadthFirstPaths(tinyCG, i)
       for {
-        v <- 0 until tinyCG.V
+        v <- 0 until tinyCG.numV
         w <- tinyCG.adj(v)
       } {
         assert(g.hasPathTo(v) == g.hasPathTo(w), s"source:$i edge v:$v - w:$w")
@@ -61,13 +56,13 @@ class BreadthFirstPathsSuite extends FlatSpec {
   }
 
   it should "satisfy constraint distTo[w] + distTo[v] + 1 where v = edgeTo[w]" in {
-    for (i <- 0 until tinyCG.V) {
+    for (i <- 0 until tinyCG.numV) {
       val g = new BreadthFirstPaths(tinyCG, i)
       for {
-        w <- 0 until tinyCG.V
+        w <- 0 until tinyCG.numV
         if (g.hasPathTo(w) && i != w)
+        v = g.edgeTo(w)
       } {
-        val v = g.edgeTo(w)
         assert(g.distTo(w) <= g.distTo(v) + 1,
           s"source:$i v:$v - w:$w distTo w:${g.distTo(w)}  distTo v + 1:${g.distTo(v) + 1}")
       }

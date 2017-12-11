@@ -1,7 +1,5 @@
 package org.gs.digraph
 
-/** @see https://algs4.cs.princeton.edu/42directed/DepthFirstDirectedPaths.java.html
-  */
 import scala.annotation.tailrec
 
 /** Find paths from single source vertex
@@ -9,18 +7,19 @@ import scala.annotation.tailrec
   * @constructor createa a new DepthFirstDirectedPaths with a digraph and a source vertex
   * @param g Digraph
   * @param s a single source vertex
+  * @see [[https://algs4.cs.princeton.edu/42directed/DepthFirstDirectedPaths.java.html]]
   * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   */
 class DepthFirstDirectedPaths(g: Digraph, s: Int) {
-  private val marked = new Array[Boolean](g.V)
-  private val edgeTo = new Array[Int](g.V)
+  private val marked = new Array[Boolean](g.numV)
+  private val edgeTo = new Array[Int](g.numV)
 
   private def dfs(v: Int) {
     marked(v) = true
     g.adj(v) foreach (w => if (!marked(w)) {
-        edgeTo(w) = v
-        dfs(w)
-      })
+      edgeTo(w) = v
+      dfs(w)
+    })
   }
   dfs(s)
 

@@ -1,5 +1,3 @@
-/** @see https://algs4.cs.princeton.edu/44sp/AcyclicSP.java.html
-  */
 package org.gs.digraph
 
 import scala.annotation.tailrec
@@ -12,12 +10,13 @@ import scala.collection.mutable.ListBuffer
   * @constructor creates a new AcyclicSP with a digraph and source vertex
   * @param g acyclic digraph, edges have direction and weight
   * @param s source vertex
+  * @see [[https://algs4.cs.princeton.edu/44sp/AcyclicSP.java.html]]
   * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   */
 class AcyclicSP(g: EdgeWeightedDigraph, s: Int) {
-  private val _distTo = Array.fill[Double](g.V)(Double.PositiveInfinity)
+  private val _distTo = Array.fill[Double](g.numV)(Double.PositiveInfinity)
   _distTo(s) = 0.0
-  private val edgeTo = Array.fill[Option[DirectedEdge]](g.V)(None)
+  private val edgeTo = Array.fill[Option[DirectedEdge]](g.numV)(None)
   private val topological = new Topological(g)
 
   topological.order match {

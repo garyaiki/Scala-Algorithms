@@ -1,5 +1,3 @@
-/** @see https://algs4.cs.princeton.edu/52trie/TST.java.html
-  */
 package org.gs.search
 
 import scala.annotation.tailrec
@@ -8,10 +6,11 @@ import scala.collection.mutable.Queue
 /** Ternary search trie
   *
   * symbol table with string keys
-  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   *
   * @constructor creates a new TST
   * @tparam A generic value type
+  * @see [[https://algs4.cs.princeton.edu/52trie/TST.java.html]]
+  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   */
 class TST[A] {
   private var n = 0
@@ -34,10 +33,12 @@ class TST[A] {
       case None => None
       case Some(x) => {
         val c = key.charAt(d)
-        if (c < x.c) get(x.left, key, d)
-        else if (c > x.c) get(x.right, key, d)
-        else if (d < key.length - 1) get(x.mid, key, d + 1)
-        else Some(x)
+        c match {
+          case _ if (c < x.c) => get(x.left, key, d)
+          case _ if (c > x.c) => get(x.right, key, d)
+          case _ if (d < key.length - 1) => get(x.mid, key, d + 1)
+          case _ => Some(x)
+        }
       }
     }
   }
@@ -72,10 +73,12 @@ class TST[A] {
         case None => new Node(c)
         case Some(y) => y
       }
-      if (c < y.c) y.left = put(y.left, d)
-      else if (c > y.c) y.right = put(y.right, d)
-      else if (d < s.length - 1) y.mid = put(y.mid, d + 1)
-      else y.value = Some(value)
+      c match {
+        case _ if (c < y.c) => y.left = put(y.left, d)
+        case _ if (c > y.c) => y.right = put(y.right, d)
+        case _ if (d < s.length - 1) => y.mid = put(y.mid, d + 1)
+        case _ => y.value = Some(value)
+      }
       Some(y)
     }
     root = put(root, 0)
@@ -88,13 +91,14 @@ class TST[A] {
       case None => length
       case Some(y) => if (s == null || s.isEmpty) length else {
         val c = s.charAt(i)
-        if (c < y.c) loop(length, y.left, i)
-        else if (c > y.c) loop(length, y.right, i)
-        else
-          y.value match {
+        c match {
+          case _ if (c < y.c) => loop(length, y.left, i)
+          case _ if (c > y.c) => loop(length, y.right, i)
+          case _ => y.value match {
             case None => loop(i + 1, y.mid, i + 1)
             case Some(v) => loop(length, y.mid, i + 1)
           }
+        }
       }
     }
 

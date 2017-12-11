@@ -21,8 +21,8 @@ package org.gs
   * ost.put(item._1, item._2)
   * val value = ost.get('K')
   * }}}
-  * @see https://algs4.cs.princeton.edu/33balanced/
-  * @see https://algs4.cs.princeton.edu/34hash/
+  * @see [[https://algs4.cs.princeton.edu/33balanced/]]
+  * @see [[https://algs4.cs.princeton.edu/34hash/]]
   */
 
 package object symboltable {}

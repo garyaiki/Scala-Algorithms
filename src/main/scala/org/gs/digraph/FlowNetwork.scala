@@ -1,5 +1,3 @@
-/** @see https://algs4.cs.princeton.edu/64maxflow/FlowNetwork.java.html
-  */
 package org.gs.digraph
 
 import scala.collection.mutable.ListBuffer
@@ -8,6 +6,7 @@ import scala.collection.mutable.ListBuffer
   *
   * @constructor creates a new FlowNetwork with a vertex count
   * @param v number of vertices
+  * @see [[https://algs4.cs.princeton.edu/64maxflow/FlowNetwork.java.html]]
   * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   */
 class FlowNetwork(val v: Int) {
@@ -22,8 +21,8 @@ class FlowNetwork(val v: Int) {
     val w = e.to
 
     def rangeGuard(x: Int): Boolean = x match {
-        case x if 0 until v contains x => true
-        case _ => false
+      case x if 0 until v contains x => true
+      case _ => false
     }
 
     require(rangeGuard(_v) && rangeGuard(w), s"verticies v:${_v} w:$w not in 0..$v ")
@@ -35,12 +34,11 @@ class FlowNetwork(val v: Int) {
 
   def adj(v: Int): List[FlowEdge] = _adj(v)
 
-  def edges(): Seq[FlowEdge] = {
-    for {
-      vV <- 0 until v
-      e <- adj(vV)
-    } yield e
-  }
+  def edges(): Seq[FlowEdge] = for {
+    vV <- 0 until v
+    e <- adj(vV)
+  } yield e
+
 
   override def toString(): String = {
     val lf = sys.props("line.separator")

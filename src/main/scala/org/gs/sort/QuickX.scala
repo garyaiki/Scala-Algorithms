@@ -1,5 +1,3 @@
-/** @see https://algs4.cs.princeton.edu/23quicksort/QuickX.java.html
-  */
 package org.gs.sort
 
 import scala.annotation.tailrec
@@ -9,11 +7,11 @@ import scala.util.Random
 
 /** Quicksort
   *
-  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
-  *
   * @constructor creates a new QuickX
   * @tparam A elements are generic and ordered ClassTag preserves Array type at runtime
   * @param ord implicitly provides ordering
+  * @see [[https://algs4.cs.princeton.edu/23quicksort/QuickX.java.html]]
+  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   */
 class QuickX[A: ClassTag](implicit ord: A => Ordered[A]) {
 
@@ -104,14 +102,17 @@ class QuickX[A: ClassTag](implicit ord: A => Ordered[A]) {
 
     @tailrec /** scan both partition, put i, j in order, loop */
     def loop(i: Int, j: Int, xs: Array[A]): Int = {
-      val newIJ = (scanLR(i, xs), scanRL(j, xs))
-      if (newIJ._1 == newIJ._2) newIJ._2
-      else if (newIJ._1 > newIJ._2) {
-        exchange(lo, newIJ._2, xs)
-        newIJ._2
-      } else {
-        exchange(newIJ._1, newIJ._2, xs)
-        loop(newIJ._1, newIJ._2, xs)
+      val rl = scanRL(j, xs)
+      scanLR(i, xs) match {
+        case lr if(lr == rl) => rl
+        case lr if(lr > rl) => {
+          exchange(lo, rl, xs)
+          rl
+        }
+        case lr => {
+          exchange(lr, rl, xs)
+          loop(lr, rl, xs)
+        }
       }
     }
     loop(lo + 1, hi, xs)

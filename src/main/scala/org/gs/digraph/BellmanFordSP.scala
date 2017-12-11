@@ -1,5 +1,3 @@
-/** @see https://algs4.cs.princeton.edu/44sp/BellmanFordSP.java.html
-  */
 package org.gs.digraph
 
 import scala.annotation.tailrec
@@ -13,12 +11,13 @@ import scala.collection.mutable.{ListBuffer, Queue}
   * @constructor creates a new BellmanFordSP with an edge weighted digraph and source vertex
   * @param g acyclic digraph edges have direction and weight
   * @param s source vertex
+  * @see [[https://algs4.cs.princeton.edu/44sp/BellmanFordSP.java.html]]
   * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   */
 class BellmanFordSP(g: EdgeWeightedDigraph, s: Int) {
-  private val _distTo = Array.fill[Double](g.V)(Double.PositiveInfinity)
-  private val edgeTo = new Array[DirectedEdge](g.V)
-  private val onQueue = Array.fill[Boolean](g.V)(false)
+  private val _distTo = Array.fill[Double](g.numV)(Double.PositiveInfinity)
+  private val edgeTo = new Array[DirectedEdge](g.numV)
+  private val onQueue = Array.fill[Boolean](g.numV)(false)
   private val queue = new Queue[Int]()
   private var cost = 0
   private var cycle = null.asInstanceOf[List[DirectedEdge]]
@@ -58,8 +57,10 @@ class BellmanFordSP(g: EdgeWeightedDigraph, s: Int) {
   }
 
   private def relax(v: Int): Unit = {
-    for (e <- g.adj(v)) {
-      val w = e.to
+    for {
+      e <- g.adj(v)
+      w = e.to
+    } { 
       if (_distTo(w)  > _distTo(v) + e.weight) {
         _distTo(w) = _distTo(v) + e.weight
         edgeTo(w) = e
@@ -68,7 +69,7 @@ class BellmanFordSP(g: EdgeWeightedDigraph, s: Int) {
           onQueue(w) = true
         }
       }
-      if (cost % g.V == 0) findNegativeCycle()
+      if (cost % g.numV == 0) findNegativeCycle()
       cost += 1
     }
   }

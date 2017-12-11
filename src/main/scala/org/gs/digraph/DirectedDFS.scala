@@ -1,5 +1,3 @@
-/** @see http://algs4.cs.princeton.edu/42directed/DirectedDFS.java.html
-  */
 package org.gs.digraph
 
 /** Find reachable vertices from single or multiple source vertices
@@ -7,11 +5,11 @@ package org.gs.digraph
   * @constructor creates a new DirectedDFS with a digraph and any number of source vertices
   * @param g Digraph
   * @param sources a variable number of vertices
-  *
+  * @see [[https://algs4.cs.princeton.edu/42directed/DirectedDFS.java.html]]
   * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   */
 class DirectedDFS(g: Digraph, sources: Int*) {
-  val marked = new Array[Boolean](g.V)
+  val marked = new Array[Boolean](g.numV)
   private var _count = 0
 
   /** returns number of vertices reachable from s */

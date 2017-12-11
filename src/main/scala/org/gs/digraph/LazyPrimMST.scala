@@ -1,27 +1,27 @@
-/** @see http://algs4.cs.princeton.edu/43mst/LazyPrimMST.java.html
-  */
 package org.gs.digraph
+
+import org.gs.graph.{Edge, EdgeWeightedGraph}
+import org.gs.queue.MinPQ
+import org.gs.set.UF
+import scala.annotation.tailrec
+import scala.collection.mutable.{ArrayBuffer, Queue}
 
 /** Compute a minimal spanning tree in an edge weighted graph
   *
   * @constructor creates a new LazyPrimMST with an EdgeWeightedGraph
   * @param g EdgeWeightedGraph
+  * @see [[https://algs4.cs.princeton.edu/43mst/LazyPrimMST.java.html]]
   * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
   */
-import scala.collection.mutable.ArrayBuffer
-import scala.collection.mutable.Queue
-import scala.annotation.tailrec
-import org.gs.queue.MinPQ
-import org.gs.set.UF
-import org.gs.graph.Edge
-import org.gs.graph.EdgeWeightedGraph
-
 class LazyPrimMST(g: EdgeWeightedGraph) {
   private var _weight: Double = 0.0
   private val mst = new Queue[Edge]()
-  private val marked = Array.fill[Boolean](g.V)(false)
+  private val marked = Array.fill[Boolean](g.numV)(false)
   private val pq = new MinPQ[Edge](new ArrayBuffer((g.e) * 2))
-  for (v <- 0 until g.V; if (!marked(v))) prim(v)
+  for {
+    v <- 0 until g.numV
+    if (!marked(v))
+  } prim(v)
 
   /** returns sum of edge weights in a MST */
   def weight(): Double = _weight
@@ -68,7 +68,7 @@ class LazyPrimMST(g: EdgeWeightedGraph) {
 
   /** Validate */
   def checkIsMinSpanningForest(): Boolean = {
-    val uf = new UF(g.V)
+    val uf = new UF(g.numV)
 
     def mstEdges(e: Edge) {
       mst foreach (f => if (f != e) uf.union(f.either, f.other(f.either)))
@@ -81,13 +81,9 @@ class LazyPrimMST(g: EdgeWeightedGraph) {
       }
 
       @tailrec
-      def loopE(es: Seq[Edge]): Boolean = {
-        es match {
+      def loopE(es: Seq[Edge]): Boolean = es match {
           case last +: Seq() => cutCheck(last)
-          case head +: tail => {
-            if(cutCheck(head)) loopE(tail) else false
-          }
-        }
+          case head +: tail => if(cutCheck(head)) loopE(tail) else false
       }
 
       loopE(g.edges)
@@ -103,11 +99,9 @@ class LazyPrimMST(g: EdgeWeightedGraph) {
       }
 
       es match {
-          case last +: Seq() => doEdge(last)
-          case head +: tail => {
-            if(doEdge(head)) loopMW(tail) else false
-          }
-        }
+        case last +: Seq() => doEdge(last)
+        case head +: tail => if(doEdge(head)) loopMW(tail) else false
+      }
     }
     loopMW(es)
   }
