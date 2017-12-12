@@ -1,13 +1,12 @@
-/** ScalaTest for Merge
-  * @see https://algs4.cs.princeton.edu/51radix/shells.txt
-  */
 package org.gs.sort
 
 import org.gs.fixtures.WordArrayBuilder
 import org.scalatest.FlatSpec
 
-/** @author Gary Struthers
+/** ScalaTest for Merge
+  * @see [[https://algs4.cs.princeton.edu/51radix/shells.txt]]
   *
+  * @author Gary Struthers
   */
 class MergeSuite extends FlatSpec {
   behavior of "a Merge"

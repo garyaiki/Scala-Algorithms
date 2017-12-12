@@ -1,13 +1,12 @@
-/** @see https://algs4.cs.princeton.edu/43mst/tinyEWG.txt
-  */
 package org.gs.digraph
 
 import org.gs.digraph.fixtures.GraphBuilder
 import org.gs.graph.{Edge, EdgeWeightedGraph}
 import org.scalatest.FlatSpec
 
-/** @author Gary Struthers
+/** @see [[https://algs4.cs.princeton.edu/43mst/tinyEWG.txt]]
   *
+  * @author Gary Struthers
   */
 class MinSpanningTreeSuite extends FlatSpec {
 

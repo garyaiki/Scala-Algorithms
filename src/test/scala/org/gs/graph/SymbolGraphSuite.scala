@@ -1,13 +1,15 @@
 package org.gs.graph
-/** [[https://doc.scalatest.org/2.2.0/#org.scalatest.FlatSpec ScalaTest]] for
-  *  [[org.gs.graph.SymbolGraph]]
-  * @author Gary Struthers
-  * @see https://algs4.cs.princeton.edu/41undirected/movies.txt
-  * @see https://algs4.cs.princeton.edu/41undirected/routes.txt
-  */
+
 import org.gs.fixtures.IntArrayBuilder
 import org.gs.graph.fixtures.SymbolGraphBuilder
 import org.scalatest.FlatSpec
+
+/** [[org.gs.graph.SymbolGraph]]
+  * 
+  * @see [[https://algs4.cs.princeton.edu/41undirected/movies.txt]]
+  * @see [[https://algs4.cs.princeton.edu/41undirected/routes.txt]]
+  * @author Gary Struthers
+  */
 
 class SymbolGraphSuite extends FlatSpec {
   class Movies extends SymbolGraphBuilder {

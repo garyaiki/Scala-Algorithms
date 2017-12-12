@@ -1,13 +1,13 @@
 package org.gs.symboltable
 
-/** @see https://algs4.cs.princeton.edu/33balanced/tinyST.txt
-  * @see https://algs4.cs.princeton.edu/33balanced/RedBlackBST.java.html
-  */
 import org.scalatest.{BeforeAndAfter, FlatSpec, PrivateMethodTester}
 import math.Ordering
 import scala.collection.mutable.ArrayBuffer
 
-/** @author Gary Struthers
+/** @see [[https://algs4.cs.princeton.edu/33balanced/tinyST.txt]]
+  * @see [[https://algs4.cs.princeton.edu/33balanced/RedBlackBST.java.html]]
+  *
+  * @author Gary Struthers
   */
 class RedBlackBSTSuite extends FlatSpec with BeforeAndAfter with PrivateMethodTester {
   var testInput: ArrayBuffer[(Char, Int)] = _

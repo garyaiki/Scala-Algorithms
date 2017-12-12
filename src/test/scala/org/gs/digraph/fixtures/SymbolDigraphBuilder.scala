@@ -1,5 +1,3 @@
-/** @see https://algs4.cs.princeton.edu/42directed/SymbolDigraph.java.html
-  */
 package org.gs.digraph.fixtures
 
 import org.gs.digraph.Digraph
@@ -9,7 +7,9 @@ import org.gs.graph.fixtures.BaseSymbolGraphBuilder
 import scala.collection.immutable.TreeMap
 import scala.io.{BufferedSource, Source}
 
-/** @author Gary Struthers
+/** @see [[https://algs4.cs.princeton.edu/42directed/SymbolDigraph.java.html]]
+  *
+  * @author Gary Struthers
   */
 trait SymbolDigraphBuilder extends StringArrayBuilder with SymbolTableBuilder with BaseSymbolGraphBuilder {
   

@@ -1,13 +1,12 @@
-/** ScalaTest for LSD
-  * @see https://algs4.cs.princeton.edu/51radix/LSD.java.html
-  */
 package org.gs.sort
 
 import org.gs.fixtures.WordArrayBuilder
 import org.scalatest.FlatSpec
 
-/** @author Gary Struthers
+/** ScalaTest for LSD
+  * @see [[https://algs4.cs.princeton.edu/51radix/LSD.java.html]]
   *
+  * @author Gary Struthers
   */
 class LSDSuite extends FlatSpec {
   behavior of "a LSD"

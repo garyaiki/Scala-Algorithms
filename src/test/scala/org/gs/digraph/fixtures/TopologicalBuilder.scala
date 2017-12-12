@@ -1,11 +1,10 @@
-/** @see https://algs4.cs.princeton.edu/42directed/jobs.txt
-  */
 package org.gs.digraph.fixtures
 
 import org.gs.digraph.{DijkstraSP, DirectedEdge, EdgeWeightedDigraph}
 
-/** @author Gary Struthers
+/** @see [[https://algs4.cs.princeton.edu/42directed/jobs.txt]]
   *
+  * @author Gary Struthers
   */
 trait TopologicalBuilder {
 

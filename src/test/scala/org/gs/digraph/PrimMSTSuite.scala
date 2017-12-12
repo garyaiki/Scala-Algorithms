@@ -1,10 +1,4 @@
-/** @see https://algs4.cs.princeton.edu/43mst/tinyEWG.txt
-  */
 package org.gs.digraph
-
-/** @author Gary Struthers
-  *
-  */
 
 import org.gs.digraph.fixtures.{EdgeWeightedGraphBuilder, GraphBuilder, PrimMSTBuilder}
 import org.gs.graph.{Edge, EdgeWeightedGraph}
@@ -13,6 +7,10 @@ import org.scalatest.FlatSpec
 import org.scalatest.Matchers._
 import scala.annotation.tailrec
 
+/** @see [[https://algs4.cs.princeton.edu/43mst/tinyEWG.txt]]
+  *
+  * @author Gary Struthers
+  */
 class PrimMSTSuite extends FlatSpec {
 
   behavior of "a PrimMST"

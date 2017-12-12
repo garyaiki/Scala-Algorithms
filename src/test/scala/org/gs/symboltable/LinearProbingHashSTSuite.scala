@@ -1,7 +1,5 @@
 package org.gs.symboltable
 
-/**
-  */
 import org.scalatest.{BeforeAndAfter, FlatSpec, PrivateMethodTester}
 import scala.collection.mutable.ArrayBuffer
 

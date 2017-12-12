@@ -1,7 +1,4 @@
 package org.gs.queue
-/** @author Gary Struthers
-  *
-  */
 
 import org.scalatest.FlatSpec
 import scala.collection.mutable.ArrayBuffer
@@ -16,6 +13,7 @@ trait QueueBuilder {
   testChars foreach(c => minPQ.insert(c))
 }
 
+/** @author Gary Struthers */
 class MaxPriorityQueueSuite extends FlatSpec {
 
   behavior of "a MaxPQ"

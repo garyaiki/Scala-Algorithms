@@ -1,12 +1,10 @@
-/** ScalaTest for AcyclicSP
-  */
 package org.gs.digraph
 
 import org.gs.digraph.fixtures.DirectedEdgeBuilder
 import org.scalatest.FlatSpec
 
-/** @author Gary Struthers
-  *
+/** ScalaTest for AcyclicSP
+  * @author Gary Struthers
   */
 class AcyclicSPSuite extends FlatSpec {
   it should "find paths in an EdgeWeightedDigraph" in new DirectedEdgeBuilder {    

@@ -1,5 +1,3 @@
-/**
-  */
 package org.gs.graph.fixtures
 
 import org.gs.fixtures.{BufferedSourceBuilder, SymbolTableBuilder}
@@ -7,9 +5,7 @@ import org.gs.graph.BaseGraph
 import scala.collection.immutable.TreeMap
 import scala.io.BufferedSource
 
-/** @author Gary Struthers
-  *
-  */
+/** @author Gary Struthers */
 trait BaseSymbolGraphBuilder {
   
   def buildGraph[A <: BaseGraph](
@@ -23,9 +19,7 @@ trait BaseSymbolGraphBuilder {
         case Some(x) => for {
           i <- 1 until s.size
           w <- st.get(s(i))
-        } {
-          g.addEdge(x, w)
-        }
+        } g.addEdge(x, w)
         case None =>
       }
     }

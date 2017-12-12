@@ -1,13 +1,13 @@
 package org.gs.digraph
-/** @see https://algs4.cs.princeton.edu/44sp/DirectedCycle.java.html
-  * @see https://algs4.cs.princeton.edu/44sp/tinyDG.txt
-  * @see https://algs4.cs.princeton.edu/42directed/tinyDAG.txt
-  */
-import org.scalatest.FlatSpec
-import org.gs.digraph.fixtures.DigraphBuilder
 
-/** @author Gary Struthers
+import org.gs.digraph.fixtures.DigraphBuilder
+import org.scalatest.FlatSpec
+
+/** @see [[https://algs4.cs.princeton.edu/44sp/DirectedCycle.java.html]]
+  * @see [[https://algs4.cs.princeton.edu/44sp/tinyDG.txt]]
+  * @see [[https://algs4.cs.princeton.edu/42directed/tinyDAG.txt]]
   *
+  * @author Gary Struthers
   */
 class DirectedCycleSuite extends FlatSpec {
 

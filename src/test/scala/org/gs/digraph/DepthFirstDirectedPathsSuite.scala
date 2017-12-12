@@ -1,13 +1,11 @@
 package org.gs.digraph
 
-/** @see https://algs4.cs.princeton.edu/44sp/tinyDG.txt
-  * @see https://algs4.cs.princeton.edu/42directed/tinyDAG.txt
-  */
-import org.scalatest.FlatSpec
 import org.gs.digraph.fixtures.DigraphBuilder
+import org.scalatest.FlatSpec
 
-/** @author Gary Struthers
-  *
+/** @see [[https://algs4.cs.princeton.edu/44sp/tinyDG.txt]]
+  * @see [[https://algs4.cs.princeton.edu/42directed/tinyDAG.txt]]
+  * @author Gary Struthers
   */
 class DepthFirstDirectedPathsSuite extends FlatSpec { 
 

@@ -1,6 +1,3 @@
-/** @see https://algs4.cs.princeton.edu/44sp/tinyDG.txt
-  * @see https://algs4.cs.princeton.edu/42directed/mediumDG.txt
-  */
 package org.gs.digraph
 
 import org.gs.digraph.fixtures.{DigraphBuilder, DirectedEdgeBuilder, SymbolDigraphBuilder,
@@ -9,8 +6,10 @@ import org.gs.fixtures.IntArrayBuilder
 import org.scalatest.FlatSpec
 import scala.collection.mutable.Queue
 
-/** @author Gary Struthers
+/** @see [[https://algs4.cs.princeton.edu/44sp/tinyDG.txt]]
+  * @see [[https://algs4.cs.princeton.edu/42directed/mediumDG.txt]]
   *
+  * @author Gary Struthers
   */
 class KosarajuSharirSCCSuite extends FlatSpec {
 

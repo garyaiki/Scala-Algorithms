@@ -1,12 +1,11 @@
-/** ScalaTest for EdgeWeightedDirectedCycle
-  */
 package org.gs.digraph
 
 import org.gs.digraph.fixtures.DirectedEdgeBuilder
 import org.scalatest.FlatSpec
 
-/** @author Gary Struthers
+/** ScalaTest for EdgeWeightedDirectedCycle
   *
+  * @author Gary Struthers
   */
 class EdgeWeightedDirectedCycleSuite extends FlatSpec {
 

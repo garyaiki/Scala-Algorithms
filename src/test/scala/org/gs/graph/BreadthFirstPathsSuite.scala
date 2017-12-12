@@ -1,13 +1,13 @@
 package org.gs.graph
 
-/** @see https://algs4.cs.princeton.edu/41undirected/tinyCG.txt
-  * @see https://algs4.cs.princeton.edu/41undirected/largeG.txt
-  */
 import org.gs.fixtures.IntArrayBuilder
 import org.gs.graph.fixtures.UnweightedEdgeBuilder
 import org.scalatest.FlatSpec
 
-/** @author Gary Struthers
+/** @see [[https://algs4.cs.princeton.edu/41undirected/tinyCG.txt]]
+  * @see [[https://algs4.cs.princeton.edu/41undirected/largeG.txt]]
+  *
+  * @author Gary Struthers
   */
 class UnweightedGraphBuilder(fileURL: String) extends UnweightedEdgeBuilder {
   private val managedResource = readURI(fileURL)

@@ -1,13 +1,12 @@
-/** ScalaTest for Ternary Search Trie
-  * @see https://algs4.cs.princeton.edu/52trie/TST.java.html
-  */
 package org.gs.search
 
 import org.gs.fixtures.WordArrayBuilder
 import org.scalatest.FlatSpec
 
-/** @author Gary Struthers
+/** ScalaTest for Ternary Search Trie
+  * @see [[https://algs4.cs.princeton.edu/52trie/TST.java.html]]
   *
+  * @author Gary Struthers
   */
 class TSTSuite extends FlatSpec {
   behavior of "a TST"

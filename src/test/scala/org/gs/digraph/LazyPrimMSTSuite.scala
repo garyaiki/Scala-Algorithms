@@ -1,17 +1,17 @@
-/** @see https://algs4.cs.princeton.edu/43mst/tinyEWG.txt
-  */
 package org.gs.digraph
 
-import org.gs.set.UF
-import org.gs.digraph.fixtures.{DirectedEdgeBuilder, EdgeWeightedGraphBuilder, GraphBuilder, MSTBuilder, PrimMSTBuilder }
+import org.gs.digraph.fixtures.{DirectedEdgeBuilder, EdgeWeightedGraphBuilder, GraphBuilder, MSTBuilder,
+  PrimMSTBuilder}
 import org.gs.graph.{Edge, EdgeWeightedGraph}
 import org.gs.graph.fixtures.EdgeBuilder
+import org.gs.set.UF
 import org.scalatest.FlatSpec
 import org.scalatest.Matchers._
 import scala.annotation.tailrec
 
-/** @author Gary Struthers
+/** @see [[https://algs4.cs.princeton.edu/43mst/tinyEWG.txt]]
   *
+  * @author Gary Struthers
   */
 class LazyPrimMSTSuite extends FlatSpec {
 

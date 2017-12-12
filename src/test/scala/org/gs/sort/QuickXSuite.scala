@@ -1,13 +1,12 @@
-/** ScalaTest for QuickX
-  * @see https://algs4.cs.princeton.edu/23quicksort/QuickX.java.html
-  */
 package org.gs.sort
 
 import org.gs.fixtures.WordArrayBuilder
 import org.scalatest.FlatSpec
 
-/** @author Gary Struthers
+/** ScalaTest for QuickX
+  * @see [[https://algs4.cs.princeton.edu/23quicksort/QuickX.java.html]]
   *
+  * @author Gary Struthers
   */
 class QuickXSuite extends FlatSpec {
   behavior of "a QuickX"

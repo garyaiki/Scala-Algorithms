@@ -1,12 +1,10 @@
-
 package org.gs.digraph
 
-import org.gs.digraph.fixtures.DirectedEdgeBuilder
+import org.gs.digraph.fixtures.{BellmanFordBuilder, DirectedEdgeBuilder}
 import org.scalatest.FlatSpec
 import org.scalatest.PrivateMethodTester._
-import org.gs.digraph.fixtures.BellmanFordBuilder
 
-/** @see https://algs4.cs.princeton.edu/44sp/tinyEWDn.txt
+/** @see [[https://algs4.cs.princeton.edu/44sp/tinyEWDn.txt]]
   * @author Gary Struthers
   */
 class BellmanFordSuite extends FlatSpec {

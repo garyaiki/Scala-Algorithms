@@ -1,13 +1,13 @@
-/** ScalaTestfor FLowNetwork
-  * @see https://algs4.cs.princeton.edu/64maxflow/tinyFN.txt
-  */
 package org.gs.digraph
 
 import org.gs.digraph.fixtures.{DirectedEdgeBuilder, FlowEdgeBuilder}
 import org.scalatest.FlatSpec
 
-/** @author Gary Struthers
+/** ScalaTestfor FLowNetwork
   *
+  * @see [[https://algs4.cs.princeton.edu/64maxflow/tinyFN.txt]]
+  *
+  * @author Gary Struthers
   */
 class FordFulkersonSuite extends FlatSpec {
   behavior of "a FordFulkerson"

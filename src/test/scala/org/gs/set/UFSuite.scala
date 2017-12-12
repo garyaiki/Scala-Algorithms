@@ -1,12 +1,11 @@
-/** @see https://algs4.cs.princeton.edu/15uf/largeUF.txt
-  */
 package org.gs.set
 
 import org.gs.fixtures.{BufferedSourceBuilder, IntArrayBuilder}
 import org.scalatest.FlatSpec
 
-/** @author Gary Struthers
+/** @see [[https://algs4.cs.princeton.edu/15uf/largeUF.txt]]
   *
+  * @author Gary Struthers
   */
 class UFSuite extends FlatSpec {
   trait UnionFindBuilder {

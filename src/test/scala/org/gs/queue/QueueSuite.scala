@@ -1,13 +1,13 @@
 package org.gs.queue
-/** @see https://algs4.cs.princeton.edu/13stacks/tobe.txt
-  */
+
 
 import org.gs.fixtures.WordArrayBuilder
 import org.scalatest.FlatSpec
 import scala.collection.mutable.ArrayBuffer
 
-/** @author Gary Struthers
+/** @see [[https://algs4.cs.princeton.edu/13stacks/tobe.txt]]
   *
+  * @author Gary Struthers
   */
 class QueueSuite extends FlatSpec {
   behavior of "a Queue"

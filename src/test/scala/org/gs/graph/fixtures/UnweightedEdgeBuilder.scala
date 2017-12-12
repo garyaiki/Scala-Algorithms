@@ -1,5 +1,3 @@
-/** Builds arrays of directed edges
-  */
 package org.gs.graph.fixtures
 
 import org.gs.digraph.DirectedEdge
@@ -7,8 +5,9 @@ import org.gs.fixtures.BufferedSourceBuilder
 import scala.collection.mutable.ArrayBuffer
 import scala.io.BufferedSource
 
-/** @author Gary Struthers
+/** Builds arrays of directed edges
   *
+  * @author Gary Struthers
   */
 trait UnweightedEdgeBuilder extends BufferedSourceBuilder {
   val intPattern = """^\d+$""".r

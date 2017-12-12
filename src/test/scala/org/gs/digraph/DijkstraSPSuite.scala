@@ -1,5 +1,3 @@
-/** @see https://algs4.cs.princeton.edu/44sp/tinyEWD.txt
-  */
 package org.gs.digraph
 
 import org.gs.digraph.fixtures.{DijkstraSPBuilder, EdgeWeightedDigraphBuilder,TinyEdgeWeightedDigraphBuilder}
@@ -7,8 +5,9 @@ import org.scalatest.FlatSpec
 import org.scalatest.Matchers._
 import scala.annotation.tailrec
 
-/** @author Gary Struthers
+/** @see [[https://algs4.cs.princeton.edu/44sp/tinyEWD.txt]]
   *
+  * @author Gary Struthers
   */
 class DijkstraSPSuite extends FlatSpec {
 
@@ -29,8 +28,8 @@ class DijkstraSPSuite extends FlatSpec {
     @tailrec
     def loop(i: Int): Boolean = {
       if (i < g.numV) {
-        if ((i != s0) && (dsp0.edgeTo(i) == null && dsp0.distTo(i) != Double.PositiveInfinity))
-          false else loop(i + 1)
+        if ((i != s0) && (dsp0.edgeTo(i) == null && dsp0.distTo(i) != Double.PositiveInfinity)) false
+        else loop(i + 1)
       } else true
     }
     var consistent = loop(0)

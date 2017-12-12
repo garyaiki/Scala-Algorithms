@@ -1,11 +1,11 @@
 package org.gs.digraph
-/** @see https://algs4.cs.princeton.edu/41undirected/routes.txt
-  */
-import org.scalatest.FlatSpec
-import org.gs.digraph.fixtures.SymbolDigraphBuilder
 
-/** @author Gary Struthers
+import org.gs.digraph.fixtures.SymbolDigraphBuilder
+import org.scalatest.FlatSpec
+
+/** @see [[https://algs4.cs.princeton.edu/41undirected/routes.txt]]
   *
+  * @author Gary Struthers
   */
 class SymbolDigraphSuite extends FlatSpec {
   behavior of "a SymbolDigraph"

@@ -1,13 +1,10 @@
 package org.gs.digraph
 
-/** @see https://algs4.cs.princeton.edu/44sp/tinyDG.txt
-  */
 import org.scalatest.FlatSpec
-import org.gs.digraph.fixtures.DigraphBuilder
-import org.gs.digraph.fixtures.UnweightedDigraphBuilder
+import org.gs.digraph.fixtures.{DigraphBuilder, UnweightedDigraphBuilder}
 
-/** @author Gary Struthers
-  *
+/** @see [[https://algs4.cs.princeton.edu/44sp/tinyDG.txt]]
+  * @author Gary Struthers
   */
 class BreadthFirstDirectedPathsSuite extends FlatSpec {
   val builder = new UnweightedDigraphBuilder("https://algs4.cs.princeton.edu/42directed/tinyDG.txt")

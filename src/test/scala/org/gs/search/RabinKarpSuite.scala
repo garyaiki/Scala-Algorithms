@@ -1,12 +1,11 @@
-/** ScalaTest, JUnit tests for Boyer Moore
-  * @see https://algs4.cs.princeton.edu/53substring/RabinKarp.java.html
-  */
 package org.gs.search
 
 import org.scalatest.FlatSpec
 
-/** @author Gary Struthers
+/** ScalaTest for Boyer Moore
+  * @see [[https://algs4.cs.princeton.edu/53substring/RabinKarp.java.html]]
   *
+  * @author Gary Struthers
   */
 class RabinKarpSuite extends FlatSpec {
   behavior of "a RabinKarp"

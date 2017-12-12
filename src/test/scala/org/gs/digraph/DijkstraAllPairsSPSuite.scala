@@ -1,5 +1,3 @@
-/**
-  */
 package org.gs.digraph
 
 import org.gs.digraph.fixtures.TinyEdgeWeightedDigraphBuilder
@@ -11,9 +9,7 @@ trait DijkstraAllPairsSPBuilder extends TinyEdgeWeightedDigraphBuilder {
   val allPairsSP = new DijkstraAllPairsSP(g)
 }
 
-/** @author Gary Struthers
-  *
-  */
+/** @author Gary Struthers */
 class DijkstraAllPairsSPSuite extends FlatSpec {
   behavior of "a DijkstraAllPairsSP"
   it should "create a new DijkstraAllPairsSP from an EWD" in new TinyEdgeWeightedDigraphBuilder {

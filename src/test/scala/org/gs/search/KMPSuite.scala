@@ -1,12 +1,11 @@
-/** ScalaTest for Knuth, Morris, Pratt
-  * @see https://algs4.cs.princeton.edu/53substring/KMP.java.html
-  */
 package org.gs.search
 
 import org.scalatest.FlatSpec
 
-/** @author Gary Struthers
+/** ScalaTest for Knuth, Morris, Pratt
+  * @see [[https://algs4.cs.princeton.edu/53substring/KMP.java.html]]
   *
+  * @author Gary Struthers
   */
 class KMPSuite extends FlatSpec {
   behavior of "a KMP"

@@ -1,12 +1,12 @@
-/** ScalaTest for Nondeterministic Finite Automata
-  * @see https://algs4.cs.princeton.edu/54regexp/NFA.java.html
-  */
 package org.gs.regex
 
 import org.scalatest.FlatSpec
 
-/** @author Gary Struthers
+/** ScalaTest for Nondeterministic Finite Automata
   *
+  * @see [[https://algs4.cs.princeton.edu/54regexp/NFA.java.html]]
+  *
+  * @author Gary Struthers
   */
 class NFASuite extends FlatSpec {
   behavior of "a NFA"

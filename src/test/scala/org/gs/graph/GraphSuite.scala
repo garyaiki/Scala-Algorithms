@@ -1,10 +1,10 @@
 package org.gs.graph
 
-/** @see https://algs4.cs.princeton.edu/41undirected/mediumG.txt
-  */
 import org.gs.fixtures.IntArrayBuilder
 import org.scalatest.FlatSpec
 
+/** @see [[https://algs4.cs.princeton.edu/41undirected/mediumG.txt]]
+  */
 class GraphSuite extends FlatSpec {
 
   behavior of "a Graph"

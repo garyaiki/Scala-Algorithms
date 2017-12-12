@@ -1,5 +1,3 @@
-/** @see https://github.com/jsuereth/scala-in-depth-source/blob/master/chapter11/src/main/scala/scalax/resource/resource.scala
-  */
 package org.gs.fixtures
 
 import org.gs.digraph.Digraph
@@ -7,8 +5,9 @@ import scala.collection.immutable.TreeMap
 import scala.collection.mutable.ArrayBuffer
 import scala.io.{BufferedSource, Source}
 
-/** @author Gary Struthers
+/** @see [[https://github.com/jsuereth/scala-in-depth-source/blob/master/chapter11/src/main/scala/scalax/resource/resource.scala]]
   *
+  * @author Gary Struthers
   */
 trait ManagedResource[T] {
   def loan[U](f: T => U): U

@@ -1,5 +1,3 @@
-/**
-  */
 package org.gs.digraph.fixtures
 
 import org.gs.digraph.{EdgeWeightedDigraph, PrimMST}
@@ -8,9 +6,7 @@ import org.gs.graph.fixtures.EdgeBuilder
 import org.gs.set.UF
 import scala.annotation.tailrec
 
-/** @author Gary Struthers
-  *
-  */
+/** @author Gary Struthers */
 trait Builder {
   val tinyEWGData = Array((6, 0, 0.58000), (0, 2, 0.26000), (0, 4, 0.38000), (0, 7, 0.16000),
     (1, 3, 0.29000), (1, 2, 0.36000), (1, 7, 0.19000), (1, 5, 0.32000), (6, 2, 0.40000),

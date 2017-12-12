@@ -1,14 +1,13 @@
-/** Builds arrays of directed edges
-  */
 package org.gs.digraph.fixtures
 
 import org.gs.digraph.FlowEdge
 import org.gs.fixtures.BufferedSourceBuilder
-import scala.io.BufferedSource
 import scala.collection.mutable.ArrayBuffer
+import scala.io.BufferedSource
 
-/** @author Gary Struthers
+/** Builds arrays of directed edges
   *
+  * @author Gary Struthers
   */
 trait FlowEdgeBuilder extends BufferedSourceBuilder {
   val docTypePattern = """<!DOCTYPE\[^>\[\]*(\[\[^\]\]*\])?>""".r

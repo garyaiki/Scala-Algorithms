@@ -1,13 +1,9 @@
-/**
-  */
 package org.gs.digraph
 
 import org.scalatest.FlatSpec
 import org.scalatest.Matchers._
 
-/** @author Gary Struthers
-  *
-  */
+/** @author Gary Struthers */
 class FlowEdgeSuite extends FlatSpec {
   behavior of "a FlowEdge"
   

@@ -1,13 +1,12 @@
-/** ScalaTest for Quick3String
-  * @see https://algs4.cs.princeton.edu/51radix/Quick3string.java.html
-  */
 package org.gs.sort
 
 import org.gs.fixtures.WordArrayBuilder
 import org.scalatest.FlatSpec
 
-/** @author Gary Struthers
+/** ScalaTest for Quick3String
+  * @see [[https://algs4.cs.princeton.edu/51radix/Quick3string.java.html]]
   *
+  * @author Gary Struthers
   */
 class Quick3StringSuite extends FlatSpec {
   behavior of "a Quick3String"

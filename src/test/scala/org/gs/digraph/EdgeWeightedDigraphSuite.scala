@@ -1,12 +1,11 @@
-/** @see https://algs4.cs.princeton.edu/44sp/tinyEWD.txt
-  */
 package org.gs.digraph
 
-import org.scalatest.FlatSpec
 import org.gs.digraph.fixtures.TinyEdgeWeightedDigraphBuilder
+import org.scalatest.FlatSpec
 
-/** @author Gary Struthers
+/** @see [[https://algs4.cs.princeton.edu/44sp/tinyEWD.txt]]
   *
+  * @author Gary Struthers
   */
 class EdgeWeightedDigraphSuite extends FlatSpec {
 

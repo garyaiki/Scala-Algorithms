@@ -1,5 +1,3 @@
-/** Builds arrays of directed edges
-  */
 package org.gs.graph.fixtures
 
 import org.gs.digraph.DirectedEdge
@@ -8,8 +6,9 @@ import org.gs.graph.Edge
 import scala.collection.mutable.ArrayBuffer
 import scala.io.BufferedSource
 
-/** @author Gary Struthers
+/** Builds arrays of directed edges
   *
+  * @author Gary Struthers
   */
 trait EdgeBuilder extends BufferedSourceBuilder {
   val docTypePattern = """<!DOCTYPE\[^>\[\]*(\[\[^\]\]*\])?>""".r
@@ -21,10 +20,10 @@ trait EdgeBuilder extends BufferedSourceBuilder {
     var v = 0
     var e = 0
     for(s <- it) s match {
-        case edgePattern(a,b,c) => savedLines.append(new Edge(a.toInt,b.toInt, c.toDouble))
-        case intPattern() => if(v == 0) v = s.toInt else e = s.toInt
-        case docTypePattern =>
-      }
+      case edgePattern(a,b,c) => savedLines.append(new Edge(a.toInt,b.toInt, c.toDouble))
+      case intPattern() => if(v == 0) v = s.toInt else e = s.toInt
+      case docTypePattern =>
+    }
     (v, e, savedLines)
   }
 
